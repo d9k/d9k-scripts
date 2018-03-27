@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# `sudo apt install mp3splt` required before first run
+
+SPLIT_BY_MINUTES_DEFAULT=18
+
+file_rel_path=$1
+
+if [[ -z "$file_rel_path" ]]; then
+  echo "Mp3 file name required"
+  exit
+fi
+
+split_by_minutes=$2
+
+if [[ -z $split_by_minutes ]]; then
+  split_by_minutes=$SPLIT_BY_MINUTES_DEFAULT
+fi
+
+file_dir_path=$(dirname "$file_rel_path")
+file_name_with_ext=$(basename "$file_rel_path")
+
+file_extension=${file_name_with_ext#*.}
+file_name=${file_name_with_ext%*.$file_extension}
+
+split_to_path="$file_dir_path/$file_name"
+
+mkdir "$split_to_path"
+
+# 5 seconds overlap
+mp3splt -t $split_by_minutes.00 -d "$split_to_path" -O 0.5 "$file_rel_path"

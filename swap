@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# @see http://stackoverflow.com/a/1115923/1760643
+
+if [[ "$#" -lt 2 ]]; then
+	echo "usage: swap file1 file2"
+	exit
+fi
+
+file1="$1"
+file2="$2"
+tmpfile=$(mktemp $(dirname "$file1")/XXXXXX)
+mv "$file1" "$tmpfile"
+mv "$file2" "$file1"
+mv "$tmpfile" "$file2"
+

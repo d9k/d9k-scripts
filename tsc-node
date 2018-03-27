@@ -1,0 +1,15 @@
+#!/bin/bash
+inputFileName=$1
+
+if [ -z "$1" ]; then
+    echo "no file specified"
+    exit
+fi
+
+# extension="${filename##*.}"
+fileNameWithoutExt="${inputFileName%.*}"
+outputFileName="${fileNameWithoutExt}.js"
+
+tsc --sourcemap --module AMD "${inputFileName}"
+
+echo -e "if (typeof define !== 'function') { var define = require('amdefine')(module) }\n\n$(cat ${outputFileName})" > ${outputFileName}

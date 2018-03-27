@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+# change brightness level on all monitors simultaneously on linux ubuntu
+
+import os
+import re
+from sys import argv
+
+try:
+    command = argv[1]
+    if command == "+" or command == "-":
+        brightness_level = os.popen("xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' '").read()
+        brightness_level = float(brightness_level)
+        print(brightness_level)
+        if command == "+":
+            brightness_level += 0.03
+        elif command == "-":
+            brightness_level -= 0.03
+        print(brightness_level)
+    else:
+        brightness_level = float(command)
+except IndexError:
+    brightness_level = 1.0
+
+if brightness_level <= 0:
+    brightness_level = 0.1
+
+xrandr_lines = os.popen("xrandr").read()
+outputs = re.findall(r'([\-\w]+) connected', xrandr_lines, re.M)
+#print(outputs)
+for output in outputs:
+    os.popen("xrandr --output " + output + " --brightness " + str(brightness_level))

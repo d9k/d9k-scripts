@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ "$#" -ne 2 ]]; then
+	echo "Exactly two arguments required"
+	exit
+fi
+
+dir_from="$1"
+dir_to="$2"
+
+find "${dir_from}" -print0 | sort -z  | xargs -0 cp -v --parents --target-directory="${dir_to}"

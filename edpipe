@@ -1,0 +1,11 @@
+#!/bin/bash
+# see http://stackoverflow.com/questions/2746553/bash-script-read-values-from-stdin-pipe , djanowski answer
+# TODO doesn't work for unknown reason - hangs if console editor
+
+stdin=$(cat)
+temp_file=$(mktemp)
+echo "${stdin}" > ${temp_file}
+#if [ -z "${EDITOR}" ]; then
+  EDITOR=sublime-text
+#fi
+${EDITOR} ${temp_file}

@@ -1,0 +1,15 @@
+@-moz-document domain(mind42.com) {
+	/** disable adblock at right */
+	#container #sidebar {
+		display: none !important;
+	}
+	#container #content {
+		margin-right: 0 !important;
+	}
+}
+
+@-moz-document domain(youtrack.orbilet.ru){
+	input, textarea{
+		color: #000 !important;
+	}
+}

@@ -1,0 +1,6 @@
+; (Parameter.set 'Audio_Command "aplay -q -c 1 -t raw -f s16 -r $SR $FILE")
+;(Parameter.set 'Audio_Command "aplay -q -c 1 -t raw -f s16 -r $(($SR*140/100)) $FILE")
+; (Parameter.set 'Audio_Command "echo "$FILE" > /tmp/t && play -t raw -f audio.s16 $FILE")
+; (Parameter.set 'Audio_Command "echo $FILE > /tmp/t ; aplay -q -c 1 -t raw -f s16 -r $SR $FILE")
+(Parameter.set 'Audio_Command "play -b 16 -c 1 -e signed-integer -r $SR -t raw $FILE tempo 1.2 pitch -200")
+(Parameter.set 'Audio_Method 'Audio_Command)

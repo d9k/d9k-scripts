@@ -1,0 +1,15 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+#iface eth0 inet dhcp
+iface eth0 inet static
+address 172.16.1.132
+netmask 255.255.255.0
+gateway 172.16.1.115
+dns-nameservers 8.8.8.8 172.16.1.115

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# run `sudo pip3 install --upgrade pygments` !
+
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+${SCRIPTS_DIR}/lesspipe-pygments3 $@ | less -R

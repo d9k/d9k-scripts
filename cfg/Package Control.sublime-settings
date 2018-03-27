@@ -1,0 +1,18 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Clickable URLs",
+		"FavoriteFiles",
+		"FileDialog",
+		"LESS",
+		"Open URL",
+		"orgmode",
+		"Package Control",
+		"Path Tools",
+		"SublimeREPL",
+		"Theme - Soda"
+	]
+}

@@ -1,0 +1,7 @@
+#/bin/bash
+
+command="zsh -c ~/scripts/vbox-ssh.sh"
+#command=zsh
+tmux new-window "${command}"
+tmux split-window -v -p 25 "${command}"
+tmux select-pane -t 0

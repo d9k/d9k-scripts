@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MERGE_UTIL="vim -d"
+
+#check graphical mode
+if [ "$DISPLAY" ] || [ "$WAYLAND_DISPLAY" ] || [ "$MIR_SOCKET" ]; then
+  MERGE_UTIL="meld"
+fi
+
+${MERGE_UTIL} "$@"

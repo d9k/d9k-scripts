@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+    echo 'no file param'
+    exit
+fi
+
+if [ ! -e $1 ]; then
+    echo 'no file found'
+    exit
+fi
+
+echo "Copying to clipboard..."
+echo
+head -n5 $1 | awk '$0="> "$0'
+echo "> . . . . ."
+cat $1 | xclip -selection clipboard

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# download build and install fatsort (http://fatsort.sourceforge.net/) before!
+
+if [[ -z "$1" ]]; then
+  echo "Available user mounted drives:"
+  mount | grep media
+  echo "Unmount the device and run this command with this device as first argument again"
+  exit
+fi
+
+set -x
+fatsort -n -c -of "$@"

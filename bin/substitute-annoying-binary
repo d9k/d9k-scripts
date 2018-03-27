@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# use this to substitute annoying binary
+# such as /usr/bin/update-manager
+#
+# also you'll get log of calls!
+
+exe_name=$(basename $0)
+exe_line="$0 $@"
+#log_file="/var/log/${exe_name}.log"
+log_file="/tmp/${exe_name}.log"
+parent_command="$(ps -o comm= $PPID)"
+
+
+function log_write {
+  datetime=$(date --rfc-3339="seconds")
+  echo "[${datetime}] $1" >> "${log_file}"
+}
+
+log_write "exec command: ${exe_line}"
+log_write "parent command: ${parent_command}"
+log_write ""

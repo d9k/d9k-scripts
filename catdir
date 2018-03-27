@@ -1,0 +1,3 @@
+#/bin/bash
+
+tail -vn +1 $(readlink -f $1)/*

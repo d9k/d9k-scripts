@@ -1,0 +1,7 @@
+#!/bin/bash
+
+emacsclient "$@" >/dev/null &
+
+if [ "$DISPLAY" ] || [ "$WAYLAND_DISPLAY" ] || [ "$MIR_SOCKET" ]; then
+  /home/d9k/scripts/win/focus_emacs.sh
+fi

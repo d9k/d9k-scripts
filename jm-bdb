@@ -1,0 +1,32 @@
+#!env php
+<?php
+$currentDir = getcwd();
+echo "Running from \"${currentDir}\"\n";
+
+$configPath = $currentDir.'/configuration.php';
+$backupFolderPath = $currentDir.'/.backupdb';
+$backupPath = $backupFolderPath.'/backup.sql';
+
+if (!file_exists($configPath)){
+    echo "\"${configPath}\" doesn't exist\n";
+    exit;
+}
+
+if (!is_readable($configPath)){
+    echo "Access to \"${configPath}\" denied\n";
+    exit;
+}
+
+include_once $configPath;
+
+$config = new JConfig();
+
+$db = $config->db;
+$password = $config->password;
+$user = $config->user;
+$host = $config->host;
+
+mkdir($backupFolderPath);
+echo shell_exec("mysqldump -u${user} -p${password} --single-transaction --hex-blob ${db} --result-file=${backupPath}");
+
+echo shell_exec("ls -lh ${backupFolderPath}");

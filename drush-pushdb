@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#check empty status
+if test -n "$(hg status)"; then
+  echo "repo status is not clear. exitting"
+  hg status
+  exit
+fi
+drush-bdb
+hg add
+hg commit -m "prod db+"
+hg push
+

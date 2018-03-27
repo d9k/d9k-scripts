@@ -1,0 +1,18 @@
+;; @see http://slime-tips.tumblr.com/post/11571143331/reloading-slime-without-restarting-emacs
+
+(defun load-slime ()
+  ;; here should be placed all the usual configuration code.
+  ;; like loading contribs and setting variables
+  (slime-setup '(slime-fancy ...)))
+
+(load-slime)
+
+(defun slime-reload ()
+  (interactive)
+  (mapc 'load-library
+        (reverse (remove-if-not
+                  (lambda (feature) (string-prefix-p "slime" feature))
+                  (mapcar 'symbol-name features))))
+  (setq slime-protocol-version (slime-changelog-date))
+
+  (load-slime))

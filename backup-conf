@@ -1,0 +1,30 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+   	echo "no input file"
+   	exit
+fi
+
+full_path=$(readlink -f "$1")
+file_name=$(basename "${full_path}")
+
+directory=$(dirname "${full_path}")
+
+cd "$directory"
+if [ ! -f "${file_name}" ]; then
+   echo "file doesn't exist!"
+   exit
+fi
+
+backup_file_name="${file_name}.bk"
+
+command="cp ${file_name} ${backup_file_name}"
+
+#check_writable
+if [ -w "$directory" ]; then
+    eval "${command}"
+else
+    eval "sudo ${command}"
+fi
+
+cd /
+ls -l "${directory}/${backup_file_name}"

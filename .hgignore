@@ -1,0 +1,19 @@
+regexp:~$
+regexp:\#$
+regexp:^ps/[\w\-_\.]*\.inc\.sh$
+regexp:^temp/(?!.*\.hgdir).+
+regexp:^ho/
+regexp:^\.idea/workspace\.xml
+regexp:^cfg/\.textadept/session
+
+# clojure lein default
+syntax:glob
+target/
+classes/
+checkouts/
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+.lein-*/
+.nrepl-port

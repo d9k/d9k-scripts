@@ -1,0 +1,5 @@
+#!/bin/bash
+
+wget sourceforge.net/projects/peazip/files/5.3.1/peazip_5.3.1.LINUX.Qt-2_i386.deb
+sudo apt-get install gdebi
+sudo gdebi peazip_5.3.1.LINUX.Qt-2_i386.deb

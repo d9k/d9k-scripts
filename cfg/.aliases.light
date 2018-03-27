@@ -1,0 +1,15 @@
+alias ls='/bin/ls --color=auto'
+alias ll='/bin/ls -hlF --color=auto'
+alias lla='/bin/ls -halF --color=auto'
+alias la='/bin/ls -A --color=auto'
+alias l='/bin/ls -CF --color=auto'
+alias grep='grep --color=auto'
+
+alias dkn='diakonos '
+
+alias hgl="hg vlog"
+
+d9k_scripts=~/scripts
+#d9k_scripts=~/d9k-scripts
+
+PATH=$PATH:~/scripts-local:${d9k_scripts}:${d9k_scripts}/meta

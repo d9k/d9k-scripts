@@ -1,0 +1,5 @@
+keepassx
+doublecmd-qt
+software-properties-gtk
+furiusisomount
+filelight

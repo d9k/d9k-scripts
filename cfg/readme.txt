@@ -1,0 +1,1 @@
+Various config files. use `ls -a` to see all (some file names start with dot like `.hgrc`)

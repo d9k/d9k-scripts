@@ -1,0 +1,15 @@
+#/bin/bash
+
+# self update:
+# sudo youtube-dl -U
+#
+# sudo add-apt-repository ppa:nilarimogard/webupd8
+# sudo apt update
+# sudo apt install youtube-dl ffmpeg
+#
+
+# --format bestaudio \
+
+youtube-dl \
+  -F \
+  "$@"

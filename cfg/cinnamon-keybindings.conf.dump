@@ -1,0 +1,124 @@
+[custom-keybindings/custom0]
+binding=@as []
+command='/home/d9k/scripts/win/focus_emacs.sh'
+name='emacs'
+
+[custom-keybindings/custom1]
+binding=['<Primary><Alt>Delete']
+command='/home/d9k/scripts/win/focus_taskman.sh'
+name='taskman'
+
+[custom-keybindings/custom2]
+binding=['<Super>4']
+command='/home/d9k/scripts/win/focus_tortoisehg.sh'
+name='thg'
+
+[custom-keybindings/custom3]
+binding=['<Primary><Super>k']
+command='/home/d9k/scripts/win/focus_keepassx.sh'
+name='keepassx'
+
+[custom-keybindings/custom4]
+binding=['Print']
+command='gnome-screenshot -a --interactive'
+name='gnome-screenshot'
+
+[custom-keybindings/custom5]
+binding=@as []
+command='/home/d9k/scripts/win/focus_chrome.sh'
+name='focus_chrome'
+
+[custom-keybindings/custom10]
+binding=['<Alt><Super>Left', 'Back']
+command='/home/d9k/scripts/bright -'
+name='bright -'
+
+[custom-keybindings/custom6]
+binding=['<Primary>grave']
+command='/home/d9k/scripts/win/focus_terminal.sh'
+name='focus_terminal.sh'
+
+[custom-keybindings/custom11]
+binding=['<Primary><Super>s']
+command='/home/d9k/scripts/win/focus_textadept.sh'
+name='textadept'
+
+[custom-keybindings/custom7]
+binding=['<Primary>backslash']
+command='/home/d9k/scripts/take_screenshot.sh'
+name='take_screenshot.sh'
+
+[custom-keybindings/custom12]
+binding=['<Super>1']
+command='/home/d9k/scripts/win/focus_browser.sh'
+name='browser'
+
+[custom-keybindings/custom8]
+binding=['<Super>e']
+command='/home/d9k/scripts/win/focus_doublecmd.sh'
+name='focus_doublecmd.sh'
+
+[custom-keybindings/custom13]
+binding=['<Primary>Forward']
+command='/home/d9k/scripts/win/key-next-tab.sh'
+name='next tab'
+
+[custom-keybindings/custom9]
+binding=['<Alt><Super>Right', 'Forward']
+command='/home/d9k/scripts/bright +'
+name='bright +'
+
+[custom-keybindings/custom14]
+binding=['<Primary>Back']
+command='/home/d9k/scripts/win/key-prev-tab.sh'
+name='prev tab'
+
+[custom-keybindings/custom15]
+binding=['<Super>z']
+command='/home/d9k/scripts/win/focus_telegram.sh'
+name='Telegram'
+
+[custom-keybindings/custom16]
+binding=['<Super>3']
+command='/home/d9k/scripts/win/focus_heidisql.sh'
+name='heidisql'
+
+[custom-keybindings/custom17]
+binding=['<Super>2']
+command='/home/d9k/scripts/win/focus_ide.sh'
+name='focus_ide'
+
+[custom-keybindings/custom18]
+binding=['<Super>s']
+command='/home/d9k/scripts/win/say-selection.sh'
+name='say selection'
+
+[custom-keybindings/custom19]
+binding=['<Super>q']
+command='/home/d9k/scripts/win/say-selection-ru.sh'
+name='say selection ru'
+
+[/]
+looking-glass-keybinding=@as []
+custom-list=['custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom5', 'custom6', 'custom7', 'custom8', 'custom9', 'custom10', 'custom11', 'custom12', 'custom13', 'custom14', 'custom15', 'custom16', 'custom17', 'custom18', 'custom19']
+
+[media-keys]
+screen-brightness-down=['XF86MonBrightnessDown']
+screenshot=@as []
+logout=@as []
+volume-down=['XF86AudioLowerVolume', '<Alt><Super>Down']
+volume-up=['XF86AudioRaiseVolume', '<Alt><Super>Up']
+screen-brightness-up=['XF86MonBrightnessUp']
+hibernate=['XF86Suspend', 'Launch1', '<Shift><Super>l']
+home=['XF86Explorer']
+screensaver=['<Super>l', 'XF86ScreenSaver']
+suspend=['XF86Sleep', '<Shift><Super>l']
+
+[wm]
+panel-run-dialog=['<Alt>F2', '<Super>r']
+minimize=['<Super>Down']
+push-tile-down=@as []
+push-snap-up=@as []
+push-tile-up=@as []
+toggle-fullscreen=['<Primary><Super>Up']
+toggle-maximized=['<Alt>F10', '<Super>Up']

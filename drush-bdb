@@ -1,0 +1,5 @@
+#!/bin/bash
+drush cache-clear all
+mkdir -p .backupdb
+drush sql-dump > .backupdb/backup.sql
+ls -l .backupdb/*.sql

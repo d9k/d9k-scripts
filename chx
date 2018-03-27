@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+    echo 'no file param'
+    exit
+fi
+
+if [ ! -e $1 ]; then
+    echo 'no file found'
+    exit
+fi
+
+#TODO can't -x for root owned files
+#TODO if not writable define whether is executable with sudo
+
+if [ -x $1 ]; then
+    command="chmod u-x $1"
+else
+    command="chmod u+x $1"
+fi
+
+if [ -w $1 ]; then
+    eval "${command}"
+else
+    eval "sudo ${command}"
+fi
+
+full_path=$(readlink -f $1)
+cd /
+ls -l ${full_path}

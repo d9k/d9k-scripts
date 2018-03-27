@@ -1,0 +1,1 @@
+VBOX_SSH_PASSWORD=password

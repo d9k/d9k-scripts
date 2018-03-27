@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exiftool * | grep -E 'File Name|Duration'

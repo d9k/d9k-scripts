@@ -1,0 +1,298 @@
+{
+    "common": {
+        "invert": [
+            "img, video, :not(object):not(body)>embed, object",
+            "iframe",
+            "svg image",
+            "[style*='background:url'], [style*='background-image:url']",
+            "[style*='background: url'], [style*='background-image: url']",
+            "[background]",
+            "twitterwidget"
+        ],
+        "noinvert": [
+            "[style*='background:url'] *, [style*='background-image:url'] *",
+            "[style*='background: url'] *, [style*='background-image: url'] *",
+            "input",
+            "[background] *"
+        ],
+        "removebg": [],
+        "rules": [
+            "#disqus_thread > :first-child { background: black !important; }"
+        ]
+    },
+    "sites": [
+        {
+            "url": "airbnb.com",
+            "invert": [
+                ".background-cover, #footer, #photo-modal"
+            ],
+            "noinvert": "#footer *, #photo-modal *"
+        },
+        {
+            "url": "basho.com",
+            "invert": [
+                "#site-navigation, footer, header, .featured-news-wrapper",
+                ":not(.lang):not(#foot-logo)>img"
+            ]
+        },
+        {
+            "url": "bbc.com",
+            "invert": [
+                "div.orb-nav-section.orb-nav-blocks > a > img"
+            ]
+        },
+        {
+            "url": "ebay.*",
+            "invert": [
+                "body[style*='background-image: url'] img",
+                "body[style*='background-image: url'] video",
+                "body[style*='background-image: url'] [style*='background-image: url']"
+            ],
+            "noinvert": "body[style*='background-image: url']"
+        },
+        {
+            "url": "facebook.com",
+            "invert": [
+                "._3ixn, ._2teu, .uiStreamStory",
+                ".userContentWrapper canvas, ._4lqu, ._4lqt",
+                "._24ws, ._1z0-"
+            ],
+            "noinvert": ".uiStreamStory video",
+            "removebg": "._4d3w .stageWrapper"
+        },
+        {
+            "url": "gigaom.com",
+            "invert": ".bg"
+        },
+        {
+            "url": [
+                "google.*",
+                "google.*.*"
+            ],
+            "invert": [
+                ".gbii, .gbip, .azp, .aLF-aPX-KP, .irc_bg, .RY3tic, canvas.circle"
+            ],
+            "noinvert": [
+                ".irc_mi, .irc_rii, .irc_mut, .amI, .amJ, .adk, .adj, [src*='ic_'], [src*='black']",
+                "input[style*='data:image']"
+            ],
+            "rules": [
+                ".pI { background: rgba(255,255,255,.7) !important; }",
+                ".eB { background: rgba(255,255,255,.4) !important; }"
+            ]
+        },
+        {
+            "url": "granttree.co.uk",
+            "invert": "img, iframe, video, embed, .photo"
+        },
+        {
+            "url": "ign.com",
+            "invert": ".video_embed_content-poster, .video_embed_content-poster-play-button",
+            "removebg": "#review-promo"
+        },
+        {
+            "url": "io9.com",
+            "rules": "html { height: auto !important; }"
+        },
+        {
+            "url": "lifehacker.com",
+            "invert": ".videoCube a .thumbBlock",
+            "rules": "html { height: auto !important; }"
+        },
+        {
+            "url": "linkedin.com",
+            "invert": [
+                "#top-header, #responsive-nav-scrollable"
+            ],
+            "noinvert": [
+                "#top-header *, #responsive-nav-scrollable *"
+            ]
+        },
+        {
+            "url": "mail.live.com",
+            "invert": [
+                "img:not([src='https://a.gfx.ms/rte_metro2.png'])",
+                "video, object, .ComposeContent"
+            ],
+            "removebg": ".ComposeContent"
+        },
+        {
+            "url": "messenger.com",
+            "invert": "._4tsk"
+        },
+        {
+            "url": "onliner.by",
+            "invert": [
+                ".b-tile-main, .b-teasers-2__teaser, .news-tiles__subtitle",
+                ".b-opinions-main-2__tile, .news-header__top > .news-header__title"
+            ],
+            "noinvert": ".b-opinions-main-2__tile *"
+        },
+        {
+            "url": "pandora.com",
+            "invert": "#body, .contentbox, #detailContainer, #mainContent, .slidesBackground, .slidesForeground",
+            "rules": [
+                ".skinContainer, .slidesBackground, .slidesForeground, #trackDetail, .track_detail_close { background-color: black !important; }",
+                ".fxCol-cont-1, .jspContainer, #trackInfoButtons { background-color: white !important; }",
+                "#brandingBar, .contentnav, .top { background-color: #3d4043 !important;}",
+                "#playerBar { background-color: #0d0d0d !important;}"
+            ]
+        },
+        {
+            "url": "play.afreecatv.com",
+            "invert": "#afreecatv_player"
+        },
+        {
+            "url": "producthunt.com",
+            "invert": ".backgroundImage_1hK9M, .v-image",
+            "noinvert": [
+                ".backgroundImage_1hK9M *",
+                ".v-image *"
+            ],
+            "rules": [
+                ".post-detail--body--gallery-fullscreen--image { background-color: black; }"
+            ]
+        },
+        {
+            "url": "reddit.com",
+            "invert": "#header-img"
+        },
+        {
+            "url": "shop.ubi.com",
+            "invert": "#topNavbar, #UplayHeader"
+        },
+        {
+            "url": "slack.com",
+            "invert": [
+                ".client_channels_list_container",
+                "figure"
+            ],
+            "noinvert": [
+                ".client_channels_list_container *",
+                "figure *"
+            ]
+        },
+        {
+            "url": "spotify.com",
+            "invert": [
+                "img, iframe, video, embed",
+                ".hero, .header-main, .search-bar, #bg-wrap, #main"
+            ]
+        },
+        {
+            "url": [
+                "stackexchange.com",
+                "askubuntu.com",
+                "mathoverflow.com",
+                "serverfault.com",
+                "stackapps.com",
+                "stackoverflow.com",
+                "superuser.com"
+            ],
+            "rules": "#hlogo a { text-indent: -256em !important; }"
+        },
+        {
+            "url": "tpondemand.com",
+            "invert": [
+                ".tau-cover-view__overlay, .tau-app-secondary-pane, .app-header, .uv-popover-content"
+            ],
+            "noinvert": [
+                ".tau-app-secondary-pane *, .app-header *"
+            ]
+        },
+        {
+            "url": "twitch.tv",
+            "invert": [
+                "#site_footer, #carousel_background::after, #left_col, .player, .badge",
+                ".social-column, .top-nav"
+            ],
+            "noinvert": [
+                ".player *, .social-column *, .top-nav *"
+            ],
+            "removebg": [
+                "#carousel, .chat-container, .conversations-list-header",
+                ".dark_wrapper ul, html, .nav",
+                ".js-conversations-list, .js-conversations-list-bottom-bar",
+                ".rightcol-content > .top"
+            ],
+            "rules": [
+                ".chat_text_input, .colon, .dark_wrapper *, .message, .room-title, .selected > a { color:black !important;}",
+                ".chat_text_input { border: 1px solid black !important; }"
+            ]
+        },
+        {
+            "url": "twitter.com",
+            "invert": [
+                ".tcu-textEllipse--multiline"
+            ]
+        },
+        {
+            "url": "ubi.com",
+            "removebg": "html, body"
+        },
+        {
+            "url": "unityhacks.com",
+            "noinvert": [
+                "#logo *, #taigachat_toolbar *",
+                ".listItemText h3, .pollBlock .pollResult div",
+                ".pollBlock .pollResult h3, .redactor_MessageEditor"
+            ],
+            "invert": [
+                "#unityhacks_sidebar, #exposeMask",
+                "#logoBlock, #navigation, #moderatorBar",
+                ".xenOverlay .sectionMain .heading overlayOnly",
+                ".banner_owner, .banner_staff, .banner_supportleader",
+                ".banner_supporter, .banner_partner, .banner_designer",
+                ".banner_promoter, .banner_honorable, .banner_premium",
+                ".messageHeading, .subHeading, .ToggleTrigger, .prefix",
+                ".callToAction, .xenOverlay .section .heading, .xenTooltip",
+                ".redactor_dropdown, .errorOverlay, .sectionHeaders, .button",
+                ".PopupOpen, .categoryStrip, .secondaryContent h3, .activated",
+                "[title='Unread messages']",
+                "footer"
+            ]
+        },
+        {
+            "url": "vk.com",
+            "invert": [
+                "#video_player, .mv_playlist, .page_header_cont", ".emoji_smile_cont"
+            ],
+            "noinvert": [
+                "#video_player *, .mv_playlist *, .page_header_cont *", ".emoji_smile_cont *"
+            ],
+            "removebg": [
+                ".mv_layer_bg"
+            ]
+        },
+        {
+            "url": "web.whatsapp.com",
+            "invert": ".qrcode .icon-logo",
+            "rules": ".qrcode { border: 8px solid black; }"
+        },
+        {
+            "url": "wikipedia.org",
+            "noinvert": ".mwe-math-fallback-image-inline"
+        },
+        {
+            "url": "wolfram.com",
+            "noinvert": [
+                ".numberedequation, .displayformula"
+            ]
+        },
+        {
+            "url": "youtube.com",
+            "invert": [
+                ".html5-video-player, .has-custom-banner, #theater-background",
+                "#watch-appbar-playlist"
+            ],
+            "noinvert": [
+                ".html5-video-player *",
+                ".has-custom-banner *",
+                "#watch-appbar-playlist *"
+            ],
+            "rules": [
+                "#scrim.app-drawer { background: rgba(255, 255, 255, 0.5); }"
+            ]
+        }
+    ]
+}

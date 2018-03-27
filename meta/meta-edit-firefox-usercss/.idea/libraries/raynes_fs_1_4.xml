@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="raynes/fs 1.4">
+    <CLASSES>
+      <root url="file://$MAVEN_REPOSITORY$/me/raynes/fs/1.4.6" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$MAVEN_REPOSITORY$/me/raynes/fs/1.4.6" recursive="false" />
+  </library>
+</component>

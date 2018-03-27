@@ -1,0 +1,9 @@
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
+
+[ -s ~/.lastdirectory ] && cd `cat ~/.lastdirectory`
+
+TRAPEXIT() {
+    pwd > $HOME/.lastdirectory
+}

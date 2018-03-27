@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# copy path to clipboard
+
+rel_path=$1
+
+if [[ -z "$rel_path" ]]; then
+  # no arg, current directory
+  rel_path=$(pwd)
+fi
+
+abs_path=$(readlink -f "$rel_path")
+
+# tr -n: remove trailing carriage return
+echo "$abs_path" | tr -d '\n' | xclip -selection clipboard
+
+echo "path \"$abs_path\" was copied to clipboard"
+
+

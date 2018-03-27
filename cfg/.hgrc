@@ -1,0 +1,24 @@
+[ui]
+; username=d9k <d9k@ya.ru>
+editor=nano
+
+[tortoisehg]
+vdiff=meld
+editor=sublime-text
+ui.language=en
+
+[merge-tools]
+meld.args=$base $local $other
+
+[extensions]
+histedit =
+rebase =
+shelve =
+strip =
+graphlog=
+convert=
+; color diff
+color =
+
+[alias]
+vlog = log -G -l 10 --template "{rev}{ifeq(branch, 'default', '', '-{branch}')}){ifeq(phase, 'public', '', ' [{phase}]')} {date|date}, {author|person}, {node}\n    {desc}\n\n"

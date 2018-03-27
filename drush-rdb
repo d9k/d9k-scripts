@@ -1,0 +1,2 @@
+#!/bin/bash
+drush sql-cli < .backupdb/backup.sql

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# xfontsel to gen font string
+while :
+do
+  mem | osd_cat --indent=-1280 --offset=965 --align=right --shadow=1 --outline 1 --color white -f -*-clean-*-*-*-*-16-*-*-*-*-*-*-*
+#  mem | osd_cat
+done

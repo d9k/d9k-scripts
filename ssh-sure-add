@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $# < 1 ]]; then
+  echo "usage: ssh-sure-add path_to_key"
+  exit
+fi
+
+ssh_key=$1
+
+ssh_add_error_output=`mktemp`
+
+ssh_add_result=`ssh-add ${ssh_key} 2> ${ssh_add_error_output}`
+ssh_add_error=`cat ${ssh_add_error_output}`
+rm ${ssh_add_error_output}
+
+if [[ "$ssh_add_error" == Could\ not\ open\ a\ connection\ to\ your\ authentication\ agent* ]]; then
+    eval `ssh-agent -s`
+    ssh-add ${ssh_key}
+fi

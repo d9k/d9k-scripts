@@ -1,0 +1,18 @@
+#/bin/bash
+
+# self update:
+# sudo youtube-dl -U
+#
+# sudo add-apt-repository ppa:nilarimogard/webupd8
+# sudo apt update
+# sudo apt install youtube-dl ffmpeg
+#
+
+youtube-dl \
+  --format bestaudio \
+  --audio-quality 0 \
+  --extract-audio \
+  --audio-format mp3 \
+  --output="%(title)s.%(ext)s" \
+  --no-mtime \
+  "$@"
