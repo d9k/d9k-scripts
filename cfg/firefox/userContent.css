@@ -17,3 +17,14 @@
 @-moz-document url-prefix(about:blank) {
   *{background-color:#000000;}
 }
+
+@-moz-document url("about:newtab") {
+  body {
+    background-color: #000 !important;
+    color: #777;
+  }
+  #snippets-container, .snippet section {
+    background-color: #000 !important;
+    color: #777 !important;
+  }
+}
