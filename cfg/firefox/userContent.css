@@ -27,4 +27,7 @@
     background-color: #000 !important;
     color: #777 !important;
   }
+  .top-sites-list .top-site-outer > a {
+    color: #999 !important;
+  }
 }
