@@ -56,8 +56,8 @@ def get_profile_from_firefox_ini(ini_path):
 def main():
     parser = argparse.ArgumentParser(description='this script creates firefox css file')
     parser.add_argument(
-        '--merge', '-m',
-        help='merge files, not just edit',
+        '--edit', '-e',
+        help='just edit file no merge',
         action='store_true'
     )
     args = parser.parse_args()
@@ -84,10 +84,10 @@ def main():
               img{opacity: 0.05 !important;}
           }
           """)
-    if args.merge:
-        bash(merge_tool, user_css_path, backup_cfg_path, bg(merge_in_bg))
-    else:
+    if args.edit:
         bash(edit_tool, user_css_path, bg(edit_in_bg))
+    else:
+        bash(merge_tool, user_css_path, backup_cfg_path, bg(merge_in_bg))
 
 if __name__ == "__main__":
     main()
