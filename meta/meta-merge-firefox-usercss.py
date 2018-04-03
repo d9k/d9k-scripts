@@ -11,10 +11,9 @@ profiles_mozilla_path = home + r"/.mozilla/firefox"
 profiles_ini_path = profiles_mozilla_path + r"/profiles.ini"
 backup_cfg_folder_path = home + r"/scripts/cfg/firefox"
 backup_cfg_path = backup_cfg_folder_path + r"/userContent.css"
-
+backup_cfg_chrome_path = backup_cfg_folder_path + r"/userChrome.css"
 #TODO список утилит + проверка через which + задание из параметра
 edit_tool = "sublime-text"
-edit_in_bg = True
 merge_tool = "meld"
 merge_in_bg = True
 
@@ -56,8 +55,18 @@ def get_profile_from_firefox_ini(ini_path):
 def main():
     parser = argparse.ArgumentParser(description='this script creates firefox css file')
     parser.add_argument(
-        '--merge', '-m',
-        help='merge files, not just edit',
+        '--edit', '-e',
+        help='just edit file no merge',
+        action='store_true'
+    )
+    parser.add_argument(
+        '--background', '-b',
+        help="open editor in background",
+        action='store_true'
+    )
+    parser.add_argument(
+        '--chrome', '-c',
+        help="edit userChrome.css, not userContent.css",
         action='store_true'
     )
     args = parser.parse_args()
@@ -75,6 +84,8 @@ def main():
         return
     user_css_folder_path = profile_path + "/chrome"
     user_css_path = user_css_folder_path + "/userContent.css"
+    user_chrome_path = user_css_folder_path + "/userChrome.css"
+
     bash("mkdir", "-p", user_css_folder_path)
     bash("touch", user_css_path)
     print("""
@@ -84,10 +95,20 @@ def main():
               img{opacity: 0.05 !important;}
           }
           """)
-    if args.merge:
-        bash(merge_tool, user_css_path, backup_cfg_path, bg(merge_in_bg))
+
+    print("User css path: " + user_css_path)
+
+    if args.chrome:
+      css_path = user_chrome_path
+      backup_path = backup_cfg_chrome_path
     else:
-        bash(edit_tool, user_css_path, bg(edit_in_bg))
+      css_path = user_css_path
+      backup_path = backup_cfg_path
+
+    if args.edit:
+        bash(edit_tool, css_path, bg(args.background))
+    else:
+        bash(merge_tool, css_path, backup_path, bg(args.background))
 
 if __name__ == "__main__":
     main()
