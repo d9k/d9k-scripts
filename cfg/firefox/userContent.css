@@ -13,3 +13,7 @@
 		color: #000 !important;
 	}
 }
+
+@-moz-document url-prefix(about:blank) {
+  *{background-color:#000000;}
+}

@@ -14,7 +14,6 @@ backup_cfg_path = backup_cfg_folder_path + r"/userContent.css"
 
 #TODO список утилит + проверка через which + задание из параметра
 edit_tool = "sublime-text"
-edit_in_bg = True
 merge_tool = "meld"
 merge_in_bg = True
 
@@ -60,6 +59,11 @@ def main():
         help='just edit file no merge',
         action='store_true'
     )
+    parser.add_argument(
+        '--background', '-b',
+        help="open editor in background",
+        action='store_true'
+    )
     args = parser.parse_args()
     #pprint.pprint(args)
     if not os.path.isfile(profiles_ini_path):
@@ -84,10 +88,13 @@ def main():
               img{opacity: 0.05 !important;}
           }
           """)
+
+    print("User css path: " + user_css_path)
+
     if args.edit:
-        bash(edit_tool, user_css_path, bg(edit_in_bg))
+        bash(edit_tool, user_css_path, bg(args.background))
     else:
-        bash(merge_tool, user_css_path, backup_cfg_path, bg(merge_in_bg))
+        bash(merge_tool, user_css_path, backup_cfg_path, bg(args.background))
 
 if __name__ == "__main__":
     main()
