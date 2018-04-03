@@ -21,6 +21,7 @@ package.path = script_dir..'/?.lua;'..package.path
 package.cpath = script_dir..'/сmodules/?.dll;'..script_dir..'./сmodules/?.so;'..package.cpath
 
 local helpers = require 'config_helpers'
+local H = require 'config_helpers'.H
 
 
 styles = loadfile('cfg/tomorrow.lua')('TomorrowNight')
@@ -28,7 +29,9 @@ stylesoutshell = styles -- apply the same scheme to Output/Console windows
 styles.auxwindow = styles.text -- apply text colors to auxiliary windows
 styles.calltip = styles.text -- apply text colors to tooltips
 
-styles.sel = {bg = helpers.H'5A446C'}
+styles.sel.bg = H'5A446C'
+--style.text.fg = H'c5c8c6'
+styles.text.fg = H'D8DBDA'
 --styles.sel = {bg = 0x392B48} -- reverse 16 bit order
 
 --styles.sel = {bg = H'482B39'} -- selection color
@@ -51,4 +54,9 @@ package {
     return wx.wxMessageBox(("Do you want to move '%s' to '%s'?"):format(source, target),
       "Move/Rename file", wx.wxYES_NO + wx.wxCENTRE, ide:GetMainFrame()) == wx.wxYES
   end
-}
+};
+
+(...).colorize = function (lexer_name)
+  lexer_name = lexer_name or 'lua'
+  ide:GetEditor():SetupKeywords(lexer_name)
+end
