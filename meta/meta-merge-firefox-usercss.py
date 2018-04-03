@@ -96,14 +96,14 @@ def main():
           }
           """)
 
-    print("User css path: " + user_css_path)
-
     if args.chrome:
       css_path = user_chrome_path
       backup_path = backup_cfg_chrome_path
     else:
       css_path = user_css_path
       backup_path = backup_cfg_path
+
+    print("css path: " + css_path)
 
     if args.edit:
         bash(edit_tool, css_path, bg(args.background))
