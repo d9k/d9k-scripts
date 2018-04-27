@@ -77,6 +77,8 @@ end
 textadept.file_types.extensions.moon = "moonscript"
 textadept.file_types.extensions.rockspec = "lua"
 
+textadept.editing.auto_pairs = nil
+
 --textadept.menu.menubar[_L['_Tools']][_L['Command _Entry']][2] = function()
    --ui.command_entry.enter_mode('lua_command', 'lua', 2)
 --end
