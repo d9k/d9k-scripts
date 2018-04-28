@@ -1,5 +1,12 @@
 -- Please CHECK Textadept version > 9.0 before apply config!
 
+-- additional hotkeys:
+--
+--  alt + C :  copy file name
+-- ctrl + L :  delete current line
+-- ctrl + Y :  redo
+-- ctrl + p :  switch buffer
+
 if not CURSES then
   ui.set_theme('base16-ocean-dark-mod', {
 -- use  somethhing like `fc-list | grep Terminus`
@@ -78,6 +85,8 @@ textadept.file_types.extensions.moon = "moonscript"
 textadept.file_types.extensions.rockspec = "lua"
 
 textadept.editing.auto_pairs = nil
+
+keys['cl'] = buffer.line_delete
 
 --textadept.menu.menubar[_L['_Tools']][_L['Command _Entry']][2] = function()
    --ui.command_entry.enter_mode('lua_command', 'lua', 2)
