@@ -11,7 +11,10 @@ if [[ ! -f ${CFG_COPY_PATH} ]]; then
   touch ${CFG_COPY_PATH}
 fi
 
-merge-util ${CFG_ORIG_PATH} ${CFG_COPY_PATH}
+MERGE_COMMAND="merge-util ${CFG_ORIG_PATH} ${CFG_COPY_PATH}"
+
+echo "> $MERGE_COMMAND"
+$MERGE_COMMAND
 
 echo "After merging data to \"${CFG_PATH}\":"
 echo
