@@ -1,4 +1,7 @@
-/* to /usr/share/meld/meld.css  */
+/**
+ * meld css for dark mode
+ * copy to /usr/share/meld/meld.css, do backup!
+ */
 
 @define-color insert-bg #002200;
 @define-color insert-outline shade(@insert-bg, 1.8);
@@ -9,7 +12,8 @@
 @define-color replace-bg #000033;
 @define-color replace-outline shade(@replace-bg, 1.8);
 @define-color replace-text #0044dd;
-@define-color conflict-bg Pink;
+/*@define-color conflict-bg Pink;*/
+@define-color conflict-bg #74344B;
 @define-color conflict-outline shade(@conflict-bg, 1.8);
 @define-color conflict-text #ff0000;
 @define-color error-bg #fce94f;
