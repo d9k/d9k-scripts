@@ -1,3 +1,4 @@
 #!/bin/bash
 
-exiftool * | grep -E 'File Name|Duration'
+# find . | grep mp3 | xargs exiftool | grep -E 'File Name|Duration'
+find -maxdepth 1 -iname "*mp3" -print0 | sort -z | xargs -0 exiftool | grep -E 'File Name|Duration'
