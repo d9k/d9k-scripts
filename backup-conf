@@ -15,7 +15,25 @@ if [ ! -f "${file_name}" ]; then
    exit
 fi
 
+
 backup_file_name="${file_name}.bk"
+
+if [[ -f "${backup_file_name}" ]]; then
+  # echo "Backup ${backup_file_name} already exists"
+  MAX_BACKUP_NUMBER=100
+  for ((number=1; number <= ${MAX_BACKUP_NUMBER}; number++))
+  {
+    backup_file_name="${file_name}.bk.${number}"
+    if [[ ! -f "${backup_file_name}" ]]; then
+      break;
+    fi
+  }
+
+  if [ "$number" -ge "$MAX_BACKUP_NUMBER" ]; then
+    echo "Version overflow; Backup cannot be created"
+    exit
+  fi
+fi
 
 command="cp ${file_name} ${backup_file_name}"
 
@@ -27,4 +45,5 @@ else
 fi
 
 cd /
-ls -l "${directory}/${backup_file_name}"
+ls -l "${directory}/${file_name}"
+ls -l "${directory}/${file_name}.bk"*
