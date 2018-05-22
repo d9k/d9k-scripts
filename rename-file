@@ -7,10 +7,17 @@ if [[ -z "${file_path}" ]]; then
   exit
 fi
 
-if [ ! -f "${file_path}" ] || [[ -d "${file_path}" ]]; then
+if [[ ! -f "${file_path}" ]] && [[ ! -d "${file_path}" ]]; then
   echo "File at ${file_path} doesn't exists. Exitting"
   exit
 fi
+
+echo
+if [[ -d "${file_path}" ]]; then
+  echo "\"${file_path}\" is a directory. Contents:"
+fi
+ls -l "${file_path}"
+echo
 
 file_path=$(readlink -f "$file_path")
 
