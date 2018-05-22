@@ -1,0 +1,22 @@
+#!/bin/bash
+
+file_path=$1
+
+if [[ -z "${file_path}" ]]; then
+  echo "File path argument not set. Exitting"
+  exit
+fi
+
+if [ ! -f "${file_path}" ] || [[ -d "${file_path}" ]]; then
+  echo "File at ${file_path} doesn't exists. Exitting"
+  exit
+fi
+
+file_path=$(readlink -f "$file_path")
+
+echo "New file path (press ctrl+c to exit):"
+read -re -p '> ' -i ${file_path} new_file_path
+
+set -x
+mv -i "$file_path" "$new_file_path"
+
