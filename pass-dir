@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ls --color --group-directories-first -l ~/.password-store/$1
