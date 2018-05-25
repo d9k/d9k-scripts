@@ -108,6 +108,7 @@ Basic lexicon should (must ?) have basic letters, symbols and punctuation."
   ( [ ":" ] = д в о е т о ч и е )
   ( [ "`" ] = о б р а т н а я к а в ы ч к а )
   ( [ "\"" ] = к а в ы ч к а )
+  ( [ "=" ] = р а в н о )
   ( [ > ] = б о л ь ш е )
   ( [ < ] = м е н ь ш е )
   ( [ _ ] = п о д ч ё р к и в а н и е )

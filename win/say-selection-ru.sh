@@ -6,6 +6,7 @@
 # sudo apt-get install festival xsel sox festvox-ru
 
 # ошибка LTS_Ruleset russian_downcase: no rule matches: LTS_Ruleset: # *here*
+# cfg/patches/festival/msu_ru_nsh_lexicon.scm в
 # /usr/share/festival/voices/russian/msu_ru_nsh_clunits/festvox/msu_ru_nsh_lexicon.scm
 
 # https://gist.github.com/d9k/f6b7670d61e00840082dbc5d74be53f5
