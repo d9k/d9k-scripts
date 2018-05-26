@@ -40,3 +40,16 @@
     color: #999 !important;
   }
 }
+
+@-moz-document url-prefix(about:reader) {
+  .toolbar.reader-toolbar{
+    background-color: #333 !important;
+    border-right: 2px solid #333 !important;
+  }
+
+  .toolbar.reader-toolbar .button:not(:hover) {
+    background-color: #333 !important;
+    border-right: 1px solid #111 !important;
+    border-bottom: 1px solid #111 !important;
+  }
+}
