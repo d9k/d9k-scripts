@@ -52,4 +52,14 @@
     border-right: 1px solid #111 !important;
     border-bottom: 1px solid #111 !important;
   }
+
+  body.dark a::-moz-selection {
+    color: #FF96C4 !important;
+  }
+
+  body.dark *::-moz-selection {
+    background-color: #084787 !important;
+    color: #E8F4FF !important;
+    box-shadow: 0 0 1px 5px #000 !important;
+  }
 }
