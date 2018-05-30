@@ -22,7 +22,7 @@ echo
 file_path=$(readlink -f "$file_path")
 
 echo "New file path (press ctrl+c to exit):"
-read -re -p '> ' -i ${file_path} new_file_path
+read -re -p '> ' -i "${file_path}" new_file_path
 
 set -x
 mv -i "$file_path" "$new_file_path"
