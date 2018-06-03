@@ -1,38 +1,58 @@
 #!env lua
+-- lua 5.2 and luarocks are required
 
-local require_or_install = function (require_string, package_name, package_version)
-  package_name = package_name or require_string
+local require_or_install = function (require_strings, package_name, package_version)
+  if type(require_strings) ~= 'table' then
+    require_strings = {require_strings}
+  end
+
+  package_name = package_name or require_strings[1]
 
   -- TODO multiple returns (require_string as array)
+  local result = {}
 
-  result, err_or_result = pcall(function()
-    return require(require_string)
-  end)
+  for _, require_string in ipairs(require_strings) do
+    local _module = nil
 
-  if result then
-    return err_or_result
+    local success, err_or_result = pcall(function()
+      return require(require_string)
+    end)
+
+    if success then
+      _module = err_or_result
+    else
+      local install_command = 'luarocks install ' .. package_name
+
+      if package_version then
+        install_command = install_command .. ' ' .. package_version
+      end
+
+      print('Installing missing rock ' .. package_name .. '...')
+      print('+ ' .. install_command)
+      --local command_output = os.execute(install_command)
+      local process_handle = io.popen(install_command)
+      local command_output = process_handle:read("*a")
+      process_handle:close()
+      print(command_output)
+
+      -- try require module again. If fail, it's fatal this time
+      _module = require(require_string)
+    end
+
+    table.insert(result, _module)
   end
 
-  local install_command = 'luarocks install ' .. package_name
-
-  if package_version then
-    install_command = install_command .. ' ' .. package_version
-  end
-
-  print('Installing missing rock ' .. package_name .. '...')
-  print('+ ' .. install_command)
-  --local command_output = os.execute(install_command)
-  local process_handle = io.popen(install_command)
-  local command_output = process_handle:read("*a")
-  process_handle:close()
-  print(command_output)
-
-  return require(require_string)
+  return unpack(result)
 end
 
 local requests = require_or_install('requests', 'lua-requests')
 local url_encode = require_or_install('net.url', 'net-url').buildQuery
 local argparse = require_or_install('argparse')
+--local xml2lua, xml_tree_handler = require_or_install({'xml2lua', 'xmlhandler.tree'}, 'xml2lua')
+
+-- error on luarocks installation, @see https://github.com/msva/lua-htmlparser/issues/52
+local htmlparser = require_or_install('htmlparser')
+
 --local pretty_format = require_or_install('inspect')
 local pretty_format = require_or_install('serpent').block
 
@@ -45,8 +65,8 @@ local pretty_json = function (object)
 end
 
 local URL_GOOGLE_TRANSLATE_API = 'https://translation.googleapis.com/language/translate/v2'
+local URL_GOOGLE_TRANSLATE_WEB_MOBILE = 'https://translate.google.com/m'
 local GOOGLE_API_KEY_FILENAME = '.google_translate_api_key'
-
 local debug_print_enabled  = false
 
 local debug_print = function (...)
@@ -90,7 +110,7 @@ local get_api_key = function ()
 
 end
 
-local api_key = get_api_key()
+--local api_key = get_api_key()
 
 local function try_parse_json_result (json_result, url)
   url = url or ''
@@ -110,7 +130,7 @@ local function try_parse_json_result (json_result, url)
   return err_or_result
 end
 
-local do_json_request = function (url_args, verb)
+local do_api_json_request = function (url_args, verb)
   verb = verb or 'get'
 
   local url = URL_GOOGLE_TRANSLATE_API .. '/?' .. url_encode(url_args)
@@ -126,17 +146,62 @@ local do_json_request = function (url_args, verb)
   return result, url
 end
 
+--local xml_parse = function (xml_string)
+--  local parser = xml2lua.parser(xml_tree_handler)
+--  return parser:parse(xml_string)
+--end
+
 -- @see https://cloud.google.com/translate/docs/reference/translate
+--local url_args = {
+--  -- The input text to translate.
+--  q = string_to_translate,
+--  -- The language to use for translation of the input text
+--  target = args.to_language,
+--  -- The language of the source text
+--  source = args.from_language,
+--}
+
 local url_args = {
   -- The input text to translate.
   q = string_to_translate,
-  -- The language to use for translation of the input text
-  target = args.to_language,
-  -- The language of the source text
-  source = args.from_language,
+  -- Target language
+  tl = args.to_language,
+  -- Source language
+  sl = args.from_language,
+  -- Codepage, somehow
+  ie = 'UTF-8',
 }
 
-local request_result = do_json_request(url_args, 'post')
-print(pretty_json(request_result))
+--local request_result = do_api_json_request(url_args, 'post')
+--print(pretty_json(request_result))
 
+local url = URL_GOOGLE_TRANSLATE_WEB_MOBILE .. '?' .. url_encode(url_args)
+debug_print('request url: ' .. url)
+local response_headers = {
+  url = url,
+  headers = {
+    ['Accept-Charset'] = 'utf-8',
+  },
+}
+local response = requests.get(response_headers)
 
+debug_print("\n" .. response.text .. "\n")
+
+--local html = xml_parse(response.text)
+local html = htmlparser.parse(response.text)
+
+-- see https://github.com/msva/lua-htmlparser
+--for _, element in ipairs(html('html div')) do
+--  print(element:getcontent())
+--  print(pretty_format(element:gettext()))
+--end
+
+local translated_text_selector = "body div.t0"
+
+local translated_text_div = html(translated_text_selector)[1]
+
+if not translated_text_div then
+  error('Translated div not found! Expected element at "'.. translated_text_selector .. '"')
+end
+
+print(translated_text_div:getcontent())
