@@ -1,4 +1,4 @@
-#!env lua
+#!/usr/bin/env lua
 -- lua 5.2 and luarocks are required
 
 local require_or_install = function (require_strings, package_name, package_version)
