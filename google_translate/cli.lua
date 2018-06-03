@@ -34,7 +34,10 @@ local requests = require_or_install('requests', 'lua-requests')
 local url_encode = require_or_install('net.url', 'net-url').buildQuery
 local argparse = require_or_install('argparse')
 --local pretty_format = require_or_install('inspect')
---local pretty_format = require_or_install('serpent').block
+local pretty_format = require_or_install('serpent').block
+
+local json = require_or_install('cjson', 'lua-cjson')
+
 local _pretty_json = require_or_install('resty.prettycjson', 'lua-resty-prettycjson')
 
 local pretty_json = function (object)
@@ -72,12 +75,14 @@ local string_to_translate = table.concat(args.string_to_translate, ' ')
 
 debug_print('string to translate: ' .. string_to_translate)
 
-local try_parse_json_result = function (json_result, url)
+local function try_parse_json_result (json_result, url)
+  url = url or ''
   local status, err_or_result = pcall(function ()
     return json.decode(json_result)
   end)
 
   if not status then
+    print('Error: ' .. err_or_result)
     print("\n" .. 'Request result text:' .. "\n")
     print(json_result)
     print('Url requested: ' .. url)
@@ -101,7 +106,7 @@ local do_json_request = function (url_args, verb)
 
   local result = try_parse_json_result(response.text, url)
 
-  return response, url
+  return result, url
 end
 
 -- @see https://cloud.google.com/translate/docs/reference/translate
