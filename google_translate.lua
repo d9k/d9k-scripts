@@ -44,7 +44,8 @@ local pretty_json = function (object)
   return _pretty_json(object, "\n", "  ")
 end
 
-local URL_GOOGLE_API_TRANSLATE = 'https://translation.googleapis.com/language/translate/v2'
+local URL_GOOGLE_TRANSLATE_API = 'https://translation.googleapis.com/language/translate/v2'
+local GOOGLE_API_KEY_FILENAME = '.google_translate_api_key'
 
 local debug_print_enabled  = false
 
@@ -75,6 +76,22 @@ local string_to_translate = table.concat(args.string_to_translate, ' ')
 
 debug_print('string to translate: ' .. string_to_translate)
 
+local get_api_key_file_path = function ()
+  local home_dir_path = os.getenv('HOME')
+  if not home_dir_path then
+    print("home path can't be detected!")
+  end
+  local api_key_file_path = home_dir_path .. '/' .. GOOGLE_API_KEY_FILENAME
+  return api_key_file_path
+end
+
+local get_api_key = function ()
+  local api_key_file_path = get_api_key_file_path()
+
+end
+
+local api_key = get_api_key()
+
 local function try_parse_json_result (json_result, url)
   url = url or ''
   local status, err_or_result = pcall(function ()
@@ -96,7 +113,7 @@ end
 local do_json_request = function (url_args, verb)
   verb = verb or 'get'
 
-  local url = URL_GOOGLE_API_TRANSLATE .. '/?' .. url_encode(url_args)
+  local url = URL_GOOGLE_TRANSLATE_API .. '/?' .. url_encode(url_args)
 
   local requests_function_args = {
     url = url,
@@ -121,3 +138,5 @@ local url_args = {
 
 local request_result = do_json_request(url_args, 'post')
 print(pretty_json(request_result))
+
+
