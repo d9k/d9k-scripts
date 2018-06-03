@@ -46,6 +46,8 @@ filehistorylength = 100 -- this is mapped to ide.config.filehistorylength
 keymap[ID.STEP] = "F11"
 keymap[ID.STEPOVER] = "F10"
 keymap[ID.COMMENT] = "Ctrl-/"
+-- prevent exit on accidental Ctrl-Q press
+keymap[ID.EXIT] = "Ctrl-Shift-Q"
 
 -- see https://github.com/pkulchenko/ZeroBraneStudio/issues/855
 -- filetree.confirm_mousemove
