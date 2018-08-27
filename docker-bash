@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker_container_id=$1
+
+if [[ -z "$docker_container_id" ]]; then
+  echo "Container id argument is required"
+  echo
+  docker ps
+  exit
+fi
+
+docker exec -i -t $1 bash
