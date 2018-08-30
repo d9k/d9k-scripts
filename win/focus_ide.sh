@@ -10,6 +10,7 @@ titles=(
 # "Light Table"
  "ZeroBrane Studio"
  "Android Studio"
+ " Atom"
 )
 
 for (( ix=${#titles[@]}-1 ; ix>=0 ; ix-- )); do

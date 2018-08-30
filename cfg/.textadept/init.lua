@@ -9,7 +9,7 @@
 
 if not CURSES then
   ui.set_theme('base16-ocean-dark-mod', {
--- use  somethhing like `fc-list | grep Terminus`
+-- use  something like `fc-list | grep Terminus`
     font="Terminus", fontface="Regular", fontsize=10
 --    font="Terminus (TTF)", fontface="Medium", fontsize=10
 --    font="Terminus (TTF)", fontface="Medium", fontsize=12
