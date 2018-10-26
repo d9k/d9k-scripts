@@ -1,0 +1,3 @@
+#!/bin/bash
+
+( nvidia-settings -q all 2> /dev/null ) | grep  -i "ThermalSensorReading" | grep Attribute
