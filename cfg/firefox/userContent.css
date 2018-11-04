@@ -62,4 +62,11 @@
     color: #E8F4FF !important;
     box-shadow: 0 0 1px 5px #000 !important;
   }
+
+  @media (min-width:1600px) {
+    .container {
+      max-width: 55em !important;
+      padding-right: 20em;
+    }
+  }
 }
