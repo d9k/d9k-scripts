@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PREFIX=$1
+
+if [[ -z "$PREFIX" ]]; then
+  echo "PREFIX is not specified"
+  exit 1
+fi
+
+for FILENAME in * ; do mv -- "$FILENAME" "${PREFIX}_${FILENAME}" ; done
