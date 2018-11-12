@@ -27,6 +27,7 @@ if [ ! "$(docker ps -q -f name=${CONTAINER_NAME})" ]; then
         --publish ${MYSQL_MAP_TO_HOST_PORT}:3306 \
         --env MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
         --volume ${MYSQL_DATA_DIR}:/var/lib/mysql/:z \
+        --volume ${MYSQL_BACKUP_DIR}:/backup:z \
         --detach \
         mariadb:${DOCKER_IMAGE_VERSION} \
         --sql-mode=TRADITIONAL \
