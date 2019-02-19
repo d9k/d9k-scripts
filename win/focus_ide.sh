@@ -3,12 +3,12 @@
 #lower => better priority
 titles=(
  "NetBeans IDE 8.2"
- "IntelliJ IDEA"
  "PyCharm"
- "PhpStorm"
  "Nightcode 0"
 # "Light Table"
  "ZeroBrane Studio"
+ "PhpStorm"
+ "IntelliJ IDEA"
  "Android Studio"
  " Atom"
 )

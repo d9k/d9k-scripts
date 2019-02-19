@@ -10,3 +10,57 @@
       background: #323234 !important;
    }
 }
+
+/* multiline tabs */
+
+.tabbrowser-tab:not([pinned]) {
+  flex-grow:1;
+
+  /* tab width setting is here! */
+
+  min-width:150px !important; /* width properties on tabs require !important override */
+  max-width: none !important; 
+}
+.tabbrowser-tab,.tab-background {
+  height:var(--tab-min-height);
+}
+.tab-stack {
+  width: 100%;
+}
+#tabbrowser-tabs .scrollbox-innerbox {
+  display: flex;
+  flex-wrap: wrap;
+}
+#tabbrowser-tabs .arrowscrollbox-scrollbox {
+  overflow: visible;
+  display: block;
+}
+#titlebar,#titlebar-buttonbox{
+  height:var(--tab-min-height) !important;
+}
+#titlebar{
+  margin-bottom:calc(var(--tab-min-height)*-1) !important;
+}
+#main-window[sizemode="maximized"] #titlebar{
+  margin-bottom:calc(6px + var(--tab-min-height)*-1) !important;
+}
+#main-window[sizemode="maximized"] #TabsToolbar{
+  margin-left:var(--tab-min-height);
+}
+#titlebar:active{
+  margin-bottom:0 !important;
+}
+#titlebar:active #titlebar-content{
+  margin-bottom:var(--tab-min-height) !important;
+}
+#tabbrowser-tabs .scrollbutton-up,#tabbrowser-tabs .scrollbutton-down,#alltabs-button,.tabbrowser-tab:not([fadein]){
+  display: none;
+}
+
+#main-window[tabsintitlebar] #tabbrowser-tabs {
+  -moz-window-dragging: no-drag;
+}
+#tabbrowser-tabs .scrollbox-innerbox {
+  max-height: 400px;
+  overflow-y:hidden;
+}
