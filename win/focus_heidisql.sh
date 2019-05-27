@@ -4,6 +4,7 @@
 titles=(
  "pgAdmin III"
  "HeidiSQL"
+ "DBeaver"
 )
 
 for (( ix=${#titles[@]}-1 ; ix>=0 ; ix-- )); do
