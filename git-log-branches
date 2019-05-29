@@ -1,0 +1,7 @@
+#!/bin/bash
+
+git-grep-branch $@
+BRANCHES=$(git-grep-branch $@)
+echo "[Press any key to see history]"
+read
+git log $BRANCHES

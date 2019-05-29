@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+    echo "Error: at least one file name expected"
+    exit
+fi
+
+set -x
+
+git checkout @ -- $@
