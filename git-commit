@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# git staged
+git diff -w --cached --color=always | less -R
+
+git commit
+
+git-to-push

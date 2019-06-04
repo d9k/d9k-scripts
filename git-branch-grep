@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Example: git-grep-branch "^p.*ir"
+
+# awk trims spaces
+#RESULT=$(git branch -a | awk '{$1=$1;print}' | grep $@)
+
+#echo $RESULT
+
+RESULT="$(git branch -a | awk '{$1=$1;print}')"
+
+for WORD in "$@"; do
+  RESULT="$(echo "$RESULT" | grep --color=always $WORD)"
+
+    #echo "$WORD"
+done
+
+#printf "$RESULT"
+echo -e "$RESULT"

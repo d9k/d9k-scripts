@@ -1,5 +1,8 @@
 #!/bin/bash
 has_no_session=$(tmux has-session -t 'general' 2>&1)
+
+TERM=xterm-256color
+
 if [ -z "$has_no_session" ]; then
   tmx-resume
 else

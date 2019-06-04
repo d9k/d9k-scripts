@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# see also https://stackoverflow.com/a/1105666/1760643
+
+FILE="$1"
+STASH_NUM="$2"
+
+if [[ -z $STASH_NUM ]]; then
+  STASH_NUM=0
+fi
+
+#git diff stash@{$STASH_NUM}^1 stash@{$STASH_NUM}
+git diff stash@{$STASH_NUM}^1 stash@{$STASH_NUM} -- ${FILE}

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+COMMIT_HASH=$1
+
+# --source doesn't work for remote branches (?)
+git log -1 --pretty=full $COMMIT_HASH
+
+SOURCE_BRANCH=$(git branch -a --contains $COMMIT_HASH)
+echo Branch: "${SOURCE_BRANCH}"
+
+set -x
+# -w: strip whitespaces from lines before diff
+# -U: lines of context
+git diff-tree -p -w -U7 $COMMIT_HASH
+
