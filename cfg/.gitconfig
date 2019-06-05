@@ -1,3 +1,5 @@
+# nested aliases require git 2.20+
+
 [user]
 ;	email = d9k@ya.ru
 ;	name = d9k
@@ -10,3 +12,42 @@
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   type = cat-file -t
   dump = cat-file -p
+
+# git log color scheme from https://coderwall.com/p/euwpig/a-better-git-log, modified
+
+l = log --graph --abbrev-commit --pretty=format:'%C(dim white)%h%Creset - %s %C(dim green)(%cr) %C(blue)<%an>%Creset %C(bold yellow)%d%Creset'
+
+
+la = l --all
+lm = log --graph --abbrev-commit --source --all --author="komarov" --pretty=format:'%C(dim white)%h%Creset - %C(blue)(%S)%Creset %C(dim green)(%cr)%C(reset) %C(dim white)/%an%Creset %n %s'
+
+
+st = status
+s = status
+
+di = diff -w --cached
+d = diff -w --cached
+dif = diff -w
+
+staged = diff -w --cached
+unstaged = diff -w
+
+stage = staged
+stag = staged
+stg = staged
+unstag = unstaged
+unsta = unstaged
+unst = unstaged
+uns = unstaged
+un = unstaged
+
+[diff]
+
+# tool = meld
+
+
+[log]
+
+# date = iso
+
+date=format:%Y.%m.%d %H:%M
