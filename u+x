@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SCRIPT=$1
+
+function try_chmod { SCRIPT_PATH=$1
+  if [[ -f ${SCRIPT_PATH} ]]; then
+    chmod --silent u+x ${SCRIPT_PATH}
+    ls -l $SCRIPT_PATH
+    exit
+  fi
+}
+
+try_chmod $SCRIPT
+try_chmod ~/scripts/$SCRIPT
+try_chmod ~/scripts-private/$SCRIPT
+
+hash -r

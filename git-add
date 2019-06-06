@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  echo "No arguments supplied!"
+  exit
+fi
+
+set -x
+git add $@
+
+git status
