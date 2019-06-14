@@ -1,0 +1,9 @@
+#!/bin/bash
+
+AUTHOR_QUERY=$1
+
+if [[ -z "${AUTHOR_QUERY}" ]]; then
+  exit
+fi
+
+git shortlog -s --all | cut -c8- | sort | grep "${AUTHOR_QUERY}" | head -n 1

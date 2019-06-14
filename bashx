@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCRIPT=$1
+
+shift #strip 1st arg
+
+bash -x $(which $SCRIPT) $@

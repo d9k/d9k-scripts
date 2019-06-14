@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -x
+
+tig --all --date-order $@

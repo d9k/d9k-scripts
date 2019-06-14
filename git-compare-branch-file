@@ -1,2 +1,5 @@
 #!/bin/bash
-git difftool -y ..$1 $2
+
+set -x
+
+git difftool -y $1:$2 $2

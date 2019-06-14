@@ -1,0 +1,4 @@
+#!/bin/bash
+set -x
+
+git log -S "$1" --source --all --date-order | tig

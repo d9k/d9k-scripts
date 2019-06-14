@@ -1,2 +1,4 @@
 #!/bin/bash
-ta $(which $@)
+
+#ta $(which $@)
+silent.sh textadept $(which $@)
