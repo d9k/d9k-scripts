@@ -11,5 +11,9 @@ echo Branch: "${SOURCE_BRANCH}"
 set -x
 # -w: strip whitespaces from lines before diff
 # -U: lines of context
-git diff-tree -p -w -U7 $COMMIT_HASH
+#git diff-tree -p -w -U7 $COMMIT_HASH
+
+# trim lines longer then 512 chars
+git diff-tree --color=always -p -w -U7 $COMMIT_HASH | sed -r 's/(.{1,512}).*/\1/'
+
 
