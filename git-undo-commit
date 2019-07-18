@@ -1,0 +1,7 @@
+0e43e6340106e
+
+#!/bin/bash
+
+set -x
+
+git reset HEAD~

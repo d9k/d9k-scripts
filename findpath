@@ -1,0 +1,9 @@
+#!/bin/bash
+
+RESULT=$(find $(pwd))
+
+for WORD in "$@"; do
+  RESULT="$(echo "$RESULT" | grep -i --color=always $WORD)"
+done
+
+echo -e "$RESULT"
