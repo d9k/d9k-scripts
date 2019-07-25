@@ -1,0 +1,138 @@
+#!/bin/bash
+
+# "lame" required
+
+# see http://www.solomonson.com/content/ubuntu-linux-text-speech
+
+# DO:
+# sudo apt-get install festival xsel sox festvox-ru
+
+# ошибка LTS_Ruleset russian_downcase: no rule matches: LTS_Ruleset: # *here*
+# cfg/patches/festival/msu_ru_nsh_lexicon.scm в
+# /usr/share/festival/voices/russian/msu_ru_nsh_clunits/festvox/msu_ru_nsh_lexicon.scm
+
+# https://gist.github.com/d9k/f6b7670d61e00840082dbc5d74be53f5
+
+CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+THIS_NAME="$(basename $0)"
+
+TEMPO=1.2
+PITCH=-120
+
+AUDIOCAPTION_FILE_SUFFIX="_AudioCaption"
+DEST_TRACK_SUFFIX="_TRACK"
+
+running=$(pgrep festival)
+
+echo "=== ARGUMENTS: ==="
+echo $@
+echo
+echo
+
+#IFS= read var << EOF
+#$(foo)
+#EOF
+
+#echo "$PIPE_CONTENT"
+
+#stdin=$(cat)
+#echo "$stdin"
+#
+#exit
+
+if [[ "$#" -lt 2 ]]; then
+  echo "Usage:  $THIS_NAME  file1  [file2, ...]  destination_folder"
+  exit
+fi
+
+for LAST_ARG; do true; done
+
+# rm trail slash
+DEST_FOLDER=${LAST_ARG%/}
+
+if [[ ! -d "${DEST_FOLDER}" ]]; then
+  echo "\"$DEST_FOLDER\" is not a folder"
+  exit
+fi
+
+echo "Dest folder is \"$DEST_FOLDER\""
+echo
+
+for ARG; do
+  if [[ "${ARG}" == "${LAST_ARG}" ]]; then
+    exit
+  fi
+
+  echo "================ NEXT FILE ====================="
+
+  FILEPATH="${ARG}"
+
+  #echo "$FILEPATH"
+  FILENAME=$(basename "${FILEPATH}")
+
+  #echo "$FILENAME"
+
+
+  #FILECAPTION="${FILENAME%%.*}"
+  #FILECAPTION=$(echo ${FILENAME/*./})
+  EXTENSION=$(echo "${FILENAME}" | sed -r 's/.+\.(.+)|.*/\1/')
+  FILECAPTION=$(echo "${FILENAME}" | sed -r 's/(.+)\..+|(.*)/\1\2/')
+
+  DEST_TRACK_PATH="${DEST_FOLDER}/${FILECAPTION}${DEST_TRACK_SUFFIX}.${EXTENSION}"
+  AUDIOCAPTION_FILE_PATH="${DEST_FOLDER}/${FILECAPTION}${AUDIOCAPTION_FILE_SUFFIX}.${EXTENSION}"
+
+  echo $FILECAPTION
+  echo $EXTENSION
+
+  echo $AUDIOCAPTION_FILE_PATH
+  echo $DEST_TRACK_PATH
+
+  echo
+
+  if [[ -n "$running" ]]; then
+      #kill it
+      #killall festival;killall audsp;killall play;sleep .1;killall play
+      killall festival;killall audsp;
+  fi
+
+
+  TEMP_FILE_PATH=$(mktemp)
+
+  echo $FILECAPTION > ${TEMP_FILE_PATH}
+
+  echo "# Before fix:"
+  cat ${TEMP_FILE_PATH}
+
+  ${CURRENT_PATH}/win/say-selection-ru-fix-file.sh ${TEMP_FILE_PATH}
+
+  echo
+  echo "# After fix:"
+  cat ${TEMP_FILE_PATH}
+  echo
+
+  TEMP_MP3_PATH="$(mktemp).mp3"
+
+  fest_opts="(Parameter.set 'Audio_Method 'Audio_Command)"
+  fest_opts+="(Parameter.set 'Audio_Required_Rate 11025)\n"
+  fest_opts+="(Parameter.set 'Audio_Required_Format 'riff)\n"
+  #fest_opts+="(Parameter.set 'Audio_Command "\""play -q -b 16 -c 1 -e signed-integer -r \$SR -t raw \$FILE tempo ${TEMPO} pitch ${PITCH}"\"")"
+  fest_opts+="(Parameter.set 'Audio_Command "\""lame --quiet --preset voice \$FILE - >> $TEMP_MP3_PATH"\"")\n"
+  fest_opts+="(tts_file \""${TEMP_FILE_PATH}"\" nil)"
+
+  #echo
+  #echo -e "${fest_opts}"
+  #echo
+
+  echo -e "${fest_opts}" | festival --pipe --language russian
+
+  #sleep 2
+
+  cp "${TEMP_MP3_PATH}" "${AUDIOCAPTION_FILE_PATH}"
+  cp "${FILEPATH}" "${DEST_TRACK_PATH}"
+
+  rm ${TEMP_MP3_PATH}
+  rm ${TEMP_FILE_PATH}
+done
+
+cd "${DEST_FOLDER}"
+ls -lh
