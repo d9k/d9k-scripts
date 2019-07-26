@@ -1,3 +1,9 @@
 #!/bin/bash
 
-git difftool --dir-diff HEAD
+REV=$1
+
+if [[ -z "$REV" ]]; then
+  REV=HEAD
+fi
+
+git difftool --dir-diff $REV
