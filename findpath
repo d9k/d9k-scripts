@@ -2,8 +2,12 @@
 
 RESULT=$(find $(pwd))
 
+COLOR_OPTION=always
+
+[[ ! -t 1 ]] && COLOR_OPTION=never
+
 for WORD in "$@"; do
-  RESULT="$(echo "$RESULT" | grep -i --color=always $WORD)"
+  RESULT="$(echo "$RESULT" | grep -i --color=${COLOR_OPTION} $WORD)"
 done
 
 echo -e "$RESULT"
