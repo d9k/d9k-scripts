@@ -34,7 +34,11 @@ then
     cat ${TEMP_FILE_PATH}
     echo
 
-    echo "(Parameter.set 'Audio_Command "\""play -q -b 16 -c 1 -e signed-integer -r \$SR -t raw \$FILE tempo ${TEMPO} pitch ${PITCH}"\"") (Parameter.set 'Audio_Method 'Audio_Command) (tts_file \""${TEMP_FILE_PATH}"\" nil)" | festival --pipe --language russian
+    fest_opts="(Parameter.set 'Audio_Method 'Audio_Command)"
+    fest_opts+="(Parameter.set 'Audio_Command "\""play -q -b 16 -c 1 -e signed-integer -r \$SR -t raw \$FILE tempo ${TEMPO} pitch ${PITCH}"\"")"
+    fest_opts+="(tts_file \""${TEMP_FILE_PATH}"\" nil)"
+
+    echo "${fest_opts}" | festival --pipe --language russian
 
     sleep 2
 
