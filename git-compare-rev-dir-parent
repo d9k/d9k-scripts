@@ -6,4 +6,4 @@ if [[ -z "$REV" ]]; then
   REV=HEAD
 fi
 
-git difftool --dir-diff $REV
+git difftool --dir-diff $REV^!
