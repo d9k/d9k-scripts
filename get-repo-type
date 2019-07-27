@@ -1,0 +1,3 @@
+#!/bin/bash
+
+get-repo-type-and-folder | head -n 1

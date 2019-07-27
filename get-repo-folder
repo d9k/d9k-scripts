@@ -1,0 +1,3 @@
+#!/bin/bash
+
+get-repo-type-and-folder | tail -n 1

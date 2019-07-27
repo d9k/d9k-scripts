@@ -2,8 +2,18 @@
 
 DIR="$(pwd)"
 
-while [[ "$(expr length '${DIR}')" -gt ]]; do
-  echo $DIR
-  echo
-done
+while [[ "$(expr length ${DIR})" -gt 1 ]]; do
+  #echo $DIR
+  #echo $(expr length ${DIR})
+  #echo
 
+  if [[ -d "$DIR/.git" ]]; then
+    echo "git"
+    echo $DIR
+  fi
+    if [[ -d "$DIR/.hg" ]]; then
+    echo "hg"
+    echo $DIR
+  fi
+  DIR=$(dirname "$DIR")
+done
