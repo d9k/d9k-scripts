@@ -1,6 +1,11 @@
 #!/bin/bash
 
-RESULT=$(find $(pwd))
+#https://www.crybit.com/exclude-directories/
+#find -iname findme ! -path ./bit/* ! -path ./cry?*
+#find . -type d \( -path dir1 -o -path dir2 -o -path dir3 \) -prune -o -print
+
+#RESULT=$(find $(pwd) -type d \( -path .hg \) -prune -o -print)
+RESULT=$(find . -type d \( -path '*/.hg' -o -path "*/.git" \) -prune -o -print)
 
 COLOR_OPTION=always
 

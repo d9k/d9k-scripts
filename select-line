@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# select nth line from piped input
+# Usage: `select-line [line_num]`
+# line_num can be negative (from end)
+
+#https://stackoverflow.com/questions/2559076/how-do-i-redirect-output-to-a-variable-in-shell
+
+#read "$@" <&0;
+#read test
+
+LINE_NUM=$1
+
+PIPE_INPUT=$(< /dev/stdin)
+
+if [[ -z "$LINE_NUM" ]]; then
+  echo -n "$PIPE_INPUT"
+  exit
+fi
+
+if [[ "$LINE_NUM" -gt 0 ]]; then
+  echo -n "$PIPE_INPUT" | sed --quiet "${LINE_NUM}p" | tr -d "\n"
+  exit
+fi
+
+if [[ "$LINE_NUM" -lt 0 ]]; then
+  MOD_LINE_NUM=$(( $LINE_NUM * -1 ))
+  #echo $MOD_LINE_NUM
+  echo -n "$PIPE_INPUT" | tail -n $MOD_LINE_NUM | head -n 1 | tr -d "\n"
+  #echo "$PIPE_INPUT" | sed --quiet "${LINE_NUM}p"
+  exit
+fi

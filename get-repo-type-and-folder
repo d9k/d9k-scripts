@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DIR="$(pwd)"
+
+while [[ "$(expr length '${DIR}')" -gt ]]; do
+  echo $DIR
+  echo
+done
+
