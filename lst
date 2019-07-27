@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# list files by last time, reverse order, full path, only paths
+
+DIR=$1
+
+if [[ -z "$DIR" ]]; then
+  DIR=$(pwd)
+fi
+
+ls --reverse -t --directory -1 $DIR/*

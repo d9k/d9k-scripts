@@ -1,4 +1,4 @@
 #!/bin/bash
-hg add
-hg commit
+hg add &&\
+hg commit &&\
 hg push
