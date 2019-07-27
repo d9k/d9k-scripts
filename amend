@@ -1,7 +1,6 @@
 #!/bin/bash
 
 REPO_TYPE=$(get-repo-type)
-MESSAGE="$@"
 
 if [[ -z "$REPO_TYPE" ]]; then
   echo "Repo not detected"
@@ -11,19 +10,11 @@ fi
 echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
-  if [[ -n "$MESSAGE" ]]; then
-    git commit -m "$MESSAGE"
-    exit
-  fi
-  git commit
+  git commit --amend
   exit
 fi
 
 if [ "$REPO_TYPE" == "hg" ]; then
-  if [[ -n "$MESSAGE" ]]; then
-    hg commit -m "$MESSAGE"
-    exit
-  fi
-  hg commit
+  hg commit --amend
   exit
 fi
