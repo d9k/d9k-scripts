@@ -36,10 +36,18 @@ function delete_lines()
 end
 
 -- keys.cy=delete_lines
+keys['cq']=delete_lines
 -- ctrl+shift+z doesn't work on cinnamon!! why??
-keys.cy=buffer.redo
+keys['cy']=buffer.redo
 
-keys.cp=ui.switch_buffer
+keys['cp']=ui.switch_buffer
+
+keys['ac'] = function()
+  ui.clipboard_text=buffer.filename
+end
+
+keys['cr'] = buffer.line_delete
+keys['cl'] = textadept.file_types.select_lexer
 
 textadept.editing.strip_trailing_spaces = true
 
@@ -74,19 +82,15 @@ events.connect(events.INITIALIZED, function()
  textadept.session.load(textadept.session.default_session)
 end, 1)
 
-keys['ac'] = function()
-  ui.clipboard_text=buffer.filename
-end
-
 -- moon lexer error!
 --textadept.file_types.extensions.moon = nil
 -- from https://github.com/leafo/moonscript-textadept
 textadept.file_types.extensions.moon = "moonscript"
 textadept.file_types.extensions.rockspec = "lua"
 
-textadept.editing.auto_pairs = nil
+textadept.file_types.extensions.aliases = "bash"
 
-keys['cl'] = buffer.line_delete
+textadept.editing.auto_pairs = nil
 
 --textadept.menu.menubar[_L['_Tools']][_L['Command _Entry']][2] = function()
    --ui.command_entry.enter_mode('lua_command', 'lua', 2)
