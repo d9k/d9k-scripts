@@ -2,12 +2,13 @@
 
 -- additional hotkeys:
 --
---  alt + C :  copy file name
+--  alt + C :  copy file name (ctrl + alt + C too)
 -- ctrl + L :  delete current line
 -- ctrl + Y :  redo
 -- ctrl + p :  switch buffer
 
 if not CURSES then
+  --   buffer:set_theme('base16-ocean-dark-mod', {
   ui.set_theme('base16-ocean-dark-mod', {
 -- use  something like `fc-list | grep Terminus`
     font="Terminus", fontface="Regular", fontsize=10
@@ -36,8 +37,9 @@ function delete_lines()
 end
 
 -- keys.cy=delete_lines
-keys['cq']=delete_lines
 -- ctrl+shift+z doesn't work on cinnamon!! why??
+
+keys['cq']=delete_lines
 keys['cy']=buffer.redo
 
 keys['cp']=ui.switch_buffer
@@ -45,9 +47,11 @@ keys['cp']=ui.switch_buffer
 keys['ac'] = function()
   ui.clipboard_text=buffer.filename
 end
+keys['cac'] = keys['ac']
 
 keys['cr'] = buffer.line_delete
 keys['cl'] = textadept.file_types.select_lexer
+keys['cj'] = textadept.editing.goto_line
 
 textadept.editing.strip_trailing_spaces = true
 
