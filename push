@@ -2,19 +2,24 @@
 
 REPO_TYPE=$(get-repo-type)
 
+CONTINUE=
 function ask_continue {
+  CONTINUE=
   # -s	        do not echo input coming from a terminal
   # -p          prompt	output the string PROMPT without a trailing newline before
   #       attempting to read
   # -r  	  	  do not allow backslashes to escape any characters
   # -n nchars	  return after reading NCHARS characters rather than waiting
   #    		for a newline,
-  read -n 1 -s -r -p "Press \"y\" key to continue: " input
+  read -n 1 -r -p "Press \"y\" key to continue: " input
+
+  # new line but with stderr
+  echo
 
   if [ "$input" != "Y" ] && [ "$input" != "y" ]; then
     exit
   fi
-  echo '1'
+  CONTINUE=1
 }
 
 
@@ -27,17 +32,19 @@ echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
   git-to-push
-  CONTINUE=$(ask_continue)
+  ask_continue
+  #CONTINUE=$(ask_continue)
 
   if [[ "$CONTINUE" != "1" ]]; then
     exit
   fi
 
+  set -x
   git push
   exit
 fi
 
 if [ "$REPO_TYPE" == "hg" ]; then
-  #hg push
+  hg push
   exit
 fi
