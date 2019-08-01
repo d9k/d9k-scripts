@@ -2,7 +2,6 @@
 
 REPO_TYPE=$(get-repo-type)
 
-CONTINUE=
 function ask_continue {
   CONTINUE=
   # -s	        do not echo input coming from a terminal
@@ -13,13 +12,13 @@ function ask_continue {
   #    		for a newline,
   read -n 1 -r -p "Press \"y\" key to continue: " input
 
-  # new line but with stderr
-  echo
+  # new line but with stderr, escaping capture output
+  echo >&2
 
   if [ "$input" != "Y" ] && [ "$input" != "y" ]; then
     exit
   fi
-  CONTINUE=1
+  echo 1
 }
 
 
@@ -32,11 +31,9 @@ echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
   git-to-push
-  ask_continue
-  #CONTINUE=$(ask_continue)
 
-  if [[ "$CONTINUE" != "1" ]]; then
-    exit
+  if [[ "$(ask_continue)" != "1" ]]; then
+    exit;
   fi
 
   set -x
