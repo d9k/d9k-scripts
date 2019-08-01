@@ -19,15 +19,18 @@ NO_COLOR='\033[0m' # No Color
 
 printf "I ${RED}love${NO_COLOR} Stack Overflow\n"
 
-function ask_continue {
-  CONTINUE=
+function ask_continue { action_name=$1
+  if [[ -z "${action_name}" ]]; then
+    action_name="continue"
+  fi
+
   # -s	        do not echo input coming from a terminal
   # -p          prompt	output the string PROMPT without a trailing newline before
   #       attempting to read
   # -r  	  	  do not allow backslashes to escape any characters
   # -n nchars	  return after reading NCHARS characters rather than waiting
   #    		for a newline,
-  read -n 1 -r -p "Press \"y\" key to continue: " input
+  read -n 1 -r -p "Press \"y\" to ${action_name}: " input
 
   # new line but with stderr, escaping capture output
   echo >&2
@@ -38,7 +41,7 @@ function ask_continue {
   echo 1
 }
 
-function header { header_text=$1;
+function header { header_text=$@;
   echo -e "\n\n${LIGHT_GRAY_TEXT}# ${header_text}:${NO_COLOR}\n"
 }
 
@@ -59,10 +62,17 @@ if [ "$REPO_TYPE" == "git" ]; then
 
   printf "${NO_COLOR}"
 
-  header "This commit will be edited"
+  header "Commit info"
 
-  git log -1 --abbrev-commit --pretty=format:'%C(dim white)#%h    %d%C(reset)%n%C(green)%cr%C(reset)%n%n%s%n%n%C(blue)/%an%C(reset)'
-  if [[ "$(ask_continue)" != "1" ]]; then
+  git log -1 --abbrev-commit --pretty=format:'%C(dim white)#%h    %d%C(reset)%n%C(green)%cr%C(reset)%C(blue)    <%an>%C(reset)%'
+
+  echo
+  echo
+
+  COMMIT_TEXT=$(git log -1 --abbrev-commit --pretty=format:'%s')
+  CONTINUE=$(ask_continue "amend \"${COMMIT_TEXT}\"")
+
+  if [[ "$CONTINUE" != "1" ]]; then
     exit;
   fi
   git commit --amend
