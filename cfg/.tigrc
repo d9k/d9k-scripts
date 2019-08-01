@@ -1,7 +1,12 @@
 # Enum: no, all, some, at-eol (diff)
 set ignore-space = some
 set diff-context = 1
+set wrap-lines = 1
 
+#bind status A !?git commit --amend
+bind status A !amend
+bind status D !@?rm %(file)
+bind main P !push
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##

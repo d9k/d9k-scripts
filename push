@@ -2,15 +2,18 @@
 
 REPO_TYPE=$(get-repo-type)
 
-function ask_continue {
-  CONTINUE=
+function ask_continue { action_name=$1
+  if [[ -z "${action_name}" ]]; then
+    action_name="continue"
+  fi
+
   # -s	        do not echo input coming from a terminal
   # -p          prompt	output the string PROMPT without a trailing newline before
   #       attempting to read
   # -r  	  	  do not allow backslashes to escape any characters
   # -n nchars	  return after reading NCHARS characters rather than waiting
   #    		for a newline,
-  read -n 1 -r -p "Press \"y\" key to continue: " input
+  read -n 1 -r -p "Press \"y\" to ${action_name}: " input
 
   # new line but with stderr, escaping capture output
   echo >&2
@@ -20,7 +23,6 @@ function ask_continue {
   fi
   echo 1
 }
-
 
 if [[ -z "$REPO_TYPE" ]]; then
   echo "Repo not detected"
@@ -32,7 +34,7 @@ echo "$REPO_TYPE repo detected"
 if [ "$REPO_TYPE" == "git" ]; then
   git-to-push
 
-  if [[ "$(ask_continue)" != "1" ]]; then
+  if [[ "$(ask_continue push)" != "1" ]]; then
     exit;
   fi
 
