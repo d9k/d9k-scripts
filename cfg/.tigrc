@@ -3,10 +3,18 @@ set ignore-space = some
 set diff-context = 1
 set wrap-lines = 1
 
+# see https://github.com/jonas/tig/wiki/Bindings
+
 #bind status A !?git commit --amend
+
 bind status A !amend
 bind status D !@?rm %(file)
 bind main P !push
+bind diff <Up> move-up
+bind diff <Down> move-down
+
+bind main c !@sh -c "echo %(commit) | xclip -selection c"
+bind main C !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##

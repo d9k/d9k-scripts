@@ -32,11 +32,17 @@ fi
 echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
+  echo
+  echo "# These commits will be pushed:"
+  echo
   git-to-push
+  echo
 
   if [[ "$(ask_continue push)" != "1" ]]; then
     exit;
   fi
+
+  echo
 
   set -x
   git push
