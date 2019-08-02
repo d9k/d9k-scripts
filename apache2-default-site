@@ -1,0 +1,34 @@
+#!/bin/bash
+
+CONFIG_NAME=$1
+APACHE_SITES_PATH="/etc/apache2/sites-available"
+DEFAULT_CONFIG_PATH="${APACHE_SITES_PATH}/001-default-override.conf"
+
+function print_available_configs {
+  echo "Available options:"
+  cd ${APACHE_SITES_PATH}
+  ls -1 | grep -v default | xargs -I {} sh -c "echo '  * {}' | sed 's/\.[^.]*$//'"
+}
+
+if [[ -z "$CONFIG_NAME" ]]; then
+  echo "Please specify config name"
+  print_available_configs
+  exit
+fi
+
+
+
+CONFIG_PATH="${APACHE_SITES_PATH}/${CONFIG_NAME}.conf"
+
+if [[ ! -f "$CONFIG_PATH" ]]; then
+  echo "Error: config ${CONFIG_PATH} not found"
+  print_available_configs
+  exit 1
+fi
+
+set -x
+sudo cp "$CONFIG_PATH" "$DEFAULT_CONFIG_PATH"
+
+# adding comment
+sudo sed -e '/ServerName/s/^/#/g' -i "$DEFAULT_CONFIG_PATH"
+sudo service apache2 restart
