@@ -87,11 +87,15 @@ fi
 # %m - The hostname up to the first ‘.’
 # see also http://aperiodic.net/phil/prompt/
 function precmd {
-  current_time=$(date +%H:%M)
+  CURRENT_TIME=$(date +%H:%M)
+  PUSH_REQUIRED=$(push-required)
   # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
   PROMPT_SEP=$'%F{blue}|'
   PROMPT="${PROMPT_SEP}"$' %B%F{green}%~%b ' # current path
-  PROMPT="${PROMPT}${PROMPT_SEP}"$' %F{white}'"${current_time} "
+  PROMPT="${PROMPT}${PROMPT_SEP}"$' %F{white}'"${CURRENT_TIME} "
+  if [[ -n "${PUSH_REQUIRED}" ]]; then
+    PROMPT="${PROMPT}${PROMPT_SEP}"$' %B%F{red}push%b ' # current path
+  fi
   PROMPT="${PROMPT}${PROMPT_SEP}"$' %n@'"${COMPUTER_NAME} "
   PROMPT="${PROMPT}${PROMPT_SEP}"$' \n%F{white} %# %b%f%k'
   PROMPT="${PROMPT}"

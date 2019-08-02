@@ -1,0 +1,16 @@
+#!/bin/bash
+
+REPO_TYPE=$(get-repo-type)
+
+#echo "$REPO_TYPE repo detected"
+
+if [ "$REPO_TYPE" == "git" ]; then
+  # one line per commit
+  git log --branches --not --remotes --pretty=format:'%C(dim green)(%cr)%C(reset)  %s %C(dim white)#%h%Creset' &2>1
+  exit
+fi
+
+if [ "$REPO_TYPE" == "hg" ]; then
+  # hg push
+  exit
+fi
