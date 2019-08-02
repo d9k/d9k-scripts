@@ -1,8 +1,10 @@
 # Set up the prompt
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+#autoload -Uz promptinit
+#promptinit
+#prompt adam1
+
+# for prompt setup see "function precmd" below
 
 # Used for inspiration:
 # https://github.com/ricbra/zsh-config/blob/master/zshrc
@@ -74,6 +76,28 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+# prompt setup:
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
+# %B (%b) - Start (stop) boldface mode.
+# %F (%f) - Start (stop) using a different foreground colour
+# %K (%k) - Start (stop) using a different bacKground colour
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
+# %d - Current working directory
+# %~ - Current working directory ommitting $HOME
+# %m - The hostname up to the first ‘.’
+# see also http://aperiodic.net/phil/prompt/
+function precmd {
+  current_time=$(date +%H:%M)
+  # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+  PROMPT_SEP=$'%F{blue}|'
+  PROMPT="${PROMPT_SEP}"$' %B%F{green}%~%b ' # current path
+  PROMPT="${PROMPT}${PROMPT_SEP}"$' %F{white}'"${current_time} "
+  PROMPT="${PROMPT}${PROMPT_SEP}"$' %n@'"${COMPUTER_NAME} "
+  PROMPT="${PROMPT}${PROMPT_SEP}"$' \n%F{white} %# %b%f%k'
+  PROMPT="${PROMPT}"
+}
+
+#PROMPT="%K{blue}%n@%m%k %B%F{green}%51<...<%~%} \n %F{white} %# %b%f%k"
 
 [ -s ~/.lastdirectory ] && cd `cat ~/.lastdirectory`
 
