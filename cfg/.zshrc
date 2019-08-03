@@ -112,12 +112,15 @@ TRAPEXIT() {
     pwd > $HOME/.lastdirectory
 }
 
+# This loads node version manager
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+
+
 # see http://naxoc.net/2014/02/02/syntax-highlighting-commands-with-zsh/
 # see https://github.com/zsh-users/zsh-syntax-highlighting
 
+ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 if [[ -f "${ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH}" ]]; then
   source /home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi

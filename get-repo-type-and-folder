@@ -2,7 +2,7 @@
 
 DIR="$(pwd)"
 
-while [[ "$(expr length ${DIR})" -gt 1 ]]; do
+while [[ $(expr length "${DIR}") -gt 1 ]]; do
   #echo $DIR
   #echo $(expr length ${DIR})
   #echo

@@ -39,7 +39,8 @@ end
 -- keys.cy=delete_lines
 -- ctrl+shift+z doesn't work on cinnamon!! why??
 
-keys['cq']=delete_lines
+--keys['cq']=delete_lines
+keys['cq']=ui.switch_buffer
 keys['cy']=buffer.redo
 
 keys['cp']=ui.switch_buffer
