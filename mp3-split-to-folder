@@ -2,30 +2,39 @@
 
 # `sudo apt install mp3splt` required before first run
 
-SPLIT_BY_MINUTES_DEFAULT=18
+SPLIT_BY_MINUTES_DEFAULT=15
 
-file_rel_path=$1
+echo "$1"
+echo "$2"
 
-if [[ -z "$file_rel_path" ]]; then
+FILE_REL_PATH="$1"
+
+if [[ -z "$FILE_REL_PATH" ]]; then
   echo "Mp3 file name required"
   exit
 fi
 
-split_by_minutes=$2
+SPLIT_BY_MINUTES=$2
 
-if [[ -z $split_by_minutes ]]; then
-  split_by_minutes=$SPLIT_BY_MINUTES_DEFAULT
+if [[ -z "$SPLIT_BY_MINUTES" ]]; then
+  SPLIT_BY_MINUTES=$SPLIT_BY_MINUTES_DEFAULT
 fi
 
-file_dir_path=$(dirname "$file_rel_path")
-file_name_with_ext=$(basename "$file_rel_path")
+FILE_DIR_PATH=$(dirname "$FILE_REL_PATH")
+FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
 
-file_extension=${file_name_with_ext#*.}
-file_name=${file_name_with_ext%*.$file_extension}
+#FILE_EXTENSION="${FILE_NAME_WITH_EXT#*.}"
+#FILE_NAME="${FILE_NAME_WITH_EXT%*.$FILE_EXTENSION}"
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
 
-split_to_path="$file_dir_path/$file_name"
+SPLIT_TO_PATH="$FILE_DIR_PATH/$FILE_NAME_NO_EXT"
 
-mkdir "$split_to_path"
+mkdir "$SPLIT_TO_PATH"
 
 # 5 seconds overlap
-mp3splt -t $split_by_minutes.00 -d "$split_to_path" -O 0.5 "$file_rel_path"
+mp3splt -t ${SPLIT_BY_MINUTES}.00 -d "$SPLIT_TO_PATH" -O 0.5 "$FILE_REL_PATH"
+cd "$SPLIT_TO_PATH"
+rename 's/m_00s__/_m__to__/gi' *.mp3
+rename 's/m_05s./_m./gi' *.mp3
+#rename 's/_/ /gi' *.mp3

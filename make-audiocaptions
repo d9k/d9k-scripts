@@ -104,6 +104,7 @@ for ARG; do
   cat ${TEMP_FILE_PATH}
 
   ${CURRENT_PATH}/win/say-selection-ru-fix-file.sh ${TEMP_FILE_PATH}
+  sed -i -e 's|_| |g' ${TEMP_FILE_PATH}
 
   echo
   echo "# After fix:"
