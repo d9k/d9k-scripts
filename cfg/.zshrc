@@ -121,3 +121,15 @@ ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-
 if [[ -f "${ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH}" ]]; then
   source /home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+# http://zsh.sourceforge.net/Intro/intro_11.html
+# https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script/226062
+
+# alt+u: up one folder
+bindkey -s '\eu' 'cd ..\n'
+# alt+l: list files
+bindkey -s '\el' 'ls -lh\n'
+# alt+s: tig status
+bindkey -s '\es' 'st\n'
+# alt+g: tig
+bindkey -s '\eg' 'tig\n'
