@@ -1,0 +1,7 @@
+#!/bin/bash
+
+REL_PATH="$1"
+
+#ABS_PATH="$(readlink -f ${REL_PATH})"
+
+ls -drt "$REL_PATH"/* | select-line -1
