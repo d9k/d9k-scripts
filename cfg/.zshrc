@@ -94,10 +94,37 @@ function precmd {
   PROMPT_START='%F{blue}# %f'
   PROMPT_END=''
   PROMPT_SEP=' '
-  PROMPT="${PROMPT_START}"$'%B%F{green}%~%b ' # current path
+  #PROMPT="${PROMPT_START}"$'%B%F{green}%~%b ' # current path
+  PROMPT="${PROMPT_START}"$'%B%F{blue}%~%b ' # current path
   PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{white}'"${CURRENT_TIME} "
   if [[ -n "${PUSH_REQUIRED}" ]]; then
     PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{red}push%b ' # current path
+  fi
+  # nvm: check if .nvmrc file is present
+  if [[ -f ".nvmrc" ]]; then
+    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}nvmrc%b '
+  fi
+
+  # nvm: check if not default node version
+  if [[ -n "${NODE_VERSION_DEFAULT}" ]]; then
+    NODE_VERSION="$(node -v)"
+    if [[ "${NODE_VERSION_DEFAULT}" != "${NODE_VERSION}" ]]; then
+      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{yellow}'"node_${NODE_VERSION} "
+    fi
+  fi
+  # check git branch differs from default
+  # set default branch: git config user.defaultbranch "product/els/48_portfolio_webinar3_theme2"
+  if [[ "$(get-repo-type)" == "git" ]]; then
+    GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
+
+    if [[ -n "${GIT_BRANCH_DEFAULT}" ]]; then
+
+      GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+      if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
+        PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{green}'"${GIT_BRANCH} "
+      fi
+    fi
   fi
   PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}%n@'"${COMPUTER_NAME} "
   PROMPT="${PROMPT}${PROMPT_END}"$'\n%F{blue}> %b%f%k'
