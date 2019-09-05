@@ -1,0 +1,15 @@
+#!/bin/bash
+
+REPO_TYPE=$(get-repo-type)
+
+if [[ -z "$REPO_TYPE" ]]; then
+  exit
+fi
+
+if [ "$REPO_TYPE" == "git" ]; then
+  git branch -a
+fi
+
+if [ "$REPO_TYPE" == "hg" ]; then
+  :
+fi

@@ -29,11 +29,12 @@ if [[ -z "$REPO_TYPE" ]]; then
   exit
 fi
 
-echo "$REPO_TYPE repo detected"
-
 if [ "$REPO_TYPE" == "git" ]; then
   echo
-  echo "# These commits will be pushed:"
+  echo "Current git branch:"
+  echo "  $(git-current-branch)"
+  echo
+  echo "# New commits:"
   echo
   git-to-push
   echo
@@ -50,6 +51,7 @@ if [ "$REPO_TYPE" == "git" ]; then
 fi
 
 if [ "$REPO_TYPE" == "hg" ]; then
+  echo "Hg repo"
   hg push
   exit
 fi

@@ -76,6 +76,34 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+# unicode chars support, see https://stackoverflow.com/a/16509364/1760643
+fast_chr() {
+    local __octal
+    local __char
+    printf -v __octal '%03o' $1
+    printf -v __char \\$__octal
+    REPLY=$__char
+}
+
+# usage: unichr 0x2505
+function unichr {
+    local c=$1    # Ordinal of char
+    local l=0    # Byte ctr
+    local o=63    # Ceiling
+    local p=128    # Accum. bits
+    local s=''    # Output string
+
+    (( c < 0x80 )) && { fast_chr "$c"; echo -n "$REPLY"; return; }
+
+    while (( c > o )); do
+        fast_chr $(( t = 0x80 | c & 0x3f ))
+        s="$REPLY$s"
+        (( c >>= 6, l++, p += o+1, o>>=1 ))
+    done
+
+    fast_chr $(( t = p | c ))
+    echo -n "$REPLY$s"
+}
 # prompt setup:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # %B (%b) - Start (stop) boldface mode.
@@ -87,6 +115,9 @@ fi
 # %m - The hostname up to the first ‘.’
 # see also http://aperiodic.net/phil/prompt/
 function precmd {
+  ICON_BRANCH=$(unichr 0x2387)
+  ICON_THREE_DOTS=$(unichr 0x2026)
+  ICON_TWO_DOTS=$(unichr 0x2025)
   CURRENT_TIME=$(date +%H:%M)
   PUSH_REQUIRED=$(push-required)
   # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
@@ -122,11 +153,19 @@ function precmd {
       GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
       if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
-        PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{green}'"${GIT_BRANCH} "
+        PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
       fi
     fi
   fi
-  PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}%n@'"${COMPUTER_NAME} "
+  # user and computer name
+  _USER=$USER
+
+  if [[ "$_USER" == "komarov" ]]; then
+    _USER="k${ICON_TWO_DOTS}"
+  fi
+
+  # (%n is $USER)
+  PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}'"$_USER@${COMPUTER_NAME} "
   PROMPT="${PROMPT}${PROMPT_END}"$'\n%F{blue}> %b%f%k'
   PROMPT="${PROMPT}"
 }
