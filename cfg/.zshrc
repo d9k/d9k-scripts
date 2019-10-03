@@ -120,6 +120,7 @@ function precmd {
   ICON_TWO_DOTS=$(unichr 0x2025)
   CURRENT_TIME=$(date +%H:%M)
   PUSH_REQUIRED=$(push-required)
+  COMMIT_REQUIRED=$(commit-required)
   # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
   #PROMPT_SEP='%F{blue}| %f'
   PROMPT_START='%F{blue}# %f'
@@ -128,9 +129,15 @@ function precmd {
   #PROMPT="${PROMPT_START}"$'%B%F{green}%~%b ' # current path
   PROMPT="${PROMPT_START}"$'%B%F{blue}%~%b ' # current path
   PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{white}'"${CURRENT_TIME} "
+
   if [[ -n "${PUSH_REQUIRED}" ]]; then
-    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{red}push%b ' # current path
+    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{red}push%b '
   fi
+
+  if [[ -n "${COMMIT_REQUIRED}" ]]; then
+    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}commit%b '
+  fi
+
   # nvm: check if .nvmrc file is present
   if [[ -f ".nvmrc" ]]; then
     PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}nvmrc%b '
