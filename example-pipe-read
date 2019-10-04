@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#[[ -t 1 ]] && \
+#    echo 'STDOUT is attached to TTY'
+#
+#[[ -p /dev/stdout ]] && \
+#    echo 'STDOUT is attached to a pipe'
+#
+#[[ ! -t 1 && ! -p /dev/stdout ]] && \
+#    echo 'STDOUT is attached to a redirection'
+#
+
+# https://unix.stackexchange.com/a/388462
+if [ ! -t 0 ]; then
+  echo "stdin has data"
+else
+  echo "stdin is empty"
+fi
