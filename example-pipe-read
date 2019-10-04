@@ -11,8 +11,16 @@
 #
 
 # https://unix.stackexchange.com/a/388462
+
+INPUT=
+
 if [ ! -t 0 ]; then
-  echo "stdin has data"
+  echo "(pipe has data)"
+
+  INPUT=$(< /dev/stdin)
 else
-  echo "stdin is empty"
+  echo "(no pipe)"
+  INPUT="$@"
 fi
+
+echo $INPUT
