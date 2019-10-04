@@ -207,3 +207,18 @@ bindkey -s '\el' 'ls -lh\n'
 bindkey -s '\es' 'st\n'
 # alt+g: tig
 bindkey -s '\eg' 'tig\n'
+# alt+r: branch (alt+b bound to "one word back")
+bindkey -s '\er' 'branch\n'
+
+alias default_text_editor=ta
+
+# File extension open default
+alias -s md=default_text_editor
+alias -s ini=default_text_editor
+alias -s txt=default_text_editor
+alias -s zshrc=default_text_editor
+alias -s js=default_text_editor
+alias -s json=default_text_editor
+alias -s php=default_text_editor
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
