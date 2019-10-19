@@ -76,6 +76,34 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+# unicode chars support, see https://stackoverflow.com/a/16509364/1760643
+fast_chr() {
+    local __octal
+    local __char
+    printf -v __octal '%03o' $1
+    printf -v __char \\$__octal
+    REPLY=$__char
+}
+
+# usage: unichr 0x2505
+function unichr {
+    local c=$1    # Ordinal of char
+    local l=0    # Byte ctr
+    local o=63    # Ceiling
+    local p=128    # Accum. bits
+    local s=''    # Output string
+
+    (( c < 0x80 )) && { fast_chr "$c"; echo -n "$REPLY"; return; }
+
+    while (( c > o )); do
+        fast_chr $(( t = 0x80 | c & 0x3f ))
+        s="$REPLY$s"
+        (( c >>= 6, l++, p += o+1, o>>=1 ))
+    done
+
+    fast_chr $(( t = p | c ))
+    echo -n "$REPLY$s"
+}
 # prompt setup:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # %B (%b) - Start (stop) boldface mode.
@@ -87,19 +115,64 @@ fi
 # %m - The hostname up to the first ‘.’
 # see also http://aperiodic.net/phil/prompt/
 function precmd {
+  ICON_BRANCH=$(unichr 0x2387)
+  ICON_THREE_DOTS=$(unichr 0x2026)
+  ICON_TWO_DOTS=$(unichr 0x2025)
   CURRENT_TIME=$(date +%H:%M)
   PUSH_REQUIRED=$(push-required)
+  COMMIT_REQUIRED=$(commit-required)
   # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
   #PROMPT_SEP='%F{blue}| %f'
   PROMPT_START='%F{blue}# %f'
   PROMPT_END=''
   PROMPT_SEP=' '
-  PROMPT="${PROMPT_START}"$'%B%F{green}%~%b ' # current path
+  #PROMPT="${PROMPT_START}"$'%B%F{green}%~%b ' # current path
+  PROMPT="${PROMPT_START}"$'%B%F{blue}%~%b ' # current path
   PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{white}'"${CURRENT_TIME} "
+
   if [[ -n "${PUSH_REQUIRED}" ]]; then
-    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{red}push%b ' # current path
+    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{red}push%b '
   fi
-  PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}%n@'"${COMPUTER_NAME} "
+
+  if [[ -n "${COMMIT_REQUIRED}" ]]; then
+    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}commit%b '
+  fi
+
+  # nvm: check if .nvmrc file is present
+  if [[ -f ".nvmrc" ]]; then
+    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}nvmrc%b '
+  fi
+
+  # nvm: check if not default node version
+  if [[ -n "${NODE_VERSION_DEFAULT}" ]]; then
+    NODE_VERSION="$(node -v)"
+    if [[ "${NODE_VERSION_DEFAULT}" != "${NODE_VERSION}" ]]; then
+      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{yellow}'"node_${NODE_VERSION} "
+    fi
+  fi
+  # check git branch differs from default
+  # set default branch: git config user.defaultbranch "product/els/48_portfolio_webinar3_theme2"
+  if [[ "$(get-repo-type)" == "git" ]]; then
+    GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
+
+    if [[ -n "${GIT_BRANCH_DEFAULT}" ]]; then
+
+      GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+      if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
+        PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
+      fi
+    fi
+  fi
+  # user and computer name
+  _USER=$USER
+
+  if [[ "$_USER" == "komarov" ]]; then
+    _USER="k${ICON_TWO_DOTS}"
+  fi
+
+  # (%n is $USER)
+  PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}'"$_USER@${COMPUTER_NAME} "
   PROMPT="${PROMPT}${PROMPT_END}"$'\n%F{blue}> %b%f%k'
   PROMPT="${PROMPT}"
 }
@@ -134,3 +207,18 @@ bindkey -s '\el' 'ls -lh\n'
 bindkey -s '\es' 'st\n'
 # alt+g: tig
 bindkey -s '\eg' 'tig\n'
+# alt+r: branch (alt+b bound to "one word back")
+bindkey -s '\er' 'branch\n'
+
+alias default_text_editor=ta
+
+# File extension open default
+alias -s md=default_text_editor
+alias -s ini=default_text_editor
+alias -s txt=default_text_editor
+alias -s zshrc=default_text_editor
+alias -s js=default_text_editor
+alias -s json=default_text_editor
+alias -s php=default_text_editor
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

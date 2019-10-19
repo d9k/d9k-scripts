@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_path=$1
+file_path="$1"
 
 if [[ -z "${file_path}" ]]; then
   echo "File path argument not set. Exitting"

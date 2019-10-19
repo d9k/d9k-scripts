@@ -1,0 +1,17 @@
+#!/bin/bash
+
+REPO_TYPE=$(get-repo-type)
+
+#echo "$REPO_TYPE repo detected"
+
+if [ "$REPO_TYPE" == "git" ]; then
+  # one line per commit
+  git diff --cached --name-only
+  #--exit-code;
+  exit
+fi
+
+if [ "$REPO_TYPE" == "hg" ]; then
+  # hg push
+  exit
+fi

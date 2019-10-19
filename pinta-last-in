@@ -1,0 +1,9 @@
+#!/bin/bash
+
+REL_PATH="$1"
+
+FILE="$(ls -drt "$REL_PATH"/* | select-line -1)"
+
+echo "Opening \"$FILE\".."
+
+pinta "${FILE}"

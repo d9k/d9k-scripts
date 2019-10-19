@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Example: `tmx-command clear C-m`
+
+# https://stackoverflow.com/a/34073831/1760643
+# Not working yet
+#for _pane in $(tmux list-panes -F '#P'); do
+for _pane in $(tmux list-panes -s -F '#{window_index}.#{pane_index}'); do
+  echo $_pane
+  # C-m: return
+  tmux send-keys -t ${_pane} "$@" C-m
+done
