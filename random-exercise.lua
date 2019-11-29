@@ -68,3 +68,5 @@ local time = socket.gettime()*10000
 
 math.randomseed(time)
 print(exercisesTable[math.random(#exercisesTable)])
+
+-- TODO rewrite to bash script with shuf | head -n 1

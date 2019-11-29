@@ -1,0 +1,6 @@
+#!/bin/bash
+
+REPOS="$HOME/repos"
+
+cd $REPOS
+git clone $@
