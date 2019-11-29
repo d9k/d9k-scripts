@@ -3,6 +3,7 @@
 # `sudo apt install mp3splt` required before first run
 
 SPLIT_BY_MINUTES_DEFAULT=15
+SPLIT_FOLDER_NAME=split
 
 echo "$1"
 echo "$2"
@@ -28,7 +29,8 @@ FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
 FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
 FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
 
-SPLIT_TO_PATH="$FILE_DIR_PATH/$FILE_NAME_NO_EXT"
+#SPLIT_TO_PATH="$FILE_DIR_PATH/$FILE_NAME_NO_EXT"
+SPLIT_TO_PATH="$FILE_DIR_PATH/$SPLIT_FOLDER_NAME"
 
 mkdir "$SPLIT_TO_PATH"
 
