@@ -5,6 +5,12 @@ CHAPTER_PREFIX=часть_
 # copy files to chapter/ folder renaming them to [chapter_prefix][number].mp3
 CHAPTERS_FOLDER=chapters
 
+if [[ -z "$1" ]]; then
+  THIS_NAME="$(basename $0)"
+  echo "Usage: ${THIS_NAME} file_name_1 [...file_name_n]"
+  exit
+fi
+
 for ARG; do
   #echo $ARG
   FILE_NAME_WITH_EXT="$ARG"

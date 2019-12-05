@@ -1,0 +1,5 @@
+#!/bin/bash
+
+youtube-dl -F $@
+
+echo example: youtube-dl -f 137+141
