@@ -24,6 +24,28 @@ file_path=$(readlink -f "$file_path")
 echo "New file path (press ctrl+c to exit):"
 read -re -p '> ' -i "${file_path}" new_file_path
 
-set -x
+set -x ;
 mv -i "$file_path" "$new_file_path"
+
+{ set +x; } 2>/dev/null
+
+# source it to use $RENAME_LAST_TO variable:
+# at .bashrc
+#
+# alias -- rename-file='source $HOME/scripts/rename-file'
+
+echo "New path:"
+echo "$new_file_path"
+
+# add this to .bashrc and call rename_file to save last file name to variable
+#
+# function rename_file() {
+#   export RENAME_LAST_TO=
+#   OUTPUT=$($HOME/scripts/rename-file $@ | tee /dev/tty)
+#   BEFORE_LAST=$(echo $OUTPUT | tail -n 2 | head -n 1)
+#   LAST=$(echo $OUTPUT | tail -n 1)
+#   if [[ "$BEFORE_LAST" == "New path:" ]]; then
+#     export RENAME_LAST_TO="$LAST"
+#   fi
+# }
 
