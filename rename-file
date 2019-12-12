@@ -1,31 +1,39 @@
 #!/bin/bash
 
-file_path="$1"
+STORE_LAST_FILE_PATH=$HOME/.rename_file_last
 
-if [[ -z "${file_path}" ]]; then
+FILE_PATH="$1"
+
+if [[ -z "${FILE_PATH}" ]]; then
+  if [[ -f "${STORE_LAST_FILE_PATH}" ]]; then
+    FILE_PATH=$(cat $STORE_LAST_FILE_PATH)
+  fi
+fi
+
+if [[ -z "${FILE_PATH}" ]]; then
   echo "File path argument not set. Exitting"
   exit
 fi
 
-if [[ ! -f "${file_path}" ]] && [[ ! -d "${file_path}" ]]; then
-  echo "File at ${file_path} doesn't exists. Exitting"
+if [[ ! -f "${FILE_PATH}" ]] && [[ ! -d "${FILE_PATH}" ]]; then
+  echo "File at ${FILE_PATH} doesn't exists. Exitting"
   exit
 fi
 
 echo
-if [[ -d "${file_path}" ]]; then
-  echo "\"${file_path}\" is a directory. Contents:"
+if [[ -d "${FILE_PATH}" ]]; then
+  echo "\"${FILE_PATH}\" is a directory. Contents:"
 fi
-ls -l "${file_path}"
+ls -l "${FILE_PATH}"
 echo
 
-file_path=$(readlink -f "$file_path")
+FILE_PATH=$(readlink -f "$FILE_PATH")
 
 echo "New file path (press ctrl+c to exit):"
-read -re -p '> ' -i "${file_path}" new_file_path
+read -re -p '> ' -i "${FILE_PATH}" NEW_FILE_PATH
 
 set -x ;
-mv -i "$file_path" "$new_file_path"
+mv -i "$FILE_PATH" "$NEW_FILE_PATH"
 
 { set +x; } 2>/dev/null
 
@@ -34,8 +42,10 @@ mv -i "$file_path" "$new_file_path"
 #
 # alias -- rename-file='source $HOME/scripts/rename-file'
 
+echo "$NEW_FILE_PATH" > $STORE_LAST_FILE_PATH
+
 echo "New path:"
-echo "$new_file_path"
+echo "$NEW_FILE_PATH"
 
 # add this to .bashrc and call rename_file to save last file name to variable
 #
