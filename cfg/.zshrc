@@ -220,5 +220,6 @@ alias -s zshrc=default_text_editor
 alias -s js=default_text_editor
 alias -s json=default_text_editor
 alias -s php=default_text_editor
+alias -s aliases=default_text_editor
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
