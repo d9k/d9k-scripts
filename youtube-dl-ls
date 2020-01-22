@@ -2,4 +2,10 @@
 
 youtube-dl -F $@
 
-echo example: youtube-dl -f 137+141
+cat << ENDMESSAGE
+
+Example download:
+   youtube-dl -f 137+141
+Example stream (SMplayer):
+   --ytdl-format=137+141"
+ENDMESSAGE
