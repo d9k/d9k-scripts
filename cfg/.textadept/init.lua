@@ -193,3 +193,9 @@ function json_pp()
 
   buffer:replace_sel(cmd_result)
 end
+local menu_tools = textadept.menu.menubar[_L['_Tools']]
+
+local SEPARATOR = {''}
+
+menu_tools[#menu_tools + 1] = SEPARATOR
+menu_tools[#menu_tools + 1] = {'JSON pretty print', json_pp}
