@@ -211,15 +211,19 @@ bindkey -s '\eg' 'tig\n'
 bindkey -s '\er' 'branch\n'
 
 alias default_text_editor=ta
+alias default_video_player=smplayer
 
 # File extension open default
-alias -s md=default_text_editor
+alias -s aliases=default_text_editor
 alias -s ini=default_text_editor
-alias -s txt=default_text_editor
-alias -s zshrc=default_text_editor
 alias -s js=default_text_editor
 alias -s json=default_text_editor
+alias -s md=default_text_editor
 alias -s php=default_text_editor
-alias -s aliases=default_text_editor
+alias -s txt=default_text_editor
+alias -s zshrc=default_text_editor
+
+alias -s webm=default_video_player
+alias -s mkv=default_video_player
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
