@@ -193,9 +193,40 @@ function json_pp()
 
   buffer:replace_sel(cmd_result)
 end
+function enclose_backticks()
+  local _prefix = 'enclose_backticks: '
+  local sel_text, sel_text_len = buffer:get_sel_text()
+
+  local out = function(text)
+    ui.statusbar_text = _prefix .. text
+  end
+
+  if sel_text_len < 1 then
+    return out('No selection')
+  end
+
+  buffer:replace_sel('`' .. sel_text .. '`')
+end
+
+function enclose_backticks_multiline()
+  local _prefix = 'enclose_backticks_multiline: '
+  local sel_text, sel_text_len = buffer:get_sel_text()
+
+  local out = function(text)
+    ui.statusbar_text = _prefix .. text
+  end
+
+  if sel_text_len < 1 then
+    return out('No selection')
+  end
+
+  buffer:replace_sel("```\n" .. sel_text .. "\n```")
+end
 local menu_tools = textadept.menu.menubar[_L['_Tools']]
 
 local SEPARATOR = {''}
 
 menu_tools[#menu_tools + 1] = SEPARATOR
 menu_tools[#menu_tools + 1] = {'JSON pretty print', json_pp}
+keys.ad = enclose_backticks
+keys.aD = enclose_backticks_multiline
