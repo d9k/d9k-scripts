@@ -87,6 +87,7 @@ events.connect(events.INITIALIZED, function()
  textadept.session.load(textadept.session.default_session)
 end, 1)
 
+-- # File associations with lexers
 -- moon lexer error!
 --textadept.file_types.extensions.moon = nil
 -- from https://github.com/leafo/moonscript-textadept
@@ -94,14 +95,138 @@ textadept.file_types.extensions.moon = "moonscript"
 textadept.file_types.extensions.rockspec = "lua"
 
 textadept.file_types.extensions.aliases = "bash"
+textadept.file_types.extensions.zshrc = "bash"
 
 textadept.editing.auto_pairs = nil
+-- keys.csup = buffer.move_selected_lines_up
+-- keys.csdown = buffer.move_selected_lines_down
+
+keys.aR = { function()
+  local events = events
+  local gui = gui
+  local KEYSYMS = _m.textadept.keys.KEYSYMS
+    gui.statusbar_text = 'Rectangular selection'
+    events.emit('update_ui')
+    rselect = events.connect('keypress',
+      function(code, shift, control, alt)
+        if alt and KEYSYMS[code] == 'left' then
+          buffer:char_left_rect_extend()
+          return true
+        elseif alt and KEYSYMS[code] == 'up' then
+          buffer:line_up_rect_extend()
+          return true
+        elseif alt and KEYSYMS[code] == 'right' then
+          buffer:char_right_rect_extend()
+          return true
+        elseif alt and KEYSYMS[code] == 'down' then
+          buffer:line_down_rect_extend()
+          return true
+        else
+          events.disconnect('keypress', rselect)
+          gui.statusbar_text = ''
+          events.emit('update_ui')
+          return
+         end
+      end, 1)
+end
+}
 
 --textadept.menu.menubar[_L['_Tools']][_L['Command _Entry']][2] = function()
    --ui.command_entry.enter_mode('lua_command', 'lua', 2)
 --end
 
+-- no ctrl+Z in cli mode
 events.connect(events.SUSPEND, function()
   buffer:undo()
   return true
 end, 1)
+-- https://github.com/DracoBlue/DModule/blob/master/core/lua/utils.lua
+function file_put_contents(path, content)
+	local file = io.open(path,"w+")
+	if (file) then
+		file:write(content)
+		file:close()
+		return true
+	end
+	return false
+end
+
+-- https://stackoverflow.com/a/326715
+function shell_cmd_run_and_get_output(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
+function json_pp()
+  local _prefix = 'json_pp: '
+  local json_pp_script_path = '/home/d9k/scripts/php-json-pretty'
+  local sel_text, sel_text_len = buffer:get_sel_text()
+
+  local out = function(text)
+    ui.statusbar_text = _prefix .. text
+  end
+
+  --local all_text=buffer:get_text()
+  -- print('all text: ' .. all_t)
+  --print('sel_text: ' .. sel_text)
+  --print('sel_text_len: ' .. sel_text_len)
+  if sel_text_len < 1 then
+    --print('no sel')
+    return out('No selection')
+  end
+
+  local tmp_filename = '/tmp/t'
+
+  local saved = file_put_contents(tmp_filename, sel_text)
+
+  if not saved then
+    return out("Can't save to " .. tmp_filename)
+  end
+
+  local cmd_result = shell_cmd_run_and_get_output(json_pp_script_path .. " " .. tmp_filename, true)
+
+  buffer:replace_sel(cmd_result)
+end
+function enclose_backticks()
+  local _prefix = 'enclose_backticks: '
+  local sel_text, sel_text_len = buffer:get_sel_text()
+
+  local out = function(text)
+    ui.statusbar_text = _prefix .. text
+  end
+
+  if sel_text_len < 1 then
+    return out('No selection')
+  end
+
+  buffer:replace_sel('`' .. sel_text .. '`')
+end
+
+function enclose_backticks_multiline()
+  local _prefix = 'enclose_backticks_multiline: '
+  local sel_text, sel_text_len = buffer:get_sel_text()
+
+  local out = function(text)
+    ui.statusbar_text = _prefix .. text
+  end
+
+  if sel_text_len < 1 then
+    return out('No selection')
+  end
+
+  buffer:replace_sel("```\n" .. sel_text .. "\n```")
+end
+local menu_tools = textadept.menu.menubar[_L['_Tools']]
+
+local SEPARATOR = {''}
+
+menu_tools[#menu_tools + 1] = SEPARATOR
+menu_tools[#menu_tools + 1] = {'JSON pretty print', json_pp}
+keys.ad = enclose_backticks
+keys.aD = enclose_backticks_multiline
