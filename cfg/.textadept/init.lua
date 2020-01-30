@@ -1,3 +1,5 @@
+-- TODO read https://notabug.org/reback00/ta-config/src/master/init.lua
+--
 -- Please CHECK Textadept version > 9.0 before apply config!
 
 -- additional hotkeys:
@@ -43,14 +45,15 @@ end
 keys['cq']=ui.switch_buffer
 keys['cy']=buffer.redo
 
-keys['cp']=ui.switch_buffer
+keys['cao']=ui.switch_buffer
+keys['cp']=io.open_recent_file
 
 keys['ac'] = function()
   ui.clipboard_text=buffer.filename
 end
 keys['cac'] = keys['ac']
 
-keys['cr'] = buffer.line_delete
+keys['cr'] = delete_lines
 keys['cl'] = textadept.file_types.select_lexer
 keys['cj'] = textadept.editing.goto_line
 
@@ -222,11 +225,31 @@ function enclose_backticks_multiline()
 
   buffer:replace_sel("```\n" .. sel_text .. "\n```")
 end
+function add_demarcation_equals_line()
+  local _prefix = 'enclose_backticks_multiline: '
+  buffer:home()
+
+  local AT_CARET = -1
+  buffer:insert_text(AT_CARET, "\n" .. string.rep('=', 45) .. "\n\n")
+  --buffer:replace_sel("```\n" .. sel_text .. "\n```")
+end
 local menu_tools = textadept.menu.menubar[_L['_Tools']]
 
 local SEPARATOR = {''}
 
 menu_tools[#menu_tools + 1] = SEPARATOR
 menu_tools[#menu_tools + 1] = {'JSON pretty print', json_pp}
-keys.ad = enclose_backticks
-keys.aD = enclose_backticks_multiline
+menu_tools[#menu_tools + 1] = {'Enclose backticks', enclose_backticks}
+menu_tools[#menu_tools + 1] = {'Enclose backticks multiline', enclose_backticks_multiline}
+menu_tools[#menu_tools + 1] = {'Add demarcation ==== line before', add_demarcation_equals_line}
+
+--keys.ad = enclose_backticks
+--keys.aD = enclose_backticks_multiline
+-- alt + x
+keys.ax = enclose_backticks
+
+-- alt + shift + x
+keys.aX = enclose_backticks_multiline
+
+-- ctrl + shift + =
+keys['c+'] = add_demarcation_equals_line
