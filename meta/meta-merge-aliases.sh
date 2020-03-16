@@ -2,7 +2,7 @@
 
 CFG_PATH=~/scripts-private/cfg
 
-merge-util ~/.aliases "${CFG_PATH}/.aliases"
+( set -x; merge-util ~/.aliases "${CFG_PATH}/.aliases" )
 
 echo "After merging data to \"${CFG_PATH}\":"
 echo
