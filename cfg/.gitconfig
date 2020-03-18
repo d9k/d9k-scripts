@@ -1,17 +1,10 @@
 # nested aliases require git 2.20+
 
 [user]
-;	email = d9k@ya.ru
-;	name = d9k
+#	email = d9k@ya.ru
+#	name = d9k
 
 [alias]
-  co = checkout
-  ci = commit
-  st = status
-  br = branch
-  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-  type = cat-file -t
-  dump = cat-file -p
 
 # git log color scheme from https://coderwall.com/p/euwpig/a-better-git-log, modified
 
@@ -40,6 +33,16 @@ unsta = unstaged
 unst = unstaged
 uns = unstaged
 un = unstaged
+bsel = branch-select
+
+to = checkout
+
+co = checkout
+ci = commit
+br = branch
+# hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+type = cat-file -t
+dump = cat-file -p
 
 [diff]
 
