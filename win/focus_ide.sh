@@ -25,6 +25,15 @@ for (( ix=${#titles[@]}-1 ; ix>=0 ; ix-- )); do
 	else
 		echo "focusing \"${t}\""
 		wmctrl -a "${titles[ix]}"
-		break
-    fi
+		# break
+    exit
+  fi
 done
+
+# no more "PhpStorm" in title, selecting by class
+
+PHPSTORM_WIN_ID=$(wmctrl -lx | grep jetbrains-phpstorm.jetbrains-phpstorm | cut -d " " -f1)
+
+if [[ -n "${PHPSTORM_WIN_ID}" ]]; then
+  wmctrl -i -a ${PHPSTORM_WIN_ID}
+fi
