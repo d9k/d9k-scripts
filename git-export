@@ -1,0 +1,35 @@
+#!/bin/bash
+
+function show_help() {
+  echo -e "
+Usage:  git-export  REV_TO_EXPORT  DEST_FOLDER
+
+* DEST_FOLDER - must not exist
+
+"
+}
+
+function show_dest() {
+  echo
+  echo \"$DEST_FOLDER\":
+  ls -l --human-readable --classify --color $DEST_FOLDER
+  echo
+}
+
+if [ "$#" -lt 2 ]; then
+  show_help
+  exit 1
+fi
+
+REV_TO_EXPORT=$1
+DEST_FOLDER=$2
+
+if [[ -e "$DEST_FOLDER" ]]; then
+  show_dest
+  echo "Error: taget directory already exists. Exitting"
+  exit
+fi
+
+mkdir -p $DEST_FOLDER
+( set -x; git archive $REV_TO_EXPORT | tar --extract --directory=$DEST_FOLDER )
+show_dest
