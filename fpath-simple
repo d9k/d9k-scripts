@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo No args
+  exit
+fi
+
+CURRENT_PATH="$@"
+LAST_PATH=
+
+while [[ "$CURRENT_PATH" != "$LAST_PATH" ]]; do
+  LAST_PATH="$CURRENT_PATH"
+	CURRENT_PATH=$(readlink -f "${CURRENT_PATH}")
+done
+
+echo $CURRENT_PATH

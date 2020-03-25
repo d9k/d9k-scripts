@@ -1,11 +1,15 @@
 #!/bin/bash
 
-if [ "$#" -lt 1 ]; then
-  echo No args
-  exit
+CURRENT_PATH="$@"
+
+if [ ! -e "$CURRENT_PATH" ]; then
+  CURRENT_PATH=$(which "$CURRENT_PATH")
+  NOT_FOUND=$(echo "$CURRENT_PATH" | grep "not found")
+  if [ -n "$NOT_FOUND" ]; then
+    exit
+  fi
 fi
 
-CURRENT_PATH="$@"
 LAST_PATH=
 
 while [[ "$CURRENT_PATH" != "$LAST_PATH" ]]; do
@@ -14,3 +18,4 @@ while [[ "$CURRENT_PATH" != "$LAST_PATH" ]]; do
 done
 
 echo $CURRENT_PATH
+
