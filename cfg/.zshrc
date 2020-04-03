@@ -155,13 +155,10 @@ function precmd {
   if [[ "$(get-repo-type)" == "git" ]]; then
     GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
 
-    if [[ -n "${GIT_BRANCH_DEFAULT}" ]]; then
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
-      GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-
-      if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
-        PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
-      fi
+    if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
+      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
     fi
   fi
   # user and computer name
@@ -179,7 +176,9 @@ function precmd {
 
 #PROMPT="%K{blue}%n@%m%k %B%F{green}%51<...<%~%} \n %F{white} %# %b%f%k"
 
-[ -s ~/.lastdirectory ] && cd `cat ~/.lastdirectory`
+# TRAPEXIT() {
+#    pwd > $HOME/.lastdirectory
+# }
 
 TRAPEXIT() {
     pwd > $HOME/.lastdirectory
@@ -187,7 +186,7 @@ TRAPEXIT() {
 
 # This loads node version manager
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # see http://naxoc.net/2014/02/02/syntax-highlighting-commands-with-zsh/
 # see https://github.com/zsh-users/zsh-syntax-highlighting

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+LOCAL_BIN=/usr/local/bin/
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: link-to-local-bin DEST"
+  exit
+fi
+
+sudo ln -s $(readlink -f "$1") $LOCAL_BIN
