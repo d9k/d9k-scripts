@@ -1,10 +1,26 @@
 #!/bin/bash
 
-LOCAL_BIN=/usr/local/bin/
+LOCAL_BIN=/usr/local/bin
 
 if [ "$#" -lt 1 ]; then
-  echo "Usage: link-to-local-bin DEST"
+  echo "Usage: link-to-local-bin SOURCE [DEST]"
   exit
 fi
 
-sudo ln -s $(readlink -f "$1") $LOCAL_BIN
+INITIAL_SOURCE="$1"
+DEST="$LOCAL_BIN/$2"
+
+SOURCE=$(readlink -f "$1")
+
+if [[ ! -f "${SOURCE}" ]]; then
+  SOURCE=$(which "${INITIAL_SOURCE}")
+fi
+
+if [[ ! -f "${SOURCE}" ]]; then
+  echo "Error: source not found"
+  exit
+fi
+
+(set -x; sudo ln -s "${SOURCE}" "${DEST}")
+
+
