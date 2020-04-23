@@ -8,4 +8,8 @@ else
   INPUT="$@"
 fi
 
-silent.sh textadept "$INPUT";
+# TODO problems with passing spaces in args!
+#silent.sh textadept "$INPUT";
+
+textadept "$INPUT" 2>&1 &>/dev/null &
+disown

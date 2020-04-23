@@ -1,0 +1,4 @@
+# Url starting with
+
+http://www.redmine.org/
+http://projects.hypermethod.com:8080/

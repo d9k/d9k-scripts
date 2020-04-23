@@ -5,5 +5,6 @@ if [[ "$#" -lt 1 ]]; then
   exit
 fi
 
+# TODO problems with passing spaces in args!
 $@ 2>&1 &>/dev/null &
 disown

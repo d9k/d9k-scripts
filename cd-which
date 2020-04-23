@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# WARNING!
+# Because of `cd` call
+# requires alias in your .bashrc/.zshrc:
+#
+# alias -- cd-which='source $HOME/scripts/cd-which'
+
+if [ "$#" -lt 1 ]; then
+  exit
+fi
+
+cd $(dirname $(which "$@"))

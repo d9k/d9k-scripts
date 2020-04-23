@@ -13,8 +13,9 @@ bind main P !push
 bind diff <Up> move-up
 bind diff <Down> move-down
 
-bind main c !@sh -c "echo %(commit) | xclip -selection c"
-bind main C !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
+bind main C !@sh -c "echo %(commit) | xclip -selection c"
+bind main c !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
+bind main M !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##

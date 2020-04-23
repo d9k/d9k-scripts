@@ -211,9 +211,11 @@ bindkey -s '\er' 'branch\n'
 
 alias default_text_editor=ta
 alias default_video_player=smplayer
+alias default_mail_viewer=thunderbird
 
 # File extension open default
 alias -s aliases=default_text_editor
+alias -s eml=default_mail_viewer
 alias -s ini=default_text_editor
 alias -s js=default_text_editor
 alias -s json=default_text_editor
