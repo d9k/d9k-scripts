@@ -2,7 +2,7 @@
 
 function show_help() {
   echo -e "
-Usage:  git-export  REV_TO_EXPORT  DEST_FOLDER
+Usage:  git-export  REV_OR_BRANCH_TO_EXPORT  DEST_FOLDER
 
 * DEST_FOLDER - must not exist
 
