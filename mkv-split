@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SPLIT_BY_SIZE_DEFAULT=4500M
+FILE_REL_PATH="$1"
+
+if [[ -z "$FILE_REL_PATH" ]]; then
+  echo "mkv file name required"
+  exit
+fi
+
+FILE_DIR_PATH=$(dirname "$FILE_REL_PATH")
+FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
+
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+SPLIT_TO_PATH="${FILE_DIR_PATH}/${FILE_NAME_NO_EXT}__split.${FILE_EXTENSION}"
+
+( set -x; mkvmerge --split ${SPLIT_BY_SIZE_DEFAULT} -o "$SPLIT_TO_PATH" "$FILE_REL_PATH" )
+
+ls -lh ${FILE_DIR_PATH}/${FILE_NAME_NO_EXT}__split*

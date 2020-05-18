@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+REPO_TYPE=$(get-repo-type)
+
+if [[ -z "$REPO_TYPE" ]]; then
+  echo "Repo not detected"
+  exit
+fi
+
+if [ "$REPO_TYPE" == "git" ]; then
+  git add . &&\
+    git commit
+
+  # custom script
+  push
+  exit
+fi
+
+if [ "$REPO_TYPE" == "hg" ]; then
+  hg add &&\
+    hg commit
+
+  hg push
+  exit
+fi

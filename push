@@ -47,6 +47,7 @@ if [ "$REPO_TYPE" == "git" ]; then
 
   set -x
   git push
+  git push origin --tags
   exit
 fi
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+set -x
+
+cat /etc/lsb-release
+cat /etc/upstream-release/lsb-release
