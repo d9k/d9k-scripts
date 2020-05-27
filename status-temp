@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sensors | grep temp | grep -v ^k | head -n 1 | awk '{print $2}'

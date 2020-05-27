@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# https://unix.stackexchange.com/a/349326
+xargs -I{} cp -u {} "$@"

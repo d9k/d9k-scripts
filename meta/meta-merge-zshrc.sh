@@ -1,12 +1,16 @@
 #!/bin/bash
 
 CFG_DIR=~
-CFG_BACKUP_DIR=~/scripts/cfg
+REPO_CFG_PATH=~/scripts/cfg
 FILE_REL_PATH=.zshrc
 
-merge-util $CFG_DIR/${FILE_REL_PATH} "${CFG_BACKUP_DIR}/${FILE_REL_PATH}"
+FILE_FULL_PATH="${REPO_CFG_PATH}/${FILE_REL_PATH}"
 
-echo "After merging data to \"${CFG_BACKUP_DIR}\":"
+merge-util $CFG_DIR/${FILE_REL_PATH} ${FILE_FULL_PATH}
+
+echo "After merging data to \"${FILE_FULL_PATH}\":"
+
+cd "${REPO_CFG_PATH}"
 echo
-cd "${CFG_BACKUP_DIR}"
-hg status .
+git diff "${FILE_FULL_PATH}"
+git status .

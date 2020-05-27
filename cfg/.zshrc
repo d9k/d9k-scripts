@@ -209,18 +209,25 @@ bindkey -s '\eg' 'tig\n'
 # alt+r: branch (alt+b bound to "one word back")
 bindkey -s '\er' 'branch\n'
 
-alias default_text_editor=ta
-alias default_video_player=smplayer
+alias default_image_viewer=gpicview
 alias default_mail_viewer=thunderbird
+alias default_text_editor=ta
+alias default_torrent_app=qbittorrent
+alias default_video_player=smplayer
 
 # File extension open default
 alias -s aliases=default_text_editor
+alias -s gif=default_image_viewer
+alias -s jpeg=default_image_viewer
+alias -s jpg=default_image_viewer
 alias -s eml=default_mail_viewer
 alias -s ini=default_text_editor
 alias -s js=default_text_editor
 alias -s json=default_text_editor
 alias -s md=default_text_editor
 alias -s php=default_text_editor
+alias -s png=default_image_viewer
+alias -s torrent=default_torrent_app
 alias -s txt=default_text_editor
 alias -s zshrc=default_text_editor
 

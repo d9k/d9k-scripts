@@ -8,5 +8,8 @@ merge-util ~/${CFG_NAME} "${REPO_CFG_PATH}/${CFG_NAME}"
 echo "After merging data to \"${REPO_CFG_PATH}\":"
 echo
 cd "${REPO_CFG_PATH}"
-hg status .
-hg diff "${REPO_CFG_PATH}/${CFG_NAME}"
+
+
+git diff "${REPO_CFG_PATH}/${CFG_NAME}"
+echo
+git status .
