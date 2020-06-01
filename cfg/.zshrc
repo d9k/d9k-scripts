@@ -153,6 +153,20 @@ function precmd {
   # check git branch differs from default
   # set default branch: git config user.defaultbranch "product/els/48_portfolio_webinar3_theme2"
   if [[ "$(get-repo-type)" == "git" ]]; then
+    GIT_NAME_REQUIRED=
+
+    if [[ -z "$(git config --local --get user.name)" ]]; then
+      GIT_NAME_REQUIRED=1
+    fi
+
+    if [[ -z "$(git config --local --get user.email)" ]]; then
+      GIT_NAME_REQUIRED=1
+    fi
+
+    if [[ -n "$GIT_NAME_REQUIRED" ]]; then
+      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{yellow}name?%b '
+    fi
+
     GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
 
     GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"

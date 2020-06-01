@@ -13,4 +13,5 @@ echo "After merging data to \"${FILE_FULL_PATH}\":"
 cd "${REPO_CFG_PATH}"
 echo
 git diff "${FILE_FULL_PATH}"
+echo "${REPO_CFG_PATH}:"
 git status .
