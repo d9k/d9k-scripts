@@ -2,7 +2,7 @@
 
 # `sudo apt install mp3splt` required before first run
 
-SPLIT_BY_MINUTES_DEFAULT=15
+SPLIT_BY_MINUTES_DEFAULT=10
 SPLIT_FOLDER_NAME=split
 
 echo "$1"

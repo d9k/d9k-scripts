@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# see https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+
+E=textadept
+
+export GIT_EDITOR=$E;
+
+echo "Opening local git config with $GIT_EDITOR";
+
+git config -e

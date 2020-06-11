@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function trans_bash {
+  while read TRS ; do TRS=${TRS//а/a} ; TRS=${TRS//ё/yo} ; echo "${TRS}" ; done
+}
+
+# https://ru-linux.livejournal.com/2212997.html
+#
+# apt-get install yudit
+
+echo "$@" | trans_bash | uniconv -encode Russian-Translit
