@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# ta
+SCRIPT_EDITOR="silent.sh textadept"
+
+file_path=$1
+
+if [[ -z "${file_path}" ]]; then
+  echo "File path argument not set. Exitting"
+  exit
+fi
+
+#script_path="$(which ${script_path})"
+
+#if [[ ! -f "${script_path}" ]] ; then
+  #echo "File at ${script_path} doesn't exists. Exitting"
+  #exit
+#fi
+
+file_path=$(readlink -f "$file_path")
+
+echo "New file path (press ctrl+c to exit):"
+read -re -p '> ' -i "${file_path}" new_file_path
+
+set -x
+cp -i "$file_path" "$new_file_path"
+
+#${SCRIPT_EDITOR} "$new_file_path"

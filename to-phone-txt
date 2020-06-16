@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+function show_help() {
+  echo -e "
+Usage:  to-phone-txt    FROM_DIRECTORY  TO_DIRECTORY
+
+"
+}
+
+if [ "$#" -lt 2 ]; then
+  show_help
+  exit 1
+fi
+
+FROM_DIRECTORY="$1"
+TO_DIRECTORY="$2"
+
+if [[ ! -d "$FROM_DIRECTORY" ]]; then
+  echo "\"$FROM_DIRECTORY\" is not a directory"
+  exit
+fi
+
+cd "$FROM_DIRECTORY"
+
+#FILES=$(find | grep "\.txt$\|\.md$")
+#
+#
+#echo "$FILES" | head -n 2
+
+#echo "$FILES" | head -n 2 | xargs --max-lines=1 -I{} to-phone-txt-file {} "$TO_DIRECTORY"
+
+
+FILES=$(find | \
+  grep --invert-match "^.$" | \
+  grep --invert-match "\/\.git\/" | \
+  grep --invert-match "\/\.idea\/" | \
+  grep "\.txt$\|\.md$")
+
+
+echo "$FILES" | xargs --max-lines=1 -I{} to-phone-txt-file {} "$TO_DIRECTORY"
+#echo "$FILES" | xargs --max-lines=1 -I{} echo {}

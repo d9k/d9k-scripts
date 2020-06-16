@@ -12,9 +12,11 @@ fi
 #set -x
 
 COMMAND="$@"
-IS_ALIAS=$(type "$COMMAND" 2>&1 | grep "aliased to")
+COMMAND_TYPE=$(type "$COMMAND" 2>&1)
+IS_ALIAS=$(echo "$COMMAND_TYPE" | grep "aliased to")
 
 if [[ -n "$IS_ALIAS" ]]; then
+  #echo "$COMMAND_TYPE"
   ALIAS_SOURCE_FULL=$(type "$@" | sed 's/^.*aliased to \(.*\)$/\1/')
   COMMAND=$(echo $ALIAS_SOURCE_FULL | grep --only-matching --max-count=1 -E '[[:alnum:]\-]+')
 fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo Use command:
+echo git clone --single-branch -b branch repo_url destination_dolder
+
+function copy_to_clipboard {
+  echo "Copying to clipboard: \`$@\`"
+
+  # without newline
+  printf "$@" | xclip -selection clipboard
+}
+
+copy_to_clipboard "git clone --single-branch -b "

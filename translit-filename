@@ -1,0 +1,6 @@
+#!/bin/bash
+
+RESULT=$(translit "$@")
+RESULT=$(echo "$RESULT" | sed -e "s|'|-|g")
+RESULT=$(echo "$RESULT" | sed -e "s|\`||g")
+echo $RESULT

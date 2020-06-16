@@ -1,0 +1,33 @@
+#!/bin/bash
+
+REPO_URL=$(git config --get remote.origin.url)
+
+function show_help() {
+  echo -e "
+Usage:  git-clone-branch-to-folder  REV_OR_BRANCH_TO_EXPORT  DEST_FOLDER
+
+* DEST_FOLDER - must not exist
+
+"
+}
+
+if [ "$#" -lt 2 ]; then
+  show_help
+  exit 1
+fi
+
+BRANCH="$1"
+DEST_FOLDER="$2"
+
+if [ -z "$REPO_URL" ]; then
+  echo "Can't detect repo url"
+  exit
+fi
+
+DEST_FOLDER=$(readlink -f "$DEST_FOLDER")
+
+echo "Cloning to \"$DEST_FOLDER\""
+
+set -x
+git clone --single-branch -b "$BRANCH" "$REPO_URL" "$DEST_FOLDER"
+
