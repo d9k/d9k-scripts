@@ -1,10 +1,26 @@
 #!/bin/bash
 
-GREP_OPTS="$@"
+export GREP_OPTS="$@"
 
 #set -x
 
-COMMAND="find -type f | grep -v \"node_modules\" | grep package.json | xargs -I{} sh -c \"echo; echo {}:; cat {} | grep --color $GREP_OPTS\""
+function find_in_file {
+  RESULT=$(cat "$@" | grep --color=always $GREP_OPTS)
+
+  if [[ -n "$RESULT" ]]; then
+    echo "$@:"
+    echo -e "$RESULT"
+  fi
+}
+
+
+#find_in_file test
+#
+#exit
+
+export -f find_in_file
+
+COMMAND="find -type f | grep -v \"node_modules\" | grep package.json | xargs --max-args=1 -I{} bash -c 'find_in_file \"{}\"'"
 
 # find | grep -v "node_modules" | grep package.json | xargs -I{} sh -c "echo; echo {}:; cat {} | grep --color $GREP_OPTS"
 
