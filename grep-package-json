@@ -1,0 +1,12 @@
+#!/bin/bash
+
+GREP_OPTS="$@"
+
+#set -x
+
+COMMAND="find -type f | grep -v \"node_modules\" | grep package.json | xargs -I{} sh -c \"echo; echo {}:; cat {} | grep --color $GREP_OPTS\""
+
+# find | grep -v "node_modules" | grep package.json | xargs -I{} sh -c "echo; echo {}:; cat {} | grep --color $GREP_OPTS"
+
+echo "> $COMMAND"
+eval "$COMMAND"
