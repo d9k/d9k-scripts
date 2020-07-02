@@ -4,7 +4,7 @@
 
 <script lang="ts">
 export default {
-  name: "${COMPONENT_NAME}"
+  name: '${COMPONENT_NAME}',
   components: {},
   props: {},
   computed: {},
