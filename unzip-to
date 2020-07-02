@@ -8,4 +8,4 @@ fi
 ARCHIVE="$1"
 DEST_DIR="$2"
 
-( set -x; unzip "$ARCHIVE" -d "$DEST_DIR" )
+( set -x; unzip -a "$ARCHIVE" -d "$DEST_DIR" )

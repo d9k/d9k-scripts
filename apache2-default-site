@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO ! _default_ в virtualhost
+
 CONFIG_NAME=$1
 APACHE_SITES_PATH="/etc/apache2/sites-available"
 DEFAULT_CONFIG_PATH="${APACHE_SITES_PATH}/001-default-override.conf"

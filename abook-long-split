@@ -35,7 +35,7 @@ SPLIT_TO_PATH="$FILE_DIR_PATH/$SPLIT_FOLDER_NAME"
 mkdir "$SPLIT_TO_PATH"
 
 # 5 seconds overlap
-mp3splt -t ${SPLIT_BY_MINUTES}.00 -d "$SPLIT_TO_PATH" -O 0.5 "$FILE_REL_PATH"
+mp3splt -T12 -t ${SPLIT_BY_MINUTES}.00 -d "$SPLIT_TO_PATH" -O 0.5 "$FILE_REL_PATH"
 cd "$SPLIT_TO_PATH"
 rename 's/m_00s__/_m__to__/gi' *.mp3
 rename 's/m_05s./_m./gi' *.mp3
