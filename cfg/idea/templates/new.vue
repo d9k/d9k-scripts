@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-export default {
+export default Vue.extend({
   name: '${COMPONENT_NAME}',
   components: {},
   props: {},
   computed: {},
   methods: {},
-}
+});
 </script>
 
 <style lang="sass" src="./styles.sass" />
