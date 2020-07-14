@@ -1,0 +1,76 @@
+#!/bin/bash
+
+SCRIPTS_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#echo $SCRIPTS_PATH
+
+# This loads node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+
+function show_help() {
+  echo -e "
+Usage:  git-file-filter-lines-by-author-to-dir    FROM_RELATIVE_FILE_PATH  AUTHOR TO_DIRECTORY
+
+"
+}
+
+if [ "$#" -lt 3 ]; then
+  show_help
+  exit 1
+fi
+
+FROM_RELATIVE_FILE_PATH_RAW="$1"
+AUTHOR="$2"
+TO_DIRECTORY="$3"
+
+# delete leading ./
+FROM_RELATIVE_FILE_PATH=$(echo "$FROM_RELATIVE_FILE_PATH_RAW" | sed 's|^\.\/||')
+
+#echo "$FROM_RELATIVE_FILE_PATH"
+
+FROM_REL_DIR_PATH=$(dirname "$FROM_RELATIVE_FILE_PATH")
+FROM_FILE_NAME_WITH_EXT=$(basename "$FROM_RELATIVE_FILE_PATH")
+
+#FILE_EXTENSION="${FILE_NAME_WITH_EXT#*.}"
+#FILE_NAME="${FILE_NAME_WITH_EXT%*.$FILE_EXTENSION}"
+FROM_FILE_EXTENSION=$(echo "$FROM_FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FROM_FILE_NAME_NO_EXT=$(echo "$FROM_FILE_NAME_WITH_EXT" | sed -e s/\.${FROM_FILE_EXTENSION}$//g)
+
+TO_REL_DIR_PATH=$(translit-filename "$FROM_REL_DIR_PATH")
+TO_FILE_NAME_NO_EXT=$(translit-filename "$FROM_FILE_NAME_NO_EXT")
+#TO_FILE_NAME="$TO_FILE_NAME_NO_EXT.txt"
+TO_FILE_NAME="$TO_FILE_NAME_NO_EXT.$FROM_FILE_EXTENSION"
+
+TO_DIR_FULL_PATH="$TO_DIRECTORY/$TO_REL_DIR_PATH"
+
+TO_FILE_FULL_PATH="$TO_DIR_FULL_PATH/$TO_FILE_NAME"
+#TO_FILE_DELETE_PATTERN="$TO_DIR_FULL_PATH/$TO_FILE_NAME_NO_EXT"
+
+#echo "TO_DIR_FULL_PATH=$TO_DIR_FULL_PATH"
+
+#exit
+
+#COPY_FILE=
+
+#if [[ ! -f "$TO_FILE_FULL_PATH" ]]; then
+#  COPY_FILE=1
+#else
+#  FROM_FILE_SIZE=$(stat --printf="%s" "$FROM_RELATIVE_FILE_PATH")
+#  TO_FILE_SIZE=$(stat --printf="%s" "$TO_FILE_FULL_PATH")
+#  if [ "$FROM_FILE_SIZE" -ne "$TO_FILE_SIZE" ]; then
+#    COPY_FILE=1
+#  fi
+#fi
+#
+#
+#if [[ -n "$COPY_FILE" ]]; then
+#  echo "  Copying..."
+#  rm "$TO_FILE_DELETE_PATTERN".* 2> /dev/null
+#  cp "$FROM_RELATIVE_FILE_PATH" "$TO_FILE_FULL_PATH"
+#fi
+
+mkdir -p "$TO_DIR_FULL_PATH"
+
+git blame -p "$FROM_RELATIVE_FILE_PATH_RAW" | node $SCRIPTS_PATH/git-blame-output-filter-by-author.js "$AUTHOR" > "$TO_FILE_FULL_PATH"
+

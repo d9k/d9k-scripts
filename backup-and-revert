@@ -1,0 +1,4 @@
+#!/bin/bash
+
+backup-conf "$@"
+git-revert "$@"

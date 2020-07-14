@@ -1,0 +1,44 @@
+#!/bin/bash
+
+function show_help() {
+  echo -e "
+Usage:  git-file-filter-lines-by-author-to-dir    FROM_DIRECTORY    AUTHOR   TO_DIRECTORY
+
+"
+}
+
+if [ "$#" -lt 2 ]; then
+  show_help
+  exit 1
+fi
+
+FROM_DIRECTORY="$1"
+AUTHOR="$2"
+TO_DIRECTORY="$3"
+
+if [[ ! -d "$FROM_DIRECTORY" ]]; then
+  echo "\"$FROM_DIRECTORY\" is not a directory"
+  exit
+fi
+
+cd "$FROM_DIRECTORY"
+
+#FILES=$(find | grep "\.txt$\|\.md$")
+#
+#
+#echo "$FILES" | head -n 2
+
+#echo "$FILES" | head -n 2 | xargs --max-lines=1 -I{} to-phone-txt-file {} "$TO_DIRECTORY"
+
+
+FILES=$(find -type f | \
+  grep --invert-match "^.$" | \
+  grep --invert-match "\/\.git\/" | \
+  grep --invert-match "\/\.idea\/" | \
+  grep --invert-match "\/node_modules\/" | \
+  grep --invert-match "\/dist\/"\
+)
+
+#echo "$FILES"
+
+echo "$FILES" | xargs --max-lines=1 -I{} git-file-filter-lines-by-author-to-dir {} "$AUTHOR" "$TO_DIRECTORY"

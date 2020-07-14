@@ -1,0 +1,5 @@
+#!/bin/bash
+
+AUTHOR=$(git-author $1)
+echo "Showing all commits by $AUTHOR in current branch"
+tig --date-order --author="$AUTHOR"
