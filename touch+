@@ -1,0 +1,17 @@
+#!/bin/bash
+
+FILE="$@"
+EXISTS=
+
+if [[ -f "$FILE" ]]; then
+  EXISTS=1
+fi
+
+touch "$FILE"
+
+if [[ -n "$EXISTS" ]]; then
+  echo "File already exists"
+  exit
+fi
+
+echo '//' > $FILE

@@ -1,1 +1,3 @@
+#!/bin/bash
+set -x
 git log --all --source --follow $@
