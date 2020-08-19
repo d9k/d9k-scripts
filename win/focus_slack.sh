@@ -1,10 +1,15 @@
 #!/bin/bash
 
-app="Slack"
+APP_PATTERN="Slack"
+APP=/snap/bin/slack
 
-t=$(wmctrl -lp | grep ${app})
+if [ ! -f ${APP} ]; then
+  APP=/usr/bin/slack
+fi
+
+t=$(wmctrl -lp | grep ${APP_PATTERN})
 if [ $? -eq 1 ]; then
-    /snap/bin/slack &
+    $APP &
 else
-    wmctrl -a ${app}
+    wmctrl -a ${APP_PATTERN}
 fi
