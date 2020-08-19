@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ARGS="$@"
+
+RESULT=$(branches)
+
+if [ -n "$ARGS" ]; then
+  RESULT=$(echo "$RESULT" | grep -iE --  "$ARGS")
+fi
+
+echo "$RESULT"

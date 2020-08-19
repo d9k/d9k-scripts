@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ARGS="$@"
+
+PIPE_INPUT=$(< /dev/stdin)
+
+if [ -z "$PIPE_INPUT" ]; then
+  exit
+fi
+
+echo "$PIPE_INPUT"
+
+echo -n "$PIPE_INPUT" | c $@
+
+if [ -n "$ARGS" ]; then
+  echo
+  echo "$ARGS line copied to clipboard"
+fi
+
+
