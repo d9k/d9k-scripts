@@ -1,10 +1,18 @@
 #!/bin/bash
 
-CFG_PATH=~/scripts/cfg
+SOURCE_CFG_DIR=~
+BACKUP_CFG_DIR=~/scripts/cfg
+CFG_FILE_REL_PATH=.textadept/init.lua
 
-merge-util ~/.textadept/init.lua "${CFG_PATH}/.textadept/init.lua"
+BACKUP_FILE_FULL_PATH="${BACKUP_CFG_DIR}/${CFG_FILE_REL_PATH}"
+SOURCE_FILE_FULL_PATH="${SOURCE_CFG_DIR}/${CFG_FILE_REL_PATH}"
 
-echo "After merging data to \"${CFG_PATH}\":"
+merge-util "${SOURCE_FILE_FULL_PATH}" "${BACKUP_FILE_FULL_PATH}"
+
+echo "After merging data to \"${SOURCE_FILE_FULL_PATH}\":"
+
+cd "${BACKUP_CFG_DIR}"
 echo
-cd "${CFG_PATH}"
-hg status .
+git diff "${BACKUP_FILE_FULL_PATH}"
+echo "${BACKUP_CFG_DIR}:"
+git status .

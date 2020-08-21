@@ -225,12 +225,12 @@ function enclose_backticks_multiline()
 
   buffer:replace_sel("```\n" .. sel_text .. "\n```")
 end
-function add_demarcation_equals_line()
+function add_demarcation_underline()
   local _prefix = 'enclose_backticks_multiline: '
   buffer:home()
 
   local AT_CARET = -1
-  buffer:insert_text(AT_CARET, "\n" .. string.rep('=', 45) .. "\n\n")
+  buffer:insert_text(AT_CARET, "\n" .. string.rep('_', 45) .. "\n\n")
   --buffer:replace_sel("```\n" .. sel_text .. "\n```")
 end
 local menu_tools = textadept.menu.menubar[_L['_Tools']]
@@ -251,5 +251,11 @@ keys.ax = enclose_backticks
 -- alt + shift + x
 keys.aX = enclose_backticks_multiline
 
--- ctrl + shift + =
-keys['c+'] = add_demarcation_equals_line
+-- alt + shift + q
+keys.aQ = enclose_backticks_multiline
+
+-- ctrl + shift + "="
+keys['c+'] = add_demarcation_underline
+
+-- alt + "-"
+keys['a-'] = add_demarcation_underline
