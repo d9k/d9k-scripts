@@ -1,0 +1,33 @@
+#!/bin/bash
+
+NEW_DEFAULT_BRANCH="$1"
+
+function ask_continue { ACTION_NAME="$1";
+  if [[ -z "${ACTION_NAME}" ]]; then
+    ACTION_NAME="continue"
+  fi
+
+  # -s	        do not echo input coming from a terminal
+  # -p          prompt	output the string PROMPT without a trailing newline before
+  #       attempting to read
+  # -r  	  	  do not allow backslashes to escape any characters
+  # -n nchars	  return after reading NCHARS characters rather than waiting
+  #    		for a newline,
+  read -n 1 -r -p "Press \"y\" to ${ACTION_NAME}: " input
+
+  # new line but with stderr, escaping capture output
+  echo >&2
+
+  if [ "$input" != "Y" ] && [ "$input" != "y" ]; then\
+    echo "Exitting"
+    exit
+  fi
+}
+
+if [[ -z "$NEW_DEFAULT_BRANCH" ]]; then
+  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  ask_continue "set branch \"$CURRENT_BRANCH\" as default"
+  NEW_DEFAULT_BRANCH="$CURRENT_BRANCH"
+fi
+
+git config --local user.defaultbranch "$NEW_DEFAULT_BRANCH"
