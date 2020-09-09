@@ -5,17 +5,29 @@ set wrap-lines = 1
 
 # see https://github.com/jonas/tig/wiki/Bindings
 
+# see https://jonas.github.io/tig/doc/tigrc.5.html
+# "External user-defined command"
+#
+# ! - foreground with output
+# @ - background, hidden
+# + - 1st line to status bar
+# ? - prompt
+# < - exit after
 #bind status A !?git commit --amend
 
 bind status A !amend
 bind status D !@?rm %(file)
 bind main P !push
+bind diff A @textadept %(file)
+bind diff P @silent.sh pstorm %(file)
+bind diff T @textadept %(file)
 bind diff <Up> move-up
 bind diff <Down> move-down
 
-bind main C !@sh -c "echo %(commit) | xclip -selection c"
+bind main T ?git checkout %(commit)
+bind main H !@sh -c "echo %(commit) | xclip -selection c"
 bind main c !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
-bind main M !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
+bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##
