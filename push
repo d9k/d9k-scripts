@@ -47,13 +47,23 @@ if [[ -z "$REPO_TYPE" ]]; then
 fi
 
 if [ "$REPO_TYPE" == "git" ]; then
+
   echo
   echo "Current git branch:"
   echo "  $(git-current-branch)"
   echo
+
+  COMMITS_TO_PUSH=$(git-to-push)
+
+  if [[ -z "$COMMITS_TO_PUSH" ]]; then
+    echo "No new commits to push"
+    exit
+  fi
+
   echo "# New commits:"
   echo
-  git-to-push
+  echo -e "${COMMITS_TO_PUSH}"
+
   echo
 
   if [[ "$(ask_continue push)" != "1" ]]; then
