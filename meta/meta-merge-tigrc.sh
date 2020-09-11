@@ -1,12 +1,20 @@
 #!/bin/bash
 
-CFG_DIR=~
-CFG_BACKUP_DIR=~/scripts/cfg
-FILE_REL_PATH=.tigrc
+SOURCE_CFG_DIR=~
+BACKUP_CFG_DIR=~/scripts/cfg
+CFG_FILE_REL_PATH=.tigrc
 
-merge-util "$CFG_DIR/${FILE_REL_PATH}" "${CFG_BACKUP_DIR}/${FILE_REL_PATH}"
 
-echo "After merging data to \"${CFG_BACKUP_DIR}\":"
+SOURCE_FILE_FULL_PATH="${SOURCE_CFG_DIR}/${CFG_FILE_REL_PATH}"
+BACKUP_FILE_FULL_PATH="${BACKUP_CFG_DIR}/${CFG_FILE_REL_PATH}"
+
+merge-util "${SOURCE_FILE_FULL_PATH}" "${BACKUP_FILE_FULL_PATH}"
+
+echo "After merging data to \"${BACKUP_FILE_FULL_PATH}\":"
 echo
-cd "${CFG_BACKUP_DIR}"
-hg status .
+cd "${BACKUP_CFG_DIR}"
+echo
+git diff "${BACKUP_FILE_FULL_PATH}"
+git status .
+echo "You can:"
+echo "\`cd ${BACKUP_CFG_DIR}\`"

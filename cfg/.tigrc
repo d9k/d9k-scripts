@@ -18,16 +18,20 @@ set wrap-lines = 1
 bind status A !amend
 bind status D !@?rm %(file)
 bind main P !push
-bind diff A @textadept %(file)
-bind diff P @silent.sh pstorm %(file)
-bind diff T @textadept %(file)
+bind diff A +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
+bind diff P +sh -c 'echo Opening in PhpStorm: %(file); silent.sh pstorm %(file)'
+bind diff T +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
 bind diff <Up> move-up
 bind diff <Down> move-down
 
-bind main T ?git checkout %(commit)
-bind main H !@sh -c "echo %(commit) | xclip -selection c"
 bind main c !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
+bind main H !@sh -c "echo %(commit) | xclip -selection c"
+
 bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
+bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
+bind main T ?git checkout %(commit)
+
+bind ref T ?git checkout %(branch)
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##

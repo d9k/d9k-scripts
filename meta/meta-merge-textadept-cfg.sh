@@ -9,7 +9,7 @@ SOURCE_FILE_FULL_PATH="${SOURCE_CFG_DIR}/${CFG_FILE_REL_PATH}"
 
 merge-util "${SOURCE_FILE_FULL_PATH}" "${BACKUP_FILE_FULL_PATH}"
 
-echo "After merging data to \"${SOURCE_FILE_FULL_PATH}\":"
+echo "After merging data to \"${BACKUP_FILE_FULL_PATH}\":"
 
 cd "${BACKUP_CFG_DIR}"
 echo
