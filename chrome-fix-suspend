@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# https://askubuntu.com/a/1275573/156571
+
+chrome  --use-cmd-decoder=validating --use-gl=desktop

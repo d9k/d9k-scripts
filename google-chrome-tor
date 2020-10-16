@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -x
+
+google-chrome --incognito --proxy-server="socks5://127.0.0.1:9050" --host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE myproxy" check.torproject.org

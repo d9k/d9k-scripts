@@ -11,11 +11,11 @@ echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
 
-  ( set -x; git diff )
+  ( set -x; git diff $@)
   exit
 fi
 
 if [ "$REPO_TYPE" == "hg" ]; then
-  ( set -x; hg diff; hg status )
+  ( set -x; hg diff $@; hg status )
   exit
 fi

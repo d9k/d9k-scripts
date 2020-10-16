@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git log --name-only -n 1 --oneline $@ \
+  \
+  `# starting from second line` \
+  | tail -n +2

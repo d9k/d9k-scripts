@@ -24,6 +24,11 @@ bind diff T +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(fi
 bind diff <Up> move-up
 bind diff <Down> move-down
 
+# git-show format:
+#   %s: one line
+#   %b: multiline
+#   %B: multiline raw
+
 bind main c !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
 bind main H !@sh -c "echo %(commit) | xclip -selection c"
 

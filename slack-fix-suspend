@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo killall slack
+
+slack --use-cmd-decoder=validating --use-gl=desktop

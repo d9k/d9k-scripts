@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TAG=$(cat package.json | jq -r '.version')
+
+if [[ -z "$TAG" ]]; then
+  echo "Error: can't read version"
+  exit
+fi
+
+set -x
+git tag $TAG

@@ -26,8 +26,28 @@ fi
 
 DEST_FOLDER=$(readlink -f "$DEST_FOLDER")
 
+DEST_FOLDER_PARENT=$(dirname "$DEST_FOLDER")
+
+#echo "$DEST_FOLDER_PARENT"
+
+SRC_FOLDER=$(git rev-parse --show-toplevel)
+
+git fetch origin "$BRANCH":"$BRANCH"
+
 echo "Cloning to \"$DEST_FOLDER\""
 
 set -x
-git clone --single-branch -b "$BRANCH" "$REPO_URL" "$DEST_FOLDER"
 
+#git clone --single-branch -b "$BRANCH" "$REPO_URL" "$DEST_FOLDER"
+#git clone --single-branch --branch "$BRANCH" . "$DEST_FOLDER"
+
+cd "$DEST_FOLDER_PARENT"
+git clone --single-branch -b "$BRANCH" "$SRC_FOLDER" "$DEST_FOLDER"
+
+cd "$DEST_FOLDER"
+git config remote.origin.url "$REPO_URL"
+
+git gc --prune
+
+# отключено, т. к. очень медленно
+#--aggressive

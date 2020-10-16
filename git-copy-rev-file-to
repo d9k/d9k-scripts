@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function show_help() {
+  echo -e "
+Usage:  git-copy-rev-file-to  REV_OR_BRANCH_TO_COPY_FROM  FILE  DEST_BASE_FOLDER
+
+"
+}
+
+if [ "$#" -lt 3 ]; then
+  show_help
+  exit 1
+fi
+
+REV="$1"
+FILE="$2"
+DEST_BASE_FOLDER="$3"
+
+#FILE_NAME=$(basename "$FILE")
+DEST_PATH="$DEST_BASE_FOLDER/$FILE"
+
+DEST_DIR=$(dirname $DEST_PATH)
+
+mkdir -p $DEST_DIR
+
+git show ${REV}:${FILE} > ${DEST_PATH}
+
+ls -lh $DEST_PATH
