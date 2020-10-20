@@ -16,7 +16,7 @@ echo $WMCTRL_SEARCH_OUTPUT
 WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
 
 if [[ -z "$WMCTRL_NUMBER" ]]; then
-  $COMMAND
+  eval $COMMAND
   exit
 fi
 
