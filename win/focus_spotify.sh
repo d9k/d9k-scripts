@@ -1,6 +1,7 @@
 #!/bin/bash
 
 WINDOW_CLASS=Spotify
+#WINDOW_CLASS=Terminal
 COMMAND="spotify &"
 
 
@@ -18,14 +19,29 @@ if [[ -z "$WMCTRL_NUMBER" ]]; then
   exit
 fi
 
-# echo ${WMCTRL_NUMBER}
+WMCTRL_NUMBER=$(printf "%d\n" ${WMCTRL_NUMBER})
+echo WMCTRL_NUMBER: ${WMCTRL_NUMBER}
 
-set -x
-# -v: verbose
-# -i: int value, not caption text
-# -a: activate
-wmctrl -v -i -a  ${WMCTRL_NUMBER}
 
+FOCUSED_WMCTRL_NUMBER=$(xdotool getwindowfocus)
+echo FOCUSED_WMCTRL_NUMBER: ${FOCUSED_WMCTRL_NUMBER}
+
+if [[ "$FOCUSED_WMCTRL_NUMBER" == "$WMCTRL_NUMBER" ]]; then
+  ALREADY_FOCUSED=1
+fi
+
+
+if [ -n "$ALREADY_FOCUSED" ]; then
+  set -x
+  #wmctrl -b toggle,shaded -a ${WMCTRL_NUMBER}
+  xdotool windowminimize ${WMCTRL_NUMBER}
+else
+  set -x
+  # -v: verbose
+  # -i: int value, not caption text
+  # -a: activate
+  wmctrl -v -i -a  ${WMCTRL_NUMBER}
+fi
 #if [ $? -eq 1 ]; then
 #  if [ "${ix}" -eq "0" ]; then
 #    echo 1
