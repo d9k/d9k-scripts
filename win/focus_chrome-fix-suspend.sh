@@ -1,10 +1,12 @@
 #!/bin/bash
 
-appTitle="Google Chrome"
+# wmctrl -lx
+WINDOW_CLASS="Google-chrome"
 
-t=$(wmctrl -lp | grep "${appTitle}")
-if [ $? -eq 1 ]; then
-    google-chrome &
-else
-    wmctrl -a "${appTitle}"
-fi
+COMMAND="$HOME/scripts/chrome-fix-suspend"
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+#echo "$SCRIPT_DIR"
+
+${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS" "$COMMAND"

@@ -1,10 +1,11 @@
 #!/bin/bash
 
-app="Telegram"
+WINDOW_CLASS="Telegram"
 
-t=$(wmctrl -lp | grep ${app})
-if [ $? -eq 1 ]; then
-    ~/soft/Telegram/Telegram &
-else
-    wmctrl -a ${app}
-fi
+COMMAND="~/soft/Telegram/Telegram &"
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+#echo "$SCRIPT_DIR"
+
+${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS" "$COMMAND"

@@ -1,17 +1,11 @@
 #!/bin/bash
 
-pattern_quote() {
-#    sed 's/[]\.|$(){}?+*^-]/\\&/g' <<< "$*"
-    sed 's/[]\.|${}?+*^-]/\\&/g' <<< "$*"
-}
+WINDOW_CLASS="Textadept"
 
-name="Textadept ("
+COMMAND="textadept &"
 
-#see http://stackoverflow.com/a/11856117/1760643
-grep_pattern=$(pattern_quote "${name}")
-t=$(wmctrl -lp | grep "${grep_pattern}")
-if [ $? -eq 1 ]; then
-    textadept &
-else
-    wmctrl -a "${name}"
-fi
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+#echo "$SCRIPT_DIR"
+
+${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS" "$COMMAND"
