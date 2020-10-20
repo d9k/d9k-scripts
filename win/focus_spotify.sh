@@ -4,9 +4,6 @@ WINDOW_CLASS=Spotify
 #WINDOW_CLASS=Terminal
 COMMAND="spotify &"
 
-
-# selecting second window
-
 # -x: + WIN CLASS
 WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n 1p)
 
