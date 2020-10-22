@@ -71,7 +71,7 @@ console.log("minor suffix: ", minorSuffix);
 const newVersion = [
   patch,
   major,
-  [minor + 1, minorSuffix].join("-")
+  [minor + 1, minorSuffix].filter(item => item).join("-")
 ].join(".")
 
 console.log("new version: ", newVersion);
