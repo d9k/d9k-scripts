@@ -1,4 +1,4 @@
-#!/usr/bin/awk BEGIN{system("deno run --unstable --allow-read --allow-write --allow-env "ARGV[1])}
+#!/usr/bin/awk BEGIN{system("deno run --unstable --allow-read --allow-write --allow-env --allow-run "ARGV[1])}
 // https://unix.stackexchange.com/a/551025/48167
 
 // https://stackoverflow.com/a/61821141/1760643
@@ -6,10 +6,11 @@
 
 // import * as fs from "https://deno.land/std/fs/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
+import { exec } from "https://deno.land/x/execute@v1.1.0/mod.ts";
 
 // import { findNearestPackageJsonSync } from "https://jspm.dev/find-nearest-package-json@2.0.1";
 import editPackageJson from "https://jspm.dev/edit-package-json@0.1.36";
-import { exists } from "https://deno.land/std/fs/mod.ts"
+// import { exists } from "https://deno.land/std/fs/mod.ts"
 
 const decoder = new TextDecoder('utf-8');
 
@@ -81,3 +82,10 @@ const packageJsonTextModded = editPackageJson.set(packageJson.text, "version", n
 // console.log(packageJsonTextModded);
 
 Deno.writeTextFileSync(packageJson.path, packageJsonTextModded);
+
+async function execWithTrace(cmdParts: string[]): Promise<string> {
+  console.log("> " + cmdParts.join(" "));
+  return exec(cmdParts);
+}
+
+await execWithTrace(["git", "add", packageJson.path]);
