@@ -15,6 +15,7 @@ set wrap-lines = 1
 # < - exit after
 #bind status A !?git commit --amend
 
+bind status a !amend
 bind status A !amend
 bind status D !@?rm %(file)
 bind main P !push
@@ -30,10 +31,11 @@ bind diff <Down> move-down
 #   %B: multiline raw
 
 bind main c !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
-bind main H !@sh -c "echo %(commit) | xclip -selection c"
+bind main H +sh -c 'COMMIT=$(printf %(commit) | head -c 20); printf $COMMIT | xclip -selection c && echo [H]ash $COMMIT copied to clipboard'
 
 bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
+bind generic L @silent.sh git-compare-rev-dir %(commit)
 bind main T ?git checkout %(commit)
 
 bind ref T ?git checkout %(branch)
