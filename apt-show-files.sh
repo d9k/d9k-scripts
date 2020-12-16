@@ -1,4 +1,4 @@
 #!/bin/bash
 
-u-x
+set -x
 dpkg-query -L $@

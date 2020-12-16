@@ -143,6 +143,28 @@ events.connect(events.SUSPEND, function()
   buffer:undo()
   return true
 end, 1)
+
+function table_keys(t)
+  local result = {}
+
+  for k, _ in pairs(t) do
+    table.insert(result, k)
+  end
+
+  return result
+end
+
+function array_filter(ar)
+  local result = {}
+  for _, v in ipairs(ar) do
+    if v then
+      local new_index = #result+1
+      result[new_index] = v
+    end
+  end
+  return result
+end
+
 -- https://github.com/DracoBlue/DModule/blob/master/core/lua/utils.lua
 function file_put_contents(path, content)
 	local file = io.open(path,"w+")
@@ -166,73 +188,90 @@ function shell_cmd_run_and_get_output(cmd, raw)
   return s
 end
 
-function json_pp()
-  local _prefix = 'json_pp: '
-  local json_pp_script_path = '/home/d9k/scripts/php-json-pretty'
+function require_selected_text()
   local sel_text, sel_text_len = buffer:get_sel_text()
 
-  local out = function(text)
-    ui.statusbar_text = _prefix .. text
-  end
-
-  --local all_text=buffer:get_text()
-  -- print('all text: ' .. all_t)
-  --print('sel_text: ' .. sel_text)
-  --print('sel_text_len: ' .. sel_text_len)
   if sel_text_len < 1 then
-    --print('no sel')
-    return out('No selection')
+    error({text= 'No selection'})
   end
 
-  local tmp_filename = '/tmp/t'
+  return sel_text
+  end
 
-  local saved = file_put_contents(tmp_filename, sel_text)
+function ensure_file_put_contents(filename, text)
+  local saved = file_put_contents(filename, text)
 
   if not saved then
-    return out("Can't save to " .. tmp_filename)
+    error({text = "Can't save to " .. filename, filename = filename})
   end
 
-  local cmd_result = shell_cmd_run_and_get_output(json_pp_script_path .. " " .. tmp_filename, true)
-
-  buffer:replace_sel(cmd_result)
+  return saved
 end
+
+function statusbar_set_text_fn_factory(log_prefix)
+  return function(text)
+    ui.statusbar_text = table.concat(array_filter({log_prefix or false, text}), ": ")
+end
+end
+
+function fn_error_to_status_bar(log_prefix, fn)
+  local out = statusbar_set_text_fn_factory(log_prefix)
+
+  local status, err = pcall(fn)
+
+  if (err) then
+    local error_text = type(err) == 'string' and err or err.text
+
+    out(error_text)
+  end
+  end
+
+function json_pp()
+  fn_error_to_status_bar('json_pp', function ()
+    local json_pp_script_path = '/home/d9k/scripts/php-json-pretty'
+    local tmp_filename = '/tmp/t'
+
+    local sel_text = require_selected_text()
+
+    ensure_file_put_contents(tmp_filename, sel_text)
+
+    local command = json_pp_script_path .. " " .. tmp_filename
+
+    local cmd_output_text = shell_cmd_run_and_get_output(command, true)
+
+    buffer:replace_sel(cmd_output_text)
+  end)
+  end
+
+
 function enclose_backticks()
-  local _prefix = 'enclose_backticks: '
-  local sel_text, sel_text_len = buffer:get_sel_text()
-
-  local out = function(text)
-    ui.statusbar_text = _prefix .. text
-  end
-
-  if sel_text_len < 1 then
-    return out('No selection')
-  end
+  fn_error_to_status_bar('enclose_backticks', function()
+    local sel_text = require_selected_text()
 
   buffer:replace_sel('`' .. sel_text .. '`')
+  end)
 end
 
 function enclose_backticks_multiline()
   local _prefix = 'enclose_backticks_multiline: '
-  local sel_text, sel_text_len = buffer:get_sel_text()
 
-  local out = function(text)
-    ui.statusbar_text = _prefix .. text
-  end
 
-  if sel_text_len < 1 then
-    return out('No selection')
-  end
+  fn_error_to_status_bar('enclose_backticks', function()
+    local sel_text = require_selected_text()
 
-  buffer:replace_sel("```\n" .. sel_text .. "\n```")
+    buffer:replace_sel("```\n" .. sel_text .. "\n```")
+  end)
 end
-function add_demarcation_underline()
-  local _prefix = 'enclose_backticks_multiline: '
+
+function add_demarcation_line()
+  local _prefix = 'add_demarcation_line: '
   buffer:home()
 
   local AT_CARET = -1
-  buffer:insert_text(AT_CARET, "\n" .. string.rep('_', 45) .. "\n\n")
+  buffer:insert_text(AT_CARET, "\n" .. string.rep('-', 45) .. "\n\n")
   --buffer:replace_sel("```\n" .. sel_text .. "\n```")
 end
+
 local menu_tools = textadept.menu.menubar[_L['_Tools']]
 
 local SEPARATOR = {''}
@@ -241,21 +280,21 @@ menu_tools[#menu_tools + 1] = SEPARATOR
 menu_tools[#menu_tools + 1] = {'JSON pretty print', json_pp}
 menu_tools[#menu_tools + 1] = {'Enclose backticks', enclose_backticks}
 menu_tools[#menu_tools + 1] = {'Enclose backticks multiline', enclose_backticks_multiline}
-menu_tools[#menu_tools + 1] = {'Add demarcation ==== line before', add_demarcation_equals_line}
+menu_tools[#menu_tools + 1] = {'Add demarcation ----- line before', add_demarcation_line}
 
 --keys.ad = enclose_backticks
 --keys.aD = enclose_backticks_multiline
 -- alt + x
-keys.ax = enclose_backticks
+-- keys.ax = enclose_backticks
+keys.aq = enclose_backticks
 
 -- alt + shift + x
-keys.aX = enclose_backticks_multiline
+-- keys.aX = enclose_backticks_multiline
+keys.aa = enclose_backticks_multiline
 
--- alt + shift + q
-keys.aQ = enclose_backticks_multiline
+keys.aw = function()
+  ui.goto_view(1)
+end
 
--- ctrl + shift + "="
-keys['c+'] = add_demarcation_underline
-
--- alt + "-"
-keys['a-'] = add_demarcation_underline
+-- ctrl + shift + =
+keys['c+'] = add_demarcation_line

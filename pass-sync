@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+
+pass git pull
+
+pass git push

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# https://linuxconfig.org/install-tor-proxy-on-ubuntu-20-04-linux
+
+wget -qO - https://api.ipify.org; echo
+torsocks wget -qO - https://api.ipify.org; echo

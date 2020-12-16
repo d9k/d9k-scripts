@@ -1,0 +1,7 @@
+chrome --private --proxy-server="socks=127.0.0.1:9050" --profile-directory="chrome-tor-profile"
+
+
+# NOTE
+# may require you to run
+# `chrome --profile-directory="Default"`
+# after
