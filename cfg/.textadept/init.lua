@@ -178,6 +178,10 @@ end
 
 -- https://stackoverflow.com/a/326715
 function shell_cmd_run_and_get_output(cmd, raw)
+  if type(cmd) == 'table' then
+    cmd = table.concat(cmd, ' ')
+  end
+
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
   f:close()
@@ -226,44 +230,73 @@ function fn_error_to_status_bar(log_prefix, fn)
   end
   end
 
-function json_pp()
-  fn_error_to_status_bar('json_pp', function ()
+function tmp_file_create(content)
+  local tmp_filename = os.tmpname()
+  ensure_file_put_contents(tmp_filename, content)
+  return tmp_filename
+end
+
+function tmp_file_autoremove_callback(content, fn)
+  local tmp_filename = tmp_file_create(content)
+  fn(tmp_filename)
+  os.remove(tmp_filename)
+  return tmp_filename
+end
+
+function action_json_pp()
+  fn_error_to_status_bar('json pp', function ()
     local json_pp_script_path = '/home/d9k/scripts/php-json-pretty'
-    local tmp_filename = '/tmp/t'
 
     local sel_text = require_selected_text()
 
-    ensure_file_put_contents(tmp_filename, sel_text)
+    tmp_file_autoremove_callback(sel_text, function(tmp_filename)
 
-    local command = json_pp_script_path .. " " .. tmp_filename
+      local cmd_output_text = shell_cmd_run_and_get_output(
+        {json_pp_script_path, tmp_filename},
+        true
+      )
 
-    local cmd_output_text = shell_cmd_run_and_get_output(command, true)
+      buffer:replace_sel(cmd_output_text)
+    end)
+  end)
+end
+
+function action_url_decode()
+  fn_error_to_status_bar('url decode', function ()
+    local script_path = '/home/d9k/scripts/php-url-decode'
+
+    local sel_text = require_selected_text()
+
+    tmp_file_autoremove_callback(sel_text, function(tmp_filename)
+
+      local cmd_output_text = shell_cmd_run_and_get_output(
+        {script_path, tmp_filename},
+        true
+      )
 
     buffer:replace_sel(cmd_output_text)
+    end)
   end)
   end
 
 
-function enclose_backticks()
-  fn_error_to_status_bar('enclose_backticks', function()
+function action_enclose_backticks()
+  fn_error_to_status_bar('enclose backticks', function()
     local sel_text = require_selected_text()
 
   buffer:replace_sel('`' .. sel_text .. '`')
   end)
 end
 
-function enclose_backticks_multiline()
-  local _prefix = 'enclose_backticks_multiline: '
-
-
-  fn_error_to_status_bar('enclose_backticks', function()
+function action_enclose_backticks_multiline()
+  fn_error_to_status_bar('enclose backticks multiline', function()
     local sel_text = require_selected_text()
 
     buffer:replace_sel("```\n" .. sel_text .. "\n```")
   end)
 end
 
-function add_demarcation_line()
+function action_add_demarcation_line()
   local _prefix = 'add_demarcation_line: '
   buffer:home()
 
@@ -277,24 +310,24 @@ local menu_tools = textadept.menu.menubar[_L['_Tools']]
 local SEPARATOR = {''}
 
 menu_tools[#menu_tools + 1] = SEPARATOR
-menu_tools[#menu_tools + 1] = {'JSON pretty print', json_pp}
-menu_tools[#menu_tools + 1] = {'Enclose backticks', enclose_backticks}
-menu_tools[#menu_tools + 1] = {'Enclose backticks multiline', enclose_backticks_multiline}
 menu_tools[#menu_tools + 1] = {'Add demarcation ----- line before', add_demarcation_line}
+menu_tools[#menu_tools + 1] = {'JSON pretty print', action_json_pp}
+menu_tools[#menu_tools + 1] = {'Enclose backticks', action_enclose_backticks}
+menu_tools[#menu_tools + 1] = {'Enclose backticks multiline', action_enclose_backticks_multiline}
+menu_tools[#menu_tools + 1] = {'Url decode', action_url_decode}
 
---keys.ad = enclose_backticks
---keys.aD = enclose_backticks_multiline
 -- alt + x
--- keys.ax = enclose_backticks
-keys.aq = enclose_backticks
+-- keys.ax = action_enclose_backticks
+keys.aq = action_enclose_backticks
+
 
 -- alt + shift + x
--- keys.aX = enclose_backticks_multiline
-keys.aa = enclose_backticks_multiline
+-- keys.aX = action_enclose_backticks_multiline
+keys.aa = action_enclose_backticks_multiline
 
 keys.aw = function()
   ui.goto_view(1)
 end
 
 -- ctrl + shift + =
-keys['c+'] = add_demarcation_line
+keys['c+'] = action_add_demarcation_line
