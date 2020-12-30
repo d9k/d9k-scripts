@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
+set -o errexit
+set -o functrace
+set -o nounset
+
+COPY_LINES_REVERSE_LINES_DEFAULT=500
+
+function parse_extension { FILE_NAME_WITH_EXT="$1"
+  echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev
+}
+
+function parse_file_name_no_ext { FILE_NAME_WITH_EXT="$1"
+  EXTENSION=$(parse_extension "$FILE_NAME_WITH_EXT")
+  #echo "DEBUG: parse_file_name_no_ext: EXTENSION: $EXTENSION"
+  echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${EXTENSION}$//g
+}
+
+function copy_lines_reverse { set +o nounset; FROM_FILE_PATH="$1"; TO_FILE_PATH="$2"; LAST_LINES="$3"; set -o nounset;
+
+  if [ $# -lt 2 ]; then
+    echo "copy_lines_reverse: insufficient args"
+    exit 1
+  fi
+
+  if [ -z "$LAST_LINES" ]; then
+    LINES="$COPY_LINES_REVERSE_LINES_DEFAULT"
+  fi
+
+  local FROM_REL_DIR_PATH=$(dirname "$FROM_FILE_PATH")
+  local FROM_FILE_NAME_WITH_EXT=$(basename "$FROM_FILE_PATH")
+
+  local FILE_NAME_NO_EXT=$(parse_file_name_no_ext "$FROM_FILE_NAME_WITH_EXT")
+
+  local FILES_TO_DELETE=$(parse_file_name_no_ext "$TO_FILE_PATH")
+
+  #echo "FILE_NAME_NO_EXT: $FILE_NAME_NO_EXT"
+
+  if ls "$FILES_TO_DELETE"* &>/dev/null; then
+    rm -f "$FILES_TO_DELETE".*
+  fi
+
+  (
+    #set -x;
+    tail -n $LINES "$FROM_FILE_PATH" | tac > "$TO_FILE_PATH"
+  )
+}
+
+copy_lines_reverse "$@"
