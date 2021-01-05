@@ -7,6 +7,7 @@ set -o nounset
 
 SCRIPTS="$HOME/scripts"
 SCRIPT_RHVOICE_FIXED="$SCRIPTS/rhvoice-fixed.sh"
+SCRIPT_RHVOICE_FIX_FILE="$SCRIPTS/rhvoice-fix-file.sh"
 
 if [ "$#" -lt 1 ]; then
   echo "Usage: create-abook SOURCE"
@@ -25,7 +26,10 @@ function parse_file_name_no_ext { FILE_NAME_WITH_EXT="$1"
 
 SOURCE_PATH="$1"
 SOURCE_PATH_NO_EXT=$(parse_file_name_no_ext "$1")
+FIXED_FILE_DEBUG_PATH="$SOURCE_PATH.rhvoice-fixed"
 DEST_PATH="$SOURCE_PATH_NO_EXT.mp3"
+
+cat "$SOURCE_PATH" | "$SCRIPT_RHVOICE_FIX_FILE" > "$FIXED_FILE_DEBUG_PATH"
 
 (
   set -x;
