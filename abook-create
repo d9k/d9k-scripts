@@ -5,6 +5,9 @@ set -o errexit
 set -o functrace
 set -o nounset
 
+SCRIPTS="$HOME/scripts"
+SCRIPT_RHVOICE_FIXED="$SCRIPTS/rhvoice-fixed.sh"
+
 if [ "$#" -lt 1 ]; then
   echo "Usage: create-abook SOURCE"
   exit
@@ -26,5 +29,5 @@ DEST_PATH="$SOURCE_PATH_NO_EXT.mp3"
 
 (
   set -x;
-  cat "$SOURCE_PATH" | RHVoice-client -r 0.5 -v 0.8 -p 0.05 -s Aleksandr+Alan | lame -b 192 -q 0 - "$DEST_PATH"
+  cat "$SOURCE_PATH" | "$SCRIPT_RHVOICE_FIXED" | lame -b 192 -q 0 - "$DEST_PATH"
 )
