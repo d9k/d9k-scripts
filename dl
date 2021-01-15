@@ -1,0 +1,12 @@
+#!/bin/bash
+
+URL="$1"
+SAVE_AS="$2"
+
+COMMAND="wget"
+
+if [ -n "$SAVE_AS" ]; then
+  COMMAND="${COMMAND} -O \"${SAVE_AS}\""
+fi
+
+eval ${COMMAND} "${URL}"
