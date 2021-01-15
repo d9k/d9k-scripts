@@ -5,10 +5,6 @@ set -o errexit
 set -o functrace
 set -o nounset
 
-SCRIPTS="$HOME/scripts"
-SCRIPT_RHVOICE_FIXED="$SCRIPTS/rhvoice-fixed.sh"
-SCRIPT_RHVOICE_FIX_FILE="$SCRIPTS/rhvoice-fix-file.sh"
-
 if [ "$#" -lt 1 ]; then
   echo "Usage: abook-speed SOURCE [SPEED_MULTIPLIER]"
   echo
@@ -20,10 +16,16 @@ function parse_extension { FILE_NAME_WITH_EXT="$1"
   echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev
 }
 
+# TODO replace with basename filename ext?
 function parse_file_name_no_ext { FILE_NAME_WITH_EXT="$1"
   EXTENSION=$(parse_extension "$FILE_NAME_WITH_EXT")
   #echo "DEBUG: parse_file_name_no_ext: EXTENSION: $EXTENSION"
   echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${EXTENSION}$//g
+}
+
+function mediainfo_duration { FILE_PATH="$1"
+  DURATION=$(mediainfo "$FILE_PATH" | grep Duration | head -n 1 | sed -n -e 's/^Duration[ ]*:[ ]*//p')
+  echo "$DURATION"
 }
 
 set +o nounset
@@ -35,11 +37,25 @@ if [ -z "$SPEED_MULTIPLIER" ]; then
   SPEED_MULTIPLIER=1.4
 fi
 
-SOURCE_EXT=$(parse_extension "$SOURCE_PATH")
-SOURCE_PATH_NO_EXT=$(parse_file_name_no_ext "$SOURCE_PATH")
-DEST_PATH="${SOURCE_PATH_NO_EXT}__${SPEED_MULTIPLIER}x.mp3"
+SOURCE_DURATION=$(mediainfo_duration "$SOURCE_PATH")
+
+echo "Source Duration: $SOURCE_DURATION"
+echo
+
+SOURCE_DIR=$(dirname "$SOURCE_PATH")
+SOURCE_FILENAME=$(basename "$SOURCE_PATH")
+SOURCE_EXT=$(parse_extension "$SOURCE_FILENAME")
+SOURCE_NAME_NO_EXT=$(parse_file_name_no_ext "$SOURCE_FILENAME")
+DEST_DIR="$SOURCE_DIR/speed"
+DEST_PATH="${DEST_DIR}/${SOURCE_NAME_NO_EXT}__${SPEED_MULTIPLIER}x.${SOURCE_EXT}"
+
+mkdir -p "$DEST_DIR"
 
 (
   set -x;
-  sox "$SOURCE_PATH" "$DEST_PATH" tempo "$SPEED_MULTIPLIER"
+  /usr/bin/time -f "Elapsed time:\t%E" sox "$SOURCE_PATH" "$DEST_PATH" tempo "$SPEED_MULTIPLIER"
 )
+
+DEST_DURATION=$(mediainfo_duration "$DEST_PATH")
+echo
+echo "Dest Duration: $DEST_DURATION"
