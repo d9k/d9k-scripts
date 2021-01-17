@@ -1,0 +1,28 @@
+#/bin/bash
+
+# self update:
+# sudo youtube-dl -U
+#
+# sudo add-apt-repository ppa:nilarimogard/webupd8
+# sudo apt update
+# sudo apt install youtube-dl ffmpeg
+#
+
+if [ "$#" -lt 2 ]; then
+  echo "Usage: youtube-dl-mp3-rename URL OUT_NAME"
+  exit
+fi
+
+
+URL="$1"
+OUT_NAME="$2"
+
+youtube-dl \
+  --format bestaudio \
+  --audio-quality 0 \
+  --extract-audio \
+  --audio-format mp3 \
+  --output="${OUT_NAME}.%(ext)s" \
+  --no-mtime \
+  --no-playlist \
+  "$URL"

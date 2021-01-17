@@ -34,7 +34,7 @@ SPEED_MULTIPLIER="$2"
 set -o nounset
 
 if [ -z "$SPEED_MULTIPLIER" ]; then
-  SPEED_MULTIPLIER=1.4
+  SPEED_MULTIPLIER=1.25
 fi
 
 SOURCE_DURATION=$(mediainfo_duration "$SOURCE_PATH")
