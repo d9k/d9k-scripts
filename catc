@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# copy file content to clipboard
+
+file_path=$1
+
+# tr -n: remove trailing carriage return
+cat "$file_path" | tr -d '\n' | xclip -selection clipboard
+
+echo "file \"$file_path\" was copied to clipboard"
+
+
