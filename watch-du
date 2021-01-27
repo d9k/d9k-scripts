@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DIR="$@"
+
+if [ -z "$DIR" ]; then
+  DIR="."
+fi
+
+#ls -1rt \"$DIR\" | tail -n 1'
+watch bash -c "'du --human-readable --summarize \"$DIR\"; du --summarize \"$DIR\"; ls -1rt \"$DIR\" | tail -n 1'"
