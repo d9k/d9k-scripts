@@ -21,5 +21,8 @@ else
 fi
 
 
-echo "$INPUT" | "$CURRENT_PATH/rhvoice-fix-file.sh" | RHVoice-client -r 0.5 -v 0.8 -p 0.05 -s Aleksandr+Alan
+# -r: rate -1..1
+# -p: pitch -1..1
+# -v: volume -1..1
+echo "$INPUT" | "$CURRENT_PATH/rhvoice-fix-file.sh" | RHVoice-client -r 0.4 -v 0.7 -p 0.05 -s Aleksandr+Alan
 

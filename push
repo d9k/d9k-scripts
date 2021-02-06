@@ -35,7 +35,7 @@ function ask_continue { action_name=$1
   # new line but with stderr, escaping capture output
   echo >&2
 
-  if [ "$input" != "Y" ] && [ "$input" != "y" ]; then
+  if [ "$input" != "Y" ] && [ "$input" != "y" ] && [ "$input" != "д" ] && [ "$input" != "Д" ]; then
     exit
   fi
   echo 1

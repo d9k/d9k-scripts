@@ -1,3 +1,3 @@
 #!/bin/bash
 
-chrome --private -user-data-dir="~/temp/chrome-data-dir-temp" --profile-directory="Default"
+chrome --private -user-data-dir="$HOME/temp/chrome-data-dir-temp" --profile-directory="Default"
