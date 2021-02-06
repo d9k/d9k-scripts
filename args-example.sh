@@ -3,20 +3,19 @@
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
 help_exit() {
-  echo "Help: ${SCRIPT_NAME} [-u USER_NAME] [-e] [ADDITIONAL_MESSAGE]"
+  echo "Help: ${SCRIPT_NAME} [--exclamate] [--greeting GREETING] USER_NAME [ADDITIONAL_MESSAGE]"
   exit
 }
 
-USERNAME=user
+GREETING="Hello"
 MESSAGE_END="."
-
 
 while [[ $# > 0 ]]; do
     OPTION="$1"
 
     case "$OPTION" in
-        -u|--user)
-            USERNAME="$2"
+        -g|--greeting)
+            GREETING="$2"
             shift # past argument
         ;;
         -e|--exclamate) # argument without value
@@ -37,6 +36,14 @@ while [[ $# > 0 ]]; do
     shift # past argument or value
 done
 
-ADDITIONAL_STRING="$1"
+# Arguments count check
+if [ "$#" -lt 1 ]; then
+  show_help
+  exit 1
+fi
 
-echo "Hello, ${USERNAME}${MESSAGE_END} ${ADDITIONAL_STRING}"
+
+USERNAME="$1"
+ADDITIONAL_MESSAGE="$2"
+
+echo "${GREETING}, ${USERNAME}${MESSAGE_END} ${ADDITIONAL_MESSAGE}"
