@@ -6,7 +6,7 @@ set -o functrace
 set -o nounset
 
 if [ "$#" -lt 1 ]; then
-  echo "Usage: abook-speed SOURCE [SPEED_MULTIPLIER]"
+  echo "Usage: abook-speed SOURCE [SPEED_MULTIPLIER] [VOLUME_BOOST_DECIBELS]"
   echo
   echo "  SPEED_MULTIPLIER: 1.4 by default"
   exit
@@ -31,11 +31,22 @@ function mediainfo_duration { FILE_PATH="$1"
 set +o nounset
 SOURCE_PATH="$1"
 SPEED_MULTIPLIER="$2"
+VOLUME_BOOST_DECIBELS="$3"
+
+VOLUME_BOOST_COMMAND_PART=
+VOLUME_BOOST_FILE_NAME_PART=
+
 set -o nounset
 
 if [ -z "$SPEED_MULTIPLIER" ]; then
   SPEED_MULTIPLIER=1.25
 fi
+
+if [ -n "$VOLUME_BOOST_DECIBELS" ]; then
+  VOLUME_BOOST_COMMAND_PART="norm ${VOLUME_BOOST_DECIBELS}"
+  VOLUME_BOOST_FILE_NAME_PART="__vol${VOLUME_BOOST_DECIBELS}"
+fi
+
 
 SOURCE_DURATION=$(mediainfo_duration "$SOURCE_PATH")
 
@@ -47,13 +58,16 @@ SOURCE_FILENAME=$(basename "$SOURCE_PATH")
 SOURCE_EXT=$(parse_extension "$SOURCE_FILENAME")
 SOURCE_NAME_NO_EXT=$(parse_file_name_no_ext "$SOURCE_FILENAME")
 DEST_DIR="$SOURCE_DIR/speed"
-DEST_PATH="${DEST_DIR}/${SOURCE_NAME_NO_EXT}__${SPEED_MULTIPLIER}x.${SOURCE_EXT}"
+DEST_PATH="${DEST_DIR}/${SOURCE_NAME_NO_EXT}__${SPEED_MULTIPLIER}x${VOLUME_BOOST_FILE_NAME_PART}.${SOURCE_EXT}"
 
 mkdir -p "$DEST_DIR"
 
+
 (
   set -x;
-  /usr/bin/time -f "Elapsed time:\t%E" sox "$SOURCE_PATH" "$DEST_PATH" tempo "$SPEED_MULTIPLIER"
+  # https://madskjeldgaard.dk/posts/sox-tutorial-batch-processing/#normalize
+  # norm effect which only takes one parameter which is the sound level to normalize to. A reasonable normalization level is -0.1 dB so let us use that in our conversion process.
+  /usr/bin/time -f "Conversion process time:\t%E" sox "$SOURCE_PATH" "$DEST_PATH" tempo "$SPEED_MULTIPLIER" $VOLUME_BOOST_COMMAND_PART
 )
 
 DEST_DURATION=$(mediainfo_duration "$DEST_PATH")

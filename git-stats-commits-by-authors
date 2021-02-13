@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# https://stackoverflow.com/a/9839491
+set -x
+git shortlog -s -n --all --no-merges

@@ -8,6 +8,12 @@
 # sudo apt install youtube-dl ffmpeg
 #
 
+# --write-description              Write video description to a .description file
+# --write-info-json                Write video metadata to a .info.json file
+
+#  --write-description \
+#  --write-info-json \
+
 youtube-dl \
   --format bestaudio \
   --audio-quality 0 \
