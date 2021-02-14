@@ -2,7 +2,7 @@
 
 function build_command() {
 cat <<- END
-rename $@ "s/,//g" *
+rename $@ "s/'//g" *
 END
 }
 
@@ -13,7 +13,6 @@ EVAL_RESULT=
 function echo_and_eval() {
   echo "> $@"
   EVAL_RESULT=$(eval "$@")
-  echo "$EVAL_RESULT"
 }
 
 function ask_continue { action_name=$1
