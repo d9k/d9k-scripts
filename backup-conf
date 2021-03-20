@@ -35,7 +35,7 @@ if [[ -f "${backup_file_name}" ]]; then
   fi
 fi
 
-command="cp ${file_name} ${backup_file_name}"
+command='cp "${file_name}" "${backup_file_name}"'
 
 #check_writable
 if [ -w "$directory" ]; then

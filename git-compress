@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Before:"
+du --summarize -h .git
+echo
+
+time git gc
+
+echo
+echo "After:"
+du --summarize -h .git
