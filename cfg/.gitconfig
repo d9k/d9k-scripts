@@ -44,13 +44,20 @@ br = branch
 type = cat-file -t
 dump = cat-file -p
 
+[core]
+	editor = nano
+#	commentchar = \\
+
 [diff]
-
-# tool = meld
-
+#  tool = meld
 
 [log]
 
 # date = iso
 
 date=format:%Y.%m.%d %H:%M
+
+[difftool "meld"]
+  keepTemporaries = false
+#  trustExitCode = false
+  keepBackup = false

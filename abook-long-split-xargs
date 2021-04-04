@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Example:"
+
+echo "ls -1 00{6..9}*.mp3 01*.mp3 | tr '\n' '\0' |  xargs -0 -L 1 -I{} abook-long-split \"{}\""

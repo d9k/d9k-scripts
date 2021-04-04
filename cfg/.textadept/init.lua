@@ -53,7 +53,7 @@ keys['ac'] = function()
 end
 keys['cac'] = keys['ac']
 
-keys['cr'] = delete_lines
+keys['cr'] = buffer.line_delete
 keys['cl'] = textadept.file_types.select_lexer
 keys['cj'] = textadept.editing.goto_line
 
@@ -310,20 +310,25 @@ local menu_tools = textadept.menu.menubar[_L['_Tools']]
 local SEPARATOR = {''}
 
 menu_tools[#menu_tools + 1] = SEPARATOR
-menu_tools[#menu_tools + 1] = {'Add demarcation ----- line before', add_demarcation_line}
+menu_tools[#menu_tools + 1] = {'Add demarcation ----- line before', action_add_demarcation_line}
 menu_tools[#menu_tools + 1] = {'JSON pretty print', action_json_pp}
 menu_tools[#menu_tools + 1] = {'Enclose backticks', action_enclose_backticks}
 menu_tools[#menu_tools + 1] = {'Enclose backticks multiline', action_enclose_backticks_multiline}
 menu_tools[#menu_tools + 1] = {'Url decode', action_url_decode}
 
+--keys.ad = enclose_backticks
+--keys.aD = enclose_backticks_multiline
 -- alt + x
--- keys.ax = action_enclose_backticks
 keys.aq = action_enclose_backticks
 
-
 -- alt + shift + x
--- keys.aX = action_enclose_backticks_multiline
+--keys.aQ = enclose_backticks_multiline
 keys.aa = action_enclose_backticks_multiline
+
+--next view
+keys.an = function()
+  ui.goto_view(1)
+end
 
 keys.aw = function()
   ui.goto_view(1)

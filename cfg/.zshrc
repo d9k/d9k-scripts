@@ -39,6 +39,10 @@ setopt cdablevars
 # completion is inserted, the cursor is moved to the end of the word
 setopt alwaystoend
 
+# for urls with "?"
+# https://superuser.com/questions/982110/how-can-i-disable-globbing-for-url-arguments-in-zsh
+setopt NO_NOMATCH
+
 # https://github.com/robbyrussell/oh-my-zsh/issues/449
 # git HEAD^ correct
 #setopt no_nomatch
@@ -201,6 +205,10 @@ TRAPEXIT() {
 # This loads node version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# `npm install --cli ...` modules work globally
+export NODE_PATH="$NVM_DIR/node_modules"
+
 ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # see http://naxoc.net/2014/02/02/syntax-highlighting-commands-with-zsh/
 # see https://github.com/zsh-users/zsh-syntax-highlighting
@@ -223,29 +231,41 @@ bindkey -s '\eg' 'tig\n'
 # alt+r: branch (alt+b bound to "one word back")
 bindkey -s '\er' 'branch\n'
 
+alias default_audio_player=smplayer
 alias default_image_viewer=gpicview
 alias default_mail_viewer=thunderbird
+alias default_office_editor=libreoffice
+alias default_pdf_viewer=xreader
 alias default_text_editor=ta
 alias default_torrent_app=qbittorrent
 alias default_video_player=smplayer
 
+
 # File extension open default
 alias -s aliases=default_text_editor
+alias -s csv=default_office_editor
+alias -s doc=default_office_editor
+alias -s docx=default_office_editor
 alias -s gif=default_image_viewer
 alias -s jpeg=default_image_viewer
 alias -s jpg=default_image_viewer
 alias -s eml=default_mail_viewer
 alias -s ini=default_text_editor
-alias -s js=default_text_editor
+#alias -s js=default_text_editor
 alias -s json=default_text_editor
 alias -s md=default_text_editor
+alias -s mp3=default_audio_player
 alias -s mkv=default_video_player
+alias -s pdf=default_pdf_viewer
 alias -s php=default_text_editor
 alias -s png=default_image_viewer
+alias -s tigrc=default_text_editor
 alias -s torrent=default_torrent_app
 alias -s txt=default_text_editor
 alias -s zshrc=default_text_editor
+
 alias -s webm=default_video_player
+alias -s mkv=default_video_player
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # [ -f ~/.nix-profile/etc/profile.d/nix.sh ] && source ~/.nix-profile/etc/profile.d/nix.sh
