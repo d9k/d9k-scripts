@@ -6,7 +6,7 @@
 #WINDOW_CLASS=jetbrains-phpstorm.jetbrains-phpstorm
 WINDOW_CLASS=jetbrains-phpstorm
 
-WINDOW_NUMBER=2
+WINDOW_NUMBER=1
 
 # selecting second window
 
