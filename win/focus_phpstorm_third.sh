@@ -1,14 +1,17 @@
 #!/bin/bash
 
 #lower => better priority
-WINDOW_CLASS=jetbrains-phpstorm.jetbrains-phpstorm
-#WINDOW_CLASS=Ы
 
+# Закомментировал, т. к. в некоторых случаях неподходящий под шаблон класс jetbrains-phpstorm-debug
+#WINDOW_CLASS=jetbrains-phpstorm.jetbrains-phpstorm
+WINDOW_CLASS=jetbrains-phpstorm
+
+WINDOW_NUMBER=3
 
 # selecting second window
 
 # -x: + WIN CLASS
-WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n 3p)
+WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n ${WINDOW_NUMBER}p)
 
 echo $WMCTRL_SEARCH_OUTPUT
 
