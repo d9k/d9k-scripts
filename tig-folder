@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ARGS="$@"
+
+echo "$ARGS"
+
+if [ -z "ARGS" ]; then
+  ARGS="."
+fi
+
+tig --all .
