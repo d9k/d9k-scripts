@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
 REPO_TYPE=$(get-repo-type)
+REQUIRED_USERNAME="d9k"
 
 if [[ -z "$REPO_TYPE" ]]; then
   echo "Repo not detected"
@@ -9,6 +9,14 @@ if [[ -z "$REPO_TYPE" ]]; then
 fi
 
 if [ "$REPO_TYPE" == "git" ]; then
+
+  GIT_USERNAME=$(git config --get user.name)
+
+  if [[ "$GIT_USERNAME" != "$REQUIRED_USERNAME" ]]; then
+    echo "Autocommit available for git username \"$REQUIRED_USERNAME\" only, current username is \"$GIT_USERNAME\""
+    exit
+  fi
+
   git add . &&\
     git commit
 
