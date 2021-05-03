@@ -7,5 +7,7 @@ cat << ENDMESSAGE
 Example download:
    youtube-dl -f 137+141
 Example stream (SMplayer: Ctrl+I -> Options for MPlayer/mpv -> Options):
-   --ytdl-format=137+141"
+   --ytdl-format=137+141
+
+Video format first!
 ENDMESSAGE
