@@ -7,7 +7,7 @@ if [[ -z "$DESTINATION" ]]; then
   exit
 fi
 
-echo 1
+mkdir -p "$DESTINATION"
 
 STAGED_FILES=$(git diff --name-only --cached)
 
