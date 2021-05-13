@@ -71,7 +71,7 @@ let command = ['sh', '-c', `echo "${formula}" | bc -l`]
 
 // console.log(budgetLines);
 console.log(summandsRaw);
-console.log(summands);
+// console.log(summands);
 // console.log(summands);
 console.log(formulaWithPrefix);
 // console.log(command)
