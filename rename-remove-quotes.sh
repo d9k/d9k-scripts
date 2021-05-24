@@ -2,7 +2,7 @@
 
 function build_command() {
 cat <<- END
-rename $@ "s/'//g" *
+rename $@ "s/('|«|»)//g" *
 END
 }
 
@@ -45,6 +45,8 @@ if [[ -z "$EVAL_RESULT" ]]; then
   echo "No files to rename found"
   exit;
 fi
+
+echo "$EVAL_RESULT"
 
 if [[ "$(ask_continue rename)" != "1" ]]; then
   exit;
