@@ -202,6 +202,18 @@ TRAPEXIT() {
     pwd > $HOME/.lastdirectory
 }
 
+current-zsh-command-copy-to-xclip() {
+    zle kill-buffer
+    print -rn -- $CUTBUFFER | xclip -selection c
+    RBUFFER=$CUTBUFFER
+    zle end-of-line;
+    command -v tmux &>/dev/null && tmux display-message "current zsh command was copied to clipboard" >/dev/null
+};
+
+zle -N current-zsh-command-copy-to-xclip
+
+bindkey "^K" current-zsh-command-copy-to-xclip
+
 # This loads node version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
