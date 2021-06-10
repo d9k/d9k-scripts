@@ -10,8 +10,27 @@ if (isset($argv[1])){
 $fileText = file_get_contents($filePath);
 $decodedArray = json_decode($fileText, 1);
 
-echo json_encode(
+$json = json_encode(
   $decodedArray,
   JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
 );
+
+/**
+ * @see https://stackoverflow.com/a/31689850
+ * thanks Cláudio Silva
+ */
+$json = preg_replace_callback (
+  '/^ +/m',
+  function ($m) {
+    return str_repeat (' ', strlen ($m[0]) / 2);
+  },
+  $json
+);
+
+echo $json;
+
+//echo json_encode(
+  //$decodedArray,
+  //JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+//);
 //. "\n";
