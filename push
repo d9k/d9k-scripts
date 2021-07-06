@@ -53,7 +53,7 @@ if [ "$REPO_TYPE" == "git" ]; then
   echo "  $(git-current-branch)"
   echo
 
-  COMMITS_TO_PUSH=$(git-to-push)
+  COMMITS_TO_PUSH="$(git-to-push)"
 
   if [[ -z "$COMMITS_TO_PUSH" ]]; then
     echo "No new commits to push"
@@ -73,7 +73,9 @@ if [ "$REPO_TYPE" == "git" ]; then
   echo
 
   set -x
-  git push
+  #git push
+  # only current branch
+  git push origin HEAD
   git push origin --tags
   exit
 fi

@@ -2,6 +2,9 @@
 
 import * as path from "https://deno.land/std@0.96.0/path/mod.ts";
 import { exec } from "https://deno.land/x/execute@v1.1.0/mod.ts";
+import util from "https://deno.land/std@0.100.0/node/util.ts";
+
+util.inspect.defaultOptions.maxArrayLength = 10000;
 
 // import makeloc from 'https://deno.land/x/dirname@1.1.2/mod.ts'
 
@@ -61,6 +64,8 @@ let summands: string[] = summandsFiltered.map((summand: string) => {
 
 let formula = summands.join('')
 
+formula = formula.replace(/^\+/, '')
+
 let formulaWithPrefix = '= ' + formula
 
 // let command = `sh -c 'echo "${formula}" | bc -l'`
@@ -71,7 +76,7 @@ let command = ['sh', '-c', `echo "${formula}" | bc -l`]
 
 // console.log(budgetLines);
 console.log(summandsRaw);
-// console.log(summands);
+console.log(util.inspect(summandsRaw))
 // console.log(summands);
 console.log(formulaWithPrefix);
 // console.log(command)

@@ -1,1 +1,5 @@
-git log --branches --not --remotes
+#!/bin/bash
+
+# TODO почему-то при переправлении вывода в файл/переменную без флага `--source` название ветки пропадает
+
+git log --branches --source --not --remotes
