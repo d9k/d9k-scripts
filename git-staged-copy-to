@@ -17,3 +17,7 @@ echo -e "$STAGED_FILES"
 echo -e "$STAGED_FILES" | xargs --max-lines=1 -I{} cp --parent {} "$DESTINATION"
 #echo -e "$STAGED_FILES" | xargs --max-lines=1 -I{} echo {} "$DESTINATION"
 #ls -l | xargs -I{} echo {}
+
+echo
+echo Result:
+tree -a "$DESTINATION"

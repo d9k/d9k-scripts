@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo Use command:
-echo git clone --single-branch -b branch repo_url destination_dolder
+echo git clone --single-branch -b branch repo_url [destination_folder]
 
 function copy_to_clipboard {
   echo "Copying to clipboard: \`$@\`"

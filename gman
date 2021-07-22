@@ -1,0 +1,20 @@
+#!/bin/bash
+
+TOPIC="$1"
+MAN_SECTION="$2"
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+function help_exit() {
+  echo "Help: ${SCRIPT_NAME} TOPIC [MAN_SECTION]"
+  exit
+}
+
+YELP_ARG=man:$TOPIC
+
+if [[ -n "$MAN_SECTION" ]]; then
+  YELP_ARG="$YELP_ARG($MAN_SECTION)"
+fi
+
+yelp "$YELP_ARG" > /dev/null 2>&1
+
