@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# from https://stackoverflow.com/a/34217100/1760643, thx Michael Anderson
+
+usage () {
+    echo "usage:" $@
+    exit 127
+}
+
+die () {
+    echo $@
+    exit 128
+}
+
+if test $# -ne 2
+then
+    usage "$0 <regex> <other-branch>"
+fi
+
+KEY=$1
+MERGEBASE=$(git merge-base HEAD $2)
+
+for x in $(git log ${MERGEBASE}..HEAD -G "${KEY}" --raw | grep "^:" | awk '{ print $6 }' | sort | uniq) ; do
+    test -f $x || continue
+
+    while read -r line; do
+        if [[ "$line" = "" ]]
+        then
+            true
+        else
+            grep -H -n -F "$line" $x
+        fi
+    done <<< "$(git diff ${MERGEBASE} $x | grep "${KEY}" | grep "^+" | sed "s/^+//")"
+
+done
