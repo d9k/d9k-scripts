@@ -11,22 +11,55 @@
   max-height: 200px;
 }
 
-.audio_row:not(:last-child) {
+.wall_module .audio_row:not(:last-child) {
   height: 30px;
 }
 
-.audio_row .audio_row__play_btn {
+.wall_module .audio_row .audio_row__play_btn {
   top: 4px !important;
 }
 
-.audio_row .audio_row__inner {
+.wall_module .audio_row .audio_row__inner {
   transform: translateY(-4px);
 }
 
-.audio_row .audio_player__place {
+.wall_module .audio_row .audio_player__place {
   top: 20px;
 }
 
-.slider.slider_size_1 .slider_slide {
+.wall_module .slider.slider_size_1 .slider_slide {
   height: 4px;
+}
+
+[dir] .wall_module .wall_text,
+[dir] .wall_module.wl_postreach_wall_module .post_poster .wall_text {
+  padding-bottom: 8px;
+}
+
+[dir] .like_cont {
+  box-shadow: unset;
+  padding-top: 4px
+}
+
+.like_button_icon {
+  opacity: 0.3;
+}
+
+.like_btn:not(:hover) .like_button_label,
+.like_btn:not(:hover) .like_button_count {
+  opacity: 0.6;
+}
+
+[dir] .wall_module .wall_posts.all>.all~.all, [dir] .wall_module .wall_posts.all>.post:not(.unshown)~.post.unshown+.post:not(.unshown), [dir] .wall_module .wall_posts.all>.all~.all_ads_promoted_post, [dir] .wall_module .wall_posts.own>.own~.own, [dir] .wall_module .wall_posts.own>.post:not(.unshown)~.post.unshown+.post:not(.unshown), [dir] .wall_module .wall_posts.own>.own~.own_ads_promoted_post, [dir] .wall_module .wall_posts.postponed>.postponed~.postponed, [dir] .wall_module .wall_posts.suggested>.suggest~.suggest, [dir] .wall_module .wall_posts_search>.post~.post {
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+body {
+    background-color: #ECECED;
+}
+
+.wall_post_text {
+    font-size: 13px;
+    line-height: 1.55;
 }
