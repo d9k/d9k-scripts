@@ -1,0 +1,32 @@
+.page_post_sized_thumbs {
+  height: unset !important;
+}
+
+.page_post_sized_thumbs > a {
+  max-height: 120px;
+}
+
+.page_post_sized_thumbs > a:only-child {
+  background-size: contain !important;
+  max-height: 200px;
+}
+
+.audio_row:not(:last-child) {
+  height: 30px;
+}
+
+.audio_row .audio_row__play_btn {
+  top: 4px !important;
+}
+
+.audio_row .audio_row__inner {
+  transform: translateY(-4px);
+}
+
+.audio_row .audio_player__place {
+  top: 20px;
+}
+
+.slider.slider_size_1 .slider_slide {
+  height: 4px;
+}
