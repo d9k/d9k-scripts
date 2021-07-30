@@ -4,23 +4,29 @@ BRANCH=$(git branch --show-current)
 
 NEW_BRANCH_SUFFIX="$1"
 
-git branch --all | grep "$BRANCH-backup-" | trim | sort -V
+BACKUP_PREFIX="${BRANCH}-backup"
+
+EXISTING_BRANCHES=$(git branch --all | grep "$BACKUP_PREFIX" | trim | sort -V)
+
+echo -e "$EXISTING_BRANCHES"
 
 if [[ -z "$NEW_BRANCH_SUFFIX" ]]; then
   exit
 fi
 
-NEW_VERSION=0
-NEW_BRANCH_PREFIX=
+PREVIOUS_BRANCH=$(echo -e "$EXISTING_BRANCHES" | tail -n 1)
 
-OLD_BACKUP_FOUND=1
-while [[ -n "$OLD_BACKUP_FOUND" ]] ;do
-  ((NEW_VERSION+=1))
-  NEW_BRANCH_PREFIX="${BRANCH}-backup-${NEW_VERSION}"
-  OLD_BACKUP_FOUND=$(git branch --all | grep "$NEW_BRANCH_PREFIX")
-done
+PREVIOUS_BRANCH_PREFIX=$(echo "$PREVIOUS_BRANCH" | sed --regexp-extended "s/${BACKUP_PREFIX}-?//")
 
-NEW_BRANCH="${NEW_BRANCH_PREFIX}-${NEW_BRANCH_SUFFIX}"
+PREVIOUS_BRANCH_NUM=$(echo "$PREVIOUS_BRANCH_PREFIX" | grep --only-matching --no-filename --extended-regexp "^[0-9]+")
+
+if [[ -z "$PREVIOUS_BRANCH_NUM" ]]; then
+  PREVIOUS_BRANCH_NUM=0
+fi
+
+((NEW_BRANCH_NUM = $PREVIOUS_BRANCH_NUM + 1))
+
+NEW_BRANCH="${BACKUP_PREFIX}-${NEW_BRANCH_NUM}-${NEW_BRANCH_SUFFIX}"
 
 echo
 echo "+ $NEW_BRANCH"
