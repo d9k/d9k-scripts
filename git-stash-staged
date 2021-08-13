@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+# https://stackoverflow.com/a/59874960/1760643
+git stash -- $(git diff --staged --name-only)

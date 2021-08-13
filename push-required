@@ -5,8 +5,19 @@ REPO_TYPE=$(get-repo-type)
 #echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
   # one line per commit
-  git log --branches --not --remotes --pretty=format:'%C(dim green)(%cr)%C(reset)  %s %C(dim white)#%h%Creset'
+  #git log --branches --not --remotes --pretty=format:'%C(dim green)(%cr)%C(reset)  %s %C(dim white)#%h%Creset'
+
+  ORIGIN_BRANCH="origin/$BRANCH"
+
+  ORIGIN_BRANCH_EXISTS=$(git branch --all | grep "$ORIGIN_BRANCH")
+
+  if [[ -z "$ORIGIN_BRANCH_EXISTS" ]]; then
+    exit
+  fi
+
+  git log "origin/$BRANCH..$BRANCH"
   exit
 fi
 
