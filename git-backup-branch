@@ -37,6 +37,40 @@ if [[ -z "$NEW_BRANCH_SUFFIX_RAW" ]]; then
   exit
 fi
 
+POSSIBLE_ACTION="$1"
+
+if [[ "$POSSIBLE_ACTION" == "-d" ]]; then
+  BRANCH_TO_DELETE_NUM="$2"
+
+  if [[ -z "$BRANCH_TO_DELETE_NUM" ]]; then
+    BRANCH_TO_DELETE_NUM=1
+  fi
+
+  BRANCHES_TO_DELETE=$(echo "$EXISTING_BRANCHES" | tail -n "$BRANCH_TO_DELETE_NUM")
+
+  echo -e "\n# Branches to delete:\n"
+
+  echo "$BRANCHES_TO_DELETE"
+
+  if [[ "$(ask_continue 'DELETE THESE BRANCHES')" == "1" ]]; then
+  echo "$BRANCHES_TO_DELETE" | while read BRANCH_TO_DELETE ; do
+    ( set -x; git branch -d "$BRANCH_TO_DELETE")
+  done
+fi
+
+  exit
+fi
+
+if [[ "$POSSIBLE_ACTION" == "-h" ]]; then
+  SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+  echo -e "
+Usage: $SCRIPT_NAME [-d [BRANCHES_NUM_TO_DELETE]] [WHAT_YOU_GONNA_DO]
+
+  Without arguments: will list existing branches"
+
+  exit
+fi
+
 EXISTING_BRANCHES_FOR_COMMIT=$(git branch --contains HEAD | grep "$BACKUP_PREFIX" | trim | sort -V)
 
 if [[ -n "$EXISTING_BRANCHES_FOR_COMMIT" ]]; then
