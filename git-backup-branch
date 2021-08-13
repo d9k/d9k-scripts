@@ -26,10 +26,6 @@ BRANCH=$(git branch --show-current)
 
 NEW_BRANCH_SUFFIX_RAW="$@"
 
-NEW_BRANCH_SUFFIX_END=$(echo $NEW_BRANCH_SUFFIX_RAW | sed "s/ /-/g")
-
-NEW_BRANCH_SUFFIX="before-$NEW_BRANCH_SUFFIX_END"
-
 BACKUP_PREFIX="${BRANCH}-backup"
 
 EXISTING_BRANCHES=$(git branch | grep "$BACKUP_PREFIX" | trim | sort -V)
@@ -37,7 +33,7 @@ EXISTING_BRANCHES=$(git branch | grep "$BACKUP_PREFIX" | trim | sort -V)
 echo -e "# Existing backup branches:\n"
 echo -e "$EXISTING_BRANCHES"
 
-if [[ -z "$NEW_BRANCH_SUFFIX" ]]; then
+if [[ -z "$NEW_BRANCH_SUFFIX_RAW" ]]; then
   exit
 fi
 
@@ -68,9 +64,14 @@ fi
 
 ((NEW_BRANCH_NUM = $PREVIOUS_BRANCH_NUM + 1))
 
+NEW_BRANCH_SUFFIX_END=$(echo $NEW_BRANCH_SUFFIX_RAW | sed "s/ /-/g")
+
+NEW_BRANCH_SUFFIX="before-$NEW_BRANCH_SUFFIX_END"
+
 NEW_BRANCH="${BACKUP_PREFIX}-${NEW_BRANCH_NUM}-${NEW_BRANCH_SUFFIX}"
 
 echo
-echo "+ $NEW_BRANCH"
 
-git branch "$NEW_BRANCH"
+( set -x; git branch "$NEW_BRANCH" )
+
+#echo "+ $NEW_BRANCH"
