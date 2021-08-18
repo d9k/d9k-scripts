@@ -1,0 +1,1 @@
+git log --graph --abbrev-commit --pretty=format:'%C(dim white)%h%Creset - %s %C(dim green)(%cr) %C(blue)<%an>%Creset %C(bold yellow)%d%Creset' "$@"

@@ -14,6 +14,7 @@ if [ "$REPO_TYPE" == "git" ]; then
   ORIGIN_BRANCH_EXISTS=$(git branch --all | grep "$ORIGIN_BRANCH")
 
   if [[ -z "$ORIGIN_BRANCH_EXISTS" ]]; then
+    echo "Origin branch $ORIGIN_BRANCH doesn't exist yet"
     exit
   fi
 
