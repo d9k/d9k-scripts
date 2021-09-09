@@ -1,13 +1,19 @@
-#!/usr/bin/php
+#!/usr/bin/php -dxdebug.mode=off
 <?php
 
-$filePath = '/tmp/t';
+if (ftell(STDIN) !== false) {
+  // pipe
+  $fileText = stream_get_contents(STDIN);
+} else {
+  $filePath = '/tmp/t';
 
-if (isset($argv[1])){
-    $filePath = $argv[1];
+  if (isset($argv[1])){
+      $filePath = $argv[1];
+  }
+
+  $fileText = file_get_contents($filePath);
 }
 
-$fileText = file_get_contents($filePath);
 $decodedArray = json_decode($fileText, 1);
 
 $json = json_encode(
