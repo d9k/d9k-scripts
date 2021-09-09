@@ -7,11 +7,34 @@ if [[ -z "$REPO_TYPE" ]]; then
   exit
 fi
 
-#echo "$REPO_TYPE repo detected"
+# echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
+  echo "Current commit:"
+  git log -n 1
+  echo
 
-  ( set -x; git pull )
+  # TODO check if changed https://stackoverflow.com/a/52307619
+  # git remote update ; git status -uno
+
+  git remote update
+
+  #git status -uno
+
+  PULL_REQUIRED=$(git status -uno | grep 'Your branch is behind')
+
+  git fetch
+
+  if [[ -z "$PULL_REQUIRED" ]]; then
+    echo "Pull is not required"
+    exit;
+  fi
+
+  ( set -x; git pull)
+
+  echo
+  echo "Commit after pull:"
+  git log -n 1
   exit
 fi
 
