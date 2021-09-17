@@ -8,11 +8,6 @@
 
 RAW_ARGS=("$@")
 
-#echo "1: $1"
-#echo "2: $2"
-#echo "3: $3"
-#echo "4: $4"
-
 ARGS=()
 
 ARG_DELAY_MARKER="_"
@@ -39,10 +34,6 @@ for ((I=0; I<$RAW_ARGS_COUNT-$SKIPPED_ARGS; I++)); do
     ARGS+=("$ARG")
   fi
 done
-
-#for ((I=$(($RAW_ARGS_COUNT-$SKIPPED_ARGS)); I<$RAW_ARGS_COUNT; I++)); do
-  #echo "I: $I"
-#done
 
 #for ARG in "${ARGS[@]}"; do
   #echo "ARGN: $ARG"
