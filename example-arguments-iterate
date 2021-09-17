@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#ARGS=($@)
+
+ARGS=()
+
+
+for ARG in "$@"; do
+   echo $ARG
+   ARGS+=("$ARG")
+done
+
+for ARG in "${ARGS[@]}"; do
+   echo $ARG
+done
+
+echo "${ARGS[@]}"
