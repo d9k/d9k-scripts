@@ -27,6 +27,10 @@ for ((I=0; I<$RAW_ARGS_COUNT-$SKIPPED_ARGS; I++)); do
   if [[ "$ARG" == "$ARG_DELAY_MARKER" ]]; then
     MOVE_SOURCE_ARG_NUM=$(($RAW_ARGS_COUNT-$SKIPPED_ARGS+$SKIPPED_ARG_NUM))
     MOVING_ARG="${RAW_ARGS[$MOVE_SOURCE_ARG_NUM]}"
+    if [[ "$MOVING_ARG" == "$ARG_DELAY_MARKER" ]]; then
+      echo "Error: Not enough arguments!" >&2
+      exit 1;
+    fi
     #echo "Moving arg: $MOVING_ARG"
     ARGS+=("$MOVING_ARG")
     SKIPPED_ARG_NUM=$(($SKIPPED_ARG_NUM+1))
