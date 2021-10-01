@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# https://stackoverflow.com/a/16493707/1760643
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+show_help() {
+  echo "Help: ${SCRIPT_NAME} [FILE] [REVISION] [TARGET_DIR]"
+}
+
+# Arguments count check
+if [ "$#" -lt 3 ]; then
+  show_help
+  exit 1
+fi
+
+FILE="$1"
+REVISION="$2"
+TARGET_DIR=$(readlink -f "$3")
+
+WORK_TREE="$TARGET_DIR/$REVISION"
+
+mkdir -p "$WORK_TREE"
+
+set -x
+git --work-tree="$WORK_TREE" checkout "$REVISION" -- "$FILE"
+
+tree "$WORK_TREE"
