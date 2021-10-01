@@ -1,0 +1,14 @@
+#!/bin/bash
+
+FOLDER="$1"
+LINE="$2"
+
+if [[ -z "$FOLDER" ]]; then
+  FOLDER="."
+fi
+
+if [[ -z "$LINE" ]]; then
+  LINE="-1"
+fi
+
+lst "$FOLDER" | select-line "$LINE"
