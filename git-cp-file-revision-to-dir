@@ -18,11 +18,23 @@ FILE="$1"
 REVISION="$2"
 TARGET_DIR=$(readlink -f "$3")
 
-WORK_TREE="$TARGET_DIR/$REVISION"
+
+REVISION_DATE=$(git show -s --date=format:'%Y_%m_%d__%H_%M' --format="%cd" $REVISION)
+REVISION_FIRST_SYMBOLS=$(echo $REVISION | head -c 8)
+
+WORK_TREE="${TARGET_DIR}/${REVISION_DATE}__${REVISION_FIRST_SYMBOLS}"
 
 mkdir -p "$WORK_TREE"
 
-set -x
-git --work-tree="$WORK_TREE" checkout "$REVISION" -- "$FILE"
+git show --stat "$REVISION"
+echo
+
+( set -x; git --work-tree="$WORK_TREE" checkout "$REVISION" -- "$FILE" )
+
+echo
 
 tree "$WORK_TREE"
+
+TARGET_FILE_PATH="$WORK_TREE/$FILE"
+
+ls -l "$TARGET_FILE_PATH"
