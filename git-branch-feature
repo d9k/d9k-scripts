@@ -31,7 +31,7 @@ fi
 
 BRANCH="feature-$BRANCH_SUFFIX"
 
-BRANCH_EXISTS=$(git branch --list ${BRANCH})
+BRANCH_EXISTS=$(git branch --list --all ${BRANCH} origin/${BRANCH})
 
 if [[ -z "$BRANCH_EXISTS" ]]; then
   echo -e "Branch \"$BRANCH\" doesn't exist\n"
