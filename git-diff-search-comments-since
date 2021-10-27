@@ -15,4 +15,4 @@ COMMIT=$1
 
 git diff $COMMIT..HEAD | \
   egrep -v "^\-" | \
-  grep -E --color "^diff.*|^\+[[:space:]]*\/\/|^\+[[:space:]]*\/\*"
+  grep -E --color "^diff.*|^\+[[:space:]]*\/\/|^\+[[:space:]]*\/\*|^\+.*console."
