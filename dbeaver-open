@@ -1,0 +1,4 @@
+#!/bin/bash
+# Reason: DBeaver doesn't support relative paths
+
+dbeaver $(readlink -f "$@")
