@@ -1,39 +1,33 @@
 #!/bin/bash
 
-#lower => better priority
-titles=(
- "NetBeans IDE 8.2"
- "PyCharm"
- "Nightcode 0"
-# "Light Table"
- "ZeroBrane Studio"
- "PhpStorm"
- "IntelliJ IDEA"
- "Android Studio"
- " Atom"
+# Посмотреть список классов открытых окон:
+# wmctrl -lx
+# (чем выше, тем приоритетнее)
+WINDOW_CLASSES=(
+  "jetbrains-webstorm"
+  "DBeaver"
 )
 
-for (( ix=${#titles[@]}-1 ; ix>=0 ; ix-- )); do
-	echo "checking \"${titles[ix]}\":"
-	t=$(wmctrl -lp | grep "${titles[ix]}")
-	if [ $? -eq 1 ]; then
-		if [ "${ix}" -eq "0" ]; then
-      echo 1
-			#echo "Last one: starting NetBeans"
-			#/bin/bash -c "source /home/d9k/.rvm/scripts/rvm; /home/d9k/netbeans-8.0/bin/netbeans" &
-		fi
-	else
-		echo "focusing \"${t}\""
-		wmctrl -a "${titles[ix]}"
-		# break
+for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
+  WINDOW_CLASS="${WINDOW_CLASSES[ix]}"
+	echo "checking \"${WINDOW_CLASS}\":"
+  WINDOW_NUMBER=1
+
+  # wmctrl: -x: output WIN CLASS too
+  WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n ${WINDOW_NUMBER}p)
+
+  echo $WMCTRL_SEARCH_OUTPUT
+
+  WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
+
+  if [[ -n "$WMCTRL_NUMBER" ]]; then
+    echo "Focusing ${WMCTRL_NUMBER}"
+
+    # wmctrl:
+    # -a: activate
+    # -i: int value, not caption text
+    # -v: verbose
+    ( set -x; wmctrl -v -i -a  ${WMCTRL_NUMBER} )
     exit
   fi
 done
-
-# no more "PhpStorm" in title, selecting by class
-
-PHPSTORM_WIN_ID=$(wmctrl -lx | grep jetbrains-phpstorm.jetbrains-phpstorm | cut -d " " -f1)
-
-if [[ -n "${PHPSTORM_WIN_ID}" ]]; then
-  wmctrl -i -a ${PHPSTORM_WIN_ID}
-fi

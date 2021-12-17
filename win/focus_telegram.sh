@@ -2,7 +2,8 @@
 
 WINDOW_CLASS="Telegram"
 
-COMMAND="~/soft/Telegram/Telegram &"
+#COMMAND="~/soft/Telegram/Telegram &"
+COMMAND="flatpak run org.telegram.desktop &"
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
