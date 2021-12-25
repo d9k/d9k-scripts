@@ -5,7 +5,7 @@ WINDOW_CLASS="$1"
 COMMAND="$2"
 
 if [[ -z "$WINDOW_CLASS" ]]; then
-  echo "$WINDOW_CLASS not set"
+  echo "WINDOW_CLASS not set"
 fi
 
 # -x: + WIN CLASS
