@@ -9,66 +9,32 @@ xdotool keyup Shift_L Shift_R
 # sudo apt install libnotify-bin
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-#A=$(bash $SCRIPT_DIR/is-window-by-class-focused.sh jetbrains)
-#
-#echo "$A"
 
 IS_FOCUSED="$SCRIPT_DIR/is-window-by-class-focused.sh"
-
-# press alt+~
-function xdotool_same_app_windows_cycle {
-  xdotool keydown alt
-  xdotool key asciitilde
-  xdotool keyup alt
-}
-
-function xdotool_app_windows_cycle {
-  xdotool keydown alt
-  sleep 0.1
-  xdotool key Tab
-  sleep 0.1
-  xdotool keyup alt
-}
-
-function xdotool_tmux_next_pane {
-  xdotool key "ctrl+a"
-  xdotool key "o"
-  exit
-}
-
-function xdotool_tmux_next_window {
-  xdotool key "ctrl+a"
-  xdotool key "ctrl+a"
-  exit
-}
-
-function xdotool_send_copyq_paste {
-  xdotool key "ctrl+Super_R+v"
-  exit
-}
 
 if [[ -n "$($IS_FOCUSED Terminal)" ]]; then
   #notify-send Terminal
   #xdotool_tmux_next_pane
   xdotool_tmux_next_window
+  sh "$SCRIPT_DIR/emulate-tmux-next-window.sh"
   exit
 fi
 
 if [[ -n "$($IS_FOCUSED jetbrains)" ]]; then
   #notify-send jetbrains
   #xdotool_same_app_windows_cycle
-  xdotool_send_copyq_paste
+  sh "$SCRIPT_DIR/emulate-copyq-paste.sh"
   exit
 fi
 
 if [[ -n "$($IS_FOCUSED Textadept)" ]]; then
-  xdotool_send_copyq_paste
+  sh "$SCRIPT_DIR/emulate-copyq-paste.sh"
   exit
 fi
 
 if [[ -n "$($IS_FOCUSED google-chrome DevTools)" ]]; then
   #xdotool_same_app_windows_cycle
-  xdotool_app_windows_cycle
+  sh "$SCRIPT_DIR/emulate-app-windows-cycle.sh"
   exit
 fi
 
