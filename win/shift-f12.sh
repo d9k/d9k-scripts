@@ -22,9 +22,23 @@ function xdotool_same_app_windows_cycle {
   xdotool keyup alt
 }
 
+function xdotool_app_windows_cycle {
+  xdotool keydown alt
+  sleep 0.1
+  xdotool key Tab
+  sleep 0.1
+  xdotool keyup alt
+}
+
 function xdotool_tmux_next_pane {
   xdotool key "ctrl+a"
   xdotool key "o"
+  exit
+}
+
+function xdotool_tmux_next_window {
+  xdotool key "ctrl+a"
+  xdotool key "ctrl+a"
   exit
 }
 
@@ -33,8 +47,10 @@ function xdotool_send_copyq_paste {
   exit
 }
 
-if [[ -n "$($IS_FOCUSED google-chrome DevTools)" ]]; then
-  xdotool_same_app_windows_cycle
+if [[ -n "$($IS_FOCUSED Terminal)" ]]; then
+  #notify-send Terminal
+  #xdotool_tmux_next_pane
+  xdotool_tmux_next_window
   exit
 fi
 
@@ -50,15 +66,9 @@ if [[ -n "$($IS_FOCUSED Textadept)" ]]; then
   exit
 fi
 
-if [[ -n "$($IS_FOCUSED jetbrains)" ]]; then
-  #notify-send jetbrains
-  xdotool_same_app_windows_cycle
-  exit
-fi
-
-if [[ -n "$($IS_FOCUSED Terminal)" ]]; then
-  #notify-send Terminal
-  xdotool_tmux_next_pane
+if [[ -n "$($IS_FOCUSED google-chrome DevTools)" ]]; then
+  #xdotool_same_app_windows_cycle
+  xdotool_app_windows_cycle
   exit
 fi
 
