@@ -9,4 +9,9 @@ if [[ -n "$($IS_FOCUSED Terminal)" ]]; then
   exit
 fi
 
+if [[ -n "$($IS_FOCUSED jetbrains)" ]]; then
+  sh "$SCRIPT_DIR/emulate-ctrl-pageup.sh"
+  exit
+fi
+
 sh "$SCRIPT_DIR/emulate-ctrl-shift-tab.sh"
