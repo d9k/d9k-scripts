@@ -2,6 +2,7 @@
 set ignore-space = some
 set diff-context = 1
 set wrap-lines = 1
+# set refresh-mode = after-command
 
 # see https://github.com/jonas/tig/wiki/Bindings
 
@@ -13,12 +14,19 @@ set wrap-lines = 1
 # + - 1st line to status bar
 # ? - prompt
 # < - exit after
+# > - Re-open Tig instantly in the last displayed view after executing the command. (only in new versions of tig!)
 #bind status A !?git commit --amend
 
 bind status a !amend
 bind status A !amend
 bind status D !@?rm %(file)
-bind main P !push
+bind status B @backup-conf %(file)
+bind status H >tig %(file)
+bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+
+bind main & ?git commit --fixup=%(commit)
+bind main * ?git commit --fixup=%(commit)
+
 bind diff A +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
 bind diff P +sh -c 'echo Opening in PhpStorm: %(file); silent.sh pstorm %(file)'
 bind diff T +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
@@ -39,6 +47,7 @@ bind generic L @silent.sh git-compare-rev-dir %(commit)
 bind main T ?git checkout %(commit)
 
 bind ref T ?git checkout %(branch)
+bind main <Ctrl-s> ?!<git-squash %(commit)
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##
@@ -139,3 +148,11 @@ color   tree.directory         221     default
 #   LINE(PALETTE_4, "", COLOR_DEFAULT, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_5, "", COLOR_WHITE, COLOR_DEFAULT, 0), \
 # LINE(PALETTE_6, "", COLOR_RED, )
+
+#set main-view = \
+#  date:custom,format="%Y-%m-%d"
+
+set main-view	= line-number:no,interval=5 id:no date:custom,format="%Y-%m-%d %H:%M" author:full commit-title:yes,graph,refs,overflow=no
+
+set main-view-date = local
+set main-view-date-display = custom
