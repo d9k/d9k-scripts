@@ -1,12 +1,21 @@
 #!/usr/bin/php
 <?php
 
-$filePath = '/tmp/t';
+#$filePath = '/tmp/t';
+
+$arg1 = null;
+$fileText = null;
 
 if (isset($argv[1])){
-    $filePath = $argv[1];
+    $arg1 = $argv[1];
 }
 
-$fileText = file_get_contents($filePath);
+if ($arg1 && is_file($arg1)) {
+  $fileText = file_get_contents($arg1);
+} else {
+  $fileText = $arg1;
+}
 
-echo urldecode($fileText);
+if ($arg1) {
+  echo urldecode($fileText);
+}
