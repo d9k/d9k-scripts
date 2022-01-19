@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# https://stackoverflow.com/a/7207542/1760643
+git checkout -
