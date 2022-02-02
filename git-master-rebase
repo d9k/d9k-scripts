@@ -1,16 +1,3 @@
 #!/bin/bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-LIB_DIR="$SCRIPT_DIR/lib"
-
-source "$LIB_DIR/ask_continue.inc.sh"
-
-# TODO check if rebase required
-
-if [[ "$(ask_continue 'backup branch before rebase')" == "1" ]]; then
-  git-backup-branch master rebase
-fi
-
-git fetch
-git rebase origin/master
+git-rebase master
