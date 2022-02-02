@@ -1,4 +1,22 @@
 #!/bin/bash
 
-set -x
-git difftool --dir-diff $@
+# Meld directories comparison doesn't save files copied with `copy to right` :(
+
+BRANCH="$1"
+
+if [[ -z "$BRANCH" ]]; then
+  BRANCH="origin/master"
+fi
+
+TEMP_DIR="$(mktemp -d -t git-compare-XXXXXXXXXX)"
+
+trap 'rm -rf -- "$TEMP_DIR"' EXIT
+
+git --work-tree=${TEMP_DIR} checkout "$BRANCH" -- .
+
+set -x;
+#G_MESSAGES_DEBUG=none
+meld ${TEMP_DIR} . &>/dev/null
+
+
+

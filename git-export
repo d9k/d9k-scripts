@@ -11,7 +11,7 @@ Usage:  git-export  REV_OR_BRANCH_TO_EXPORT  DEST_FOLDER
 
 function show_dest() {
   echo
-  echo \"$DEST_FOLDER\":
+  echo "\"$DEST_FOLDER\"":
   ls -l --human-readable --classify --color $DEST_FOLDER
   echo
 }
