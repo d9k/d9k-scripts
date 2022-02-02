@@ -1,11 +1,20 @@
 #!/bin/bash
 
-if [ $# -lt 2 ]; then
-  echo "Usage: unzip-to ARCHIVE DEST_DIR"
+if [ $# -lt 1 ]; then
+  echo "Usage: unzip-to ARCHIVE [DEST_DIR]"
   exit
 fi
 
 ARCHIVE="$1"
 DEST_DIR="$2"
 
-( set -x; unzip -a "$ARCHIVE" -d "$DEST_DIR" )
+UNZIP_COMMAND=("unzip" "-a" "\"$ARCHIVE\"")
+
+if [[ -n "$DEST_DIR" ]]; then
+  UNZIP_COMMAND+=("-d" "\"$DEST_DIR\"")
+fi
+
+#UNZIP_COMMAND=$(printf ' %q' "${UNZIP_ARGS[@]}")
+
+echo "> ${UNZIP_COMMAND[@]}"
+eval "${UNZIP_COMMAND[@]}"
