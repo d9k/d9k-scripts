@@ -6,4 +6,8 @@ if [[ -z "$REV" ]]; then
   REV=HEAD
 fi
 
-git difftool --dir-diff $REV^!
+#FIXME: Error: fatal: combined diff formats ('-c' and '--cc') are not supported in directory diff mode ('-d' and '--dir-diff')
+#git difftool --dir-diff $REV^!
+
+git difftool --dir-diff $REV^1..$REV
+
