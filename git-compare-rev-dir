@@ -12,10 +12,14 @@ TEMP_DIR="$(mktemp -d -t git-compare-XXXXXXXXXX)"
 
 trap 'rm -rf -- "$TEMP_DIR"' EXIT
 
-git --work-tree=${TEMP_DIR} checkout "$BRANCH" -- .
+#TODO corrupts current workdir too!!
+#git --work-tree=${TEMP_DIR} checkout "$BRANCH" -- .
+git archive "$BRANCH" | tar --extract --directory="${TEMP_DIR}"
 
 set -x;
 #G_MESSAGES_DEBUG=none
+
+# requires
 meld ${TEMP_DIR} . &>/dev/null
 
 
