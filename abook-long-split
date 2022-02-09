@@ -42,9 +42,14 @@ fi
 FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
 FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
 
+if is not a file "$FILE_ABS_PATH"; then
+  echo "Error: \"$FILE_ABS_PATH\" is not a file!"
+  exit 10
+fi
+
 if is not a dir "$SPLIT_TO_PATH"; then
   echo "\"$SPLIT_TO_PATH\" is not a dir"
-  exit
+  exit 20
 fi
 
 cd "$SPLIT_TO_PATH"
@@ -53,7 +58,7 @@ EXISTING_FILES=$(find -maxdepth 1 -wholename "./$FILE_NAME_NO_EXT*.$FILE_EXTENSI
 if is not empty "$EXISTING_FILES"; then
   echo "Target already have file:"
   echo -e "$EXISTING_FILES"
-  exit
+  exit 30
 fi
 
 FILE_DURATION_MS=$(mediainfo --Inform="General;%Duration%" "$FILE_ABS_PATH")
@@ -63,7 +68,10 @@ let "SPLIT_BY_S=SPLIT_BY_MINUTES*60"
 
 if is le "$FILE_DURATION_S" "$SPLIT_BY_S"; then
   FILE_DURATION_READABLE=$(mediainfo_readable_duration "$FILE_ABS_PATH")
-  echo "File is too short to split: $FILE_DURATION_READABLE"
+  echo "File is too short to split: $FILE_DURATION_READABLE. Copying instead"
+  CP_TARGET_PATH="$SPLIT_TO_PATH/$FILE_NAME_WITH_EXT"
+  cp "$FILE_ABS_PATH" "$CP_TARGET_PATH"
+  ls -lh "$CP_TARGET_PATH"
   exit
 fi
 
