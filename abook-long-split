@@ -29,12 +29,12 @@ if is empty "$SPLIT_BY_MINUTES"; then
 fi
 
 FILE_ABS_PATH=$(readlink -f "$FILE_REL_PATH")
-FILE_DIR_PATH=$(dirname "$FILE_REL_PATH")
+FILE_DIR_PATH=$(dirname "$FILE_ABS_PATH")
 FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
 
 if is empty "$SPLIT_TO_PATH"; then
   SPLIT_TO_PATH="$FILE_DIR_PATH/split"
-  mkdir "$SPLIT_TO_PATH"
+  mkdir -p "$SPLIT_TO_PATH"
 fi
 
 #FILE_EXTENSION="${FILE_NAME_WITH_EXT#*.}"
@@ -75,10 +75,25 @@ if is le "$FILE_DURATION_S" "$SPLIT_BY_S"; then
   exit
 fi
 
-# 5 seconds overlap
-mp3splt -T12 -t ${SPLIT_BY_MINUTES}.00 -d "$SPLIT_TO_PATH" -O 0.5 "$FILE_ABS_PATH"
+cd "$FILE_DIR_PATH"
 
-cd "$SPLIT_TO_PATH"
-rename 's/m_00s__/_m__to__/gi' *.mp3
-rename 's/m_05s./_m./gi' *.mp3
-#rename 's/_/ /gi' *.mp3
+# 5 seconds overlap
+mp3splt \
+  \
+  `# -T: TAGS_VERSION: id3 v1 + v2` \
+  -T12 \
+  \
+  `# -t: time mode: fixed time length of file parts` \
+  -t ${SPLIT_BY_MINUTES}.00 \
+  \
+  -d "$SPLIT_TO_PATH" \
+  \
+  `# -o FORMAT: Output format:` \
+  `#     @f: input filename without extension` \
+  `#     @N2: autoincrement track tag number, 2+ digits` \
+  -o "@f-@N2-part" \
+  \
+  `# -O TIME: Overlap  split files: seconds` \
+  -O 0.5 \
+  \
+  "$FILE_ABS_PATH"
