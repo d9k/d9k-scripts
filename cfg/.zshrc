@@ -108,6 +108,26 @@ function unichr {
     fast_chr $(( t = p | c ))
     echo -n "$REPLY$s"
 }
+
+function save_current_dir_to_history {
+  DIR_HISTORY_ERRORS_PATH=~/.dir-history-errors
+
+  if [ ! $(command -v sponge) ]; then
+    echo "sponge is not installed (run sudo apt install moreutils)" >> "$DIR_HISTORY_ERRORS_PATH"
+    return;
+  fi
+
+  # save current dir to history
+  CURRENT_DIR=$(pwd)
+  DIR_HISTORY_PATH=~/.dir-history
+
+  # install sponge from moreutils
+  echo "${CURRENT_DIR}" >> "$DIR_HISTORY_PATH"
+  tail -n 100 "$DIR_HISTORY_PATH" | sponge "$DIR_HISTORY_PATH"
+  # remove duplicates
+  cat "$DIR_HISTORY_PATH" | tac | awk '!seen[$0]++' | tac | sponge "$DIR_HISTORY_PATH"
+}
+
 # prompt setup:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # %B (%b) - Start (stop) boldface mode.
@@ -189,7 +209,9 @@ function precmd {
   # (%n is $USER)
   PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}'"$_USER@${COMPUTER_NAME} "
   PROMPT="${PROMPT}${PROMPT_END}"$'\n%F{blue}> %b%f%k'
-  PROMPT="${PROMPT}"
+  #PROMPT="${PROMPT}"
+
+  save_current_dir_to_history
 }
 
 #PROMPT="%K{blue}%n@%m%k %B%F{green}%51<...<%~%} \n %F{white} %# %b%f%k"
@@ -216,7 +238,7 @@ bindkey "^K" current-zsh-command-copy-to-xclip
 
 # This loads node version manager
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use default > /dev/null
 
 # `npm install --cli ...` modules work globally
 export NODE_PATH="$NVM_DIR/node_modules"
@@ -281,3 +303,20 @@ alias -s mkv=default_video_player
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # [ -f ~/.nix-profile/etc/profile.d/nix.sh ] && source ~/.nix-profile/etc/profile.d/nix.sh
+
+C() {} # you'll want this so that you don't get a command unrecognized error
+
+preexec() {
+  tmp="";
+  if [ "${1:0:1}" = "C" ] && [ "${1:1:1}" = " " ] && [ "${1:2:1}" != " " ]; then
+    for (( i=2; i<${#1}; i++ )); do
+      tmp="${tmp}${1:$i:1}";
+    done
+    echo "$tmp" | xclip -selection clipboard;
+  fi
+}
+
+# https://velociraptor.run/ - The script runner for Deno
+if [[ -n $(command -v vr) ]]; then
+  source <(vr completions zsh) > /dev/null
+fi
