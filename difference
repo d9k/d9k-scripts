@@ -1,0 +1,14 @@
+#!/bin/bash
+
+help_and_exit () {
+    echo -e "
+Usage: difference FILE_1 FILE_2
+"
+    exit 1
+}
+
+if [ "$#" -ne 2 ]; then
+  help_and_exit
+fi
+
+grep -f "$2" --fixed-strings --line-regexp --invert-match "$1"
