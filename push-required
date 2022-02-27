@@ -5,7 +5,12 @@ REPO_TYPE=$(get-repo-type)
 #echo "$REPO_TYPE repo detected"
 
 if [ "$REPO_TYPE" == "git" ]; then
-  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+  if [[ "$BRANCH" == "HEAD" ]]; then
+    exit 2
+  fi
+
   # one line per commit
   #git log --branches --not --remotes --pretty=format:'%C(dim green)(%cr)%C(reset)  %s %C(dim white)#%h%Creset'
 
