@@ -6,7 +6,7 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 ORIGIN_BRANCH="origin/$BRANCH"
 
-ORIGIN_BRANCH_EXISTS=$(git branch --all | grep "$ORIGIN_BRANCH")
+ORIGIN_BRANCH_EXISTS=$(git branch --all | grep "$ORIGIN_BRANCH$")
 
 if [[ -z "$ORIGIN_BRANCH_EXISTS" ]]; then
   echo "Origin branch $ORIGIN_BRANCH doesn't exist yet"
