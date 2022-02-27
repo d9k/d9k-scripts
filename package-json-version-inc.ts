@@ -15,7 +15,6 @@ import editPackageJson from "https://jspm.dev/edit-package-json@0.1.36";
 const decoder = new TextDecoder('utf-8');
 
 // console.dir(fs)
-//console.log('123456');
 //console.dir(editPackageJson)
 //Deno.exit();
 
