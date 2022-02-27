@@ -128,6 +128,73 @@ function save_current_dir_to_history {
   cat "$DIR_HISTORY_PATH" | tac | awk '!seen[$0]++' | tac | sponge "$DIR_HISTORY_PATH"
 }
 
+PROMPT_SEP=' '
+
+function prompt_part_git {
+  PROMPT_PART_GIT=
+
+  PUSH_REQUIRED=$(push-required)
+  COMMIT_REQUIRED=$(commit-required)
+
+  if [[ -n "${PUSH_REQUIRED}" ]]; then
+    PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%B%F{red}push%b '
+  fi
+
+  if [[ -n "${COMMIT_REQUIRED}" ]]; then
+    PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%B%F{yellow}commit%b '
+  fi
+
+  # check git branch differs from default
+  # set default branch: git config user.defaultbranch "product/els/48_portfolio_webinar3_theme2"
+  if [[ "$(get-repo-type)" == "git" ]]; then
+
+    GIT_NAME_REQUIRED=
+
+    if [[ -z "$(git config --local --get user.name)" ]]; then
+      GIT_NAME_REQUIRED=1
+    fi
+
+    if [[ -z "$(git config --local --get user.email)" ]]; then
+      GIT_NAME_REQUIRED=1
+    fi
+
+    if [[ -n "$GIT_NAME_REQUIRED" ]]; then
+      PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%F{yellow}name?%b '
+    fi
+
+    GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
+
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+
+    if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
+      PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
+    fi
+  fi
+
+  # user and computer name
+  _USER=$USER
+
+  if [[ "$_USER" == "komarov" ]]; then
+    _USER="k${ICON_TWO_DOTS}"
+  fi
+
+  echo "$PROMPT_PART_GIT"
+}
+
+function prompt_part_node {
+  PROMPT_NODE_PART=
+
+  # nvm: check if not default node version
+  if [[ -n "${NODE_VERSION_DEFAULT}" ]]; then
+    NODE_VERSION="$(node -v)"
+    if [[ "${NODE_VERSION_DEFAULT}" != "${NODE_VERSION}" ]]; then
+      PROMPT_NODE_PART="${PROMPT_NODE_PART}${PROMPT_SEP}"$'%F{yellow}'"node_${NODE_VERSION} "
+    fi
+  fi
+
+  echo "$PROMPT_NODE_PART"
+}
+
 # prompt setup:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # %B (%b) - Start (stop) boldface mode.
@@ -143,67 +210,27 @@ function precmd {
   ICON_THREE_DOTS=$(unichr 0x2026)
   ICON_TWO_DOTS=$(unichr 0x2025)
   CURRENT_TIME=$(date +%H:%M)
-  PUSH_REQUIRED=$(push-required)
-  COMMIT_REQUIRED=$(commit-required)
+
   # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
   #PROMPT_SEP='%F{blue}| %f'
   PROMPT_START='%F{blue}# %f'
   PROMPT_END=''
-  PROMPT_SEP=' '
+
   #PROMPT="${PROMPT_START}"$'%B%F{green}%~%b ' # current path
   PROMPT="${PROMPT_START}"$'%B%F{blue}%~%b ' # current path
   PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{white}'"${CURRENT_TIME} "
 
-  if [[ -n "${PUSH_REQUIRED}" ]]; then
-    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{red}push%b '
-  fi
+  PROMPT_PART_GIT=$(prompt_part_git)
 
-  if [[ -n "${COMMIT_REQUIRED}" ]]; then
-    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}commit%b '
-  fi
+  PROMPT="${PROMPT}${PROMPT_PART_GIT}"
+
+  PROMPT_PART_NODE=$(prompt_part_node)
+
+  PROMPT="${PROMPT}${PROMPT_PART_NODE}"
 
   # nvm: check if .nvmrc file is present
   if [[ -f ".nvmrc" ]]; then
     PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}nvmrc%b '
-  fi
-
-  # nvm: check if not default node version
-  if [[ -n "${NODE_VERSION_DEFAULT}" ]]; then
-    NODE_VERSION="$(node -v)"
-    if [[ "${NODE_VERSION_DEFAULT}" != "${NODE_VERSION}" ]]; then
-      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{yellow}'"node_${NODE_VERSION} "
-    fi
-  fi
-  # check git branch differs from default
-  # set default branch: git config user.defaultbranch "product/els/48_portfolio_webinar3_theme2"
-  if [[ "$(get-repo-type)" == "git" ]]; then
-    GIT_NAME_REQUIRED=
-
-    if [[ -z "$(git config --local --get user.name)" ]]; then
-      GIT_NAME_REQUIRED=1
-    fi
-
-    if [[ -z "$(git config --local --get user.email)" ]]; then
-      GIT_NAME_REQUIRED=1
-    fi
-
-    if [[ -n "$GIT_NAME_REQUIRED" ]]; then
-      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{yellow}name?%b '
-    fi
-
-    GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
-
-    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-
-    if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
-      PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
-    fi
-  fi
-  # user and computer name
-  _USER=$USER
-
-  if [[ "$_USER" == "komarov" ]]; then
-    _USER="k${ICON_TWO_DOTS}"
   fi
 
   # (%n is $USER)
