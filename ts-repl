@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "$@"
+
+npx ts-node -r tsconfig-paths/register "$@"
