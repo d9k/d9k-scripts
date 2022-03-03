@@ -171,13 +171,6 @@ function prompt_part_git {
     fi
   fi
 
-  # user and computer name
-  _USER=$USER
-
-  if [[ "$_USER" == "komarov" ]]; then
-    _USER="k${ICON_TWO_DOTS}"
-  fi
-
   echo "$PROMPT_PART_GIT"
 }
 
@@ -190,6 +183,11 @@ function prompt_part_node {
     if [[ "${NODE_VERSION_DEFAULT}" != "${NODE_VERSION}" ]]; then
       PROMPT_NODE_PART="${PROMPT_NODE_PART}${PROMPT_SEP}"$'%F{yellow}'"node_${NODE_VERSION} "
     fi
+  fi
+
+  # nvm: check if .nvmrc file is present
+  if [[ -f ".nvmrc" ]]; then
+    PROMPT_NODE_PART="${PROMPT_NODE_PART}${PROMPT_SEP}"$'%B%F{yellow}nvmrc%b '
   fi
 
   echo "$PROMPT_NODE_PART"
@@ -228,9 +226,11 @@ function precmd {
 
   PROMPT="${PROMPT}${PROMPT_PART_NODE}"
 
-  # nvm: check if .nvmrc file is present
-  if [[ -f ".nvmrc" ]]; then
-    PROMPT="${PROMPT}${PROMPT_SEP}"$'%B%F{yellow}nvmrc%b '
+  # user and computer name
+  _USER=$USER
+
+  if [[ "$_USER" == "komarov" ]]; then
+    _USER="k${ICON_TWO_DOTS}"
   fi
 
   # (%n is $USER)
