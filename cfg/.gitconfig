@@ -61,3 +61,5 @@ date=format:%Y.%m.%d %H:%M
   keepTemporaries = false
 #  trustExitCode = false
   keepBackup = false
+[init]
+	defaultBranch = main
