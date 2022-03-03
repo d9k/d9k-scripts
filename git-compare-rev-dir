@@ -20,7 +20,7 @@ set -x;
 #G_MESSAGES_DEBUG=none
 
 # requires
-meld ${TEMP_DIR} . &>/dev/null
+meld . ${TEMP_DIR} &>/dev/null
 
 
 
