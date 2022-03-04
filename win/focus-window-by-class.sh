@@ -3,7 +3,9 @@
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
 help_exit() {
-  echo "Help: ${SCRIPT_NAME} [-n|--number WINDOW_NUMBER] WINDOW_CLASS [COMMAND]"
+  echo "Help: ${SCRIPT_NAME} [-n|--number WINDOW_NUMBER] WINDOW_CLASS [COMMAND]
+* WINDOW_CLASS: detect by running: wmctrl -lx
+  "
   exit
 }
 
