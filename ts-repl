@@ -1,5 +1,79 @@
 #!/bin/bash
 
-echo "$@"
+#NODE_OPTIONS='--experimental-repl-await'
 
-npx ts-node -r tsconfig-paths/register "$@"
+
+ARGS=()
+
+function build_args {
+  if [[ -d "node_modules/tsconfig-paths" ]]; then
+    ARGS+=("-r" "tsconfig-paths/register")
+  else
+    echo "tsconfig-paths is required for correctly working import!"
+    echo "You can install it with \`npm install --no-save tsconfig-paths\`"
+    #echo "You also need to alter tsconfig.ts to make ts-transformer-keys working"
+    echo "See https://github.com/dividab/tsconfig-paths"
+    echo
+    echo Also add to "tsconfig.json":
+
+cat <<PRE
+
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+
+PRE
+    return
+  fi
+
+  if [[ -d "node_modules/ttypescript" ]]; then
+    ARGS+=("--compiler" "ttypescript")
+  else
+    echo "Running without ttypescript."
+    echo "You can install it with \`npm install --no-save tsconfig-paths ttypescript\`"
+    echo "See https://github.com/cevek/ttypescript"
+    echo
+    return
+  fi
+
+  if [[ -d "node_modules/ts-transformer-keys" ]]; then
+    ARGS+=("-r" "ts-transformer-keys")
+  else
+    echo "Running without ts-transformer-keys."
+    echo "You can install it with \`npm install --no-save tsconfig-paths ttypescript ts-transformer-keys\`"
+    echo "You also need to alter tsconfig.ts to make ts-transformer-keys working"
+
+cat <<PRE
+
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "plugins": [
+      { "transform": "ts-transformer-keys/transformer" }
+    ]
+  },
+  // ...
+}
+
+PRE
+
+    echo "See https://github.com/kimamula/ts-transformer-keys#ttypescript"
+    echo
+    return
+  fi
+
+}
+
+build_args
+
+
+QUOTED_ARGS=
+if [[ -n "${ARGS[0]}" ]]; then
+  QUOTED_ARGS=$(printf ' %q' "${ARGS[@]}")
+fi
+
+set -x
+eval npx ts-node "${QUOTED_ARGS[@]}" "$@"
