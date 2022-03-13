@@ -1,42 +1,28 @@
 #!/bin/bash
 
+# for notify-send:
+# sudo apt install libnotify-bin
+
 sleep 0.02
 # if doesn't work, uncomment:
 #sleep 0.2
 
 xdotool keyup Shift_L Shift_R
 
-# sudo apt install libnotify-bin
+sleep 0.1
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 
-IS_FOCUSED="$SCRIPT_DIR/is-window-by-class-focused.sh"
+#IS_FOCUSED="$SCRIPT_DIR/is-window-by-class-focused.sh"
 
-if [[ -n "$($IS_FOCUSED Terminal)" ]]; then
-  #notify-send Terminal
-  #xdotool_tmux_next_pane
-  xdotool_tmux_next_window
-  sh "$SCRIPT_DIR/emulate-tmux-next-window.sh"
-  exit
-fi
+#if [[ -n "$($IS_FOCUSED Terminal)" ]]; then
+#  #notify-send Terminal
+#  #xdotool_tmux_next_pane
+#  xdotool_tmux_next_window
+#  sh "$SCRIPT_DIR/emulate-tmux-next-window.sh"
+#  exit
+#fi
 
-if [[ -n "$($IS_FOCUSED jetbrains)" ]]; then
-  #notify-send jetbrains
-  #xdotool_same_app_windows_cycle
-  sh "$SCRIPT_DIR/emulate-copyq-paste.sh"
-  exit
-fi
-
-if [[ -n "$($IS_FOCUSED Textadept)" ]]; then
-  sh "$SCRIPT_DIR/emulate-copyq-paste.sh"
-  exit
-fi
-
-if [[ -n "$($IS_FOCUSED google-chrome DevTools)" ]]; then
-  #xdotool_same_app_windows_cycle
-  sh "$SCRIPT_DIR/emulate-app-windows-cycle.sh"
-  exit
-fi
-
-xdotool key F12
+sh "$SCRIPT_DIR/emulate-multimedia-play.sh"
 
