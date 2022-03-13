@@ -1,0 +1,29 @@
+#!/bin/bash
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [ -f ~/.aliases ]; then
+    #echoerr "Loading aliases"
+    shopt -s expand_aliases
+    source ~/.aliases
+fi
+
+#set -x
+
+COMMAND="$@"
+COMMAND_TYPE=$(type "$COMMAND" 2>&1)
+IS_ALIAS=$(echo "$COMMAND_TYPE" | grep "aliased to")
+#echoerr "$COMMAND_TYPE"
+
+if [[ -n "$IS_ALIAS" ]]; then
+  #echo "$COMMAND_TYPE"
+  ALIAS_SOURCE_FULL=$(type "$@" | sed 's/^.*aliased to \(.*\)$/\1/')
+  COMMAND=$(echo $ALIAS_SOURCE_FULL | grep --only-matching --max-count=1 -E '[[:alnum:]\-]+')
+  #echoerr $COMMAND
+fi
+
+COMMAND_PATH=$(which $COMMAND)
+
+echo "$COMMAND_PATH"

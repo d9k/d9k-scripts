@@ -1,27 +1,8 @@
 #!/bin/bash
 
-#ta $(which $@)
-#silent.sh textadept $(which $@)
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-if [ -f ~/.aliases ]; then
-    echo "Loading aliases"
-    shopt -s expand_aliases
-    source ~/.aliases
-fi
-
-#set -x
-
-COMMAND="$@"
-COMMAND_TYPE=$(type "$COMMAND" 2>&1)
-IS_ALIAS=$(echo "$COMMAND_TYPE" | grep "aliased to")
-
-if [[ -n "$IS_ALIAS" ]]; then
-  #echo "$COMMAND_TYPE"
-  ALIAS_SOURCE_FULL=$(type "$@" | sed 's/^.*aliased to \(.*\)$/\1/')
-  COMMAND=$(echo $ALIAS_SOURCE_FULL | grep --only-matching --max-count=1 -E '[[:alnum:]\-]+')
-fi
-
-COMMAND_PATH=$(which "$COMMAND")
+COMMAND_PATH=$($SCRIPT_DIR/command-real-path "$1")
 
 if [[ -n "$COMMAND_PATH" ]]; then
   echo "Found command \"$COMMAND_PATH\""
