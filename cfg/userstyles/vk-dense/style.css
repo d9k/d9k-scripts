@@ -1,56 +1,69 @@
+/** unblocks play button in /audio on floating music panel when scrolling down */
+.audio_page_player_volume_wrap > :not(.audio_page_player_volume_slider) {
+    display: none;
+}
+
 .page_post_sized_thumbs {
-  height: unset !important;
+    height: unset !important;
 }
 
 .page_post_sized_thumbs > a {
-  max-height: 120px;
+    max-height: 120px;
 }
 
 .page_post_sized_thumbs > a:only-child {
-  background-size: contain !important;
-  max-height: 200px;
+    background-size: contain !important;
+    max-height: 200px;
 }
 
 .wall_module .audio_row:not(:last-child) {
-  height: 30px;
+    height: 30px;
 }
 
 .wall_module .audio_row .audio_row__play_btn {
-  top: 4px !important;
+    top: 4px !important;
 }
 
 .wall_module .audio_row .audio_row__inner {
-  transform: translateY(-4px);
+    transform: translateY(-4px);
 }
 
 .wall_module .audio_row .audio_player__place {
-  top: 20px;
+    top: 20px;
 }
 
 .wall_module .slider.slider_size_1 .slider_slide {
-  height: 4px;
+    height: 4px;
 }
 
 [dir] .wall_module .wall_text,
 [dir] .wall_module.wl_postreach_wall_module .post_poster .wall_text {
-  padding-bottom: 8px;
+    padding-bottom: 8px;
 }
 
 [dir] .like_cont {
-  box-shadow: unset;
-  padding-top: 4px
+    box-shadow: unset;
+    padding-top: 4px;
 }
 
 .like_button_icon {
-  opacity: 0.3;
+    opacity: 0.3;
 }
 
 .like_btn:not(:hover) .like_button_label,
 .like_btn:not(:hover) .like_button_count {
-  opacity: 0.6;
+    opacity: 0.6;
 }
 
-[dir] .wall_module .wall_posts.all>.all~.all, [dir] .wall_module .wall_posts.all>.post:not(.unshown)~.post.unshown+.post:not(.unshown), [dir] .wall_module .wall_posts.all>.all~.all_ads_promoted_post, [dir] .wall_module .wall_posts.own>.own~.own, [dir] .wall_module .wall_posts.own>.post:not(.unshown)~.post.unshown+.post:not(.unshown), [dir] .wall_module .wall_posts.own>.own~.own_ads_promoted_post, [dir] .wall_module .wall_posts.postponed>.postponed~.postponed, [dir] .wall_module .wall_posts.suggested>.suggest~.suggest, [dir] .wall_module .wall_posts_search>.post~.post {
+[dir] .wall_module .wall_posts.all > .all ~ .all,
+[dir] .wall_module .wall_posts.all > .post:not(.unshown) ~ .post.unshown + .post:not(.unshown),
+[dir] .wall_module .wall_posts.all > .all ~ .all_ads_promoted_post,
+[dir] .wall_module .wall_posts.own > .own ~ .own,
+[dir] .wall_module .wall_posts.own > .post:not(.unshown) ~ .post.unshown + .post:not(.unshown),
+[dir] .wall_module .wall_posts.own > .own ~ .own_ads_promoted_post,
+[dir] .wall_module .wall_posts.postponed > .postponed ~ .postponed,
+[dir] .wall_module .wall_posts.suggested > .suggest ~ .suggest,
+[dir] .wall_module .wall_posts_search > .post ~ .post {
     margin-top: 10px;
     border-radius: 8px;
 }
@@ -62,4 +75,14 @@ body {
 .wall_post_text {
     font-size: 13px;
     line-height: 1.55;
+}
+
+[dir] .wall_module .thumbed_link {
+    margin-top: 4px;
+}
+
+[dir] .wall_module:not(.search_results) .post--with-likes:not(.post_copy):not(.post_btl):not(.post_wf):not(.post_fr_likes):not(.post--withActionStatusBar):not(.post--withPostBottomAction) .wall_text .PostNoBottomSpaceAttach:last-child,
+[dir] .wall_module:not(.search_results) .post--with-likes:not(.post_copy):not(.post_btl):not(.post_wf):not(.post_fr_likes):not(.post--withActionStatusBar):not(.post--withPostBottomAction) .wall_text .thumbed_link:last-child,
+[dir] .wall_module:not(.search_results) .post--with-likes:not(.post_copy):not(.post_btl):not(.post_wf):not(.post_fr_likes):not(.post--withActionStatusBar):not(.post--withPostBottomAction) .wall_text .media_link:last-child {
+    margin-bottom: 0;
 }
