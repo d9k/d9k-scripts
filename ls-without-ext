@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ls -1 | cut -f 1 -d "." | uniq
