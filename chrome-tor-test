@@ -1,4 +1,9 @@
-chrome --private --proxy-server="socks=127.0.0.1:9050" --profile-directory="chrome-tor-profile"
+chrome \
+  --private \
+  --proxy-server="socks=127.0.0.1:9050" \
+  --user-data-dir="$HOME/temp/chrome-data-dir-tor-test" \
+  --profile-directory="Default" \
+  "https://metrics.torproject.org/rs.html"
 
 
 # NOTE
