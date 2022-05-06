@@ -166,8 +166,19 @@ function prompt_part_git {
 
     GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 
+    GIT_BRANCH_ICON="${ICON_BRANCH}"
+
+    if [[ "${GIT_BRANCH}" == "HEAD" ]]; then
+      GIT_TAG=$(git describe --exact-match 2>/dev/null)
+
+      if [[ -n "${GIT_TAG}" ]]; then
+        GIT_BRANCH="${GIT_TAG}"
+        GIT_BRANCH_ICON="${ICON_TAG}"
+      fi
+    fi
+
     if [[ "${GIT_BRANCH_DEFAULT}" != "${GIT_BRANCH}" ]]; then
-      PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%F{cyan}'"${ICON_BRANCH}  ${GIT_BRANCH} "
+      PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%F{cyan}'"${GIT_BRANCH_ICON}  ${GIT_BRANCH} "
     fi
   fi
 
@@ -193,6 +204,11 @@ function prompt_part_node {
   echo "$PROMPT_NODE_PART"
 }
 
+export ICON_BRANCH=$(unichr 0x2387)
+export ICON_THREE_DOTS=$(unichr 0x2026)
+export ICON_TWO_DOTS=$(unichr 0x2025)
+export ICON_TAG=$(unichr 0x1F3F7)
+
 # prompt setup:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # %B (%b) - Start (stop) boldface mode.
@@ -203,10 +219,8 @@ function prompt_part_node {
 # %~ - Current working directory ommitting $HOME
 # %m - The hostname up to the first ‘.’
 # see also http://aperiodic.net/phil/prompt/
+# see unicode table: https://unicodelookup.com/
 function precmd {
-  ICON_BRANCH=$(unichr 0x2387)
-  ICON_THREE_DOTS=$(unichr 0x2026)
-  ICON_TWO_DOTS=$(unichr 0x2025)
   CURRENT_TIME=$(date +%H:%M)
 
   # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
