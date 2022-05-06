@@ -1,4 +1,16 @@
 #!/bin/bash
 # Reason: DBeaver doesn't support relative paths
 
-dbeaver $(readlink -f "$@")
+FILE="$@"
+
+if [[ -z "$FILE" ]]; then
+  dbeaver
+  exit
+fi
+
+if [[ ! -f "$FILE" ]]; then
+  echo "File doesn't exist. Touching..."
+  touch "$FILE"
+fi
+
+dbeaver $(readlink -f "$FILE")
