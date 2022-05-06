@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function echo_help {
+  echo "Examples:"
+  echo "    rename-ask 's/.prog/.prg/' *.prog"
+  echo "    rename-ask 's/chapter//g' *"
+}
+
 
 function ask_continue { action_name=$1
   if [[ -z "${action_name}" ]]; then
@@ -22,6 +28,11 @@ function ask_continue { action_name=$1
   fi
   echo 1
 }
+
+if [[ -z "$1" ]]; then
+  echo_help
+  exit
+fi
 
 rename -n "$@"
 
