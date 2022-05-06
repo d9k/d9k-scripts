@@ -1,0 +1,3 @@
+[submodule "cfg/zsh-submodules/zsh-yarn-completions"]
+	path = cfg/zsh-submodules/zsh-yarn-completions
+	url = https://github.com/chrisands/zsh-yarn-completions

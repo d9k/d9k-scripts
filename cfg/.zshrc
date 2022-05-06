@@ -357,7 +357,18 @@ preexec() {
   fi
 }
 
+source_if_exists() { SRC="$1"
+  if [[ -f "$SRC" ]]; then
+    source "$SRC"
+  fi
+}
+
 # https://velociraptor.run/ - The script runner for Deno
 if [[ -n $(command -v vr) ]]; then
   source <(vr completions zsh) > /dev/null
 fi
+
+# https://github.com/rvm/ubuntu_rvm
+source_if_exists /etc/profile.d/rvm.sh
+
+source_if_exists ~/scripts/cfg/zsh-submodules/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh
