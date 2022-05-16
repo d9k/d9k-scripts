@@ -1,3 +1,6 @@
 [submodule "cfg/zsh-submodules/zsh-yarn-completions"]
 	path = cfg/zsh-submodules/zsh-yarn-completions
 	url = https://github.com/chrisands/zsh-yarn-completions
+[submodule "submodules/shuf-by-aapjeisbaas"]
+	path = submodules/shuf-by-aapjeisbaas
+	url = https://gitlab.com/aapjeisbaas/shuf.git
