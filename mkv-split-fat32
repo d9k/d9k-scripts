@@ -1,0 +1,56 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# human-readable conditions by qzb
+source "$SCRIPT_DIR/is"
+
+SPLITTED_VOLUME_SIZE=3800m
+
+FILE_REL_PATH="$1"
+
+if is empty "$FILE_REL_PATH"; then
+  echo "Usage: $SCRIPT_NAME file_name [target_dir=./split]"
+  exit
+fi
+
+SPLIT_TO_PATH="$2"
+
+FILE_ABS_PATH=$(readlink -f "$FILE_REL_PATH")
+FILE_DIR_PATH=$(dirname "$FILE_ABS_PATH")
+FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
+
+if is empty "$SPLIT_TO_PATH"; then
+  SPLIT_TO_PATH="$FILE_DIR_PATH/split"
+  mkdir -p "$SPLIT_TO_PATH"
+fi
+
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+if is not a file "$FILE_ABS_PATH"; then
+  echo "Error: \"$FILE_ABS_PATH\" is not a file!"
+  exit 10
+fi
+
+if is not a dir "$SPLIT_TO_PATH"; then
+  echo "\"$SPLIT_TO_PATH\" is not a dir"
+  exit 20
+fi
+
+cd "$SPLIT_TO_PATH"
+EXISTING_FILES=$(find -maxdepth 1 -wholename "./$FILE_NAME_NO_EXT*.$FILE_EXTENSION")
+
+if is not empty "$EXISTING_FILES"; then
+  echo "Target already have file:"
+  echo -e "$EXISTING_FILES"
+  exit 30
+fi
+
+# TODO exit if file is too little to split
+
+mkvmerge \
+  --split "$SPLITTED_VOLUME_SIZE" \
+  "$FILE_ABS_PATH" \
+  --output "${SPLIT_TO_PATH}/$FILE_NAME_NO_EXT-%02d.${FILE_EXTENSION}"
