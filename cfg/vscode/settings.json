@@ -1,0 +1,72 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "workbench.tree.indent": 20,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.list.horizontalScrolling": true,
+    "workbench.hover.delay": 100,
+    "workbench.iconTheme": "vs-nomo-dark",
+    "editor.wordWrap": "on",
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.blame.highlight.enabled": false,
+    "gitlens.blame.format": "${author|14?} ${agoOrDateShort|8-}",
+    "gitlens.hovers.currentLine.enabled": false,
+    "editor.lineHeight": 1.65,
+    "workbench.colorTheme": "Material Theme",
+    "theme-by-language.themes": {
+        "markdown": "Slime",
+        "typescriptreact": "Material Theme"
+    },
+    "workbench.colorCustomizations": {
+        "[Community Material Theme Palenight High Contrast]": {
+            "editor.background": "#1b150c"
+        },
+        "[Slime]": {
+            // "editor.background": "#131c24",
+            // "editor.background": "#1b292e",
+            "editor.background": "#121b1f",
+            // "sideBar.background": "#1b2020",
+            "sideBar.background": "#192022",
+            // "statusBar.background": "#282e2f",
+            // "statusBar.background": "#131c24",
+            //"editorPane.background": "#1e2324",
+            // "editorPane.background": "#131c24",
+            //"panel.background": "#1e2324",
+            // "panel.background": "#131c24",
+            // "editorGutter.background": "#1e2324",
+            // "editorGutter.background": "#131c24",
+            "editorGutter.background": "#121b1f",
+            // "editorGutter.foldingControlForeground": "#c5c5c5",
+            "editorGutter.foldingControlForeground": "#6fd6ff",
+            //"breadcrumb.background": "#1e2324",
+            //"panel.background": "#1e2324",
+            // "panel.background": "#131c24",
+            // "titleBar.activeBackground": "#282e2f",
+            // "titleBar.inactiveBackground": "#282e2f",
+            // "titleBar.inactiveBackground": "#FF2e2f",
+            // "editorGroupHeader.tabsBackground": "#131c24",
+            "editorGroupHeader.tabsBackground": "#192022",
+            "tab.activeBackground": "#3a4547",
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Slime]": {
+            "textMateRules": [
+                {
+                    "scope": [
+                        "markup.inline.raw.markdown",
+                        "text.html.markdown markup.fenced_code.block.markdown",
+                        "markup.inline.raw.string.markdown"
+                    ],
+                    "settings": {
+                        "foreground": "#819774"
+                    }
+                },
+            ]
+        }
+    },
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.enabled": false,
+    "editor.scrollbar.verticalScrollbarSize": 8,
+    "editor.scrollbar.vertical": "visible"
+}
