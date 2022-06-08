@@ -1,0 +1,19 @@
+#!/bin/bash
+
+FILE_REL_PATH="$1"
+
+if [[ -z "$FILE_REL_PATH" ]]; then
+  echo "audio file name required"
+  exit
+fi
+
+FILE_DIR_PATH=$(dirname "$FILE_REL_PATH")
+FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
+
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+TARGET_PATH="${FILE_DIR_PATH}/${FILE_NAME_NO_EXT}.mp3"
+
+set -x
+ffmpeg -i "$FILE_REL_PATH" -vn -ar 44100 -ac 1 -b:a 96k  "$TARGET_PATH"
