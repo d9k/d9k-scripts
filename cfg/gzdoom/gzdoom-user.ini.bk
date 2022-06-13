@@ -84,8 +84,6 @@ Path=/media/d9k/Media2/inst/ga/doom/GZDoom_HD_Texture_pack/GZDoom/Mods/DHTP-2019
 Path=/media/d9k/Media2/inst/ga/doom/GZDoom_HD_Texture_pack/GZDoom/Mods/JFO_D.pk3
 Path=/media/d9k/Media2/inst/ga/doom/GZDoom_HD_Texture_pack/GZDoom/Mods/R_Hud_Stuff_v1.pk3
 Path=/media/d9k/Media2/inst/ga/doom/GZDoom_HD_Texture_pack/GZDoom/Mods/NeuralUpscale2x_v0.95.pk3
-# Causes "level was saved with a different number of acs modules" error
-#Path=/media/d9k/Media2/ga/doom/LastWeapon.pk3
 
 [doom.id.Autoload]
 
@@ -766,24 +764,24 @@ sv_smartaim=0
 0=slot 0
 -=sizedown
 Equals=sizeup
-#Tab=togglemap
-Tab=turn180
-E=+forward
+Tab=togglemap
+W=+forward
+E=+use
 M=messagemode
 LeftBracket=invprev
 RightBracket=invnext
 Enter=invuse
-S=+moveleft
-D=+back
-F=+moveright
+A=+moveleft
+S=+back
+D=+moveright
 `=toggleconsole
-Shift=+speed
-Alt=+crouch
+Ctrl=+speed
+Shift=+crouch
 \=+showscores
 #X=crouch
 Space=+jump
 #CapsLock=toggle cl_run
-CapsLock=togglemap
+CapsLock=turn180
 F1=menu_help
 F2=menu_save
 F3=menu_load
@@ -823,16 +821,8 @@ LTrigger=+altattack
 RTrigger=+attack
 Pad_A=+use
 Pad_Y=+jump
-Q=slot 5
-W=slot 4
-R=slot 3
-Z=slot 6
-T=slot 2
-G=+reload
-V=+zoom
-C=slot 1
-K=weapdrop
-B=+use
+R=+reload
+Z=+zoom
 
 [Doom.DoubleBindings]
 
@@ -910,8 +900,8 @@ L=toggleflashlight_bind
 [Doom.SteveFlashlightKeySection.DoubleBindings]
 
 [Doom.MeleeKey.Bindings]
-H=QuickPunch_Bind
-Ctrl=QuickPunch_Bind
+Q=QuickPunch_Bind
+G=Gquick
 Mouse2=Gquick
 
 [Doom.MeleeKey.DoubleBindings]
