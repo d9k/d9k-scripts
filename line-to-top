@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: line-to-top FILE LINE_PATTERN"
+  exit
+fi
+
+FILE="$1"
+LINE_PATTERN="$2"
+
+TOP_LINES=$(cat "$FILE"| grep -F "$LINE_PATTERN")
+
+BOTTOM_LINES=$(cat "$FILE"| grep -F -v "$LINE_PATTERN")
+
+echo -e "$TOP_LINES"
+echo -e "$BOTTOM_LINES"
