@@ -1,3 +1,10 @@
 #!/bin/bash
 
-git log "$@" --pretty="format:%at %C(yellow)commit %H%Creset\nAuthor: %an <%ae>\nDate: %ad\n\n %s\n" | sort -r | cut -d" " -f2- | sed -e "s/\\\n/\\`echo -e '\n\r'`/g" | tr -d '\15\32' | less -R
+# %d - ref names, masters and tags
+
+git log "$@" --pretty="format:%at %C(yellow)commit %H%Creset\nAuthor: %an <%ae>\nDate: %ad\nBranches:%d\n\n%s\n" | \
+  sort -r | \
+  cut -d" " -f2- | \
+  sed -e "s/\\\n/\\`echo -e '\n\r'`/g" | \
+  tr -d '\15\32' | \
+  less -R
