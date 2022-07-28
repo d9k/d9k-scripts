@@ -9,6 +9,10 @@ fi
 
 # echo "$REPO_TYPE repo detected"
 
+function git_last_commit_from_branch {
+  git log -1 --pretty=format:"%h" --abbrev=16 "$@" 2> /dev/null
+}
+
 if [ "$REPO_TYPE" == "git" ]; then
   echo "Current commit:"
   git log -n 1
@@ -25,16 +29,38 @@ if [ "$REPO_TYPE" == "git" ]; then
 
   #PULL_REQUIRED=$(git status -uno | grep 'Your branch is behind')
 
-  git fetch
+  #git fetch
 
   PULL_REQUIRED=$(git status -uno | grep 'Your branch is behind')
 
   BRANCH_DIVERGED=$(git status -uno | grep 'different commits\|have diverged')
 
-  if [[ -z "$PULL_REQUIRED" ]]; then
-    echo "Pull is not required"
 
-    if [[ -n "$BRANCH_DIVERGED" ]]; then
+  if [[ -z "$PULL_REQUIRED" ]]; then
+
+    if [[ -z "$BRANCH_DIVERGED" ]]; then
+
+      BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+      LOCAL_COMMIT=$(git_last_commit_from_branch $BRANCH)
+      REMOTE_COMMIT=$(git_last_commit_from_branch origin/$BRANCH)
+
+      if [[ -n "$REMOTE_COMMIT" ]]; then
+        if [[ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]]; then
+          echo "Local and origin last commits differ ($LOCAL_COMMIT and $REMOTE_COMMIT)"
+
+          echo
+          echo "Origin commit:"
+          git log -n 1 origin/$BRANCH
+          echo
+
+          BRANCH_DIVERGED="Branch diverged"
+        fi
+      fi
+    fi
+
+    if [[ -z "$BRANCH_DIVERGED" ]]; then
+      echo "Pull is not required"
+    else
       echo "$BRANCH_DIVERGED"
       echo "Resolve conflicts manually"
 
