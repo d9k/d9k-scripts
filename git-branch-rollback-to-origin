@@ -36,7 +36,7 @@ echo -e "# Commit at origin/$BRANCH:\n"
 git log -n 1 origin/$BRANCH
 echo
 
-ASK_RESULT=$(ask_continue "roll back \"$BRANCH\" branch to \"$BRANCH\"/origin and LOSE CHANGES")
+ASK_RESULT=$(ask_continue "roll back \"$BRANCH\" branch to \"$BRANCH/origin\" and LOSE CHANGES")
 
 if [[ "$ASK_RESULT" != "1" ]]; then
   exit
