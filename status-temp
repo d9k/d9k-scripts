@@ -1,3 +1,9 @@
 #!/bin/sh
 
-sensors | grep -A 3 PCI | grep temp | grep -v ^k | head -n 1 | awk '{print $2}'
+RESULT=$(sensors | grep -A 3 PCI | grep temp | grep -v ^k | head -n 1 | awk '{print $2}')
+
+if [ -z "$RESULT" ]; then
+  RESULT="$(sensors | grep "CPU:" | awk '{print $2}')"
+fi
+
+echo "$RESULT"
