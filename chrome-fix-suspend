@@ -5,4 +5,5 @@
 chrome  \
   --use-cmd-decoder=validating \
   --use-gl=desktop \
-  --allow-outdated-plugins
+  --allow-outdated-plugins \
+  --wm-window-animations-disabled
