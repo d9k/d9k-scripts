@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# https://askubuntu.com/a/1275573/156571
+
+rocketchat-desktop \
+  --use-cmd-decoder=validating \
+  --use-gl=desktop \
+  --allow-outdated-plugins \
+  --wm-window-animations-disabled \
+  --force-dark-mode

@@ -1,44 +1,46 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 #lower => better priority
 
 # Закомментировал, т. к. в некоторых случаях неподходящий под шаблон класс jetbrains-phpstorm-debug
 #WINDOW_CLASS=jetbrains-phpstorm.jetbrains-phpstorm
-WINDOW_CLASS_PATTERN="rocket\.chat"
+WINDOW_CLASS="rocket.chat"
 
-APP=rocketchat-desktop
+COMMAND="$HOME/scripts/rocket-chat-fix-suspend"
 
-WINDOW_NUMBER=1
+# WINDOW_NUMBER=1
 
 # selecting second window
 
 # -x: + WIN CLASS
-WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS_PATTERN} | sed -n ${WINDOW_NUMBER}p)
+# WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS_PATTERN} | sed -n ${WINDOW_NUMBER}p)
 
-echo "Found: $WMCTRL_SEARCH_OUTPUT"
+# echo "Found: $WMCTRL_SEARCH_OUTPUT"
 
-WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
+# WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
 
-if [[ -z "$WMCTRL_NUMBER" ]]; then
+# if [[ -z "$WMCTRL_NUMBER" ]]; then
 
-  if [[ -z "$APP" ]]; then
-    echo "No app defined. Exitting"
-    exit
-  else
-    echo "Running app $APP"
-    "$APP" &
-  fi
+#   if [[ -z "$APP" ]]; then
+#     echo "No app defined. Exitting"
+#     exit
+#   else
+#     echo "Running app $APP"
+#     $APP &
+#   fi
 
 
-else
-  # echo ${WMCTRL_NUMBER}
+# else
+#   # echo ${WMCTRL_NUMBER}
 
-  set -x
-  # -v: verbose
-  # -i: int value, not caption text
-  # -a: activate
-  wmctrl -v -i -a  ${WMCTRL_NUMBER}
-fi
+#   set -x
+#   # -v: verbose
+#   # -i: int value, not caption text
+#   # -a: activate
+#   wmctrl -v -i -a  ${WMCTRL_NUMBER}
+# fi
 
 
 
@@ -53,3 +55,5 @@ fi
 #  wmctrl -a "${titles[ix]}"
 #  break
 #  fi
+
+${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS" "$COMMAND"
