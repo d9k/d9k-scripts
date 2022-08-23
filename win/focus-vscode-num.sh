@@ -19,6 +19,7 @@ WMCTRL_SEARCH_OUTPUT=$(\
   grep ${WINDOW_CLASS} | \
   # исключения \
   grep -v "diary (Workspace)" | \
+  grep -v "scripts (Workspace)" | \
   grep -v "textbook (Workspace)" | \
   sed -n ${WINDOW_NUMBER}p \
 )
