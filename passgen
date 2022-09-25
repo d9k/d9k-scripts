@@ -18,7 +18,10 @@ function one_password {
   PASS_LETTERS=$( \
     echo "$WORDS" | \
     `#uppercase` sed 's/./\u&/' | \
-    `#join` sed -z 's/\n//g'\
+    `#join` sed -z 's/\n/. /g'\
+
+    #`#uppercase` sed 's/./\u&/' | \
+    #`#join` sed -z 's/\n//g'\
   )
 
   #PASS_NUMBERS=$(\

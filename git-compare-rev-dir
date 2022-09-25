@@ -5,7 +5,7 @@
 BRANCH="$1"
 
 if [[ -z "$BRANCH" ]]; then
-  BRANCH="origin/master"
+  BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 fi
 
 TEMP_DIR="$(mktemp -d -t git-compare-XXXXXXXXXX)"

@@ -1,0 +1,1 @@
+--ytdl-format="bestvideo[height<=?1440]+bestaudio/best" --sub-scale-by-window=no --sub-scale=1.25 --sub-margin-y=30 --sub-border-size=4 --sub-border-color=0.0/0.0/0.27/0.85 --sub-spacing=1.6

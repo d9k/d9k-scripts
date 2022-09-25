@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -x
+
+chrome \
+  --allow-outdated-plugins \
+  --user-data-dir="$HOME/temp/chrome-data-dir-no-cors" \
+  --profile-directory="Default" \
+  --disable-web-security \
+  --disable-site-isolation-trials \
+  --disable-gpu \
+  --allow-running-insecure-content
+

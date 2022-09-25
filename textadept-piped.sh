@@ -11,5 +11,7 @@ fi
 # TODO problems with passing spaces in args!
 #silent.sh textadept "$INPUT";
 
+#export LD_PRELOAD=
+
 textadept "$INPUT" 2>&1 &>/dev/null &
 disown
