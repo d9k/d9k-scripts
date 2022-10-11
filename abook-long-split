@@ -10,7 +10,7 @@ function mediainfo_readable_duration { FILE_PATH="$1"
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# human-readable conditions by qzb
+# human-readable conditions by qzb (https://github.com/qzb/is.sh)
 source "$SCRIPT_DIR/is"
 
 FILE_REL_PATH="$1"
