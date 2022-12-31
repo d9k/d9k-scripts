@@ -7,7 +7,7 @@ help_exit() {
   echo "Help: ${SCRIPT_NAME} [-n|--number WINDOW_NUMBER] WINDOW_CLASS [COMMAND]
 * WINDOW_CLASS: detect by running: wmctrl -lx
   "
-  exit
+  exit 1
 }
 
 WINDOW_NUMBER=1
@@ -54,6 +54,8 @@ WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
 if [[ -z "$WMCTRL_NUMBER" ]]; then
   if [[ -n "$COMMAND" ]]; then
     eval $COMMAND
+  else
+    exit 2
   fi
   exit
 fi
