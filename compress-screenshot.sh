@@ -7,7 +7,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source "$SCRIPT_DIR/is"
 
 MAX_ORIGINAL_ALLOWED_SIZE_KB=500
-QUALITY=96
+QUALITY=94
 
 function echoerr {
   printf "%s\n" "$*" >&2;
