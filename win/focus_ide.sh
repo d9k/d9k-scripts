@@ -5,6 +5,7 @@
 # (чем выше, тем приоритетнее)
 WINDOW_CLASSES=(
   "jetbrains-webstorm"
+  "jetbrains-idea"
   "DBeaver"
 )
 
