@@ -1,9 +1,15 @@
+#!/bin/bash
+
+# export PAGE="https://metrics.torproject.org/rs.html"
+
+export PAGE="https://bridges.torproject.org/bridges?transport=obfs4"
+
 chrome \
   --private \
   --proxy-server="socks=127.0.0.1:9050" \
   --user-data-dir="$HOME/temp/chrome-data-dir-tor-test" \
   --profile-directory="Default" \
-  "https://metrics.torproject.org/rs.html"
+  "$PAGE"
 
 
 # NOTE
