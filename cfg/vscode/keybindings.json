@@ -120,5 +120,27 @@
     {
         "key": "ctrl+p",
         "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+alt+w",
+        "command": "workbench.action.closeOtherEditors"
+    },
+    {
+        "key": "ctrl+alt+v",
+        "command": "workbench.action.splitEditorRight"
+    },
+    {
+        "key": "ctrl+alt+h",
+        "command": "workbench.action.splitEditorDown"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+k",
+        "command": "-editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
     }
 ]
