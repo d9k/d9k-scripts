@@ -142,5 +142,10 @@
         "key": "ctrl+shift+k",
         "command": "-editor.action.deleteLines",
         "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.openLink",
+        "when": "editorTextFocus && editorLangId == 'markdown'"
     }
 ]
