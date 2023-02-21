@@ -148,7 +148,6 @@
                 </dpadbutton>
             </dpad>
             <trigger index="5">
-                <deadZone>2000</deadZone>
                 <throttle>positivehalf</throttle>
                 <triggerbutton index="2">
                     <slots>
@@ -160,7 +159,6 @@
                 </triggerbutton>
             </trigger>
             <trigger index="6">
-                <deadZone>2000</deadZone>
                 <throttle>positivehalf</throttle>
                 <triggerbutton index="2">
                     <setselect>2</setselect>
@@ -427,6 +425,18 @@
                         </slot>
                     </slots>
                 </dpadbutton>
+                <dpadbutton index="4">
+                    <slots>
+                        <slot>
+                            <code>0x1000021</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                        <slot>
+                            <code>0x1000011</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
                 <dpadbutton index="2">
                     <slots>
                         <slot>
@@ -435,6 +445,18 @@
                         </slot>
                         <slot>
                             <code>0x1000001</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </dpadbutton>
+                <dpadbutton index="1">
+                    <slots>
+                        <slot>
+                            <code>0x1000021</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                        <slot>
+                            <code>0x1000010</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -451,6 +473,22 @@
                     <setselectcondition>while-held</setselectcondition>
                 </triggerbutton>
             </trigger>
+            <button index="10">
+                <slots>
+                    <slot>
+                        <code>0x1000035</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="7">
+                <slots>
+                    <slot>
+                        <code>0x1000036</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
             <button index="5">
                 <slots>
                     <slot>
@@ -571,6 +609,42 @@
                     </slot>
                     <slot>
                         <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="4">
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x57</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="1">
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x56</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="2">
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x43</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
