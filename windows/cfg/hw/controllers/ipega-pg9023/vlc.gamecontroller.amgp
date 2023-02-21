@@ -503,6 +503,78 @@
                     </slot>
                 </slots>
             </button>
+            <button index="3">
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x2d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>400</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>500</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>500</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>500</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>500</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
         </set>
     </sets>
 </gamecontroller>
