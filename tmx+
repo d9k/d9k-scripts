@@ -1,0 +1,6 @@
+#/bin/bash
+
+# Attach one more time to existing tmux session, don't detach current terminals from tmux
+
+tmux select-pane -t 0
+tmux attach-session -t 'general'
