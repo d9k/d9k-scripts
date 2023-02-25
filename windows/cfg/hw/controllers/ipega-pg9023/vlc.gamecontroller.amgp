@@ -19,13 +19,12 @@
     <sets>
         <set index="1">
             <stick index="1">
-                <stickbutton index="7">
+                <stickbutton index="3">
                     <turbointerval>200</turbointerval>
-                    <turbomode>gradient</turbomode>
                     <useturbo>true</useturbo>
                     <slots>
                         <slot>
-                            <code>0x1000012</code>
+                            <code>0x1000014</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -42,12 +41,13 @@
                         </slot>
                     </slots>
                 </stickbutton>
-                <stickbutton index="3">
+                <stickbutton index="7">
                     <turbointerval>200</turbointerval>
+                    <turbomode>gradient</turbomode>
                     <useturbo>true</useturbo>
                     <slots>
                         <slot>
-                            <code>0x1000014</code>
+                            <code>0x1000012</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -66,10 +66,10 @@
                 </stickbutton>
             </stick>
             <stick index="2">
-                <stickbutton index="7">
+                <stickbutton index="3">
                     <slots>
                         <slot>
-                            <code>0x1000012</code>
+                            <code>0x1000014</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -85,10 +85,10 @@
                         </slot>
                     </slots>
                 </stickbutton>
-                <stickbutton index="3">
+                <stickbutton index="7">
                     <slots>
                         <slot>
-                            <code>0x1000014</code>
+                            <code>0x1000012</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -106,12 +106,12 @@
                 </stickbutton>
             </stick>
             <dpad index="1">
-                <dpadbutton index="8">
+                <dpadbutton index="2">
                     <turbointerval>300</turbointerval>
                     <useturbo>true</useturbo>
                     <slots>
                         <slot>
-                            <code>0x1000012</code>
+                            <code>0x1000014</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -126,12 +126,12 @@
                         </slot>
                     </slots>
                 </dpadbutton>
-                <dpadbutton index="2">
+                <dpadbutton index="8">
                     <turbointerval>300</turbointerval>
                     <useturbo>true</useturbo>
                     <slots>
                         <slot>
-                            <code>0x1000014</code>
+                            <code>0x1000012</code>
                             <mode>keyboard</mode>
                         </slot>
                     </slots>
@@ -148,6 +148,7 @@
                 </dpadbutton>
             </dpad>
             <trigger index="5">
+                <deadZone>2000</deadZone>
                 <throttle>positivehalf</throttle>
                 <triggerbutton index="2">
                     <slots>
@@ -159,16 +160,125 @@
                 </triggerbutton>
             </trigger>
             <trigger index="6">
+                <deadZone>2000</deadZone>
                 <throttle>positivehalf</throttle>
                 <triggerbutton index="2">
                     <setselect>2</setselect>
                     <setselectcondition>while-held</setselectcondition>
                 </triggerbutton>
             </trigger>
-            <button index="11">
+            <button index="1">
                 <slots>
                     <slot>
-                        <code>0x46</code>
+                        <code>0x20</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="2">
+                <slots>
+                    <slot>
+                        <code>0x1000009</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="3">
+                <slots>
+                    <slot>
+                        <code>0x2d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>300</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>300</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>300</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>300</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x3d</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>300</code>
+                        <mode>hold</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="4">
+                <slots>
+                    <slot>
+                        <code>0x1000004</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>900</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000003</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>100</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000004</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="5">
+                <slots>
+                    <slot>
+                        <code>0x1000000</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>1500</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000023</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000033</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="7">
+                <slots>
+                    <slot>
+                        <code>0x1000023</code>
                         <mode>keyboard</mode>
                     </slot>
                     <slot>
@@ -176,7 +286,31 @@
                         <mode>hold</mode>
                     </slot>
                     <slot>
-                        <code>0x100003a</code>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x57</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="8">
+                <slots>
+                    <slot>
+                        <code>0x1000001</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>1000</code>
+                        <mode>hold</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000001</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -278,10 +412,10 @@
                     </slot>
                 </slots>
             </button>
-            <button index="7">
+            <button index="11">
                 <slots>
                     <slot>
-                        <code>0x1000023</code>
+                        <code>0x46</code>
                         <mode>keyboard</mode>
                     </slot>
                     <slot>
@@ -289,139 +423,7 @@
                         <mode>hold</mode>
                     </slot>
                     <slot>
-                        <code>0x1000021</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x57</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="8">
-                <slots>
-                    <slot>
-                        <code>0x1000001</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>1000</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000021</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000001</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="5">
-                <slots>
-                    <slot>
-                        <code>0x1000000</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>1500</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000023</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000033</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="3">
-                <slots>
-                    <slot>
-                        <code>0x2d</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>300</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x3d</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>300</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x3d</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>300</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x3d</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>300</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x3d</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>300</code>
-                        <mode>hold</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="4">
-                <slots>
-                    <slot>
-                        <code>0x1000004</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>900</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000003</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>100</code>
-                        <mode>hold</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000021</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000004</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="1">
-                <slots>
-                    <slot>
-                        <code>0x20</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="2">
-                <slots>
-                    <slot>
-                        <code>0x1000009</code>
+                        <code>0x100003a</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -429,12 +431,11 @@
         </set>
         <set index="2">
             <stick index="2">
-                <stickbutton index="7">
+                <stickbutton index="3">
+                    <turbointerval>400</turbointerval>
+                    <turbomode>gradient</turbomode>
+                    <useturbo>true</useturbo>
                     <slots>
-                        <slot>
-                            <code>0x1000020</code>
-                            <mode>keyboard</mode>
-                        </slot>
                         <slot>
                             <code>0x1000001</code>
                             <mode>keyboard</mode>
@@ -442,6 +443,8 @@
                     </slots>
                 </stickbutton>
                 <stickbutton index="5">
+                    <turbointerval>400</turbointerval>
+                    <useturbo>true</useturbo>
                     <slots>
                         <slot>
                             <code>0x1000021</code>
@@ -457,8 +460,15 @@
                         </slot>
                     </slots>
                 </stickbutton>
-                <stickbutton index="3">
+                <stickbutton index="7">
+                    <turbointerval>400</turbointerval>
+                    <turbomode>gradient</turbomode>
+                    <useturbo>true</useturbo>
                     <slots>
+                        <slot>
+                            <code>0x1000020</code>
+                            <mode>keyboard</mode>
+                        </slot>
                         <slot>
                             <code>0x1000001</code>
                             <mode>keyboard</mode>
@@ -466,6 +476,9 @@
                     </slots>
                 </stickbutton>
                 <stickbutton index="1">
+                    <turbointerval>400</turbointerval>
+                    <turbomode>gradient</turbomode>
+                    <useturbo>true</useturbo>
                     <slots>
                         <slot>
                             <code>0x1000021</code>
@@ -483,14 +496,10 @@
                 </stickbutton>
             </stick>
             <dpad index="1">
-                <dpadbutton index="8">
+                <dpadbutton index="2">
                     <slots>
                         <slot>
                             <code>0x1000021</code>
-                            <mode>keyboard</mode>
-                        </slot>
-                        <slot>
-                            <code>0x1000020</code>
                             <mode>keyboard</mode>
                         </slot>
                         <slot>
@@ -511,10 +520,14 @@
                         </slot>
                     </slots>
                 </dpadbutton>
-                <dpadbutton index="2">
+                <dpadbutton index="8">
                     <slots>
                         <slot>
                             <code>0x1000021</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                        <slot>
+                            <code>0x1000020</code>
                             <mode>keyboard</mode>
                         </slot>
                         <slot>
@@ -537,7 +550,20 @@
                 </dpadbutton>
             </dpad>
             <trigger index="5">
+                <deadZone>2000</deadZone>
                 <throttle>positivehalf</throttle>
+                <triggerbutton index="2">
+                    <slots>
+                        <slot>
+                            <code>0x1000021</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                        <slot>
+                            <code>0x31</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </triggerbutton>
             </trigger>
             <trigger index="6">
                 <deadZone>2000</deadZone>
@@ -547,70 +573,26 @@
                     <setselectcondition>while-held</setselectcondition>
                 </triggerbutton>
             </trigger>
-            <button index="10">
+            <button index="1">
                 <slots>
                     <slot>
-                        <code>0x1000035</code>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x56</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
             </button>
-            <button index="7">
+            <button index="2">
                 <slots>
                     <slot>
-                        <code>0x1000036</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                </slots>
-            </button>
-            <button index="5">
-                <slots>
-                    <slot>
-                        <code>0x1000022</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x52</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>300</code>
-                        <mode>pause</mode>
-                    </slot>
-                    <slot>
-                        <code>0x4c</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x4f</code>
+                        <code>0x1000021</code>
                         <mode>keyboard</mode>
                     </slot>
                     <slot>
                         <code>0x43</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x4b</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x2e</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x42</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x41</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x54</code>
-                        <mode>keyboard</mode>
-                    </slot>
-                    <slot>
-                        <code>0x1000004</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
@@ -699,26 +681,134 @@
                     </slot>
                 </slots>
             </button>
-            <button index="1">
+            <button index="5">
                 <slots>
                     <slot>
-                        <code>0x1000021</code>
+                        <code>0x1000022</code>
                         <mode>keyboard</mode>
                     </slot>
                     <slot>
-                        <code>0x56</code>
+                        <code>0x52</code>
                         <mode>keyboard</mode>
                     </slot>
-                </slots>
-            </button>
-            <button index="2">
-                <slots>
                     <slot>
-                        <code>0x1000021</code>
+                        <code>300</code>
+                        <mode>pause</mode>
+                    </slot>
+                    <slot>
+                        <code>0x4c</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x4f</code>
                         <mode>keyboard</mode>
                     </slot>
                     <slot>
                         <code>0x43</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x4b</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x2e</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x42</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x41</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x54</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000004</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="7">
+                <slots>
+                    <slot>
+                        <code>0x1000036</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="8">
+                <turbointerval>200</turbointerval>
+                <useturbo>true</useturbo>
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000023</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000015</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="9">
+                <turbointerval>200</turbointerval>
+                <useturbo>true</useturbo>
+                <slots>
+                    <slot>
+                        <code>0x1000021</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000023</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000013</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="10">
+                <slots>
+                    <slot>
+                        <code>0x1000035</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                </slots>
+            </button>
+            <button index="11">
+                <slots>
+                    <slot>
+                        <code>0x1000022</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x42</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>200</code>
+                        <mode>pause</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000014</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000014</code>
+                        <mode>keyboard</mode>
+                    </slot>
+                    <slot>
+                        <code>0x1000004</code>
                         <mode>keyboard</mode>
                     </slot>
                 </slots>
