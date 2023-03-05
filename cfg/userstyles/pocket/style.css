@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+article.reader {
+    max-width: 850px !important;
+}
+
+main > article > article {
+    padding-right: 25px !important;
+}
+
+main > article > article {
+    font-family: 'Roboto', sans-serif, "Verdana", "Arial" !important;
+    font-weight: 300;
+    letter-spacing: 1.9px;
+}
+
+p {
+    line-height: 190%;
+}
+
+p,
+main > article > article ul {
+    text-align: justify !important;
+    margin-bottom: 48px !important;
+}
+
