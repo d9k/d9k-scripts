@@ -508,6 +508,18 @@
                         </slot>
                     </slots>
                 </stickbutton>
+                <stickbutton index="1">
+                    <slots>
+                        <slot>
+                            <code>0x1000021</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                        <slot>
+                            <code>0x5a</code>
+                            <mode>keyboard</mode>
+                        </slot>
+                    </slots>
+                </stickbutton>
                 <stickbutton index="7">
                     <turbointerval>100</turbointerval>
                     <useturbo>true</useturbo>
@@ -698,7 +710,7 @@
                 </slots>
             </button>
             <button index="2">
-                <turbointerval>100</turbointerval>
+                <turbointerval>160</turbointerval>
                 <useturbo>true</useturbo>
                 <slots>
                     <slot>
