@@ -4,6 +4,7 @@ SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 FILE_LAST_TIMESTAMP=".compress-screenshots-last-timestamp"
+FILE_LOCK_COMPRESSION=".compress-screenshots-lock"
 
 # human-readable conditions by qzb (https://github.com/qzb/is.sh)
 source "$SCRIPT_DIR/is"
@@ -23,6 +24,17 @@ DIR_ABS_PATH=$(readlink -f "$DIR_REL_PATH")
 
 cd "$DIR_ABS_PATH"
 
+
+if [[ -f "$FILE_LOCK_COMPRESSION" ]]; then
+  ERR="Can't compress screenshots folder! Remove \"$FILE_LOCK_COMPRESSION\" from the directory"
+  echo $ERR;
+  notify-send -u normal "$ERR"
+
+  exit
+fi
+
+touch "$FILE_LOCK_COMPRESSION"
+
 LAST_TIMESTAMP=$(cat "$FILE_LAST_TIMESTAMP")
 
 if [[ -z "$LAST_TIMESTAMP" ]]; then
@@ -41,3 +53,5 @@ for FILE in $(ls -rt *.png); do
         echo "Skipping \"$FILE\""
     fi
 done;
+
+rm "$FILE_LOCK_COMPRESSION"

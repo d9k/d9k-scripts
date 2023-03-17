@@ -20,9 +20,3 @@ fi
 
 kill -9 "$PID"
 killall vlc
-
-sleep 1
-
-cd /home/d9k/soft/sndcopy
-#/usr/bin/bash ./sndcpy >> /var/log/sndcpy.log &
-/usr/bin/bash ./sndcpy >> /var/log/sndcpy.log 2>&1 &
