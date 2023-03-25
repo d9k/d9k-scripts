@@ -19,4 +19,5 @@ if [[ "$(ask_continue 'backup branch before rebase')" == "1" ]]; then
 fi
 
 git fetch
-git rebase origin/"$BRANCH"
+#git rebase origin/"$BRANCH"
+git rebase -i --autostash origin/"$BRANCH"
