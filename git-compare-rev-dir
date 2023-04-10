@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Meld directories comparison doesn't save files copied with `copy to right` :(
 
 BRANCH="$1"
@@ -20,7 +22,18 @@ set -x;
 #G_MESSAGES_DEBUG=none
 
 # requires
-meld . ${TEMP_DIR} &>/dev/null
 
+"${SCRIPTS_DIR}/git-rev-has-parent" > /dev/null
+
+if [[ "$?" == "0" ]]; then
+  COMPARING_WITH_PARENT=1
+fi
+
+if [[ -n "$COMPARING_WITH_PARENT" ]]; then
+  echo "Compare with parent mode: target branch is on LEFT"
+  meld ${TEMP_DIR} . &>/dev/null
+else
+  meld . ${TEMP_DIR} &>/dev/null
+fi
 
 
