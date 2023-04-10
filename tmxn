@@ -5,7 +5,7 @@ tmux split-window -v -p 25 'zsh'
 # tmux split-window -h
 # tmux new-window 'mutt'
 tmux select-pane -t 0
-tmx-neww
+tmx-neww -n "sys"
 tmx-neww
 tmx-neww
 tmux select-window -t 1
