@@ -3,3 +3,5 @@ node_modules/
 package-lock.json
 *.deprecated
 *.bk
+cfg/obsidian/plugins/obsidian-icon-shortcodes
+cfg/obsidian/workspace.json

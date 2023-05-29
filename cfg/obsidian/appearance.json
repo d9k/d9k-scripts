@@ -1,0 +1,11 @@
+{
+  "accentColor": "",
+  "textFontFamily": "Ubuntu Mono",
+  "interfaceFontFamily": "Ubuntu Mono",
+  "monospaceFontFamily": "Ubuntu Mono",
+  "cssTheme": "Things",
+  "enabledCssSnippets": [
+    "line-height",
+    "headers-colors"
+  ]
+}
