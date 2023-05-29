@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# https://unix.stackexchange.com/questions/184684/audio-play-not-starting-at-beginning
+pavucontrol &
