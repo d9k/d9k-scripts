@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ARG="$1"
+
+# https://askubuntu.com/a/1181157/156571
+# https://github.com/ddccontrol/ddccontrol/issues/20
+
+
+DEV="dev:/dev/i2c-4"
+
+ddccontrol -r 0x10 "$DEV" 2>/dev/null | grep "Brightness" | grep -o "/.*/" | grep -E -o "[0-9]+"

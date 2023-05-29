@@ -1,0 +1,38 @@
+#!/bin/bash
+
+BRIGHT_SCRIPT="$HOME/scripts/bright"
+BACKLIGHT_GET_SCRIPT="$HOME/scripts/win/backlight-get"
+
+ARG="$1"
+
+# https://askubuntu.com/a/1181157/156571
+# https://github.com/ddccontrol/ddccontrol/issues/20
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [[ -z "$ARG" ]]; then
+  echoerr "Backlight brighness argument not provided! Examples: +5 / -1 / 75"
+  exit 1;
+fi
+
+ARG_BEGIN="${ARG:0:1}"
+
+DEV="dev:/dev/i2c-4"
+
+if [ "$ARG_BEGIN" = "+" ]; then
+  ddccontrol -r 0x10 -W "$ARG" "$DEV"
+  "$BRIGHT_SCRIPT" 1
+elif [ "$ARG_BEGIN" = "-" ]; then
+  BACKLIGHT_VALUE=$("$BACKLIGHT_GET_SCRIPT")
+
+  if [ $BACKLIGHT_VALUE -gt 1 ]; then
+    ddccontrol -r 0x10 -W "$ARG" "$DEV"
+  else
+    "$BRIGHT_SCRIPT" -
+  fi
+else
+  "$BRIGHT_SCRIPT" 1
+  ddccontrol -r 0x10 -w "$ARG" "$DEV"
+fi
