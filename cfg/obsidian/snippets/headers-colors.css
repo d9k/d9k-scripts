@@ -1,17 +1,13 @@
-/*.markdown-preview-view h1 {*/
-    /*color: #FFF785;*/
-/*}*/
-/**/
-/*.cm-header-1 {*/
-    /*color: #FFF785;*/
-/*}*/
-
-.markdown-preview-view h2 {
-    color: #F7F3BC;
+.inline-title {
+    color: #17798F;
 }
 
-.cm-header-2 {
-    color: #F7F3BC;
+.markdown-preview-view h1 {
+    color: #367064;
+}
+
+.cm-header-1 {
+    color: #367064;
 }
 
 .markdown-preview-view h3 {
@@ -20,4 +16,12 @@
 
 .cm-header-3 {
     color: #a691d4;
+}
+
+.markdown-preview-view h4 {
+    color: #F7F3BC;
+}
+
+.cm-header-4 {
+    color: #F7F3BC;
 }

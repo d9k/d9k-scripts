@@ -1,4 +1,5 @@
 {
   "showLineNumber": true,
-  "tabSize": 4
+  "tabSize": 4,
+  "showInlineTitle": false
 }
