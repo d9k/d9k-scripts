@@ -1,0 +1,3 @@
+.quiet-outline [class*=level-]:not(.level-1) .n-tree-node-content {
+  font-size: 0.85em;
+}

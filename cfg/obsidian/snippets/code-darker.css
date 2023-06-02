@@ -1,0 +1,18 @@
+.cm-inline-code {
+    /*background-color: #000000 !important;*/
+    background-color: #171f26 !important;
+    /*background-color: #282C34 !important;*/
+    outline: 2px solid #171f26 !important;
+    border: 2px solid #171f26;
+    border-radius: 2px;
+    color: #6dbf77 !important;
+}
+
+body {
+    --code-normal: #6dbf77;
+    --code-block-alt-bg: #171f26 !important;
+}
+
+.cm-inline-code, .cm-s-obsidian .HyperMD-codeblock, .markdown-preview-view.markdown-preview-view :is(pre, code) {
+    --code-block-alt-bg: #171f26 !important;
+}

@@ -3,9 +3,14 @@
   "textFontFamily": "Ubuntu Mono",
   "interfaceFontFamily": "Ubuntu Mono",
   "monospaceFontFamily": "Ubuntu Mono",
-  "cssTheme": "Things",
+  "cssTheme": "",
   "enabledCssSnippets": [
     "line-height",
-    "headers-colors"
-  ]
+    "headers-colors",
+    "code-darker",
+    "background-darker",
+    "outline-font-smaller",
+    "headers-smaller"
+  ],
+  "baseFontSize": 16
 }

@@ -1,0 +1,9 @@
+body {
+    /*--background-primary: #052220;*/
+    --background-primary: #061817;
+    --background-primary-alt: #10171c;
+    --background-secondary: #010e0c;
+    --background-secondary-alt: #000 !important;
+    --titlebar-background-focused: #000 !important;
+}
+

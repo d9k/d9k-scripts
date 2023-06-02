@@ -10,6 +10,14 @@
     color: #367064;
 }
 
+.markdown-preview-view h2 {
+    color: #aaa;
+}
+
+.cm-header-2 {
+    color: #b9b9b9;
+}
+
 .markdown-preview-view h3 {
     color: #a691d4;
 }
