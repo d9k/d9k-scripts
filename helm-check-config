@@ -1,0 +1,46 @@
+#!/bin/bash
+
+ENV="$1"
+
+DIRNAME=$(basename "$PWD")
+
+
+if [[ -z "$ENV" ]]; then
+    ENV="production"
+fi
+
+if [[ -d '.helm' ]]; then
+    cd ".helm"
+fi
+
+cat <<EOF > "values-override.yaml"
+global:
+  env: "$ENV"
+EOF
+
+if [[ ! -f "Chart.yaml" ]]; then
+  DUMMY_CHART=1
+  cat <<EOF > "Chart.yaml"
+name: "$DIRNAME"
+version: 0.1
+EOF
+fi
+
+cat <<EOF > "templates/99-werf-dummy.yaml"
+  {{- define "werf_container_image" }}
+  {{- end }}
+  {{- define "werf_container_env" }}
+  {{- end }}
+EOF
+
+( set -x; helm template . --debug -f values-override.yaml )
+
+# Cleaning
+
+rm "values-override.yaml"
+
+if [[ -n "$DUMMY_CHART" ]]; then
+  rm "Chart.yaml"
+fi
+
+rm "templates/99-werf-dummy.yaml"
