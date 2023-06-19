@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FILE="$1"
+
+if [[ -z "$1" ]]; then
+  echo "File not provided"
+  exit 1;
+fi
+
+cat "$1" | sort --version-sort | uniq -cd | trim | sort --version-sort
