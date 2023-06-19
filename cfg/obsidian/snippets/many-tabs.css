@@ -1,0 +1,38 @@
+body {
+  /*--tab-font-size: var(--font-ui-smaller);*/
+  --tab-font-size: 15px;
+}
+
+.workspace .mod-root .workspace-tab-header-spacer {
+    flex-shrink: 0;
+    flex-basis: 10px;
+}
+
+.workspace .mod-root .workspace-tab-header-container {
+  display: table;
+}
+
+.workspace .mod-root .workspace-tab-header-container-inner {
+  flex-wrap: wrap;
+}
+
+.workspace .mod-root .workspace-tab-header {
+    flex: none !important;
+}
+
+.titlebar .workspace-tab-header-tab-list,
+.titlebar .workspace-tab-header-new-tab,
+.mod-root .workspace-tab-header-tab-list,
+.mod-root .workspace-tab-header-new-tab {
+    display: table-cell;
+}
+
+.workspace .mod-root .workspace-tab-header {
+    width: unset;
+    max-width: var(--tab-width);
+}
+
+.workspace-tab-header-inner {
+    width: unset;
+}
+

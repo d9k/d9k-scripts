@@ -5,5 +5,10 @@
   "txt-as-md-obsidian",
   "obsidian-quiet-outline",
   "recent-files-obsidian",
-  "heading-level-indent"
+  "heading-level-indent",
+  "hover-external-link",
+  "obsidian-image-toolkit",
+  "obsidian-trim-whitespace",
+  "cycle-in-sidebar",
+  "spoiler-block-obsidian"
 ]

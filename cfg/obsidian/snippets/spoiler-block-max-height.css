@@ -1,0 +1,20 @@
+/** smaller */
+.block-language-spoiler-block {
+  font-size: var(--font-ui-smaller);
+}
+
+/** show whitespace */
+.block-language-spoiler-block .spoiler,
+.block-language-spoiler-block .spoiler-show {
+  white-space: pre;
+}
+
+
+/** max-height */
+.block-language-spoiler-block {
+  overflow: hidden;
+}
+
+.block-language-spoiler-block .spoiler {
+  max-height: 80px;
+}

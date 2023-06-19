@@ -2,8 +2,9 @@
     /*background-color: #000000 !important;*/
     background-color: #171f26 !important;
     /*background-color: #282C34 !important;*/
-    outline: 2px solid #171f26 !important;
-    border: 2px solid #171f26;
+    /* outline causes cursor disappear: */
+    /*outline: 2px solid #171f26 !important;*/
+    border: 4px solid #171f26;
     border-radius: 2px;
     color: #6dbf77 !important;
 }
@@ -15,4 +16,10 @@ body {
 
 .cm-inline-code, .cm-s-obsidian .HyperMD-codeblock, .markdown-preview-view.markdown-preview-view :is(pre, code) {
     --code-block-alt-bg: #171f26 !important;
+}
+
+
+.markdown-rendered details pre {
+    color: #6dbf77;
+    font-size: var(--font-smallest);
 }
