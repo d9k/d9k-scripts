@@ -8,7 +8,7 @@ xdotool sleep 0.2 key --clearmodifiers "Control_L+c"
 
 ${SCRIPT_DIR}/focus_terminal.sh
 
-xdotool sleep 0.2 key --clearmodifiers "Control_L+Shift+v"
-xdotool sleep 0.2 key --clearmodifiers "Return"
-
+xdotool sleep 1.5 key --clearmodifiers "Control_L+Shift+v"
+xdotool sleep 0.4 key --clearmodifiers "Return"
+xdotool sleep 0.4 key --clearmodifiers "Return"
 
