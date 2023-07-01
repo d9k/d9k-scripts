@@ -200,5 +200,21 @@
       "key": "B"
     }
   ],
-  "editor:toggle-bold": []
+  "editor:toggle-bold": [],
+  "file-explorer:reveal-active-file": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "W"
+    }
+  ],
+  "file-explorer:move-file": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "M"
+    }
+  ]
 }
