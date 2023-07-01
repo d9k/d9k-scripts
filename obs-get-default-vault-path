@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# obs is CLI for Obsidian,
+# see https://yakitrak.github.io/obs/
+obs print-default | grep -Po "path:\s*\K.*"
