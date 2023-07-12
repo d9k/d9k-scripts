@@ -1,0 +1,35 @@
+#!/bin/bash
+
+export DISPLAY=:0
+
+if [[ "$EUID" = 0 ]]; then
+    echo "Check access: user is already root"
+else
+    sudo -k # make sure to ask for password on next sudo
+    if sudo true; then
+        echo "Check access: sudo password ok"
+    else
+        echo "Error: Check access: wrong sudo password!"
+        exit 1
+    fi
+fi
+
+export WAYLAND_DISPLAY=weston-socket-waydroid
+
+weston \
+  --width=1400 \
+  --height=900 \
+  --socket=$WAYLAND_DISPLAY \
+  --backend=x11-backend.so &
+
+sudo waydroid container restart
+waydroid session stop
+waydroid session start &
+sudo waydroid shell wm set-fix-to-user-rotation enabled
+
+# echo
+# echo "===== Run \`waydroid show-full-ui\` in weston window ====="
+# echo
+
+# will run in weston because of WAYLAND_DISPLAY variable was set
+waydroid show-full-ui
