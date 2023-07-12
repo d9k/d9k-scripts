@@ -1,6 +1,22 @@
 body {
   /*--tab-font-size: var(--font-ui-smaller);*/
-  --tab-font-size: 15px;
+  --tab-font-size: 14px;
+  /*--tab-text-color: #aaa;*/
+  --tab-text-color: #fff;
+  --tab-text-color-active: #fff;
+  --tab-outline-color: #fff;
+}
+
+/** TODO */
+.workspace-tab-header-inner-title {
+  color: #fff !important;
+  letter-spacing: 0.05em;
+}
+
+.workspace-tab-header.is-active {
+  /*text-decoration: underline;*/
+  border: 1px solid #aaa;
+  border-bottom: none;
 }
 
 .workspace .mod-root .workspace-tab-header-spacer {
