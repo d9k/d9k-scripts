@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# https://stackoverflow.com/questions/36079884/count-git-commits-per-period
+
+GIT_CMD="git rev-list --count --all --no-merges"
+SINCE="$1"
+
+TOTAL=$($GIT_CMD)
+IN_MONTH=$($GIT_CMD --since="1.month")
+IN_YEAR=$($GIT_CMD --since="1.year")
+
+echo "Commits number (in 1 month / in 1 year / total):"
+echo "$IN_MONTH/$IN_YEAR/$TOTAL"
+
+if [ -n "$SINCE" ]; then
+  echo
+  echo "Commits since $SINCE:"
+  $GIT_CMD --since="$SINCE"
+fi
