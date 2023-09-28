@@ -15,7 +15,7 @@ AUTH_TOKEN=$(\
   awk -v FS="('Authorization: Bearer |')" '{print $2}'\
 )
 
-echo -e "AUTH_TOKEN=\"$AUTH_TOKEN\"" | xclip -selection c
+echo -e "export AUTH_TOKEN=\"$AUTH_TOKEN\"" | xclip -selection c
 
 # CLIPBOARD=$(xsel -ob)
 # $(echo -e "$CLIPBOARD")
