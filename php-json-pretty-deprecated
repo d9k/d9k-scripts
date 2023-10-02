@@ -6,6 +6,9 @@
  * https://jqlang.github.io/jq/
  */
 
+$fileText = '';
+$filePath = '';
+
 //if (ftell(STDIN) !== false) {
 if (posix_isatty(STDIN) == false) {
 //echo 'read pipe';
