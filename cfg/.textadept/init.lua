@@ -87,7 +87,15 @@ for k,v in pairs(ru_codes) do
 end
 
 events.connect(events.INITIALIZED, function()
- textadept.session.load(textadept.session.default_session)
+ -- textadept.session.load(textadept.session.default_session)
+
+ local default_session = textadept.session.default_session
+ if not default_session then
+   default_session = _USERHOME .. (not CURSES and '/session' or '/session_term')
+ end
+
+-- TODO fix crash!
+-- textadept.session.load(default_session)
 end, 1)
 
 -- # File associations with lexers
@@ -245,14 +253,16 @@ end
 
 function action_json_pp()
   fn_error_to_status_bar('json pp', function ()
-    local json_pp_script_path = '/home/d9k/scripts/php-json-pretty'
+    --local json_pp_script_path = '/home/d9k/scripts/php-json-pretty-deprecated'
+    local jq_location = '/usr/bin/jq'
 
     local sel_text = require_selected_text()
 
     tmp_file_autoremove_callback(sel_text, function(tmp_filename)
 
       local cmd_output_text = shell_cmd_run_and_get_output(
-        {json_pp_script_path, tmp_filename},
+        --{json_pp_script_path, tmp_filename},
+        {jq_location, '"."', tmp_filename},
         true
       )
 
@@ -260,6 +270,25 @@ function action_json_pp()
     end)
   end)
 end
+
+function action_sort_lines()
+  fn_error_to_status_bar('sort_lines', function ()
+    local script_path = '/home/d9k/scripts/php-sort-lines.php'
+
+    local sel_text = require_selected_text()
+
+    tmp_file_autoremove_callback(sel_text, function(tmp_filename)
+
+      local cmd_output_text = shell_cmd_run_and_get_output(
+        {script_path, tmp_filename},
+        true
+      )
+
+      buffer:replace_sel(cmd_output_text)
+    end)
+  end)
+end
+
 
 function action_url_decode()
   fn_error_to_status_bar('url decode', function ()
@@ -314,6 +343,7 @@ menu_tools[#menu_tools + 1] = {'Add demarcation ----- line before', action_add_d
 menu_tools[#menu_tools + 1] = {'JSON pretty print', action_json_pp}
 menu_tools[#menu_tools + 1] = {'Enclose backticks', action_enclose_backticks}
 menu_tools[#menu_tools + 1] = {'Enclose backticks multiline', action_enclose_backticks_multiline}
+menu_tools[#menu_tools + 1] = {'Sort lines', action_sort_lines}
 menu_tools[#menu_tools + 1] = {'Url decode', action_url_decode}
 
 --keys.ad = enclose_backticks
