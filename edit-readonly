@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# https://www.faqforge.com/linux/how-to-prevent-that-a-user-deletes-a-file-owned-by-root-in-his-home-directory
+
+FILE="$1"
+
+if [[ -z "$FILE" ]]; then
+  echo "Provide a file"
+  exit 1;
+fi
+
+sudo chattr -i "$FILE"
+sudo nano "$FILE"
+sudo chattr +i "$FILE"
+
+lsattr "$FILE"
