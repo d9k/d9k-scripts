@@ -1,3 +1,11 @@
+/*  */
+
+.quiet-outline [class*=level-] .n-tree-node-content,
 .quiet-outline [class*=level-]:not(.level-1) .n-tree-node-content {
   font-size: 0.85em;
+  line-height: 1.3em;
+}
+
+.quiet-outline .n-tree-node-content__text p {
+  padding: 0.4em 0;
 }

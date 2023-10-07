@@ -3,19 +3,22 @@
     background-color: #171f26 !important;
     /*background-color: #282C34 !important;*/
     /* outline causes cursor disappear: */
-    /*outline: 2px solid #171f26 !important;*/
     color: #6dbf77 !important;
     /*transition-timing-function: ease-in;*/
     /*transition: border-width 1s;*/
+
     border: 0 solid #171f26;
     border-top-width: 4px;
     border-bottom-width: 4px;
+    border-left: 1px solid #171f26;
+    border-right: 1px solid #171f26;
 }
 
 /*.cm-line:not(.cm-active) .cm-inline-code {*/
-.cm-widgetBuffer + .cm-inline-code {
-    border-left: 4px solid #171f26;
-    border-right: 4px solid #171f26;
+.cm-widgetBuffer + .cm-inline-code:not(.cm-formatting) {
+    border-radius: 2px;
+    border-left: 10px solid #171f26;
+    border-right: 10px solid #171f26;
 }
 
 body {

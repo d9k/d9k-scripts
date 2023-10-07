@@ -52,3 +52,14 @@ body {
     width: unset;
 }
 
+.workspace .mod-root .workspace-tab-header .workspace-tab-header-inner-close-button {
+  position: absolute;
+  right: 0;
+  background-color: #000;
+  border-radius: 10px;
+}
+
+.workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-button {
+  background-color: transparent;
+  position: static;
+}
