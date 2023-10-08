@@ -198,6 +198,12 @@
         "Mod"
       ],
       "key": "B"
+    },
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "Q"
     }
   ],
   "editor:toggle-bold": [],
@@ -232,6 +238,22 @@
         "Mod"
       ],
       "key": "W"
+    }
+  ],
+  "obsidian-quiet-outline:quiet-outline": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "2"
+    }
+  ],
+  "file-explorer:open": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "1"
     }
   ]
 }
