@@ -1,0 +1,27 @@
+#!/bin/bash
+
+TMP_DIR=$(mktemp -d -t git-first-commit-date-XXXXXXXXXX)
+
+REPO_URL="$1"
+MAIN_BRANCH="$2"
+
+if [[ -z "$REPO_URL" ]]; then
+  echo "Error: no repo URL provided"
+  exit 1
+fi
+
+if [[ -z "$MAIN_BRANCH" ]]; then
+  MAIN_BRANCH="main"
+fi
+
+cd ${TMP_DIR}
+
+set -x
+
+# https://stackoverflow.com/a/60952814/1760643
+git clone --filter=blob:none --no-checkout --single-branch --branch "$MAIN_BRANCH" "${REPO_URL}" .
+
+tig --reverse
+
+chmod -R u+w ${TMP_DIR}/.git
+rm -r ${TMP_DIR}
