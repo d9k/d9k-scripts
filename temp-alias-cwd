@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ALIAS="$1"
+
+DIR="$(pwd)"
+
+OUTPUT="$HOME/.temp_aliases"
+
+export "$ALIAS"="$DIR"
+
+echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
+
+tail "$OUTPUT"
