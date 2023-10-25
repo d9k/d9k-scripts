@@ -11,6 +11,8 @@ ssh-agent -s > "$OUT"
 
 
 printf "export " >> "$OUT"
+
+#gnome-keyring-daemon --replace --components=pkcs11,secrets,ssh >> "$OUT"
 gnome-keyring-daemon --replace --components=pkcs11,secrets >> "$OUT"
 
 echo "$OUT:"
