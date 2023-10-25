@@ -1,0 +1,24 @@
+#!/bin/bash
+
+OUT="$HOME/.keyring-fix"
+
+sudo killall ssh-agent
+sudo killall gnome-keyring-daemon
+
+ssh-agent -s > "$OUT"
+
+. "$OUT"
+
+
+printf "export " >> "$OUT"
+gnome-keyring-daemon --replace --components=pkcs11,secrets >> "$OUT"
+
+echo "$OUT:"
+cat "$OUT"
+
+echo
+echo "Run"
+echo
+echo ". \"$OUT\""
+echo
+echo "in other consoles"
