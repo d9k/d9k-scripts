@@ -11,19 +11,26 @@
 }
 
 .markdown-preview-view h2 {
-    color: #aaa;
+    color: #d2ed91;
+    /*font-style: italic;*/
 }
 
 .cm-header-2 {
-    color: #b9b9b9;
+    color: #d2ed91;
+    font-style: italic;
 }
 
 .markdown-preview-view h3 {
-    color: #a691d4;
+    /*color: #a691d4;*/
+    color: #a886f1;
+    font-weight: 400;
+    font-size: 1.18em
 }
 
 .cm-header-3 {
-    color: #a691d4;
+    color: #a886f1;
+    font-weight: 400;
+    font-size: 1.18em
 }
 
 .markdown-preview-view h4 {
@@ -32,4 +39,9 @@
 
 .cm-header-4 {
     color: #F7F3BC;
+}
+
+.HyperMD-header.HyperMD-header-1,
+.HyperMD-header.HyperMD-header-2 {
+  transform: translateX(-10px);
 }
