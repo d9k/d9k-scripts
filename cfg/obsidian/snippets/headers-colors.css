@@ -2,7 +2,10 @@ body {
   --h1-color: #367064;
   --h2-color: #d2ed91;
   --h3-color: #a886f1;
-  --h4-color: #F7F3BC;
+  /*--h4-color: #F7F3BC;*/
+  --h4-color: #1f7481;
+  --h5-color: #F7F3BC;
+  --h6-color: #cd589f;
 }
 
 .inline-title {
@@ -56,4 +59,30 @@ body {
 .HyperMD-header.HyperMD-header-1,
 .HyperMD-header.HyperMD-header-2 {
   transform: translateX(-10px);
+}
+
+/** Inline code in headers */
+
+.cm-header.cm-header-1.cm-inline-code {
+  color: var(--h1-color) !important;
+}
+
+.cm-header.cm-header-2.cm-inline-code {
+  color: var(--h2-color) !important;
+}
+
+.cm-header.cm-header-3.cm-inline-code {
+  color: var(--h3-color) !important;
+}
+
+.cm-header.cm-header-4.cm-inline-code {
+  color: var(--h4-color) !important;
+}
+
+.cm-header.cm-header-5.cm-inline-code {
+  color: var(--h5-color) !important;
+}
+
+.cm-header.cm-header-6.cm-inline-code {
+  color: var(--h6-color) !important;
 }
