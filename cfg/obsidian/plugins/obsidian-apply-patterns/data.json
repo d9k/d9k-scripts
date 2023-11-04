@@ -1,0 +1,62 @@
+{
+  "patterns": [
+    {
+      "name": "Link title fix",
+      "rules": [
+        {
+          "from": "^\\([0-9]+\\) ",
+          "to": "",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "- YouTube",
+          "to": "| YT",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
+      "name": "Reddit link title fix",
+      "rules": [
+        {
+          "from": "^\\([0-9]+\\) ",
+          "to": "",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": ": (.*)$",
+          "to": "| /r/$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    }
+  ],
+  "filterString": "",
+  "commandFilterString": "",
+  "commands": [],
+  "apiVersion": 6,
+  "defaultCursorRegexEnd": "^",
+  "defaultCursorRegexStart": "$"
+}
