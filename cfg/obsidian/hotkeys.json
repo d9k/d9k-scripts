@@ -10,7 +10,8 @@
   "workspace:split-horizontal": [
     {
       "modifiers": [
-        "Alt"
+        "Alt",
+        "Shift"
       ],
       "key": "H"
     }
@@ -18,7 +19,8 @@
   "workspace:split-vertical": [
     {
       "modifiers": [
-        "Alt"
+        "Alt",
+        "Shift"
       ],
       "key": "V"
     }
@@ -174,6 +176,12 @@
         "Alt"
       ],
       "key": "T"
+    },
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "D"
     }
   ],
   "cycle-in-sidebar:cycle-left-sidebar": [
@@ -253,7 +261,32 @@
       "modifiers": [
         "Alt"
       ],
+      "key": "3"
+    }
+  ],
+  "recent-files-obsidian:recent-files-open": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
       "key": "1"
+    }
+  ],
+  "workspace:copy-path": [
+    {
+      "modifiers": [
+        "Alt",
+        "Shift"
+      ],
+      "key": "C"
+    }
+  ],
+  "obsidian-apply-patterns:apply-pattern-to-selection": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "A"
     }
   ]
 }
