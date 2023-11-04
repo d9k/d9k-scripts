@@ -2,10 +2,10 @@ body {
   --h1-color: #367064;
   --h2-color: #d2ed91;
   --h3-color: #a886f1;
-  /*--h4-color: #F7F3BC;*/
   --h4-color: #1f7481;
   --h5-color: #F7F3BC;
   --h6-color: #cd589f;
+  --header-tag-background: #22303b;
 }
 
 .inline-title {
@@ -16,17 +16,7 @@ body {
     color: #367064;
 }
 
-.cm-header-1 {
-    /*color: #367064;*/
-}
-
-.markdown-preview-view h2 {
-    /*color: #d2ed91;*/
-    /*font-style: italic;*/
-}
-
 .cm-header-2 {
-    /*color: #d2ed91;*/
     font-style: italic;
 
     /**
@@ -36,24 +26,13 @@ body {
 }
 
 .markdown-preview-view h3 {
-    /*color: #a691d4;*/
-    /*color: #a886f1;*/
     font-weight: 400;
     font-size: 1.18em
 }
 
 .cm-header-3 {
-    /*color: #a886f1;*/
     font-weight: 400;
     font-size: 1.18em
-}
-
-.markdown-preview-view h4 {
-    /*color: #F7F3BC;*/
-}
-
-.cm-header-4 {
-    /*color: #F7F3BC;*/
 }
 
 .HyperMD-header.HyperMD-header-1,
@@ -61,28 +40,46 @@ body {
   transform: translateX(-10px);
 }
 
-/** Inline code in headers */
+/** Inline code and tags in headers */
 
-.cm-header.cm-header-1.cm-inline-code {
+.cm-header.cm-header-1.cm-inline-code,
+.cm-header.cm-header-1.cm-hashtag {
   color: var(--h1-color) !important;
 }
 
-.cm-header.cm-header-2.cm-inline-code {
+.cm-header.cm-header-2.cm-inline-code,
+.cm-header.cm-header-2.cm-hashtag {
   color: var(--h2-color) !important;
 }
 
-.cm-header.cm-header-3.cm-inline-code {
+.cm-header.cm-header-3.cm-inline-code,
+.cm-header.cm-header-3.cm-hashtag {
   color: var(--h3-color) !important;
 }
 
-.cm-header.cm-header-4.cm-inline-code {
+.cm-header.cm-header-4.cm-inline-code,
+.cm-header.cm-header-4.cm-hashtag {
   color: var(--h4-color) !important;
 }
 
-.cm-header.cm-header-5.cm-inline-code {
+.cm-header.cm-header-5.cm-inline-code,
+.cm-header.cm-header-5.cm-hashtag {
   color: var(--h5-color) !important;
 }
 
-.cm-header.cm-header-6.cm-inline-code {
+.cm-header.cm-header-6.cm-inline-code,
+.cm-header.cm-header-6.cm-hashtag {
   color: var(--h6-color) !important;
+}
+
+.cm-header.cm-hashtag {
+  background-color: var(--header-tag-background);
+}
+
+.cm-header.cm-hashtag-begin {
+  padding-left: 8px;
+}
+
+.cm-header.cm-hashtag-end {
+  padding-right: 8px;
 }
