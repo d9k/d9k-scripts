@@ -1,3 +1,10 @@
+body {
+  --h1-color: #367064;
+  --h2-color: #d2ed91;
+  --h3-color: #a886f1;
+  --h4-color: #F7F3BC;
+}
+
 .inline-title {
     color: #17798F;
 }
@@ -7,38 +14,43 @@
 }
 
 .cm-header-1 {
-    color: #367064;
+    /*color: #367064;*/
 }
 
 .markdown-preview-view h2 {
-    color: #d2ed91;
+    /*color: #d2ed91;*/
     /*font-style: italic;*/
 }
 
 .cm-header-2 {
-    color: #d2ed91;
+    /*color: #d2ed91;*/
     font-style: italic;
+
+    /**
+     * To not apply italic for emojis
+     */
+    font-synthesis: none;
 }
 
 .markdown-preview-view h3 {
     /*color: #a691d4;*/
-    color: #a886f1;
+    /*color: #a886f1;*/
     font-weight: 400;
     font-size: 1.18em
 }
 
 .cm-header-3 {
-    color: #a886f1;
+    /*color: #a886f1;*/
     font-weight: 400;
     font-size: 1.18em
 }
 
 .markdown-preview-view h4 {
-    color: #F7F3BC;
+    /*color: #F7F3BC;*/
 }
 
 .cm-header-4 {
-    color: #F7F3BC;
+    /*color: #F7F3BC;*/
 }
 
 .HyperMD-header.HyperMD-header-1,
