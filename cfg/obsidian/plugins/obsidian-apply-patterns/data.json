@@ -20,6 +20,15 @@
           "multiline": false,
           "sticky": false,
           "disabled": false
+        },
+        {
+          "from": "- Stack Overflow",
+          "to": "| SO",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
         }
       ],
       "collapsed": false,
@@ -41,6 +50,32 @@
         {
           "from": ": (.*)$",
           "to": "| /r/$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
+      "name": "quote",
+      "rules": [
+        {
+          "from": "^",
+          "to": "_\"",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "$",
+          "to": "\"_",
           "caseInsensitive": false,
           "global": false,
           "multiline": false,
