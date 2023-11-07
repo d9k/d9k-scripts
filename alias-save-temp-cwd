@@ -6,8 +6,12 @@ DIR="$(pwd)"
 
 OUTPUT="$HOME/.temp_aliases"
 
-export "$ALIAS"="$DIR"
+export $ALIAS="$DIR"
 
 echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
 
 tail "$OUTPUT"
+
+echo
+echo "Run"
+echo ". $OUTPUT"
