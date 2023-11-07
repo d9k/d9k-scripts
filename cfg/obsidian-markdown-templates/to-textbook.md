@@ -1,1 +1,1 @@
-- [ ] :point_right::spiral_note_pad:
+:point_right::spiral_note_pad:
