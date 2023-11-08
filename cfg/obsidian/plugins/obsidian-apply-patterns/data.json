@@ -1,42 +1,7 @@
 {
   "patterns": [
     {
-      "name": "_ Link title fix",
-      "rules": [
-        {
-          "from": "^\\([0-9]+\\) ",
-          "to": "",
-          "caseInsensitive": false,
-          "global": false,
-          "multiline": false,
-          "sticky": false,
-          "disabled": false
-        },
-        {
-          "from": "- YouTube",
-          "to": "| YT",
-          "caseInsensitive": false,
-          "global": false,
-          "multiline": false,
-          "sticky": false,
-          "disabled": false
-        },
-        {
-          "from": "- Stack Overflow",
-          "to": "| SO",
-          "caseInsensitive": false,
-          "global": false,
-          "multiline": false,
-          "sticky": false,
-          "disabled": false
-        }
-      ],
-      "collapsed": false,
-      "cursorRegexStart": "$",
-      "cursorRegexEnd": "^"
-    },
-    {
-      "name": "Reddit link title fix",
+      "name": "Reddit link title: fix",
       "rules": [
         {
           "from": "^\\([0-9]+\\) ",
@@ -88,7 +53,7 @@
       "cursorRegexEnd": "^"
     },
     {
-      "name": "Link markdown fix title",
+      "name": "link markdown: fix title",
       "rules": [
         {
           "from": "\\[\\([0-9]+\\)[ ]*",
