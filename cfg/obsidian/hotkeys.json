@@ -2,7 +2,8 @@
   "editor:toggle-strikethrough": [
     {
       "modifiers": [
-        "Alt"
+        "Alt",
+        "Shift"
       ],
       "key": "S"
     }
@@ -181,7 +182,7 @@
       "modifiers": [
         "Alt"
       ],
-      "key": "D"
+      "key": "A"
     }
   ],
   "cycle-in-sidebar:cycle-left-sidebar": [
@@ -261,7 +262,7 @@
       "modifiers": [
         "Alt"
       ],
-      "key": "3"
+      "key": "1"
     }
   ],
   "recent-files-obsidian:recent-files-open": [
@@ -269,7 +270,7 @@
       "modifiers": [
         "Alt"
       ],
-      "key": "1"
+      "key": "3"
     }
   ],
   "workspace:copy-path": [
@@ -286,7 +287,31 @@
       "modifiers": [
         "Alt"
       ],
-      "key": "A"
+      "key": "D"
+    }
+  ],
+  "obsidian-editor-shortcuts:copyLineDown": [],
+  "obsidian-editor-shortcuts:copyLineUp": [],
+  "obsidian-editor-shortcuts:duplicateLine": [],
+  "obsidian-editor-shortcuts:insertLineBelow": [],
+  "obsidian-editor-shortcuts:selectAllOccurrences": [],
+  "obsidian-editor-shortcuts:selectWordOrNextOccurrence": [],
+  "obsidian-editor-shortcuts:selectLine": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "S"
+    }
+  ],
+  "obsidian-editor-shortcuts:addCursorsToSelectionEnds": [],
+  "obsidian-editor-shortcuts:deleteLine": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "K"
     }
   ]
 }
