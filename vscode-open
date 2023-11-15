@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ -z "$1" ]]; then
-  code .
+  NODE_OPTIONS="" code .
   exit
 fi
 
-code "$@"
+NODE_OPTIONS="" code "$@"
