@@ -10,6 +10,7 @@ RESULTS=$( \
     | grep -P -v "^\." \
     | grep -i "$@" \
     | sed -E 's/\.gpg$//' \
+    | grep -P -v "\.info$" \
     | head -n "$LINES_NUM"
 )
 
@@ -25,11 +26,19 @@ if [[ -n "$REST_RESULTS_TEXT" ]]; then
   echo "Found also:"
   echo -n "$REST_RESULTS_TEXT"
   echo
-  echo
 fi
 
-echo "Showing:"
-echo "  $RESULT:"
+RESULT_INFO="$RESULT.info"
+
+if [[ -f "$RESULT_INFO.gpg" ]]; then
+  echo
+  echo "$RESULT_INFO:"
+  pass "$RESULT_INFO" | sed -E 's/^/  /'
+fi
+
 
 echo
-pass "$RESULT"
+echo "$RESULT:"
+pass "$RESULT" | sed -E 's/^/  /'
+
+
