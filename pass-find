@@ -5,15 +5,25 @@ LINES_NUM=10
 
 cd $PASS_STORE_DIR
 
+
 RESULTS=$( \
   find -type f -printf '%P\n' -iname "*.gpg" \
     | grep -P -v "^\." \
     | sed -E 's/\.gpg$//' \
     | grep -P -v "\.info$" \
-    | grep -i "$@" \
-    | sort \
-    | head -n "$LINES_NUM"
+    | grep -i "$1" \
+    | sort
 )
+
+shift 1
+
+for PATTERN in "$@"; do
+  RESULTS=$(echo -n "$RESULTS" | grep -i "$PATTERN")
+done
+
+
+RESULTS=$(echo -n "$RESULTS" | head -n "$LINES_NUM")
+
 
 if [[ -z "$RESULTS" ]]; then
   echo "No results! Exitting"
