@@ -22,7 +22,7 @@
           "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -48,7 +48,7 @@
           "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -83,7 +83,7 @@
           "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -131,6 +131,23 @@
           "caseInsensitive": false,
           "global": false,
           "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
+      "name": "strip hashtags",
+      "rules": [
+        {
+          "from": "#",
+          "to": "",
+          "caseInsensitive": false,
+          "global": true,
+          "multiline": true,
           "sticky": false,
           "disabled": false
         }
