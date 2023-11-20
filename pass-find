@@ -11,6 +11,7 @@ RESULTS=$( \
     | grep -i "$@" \
     | sed -E 's/\.gpg$//' \
     | grep -P -v "\.info$" \
+    | sort \
     | head -n "$LINES_NUM"
 )
 
