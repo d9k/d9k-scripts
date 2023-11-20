@@ -1,0 +1,35 @@
+#!/bin/bash
+
+PASS_STORE_DIR="$HOME/.password-store"
+LINES_NUM=10
+
+cd $PASS_STORE_DIR
+
+RESULTS=$( \
+  find -type f -printf '%P\n' -iname "*.gpg" \
+    | grep -P -v "^\." \
+    | grep -i "$@" \
+    | sed -E 's/\.gpg$//' \
+    | head -n "$LINES_NUM"
+)
+
+if [[ -z "$RESULTS" ]]; then
+  echo "No results! Exitting"
+  exit 1
+fi
+
+RESULT=$(echo -n "$RESULTS" | head -n 1)
+REST_RESULTS_TEXT=$(echo -n "$RESULTS" | sed -E 's/^/  /' | tail -n +2)
+
+if [[ -n "$REST_RESULTS_TEXT" ]]; then
+  echo "Found also:"
+  echo -n "$REST_RESULTS_TEXT"
+  echo
+  echo
+fi
+
+echo "Showing:"
+echo "  $RESULT:"
+
+echo
+pass "$RESULT"
