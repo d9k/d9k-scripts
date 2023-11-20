@@ -8,9 +8,9 @@ cd $PASS_STORE_DIR
 RESULTS=$( \
   find -type f -printf '%P\n' -iname "*.gpg" \
     | grep -P -v "^\." \
-    | grep -i "$@" \
     | sed -E 's/\.gpg$//' \
     | grep -P -v "\.info$" \
+    | grep -i "$@" \
     | sort \
     | head -n "$LINES_NUM"
 )
