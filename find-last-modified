@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DAYS_AGO="$1"
+
+if [[ -z "$DAYS_AGO" ]]; then
+  DAYS_AGO=7
+fi
+
+set -x
+find . -mtime -"$DAYS_AGO" -type f | grep -v "\.git" | sort
