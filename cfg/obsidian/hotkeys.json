@@ -108,14 +108,6 @@
       "key": "L"
     }
   ],
-  "workspace:toggle-pin": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "P"
-    }
-  ],
   "editor:focus-right": [
     {
       "modifiers": [
@@ -328,14 +320,6 @@
       "key": "E"
     }
   ],
-  "darlal-switcher-plus:switcher-plus:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "P"
-    }
-  ],
   "darlal-switcher-plus:switcher-plus:open-symbols-active": [
     {
       "modifiers": [
@@ -351,6 +335,31 @@
         "Shift"
       ],
       "key": "O"
+    }
+  ],
+  "darlal-switcher-plus:switcher-plus:open-editors": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "P"
+    }
+  ],
+  "darlal-switcher-plus:switcher-plus:open": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "P"
+    }
+  ],
+  "workspace:toggle-pin": [
+    {
+      "modifiers": [
+        "Alt",
+        "Shift"
+      ],
+      "key": "P"
     }
   ]
 }

@@ -58,4 +58,6 @@ echo "\`\`\`"
 pass "$RESULT"
 echo "\`\`\`"
 
+echo
+pass -c "$RESULT"
 
