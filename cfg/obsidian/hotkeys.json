@@ -35,20 +35,7 @@
       "key": "P"
     }
   ],
-  "switcher:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "O"
-    },
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "P"
-    }
-  ],
+  "switcher:open": [],
   "editor:cycle-list-checklist": [
     {
       "modifiers": [
@@ -177,12 +164,6 @@
         "Alt"
       ],
       "key": "T"
-    },
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "A"
     }
   ],
   "cycle-in-sidebar:cycle-left-sidebar": [
@@ -312,6 +293,64 @@
         "Shift"
       ],
       "key": "K"
+    }
+  ],
+  "obsidian-editor-shortcuts:expandSelectionToBrackets": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "B"
+    }
+  ],
+  "obsidian-editor-shortcuts:expandSelectionToQuotes": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "U"
+    }
+  ],
+  "templater-obsidian:replace-in-file-templater": [],
+  "templater-obsidian:insert-templater": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "A"
+    }
+  ],
+  "templater-obsidian:jump-to-next-cursor-location": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "E"
+    }
+  ],
+  "darlal-switcher-plus:switcher-plus:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "P"
+    }
+  ],
+  "darlal-switcher-plus:switcher-plus:open-symbols-active": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "O"
+    }
+  ],
+  "darlal-switcher-plus:switcher-plus:open-headings": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
     }
   ]
 }
