@@ -4,7 +4,7 @@
   "alwaysNewTabForSymbols": false,
   "useActiveTabForSymbolsOnMobile": false,
   "symbolsInLineOrder": true,
-  "editorListCommand": "edt ",
+  "editorListCommand": ":",
   "symbolListCommand": "@",
   "symbolListActiveEditorCommand": "$ ",
   "workspaceListCommand": "+",
@@ -49,7 +49,7 @@
   "excludeObsidianIgnoredFiles": false,
   "shouldSearchFilenames": false,
   "shouldSearchBookmarks": false,
-  "pathDisplayFormat": 4,
+  "pathDisplayFormat": 1,
   "hidePathIfRoot": true,
   "enabledRelatedItems": [
     "disk-location",
