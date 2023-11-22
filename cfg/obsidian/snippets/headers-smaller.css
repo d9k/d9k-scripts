@@ -5,4 +5,16 @@ body {
   --h4-size: 1.0rem;
   --h5-size: 1rem;
   --h6-size: 0.9rem;
+
+  --h3-weight: 400;
+}
+
+.markdown-preview-view h3 {
+    /*font-weight: 400;*/
+    font-size: 1.18em
+}
+
+.cm-header-3 {
+    font-weight: 400;
+    font-size: 1.18em
 }

@@ -6,8 +6,6 @@ body {
   --h5-color: #F7F3BC;
   --h6-color: #cd589f;
   --header-tag-background: #22303b;
-
-  --h3-weight: 400;
 }
 
 /** Block reference (^) styling */
@@ -35,17 +33,7 @@ body {
     font-synthesis: none;
 }
 
-.markdown-preview-view h3 {
-    /*font-weight: 400;*/
-    font-size: 1.18em
-}
-
-.cm-header-3 {
-    font-weight: 400;
-    font-size: 1.18em
-}
-
-/** Top level titles negative padding */
+/** Top level titles (H1, H2): add negative padding */
 
 .HyperMD-header.HyperMD-header-1,
 .HyperMD-header.HyperMD-header-2 {
@@ -55,32 +43,38 @@ body {
 /** Inline code and tags in headers */
 
 .cm-header.cm-header-1.cm-inline-code,
-.cm-header.cm-header-1.cm-hashtag {
+.cm-header.cm-header-1.cm-hashtag,
+.cm-header.cm-header-1.cm-link {
   color: var(--h1-color) !important;
 }
 
 .cm-header.cm-header-2.cm-inline-code,
-.cm-header.cm-header-2.cm-hashtag {
+.cm-header.cm-header-2.cm-hashtag,
+.cm-header.cm-header-2.cm-link {
   color: var(--h2-color) !important;
 }
 
 .cm-header.cm-header-3.cm-inline-code,
-.cm-header.cm-header-3.cm-hashtag {
+.cm-header.cm-header-3.cm-hashtag,
+.cm-header.cm-header-3.cm-link {
   color: var(--h3-color) !important;
 }
 
 .cm-header.cm-header-4.cm-inline-code,
-.cm-header.cm-header-4.cm-hashtag {
+.cm-header.cm-header-4.cm-hashtag,
+.cm-header.cm-header-4.cm-link {
   color: var(--h4-color) !important;
 }
 
 .cm-header.cm-header-5.cm-inline-code,
-.cm-header.cm-header-5.cm-hashtag {
+.cm-header.cm-header-5.cm-hashtag,
+.cm-header.cm-header-5.cm-link {
   color: var(--h5-color) !important;
 }
 
 .cm-header.cm-header-6.cm-inline-code,
-.cm-header.cm-header-6.cm-hashtag {
+.cm-header.cm-header-6.cm-hashtag,
+.cm-header.cm-header-6.cm-link {
   color: var(--h6-color) !important;
 }
 
@@ -99,7 +93,7 @@ body {
 /** Less spacing between headers. Because need to remember add blank line before header */
 .cm-s-obsidian .cm-line.HyperMD-header {
   /*--p-spacing: 0.3rem;*/
-   padding-top: 0.3rem;
+  padding-top: 0.3rem;
 }
 
 
