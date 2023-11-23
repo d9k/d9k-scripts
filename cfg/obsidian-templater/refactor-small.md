@@ -1,1 +1,1 @@
-:arrows_counterclockwise:
+:arrows_clockwise:
