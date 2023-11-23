@@ -65,14 +65,14 @@
   "fileExtAllowList": [
     "canvas"
   ],
-  "enableMatchPriorityAdjustments": false,
+  "enableMatchPriorityAdjustments": true,
   "matchPriorityAdjustments": {
-    "isOpenInEditor": 0,
+    "isOpenInEditor": 0.85,
     "isBookmarked": 0,
-    "isRecent": 0,
-    "file": 0,
-    "alias": 0,
-    "h1": 0
+    "isRecent": 1,
+    "file": -0.95,
+    "alias": -0.95,
+    "h1": -0.9
   },
   "quickFilters": {
     "resetKey": "0",
