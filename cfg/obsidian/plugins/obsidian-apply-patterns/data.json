@@ -54,6 +54,77 @@
       "cursorRegexEnd": "^"
     },
     {
+      "name": "link markdown: fix title: remove author",
+      "rules": [
+        {
+          "from": "\\[\\([0-9]+\\)[ ]*",
+          "to": "[",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "- YouTube",
+          "to": "| YT",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "- Stack Overflow",
+          "to": "| SO",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "· Issue #([0-9]+) · ([0-9a-z_\\-]+)/([0-9a-z_\\-]+)",
+          "to": "| issue #$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "· ([0-9a-z_\\-]+)/([0-9a-z_\\-]+) · Discussion #([0-9]+)",
+          "to": "| discussion #$3",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "\\| issue #([0-9]+) \\| ([0-9a-z_\\-]+)",
+          "to": "| issue #$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "\\| discussion #([0-9]+) \\| ([0-9a-z_\\-]+)",
+          "to": "| discussion #$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
       "name": "quote",
       "rules": [
         {
