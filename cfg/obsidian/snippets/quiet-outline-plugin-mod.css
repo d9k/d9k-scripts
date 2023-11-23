@@ -26,16 +26,13 @@
 }
 
 
-
 /** Selected node */
 .quiet-outline .n-tree-node.located {
   background-color: #16332d;
 }
 
 .quiet-outline .n-tree-node.located p {
-  /*color: #FFFFFF;*/
   font-weight: 400;
-  /*text-decoration: underline;*/
 }
 
 .quiet-outline .n-tree-node.located p {
