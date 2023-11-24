@@ -301,7 +301,7 @@
           "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -345,8 +345,26 @@
           "disabled": false
         },
         {
-          "from": "/-/blob([^\\/])",
+          "from": "/tree/master([^\\/])",
           "to": "$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "https://github.com/([A-Za-z0-9_\\-\\.]+)/([A-Za-z0-9_\\-\\.]+)/tree/master/([A-Za-z0-9_\\-\\.\\/]+)",
+          "to": "[$2: $3 | $1 | GH](https://github.com/$1/$2/tree/master/$3)",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "https://github.com/([A-Za-z0-9_\\-\\.]+)/([A-Za-z0-9_\\-\\.]+)",
+          "to": "[$2 | $1 | GH](https://github.com/$1/$2)",
           "caseInsensitive": false,
           "global": false,
           "multiline": false,
