@@ -263,6 +263,49 @@
       "cursorRegexEnd": "^"
     },
     {
+      "name": "checkbox: suspended",
+      "rules": [
+        {
+          "from": "- \\[.\\]",
+          "to": "- [-]",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "^([ \\t]*)- ([^\\[])",
+          "to": "$1- [-] $2",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": true,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
+      "name": "demo",
+      "rules": [
+        {
+          "from": "^([ \\t]*[\\-]{0,1})",
+          "to": "$1 :balloon:",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
       "name": "sourcegraph.com source code link fix",
       "rules": [
         {
@@ -275,7 +318,7 @@
           "disabled": false
         },
         {
-          "from": "/github.com/([A-Za-z0-9_\\-]+)/([A-Za-z0-9_\\-]+)@([A-Za-z0-9]+)/",
+          "from": "/github.com/([A-Za-z0-9_\\-\\.]+)/([A-Za-z0-9_\\-\\.]+)@([a-z0-9]+)/",
           "to": "/github.com/$1/$2/",
           "caseInsensitive": false,
           "global": false,
@@ -284,8 +327,8 @@
           "disabled": false
         },
         {
-          "from": "/-/blob/src",
-          "to": "/blob/-/src",
+          "from": "/-/blob",
+          "to": "/tree/master",
           "caseInsensitive": false,
           "global": false,
           "multiline": false,
@@ -311,7 +354,7 @@
           "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     }
