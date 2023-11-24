@@ -363,8 +363,8 @@
           "disabled": false
         },
         {
-          "from": "https://github.com/([A-Za-z0-9_\\-\\.]+)/([A-Za-z0-9_\\-\\.]+)",
-          "to": "[$2 | $1 | GH](https://github.com/$1/$2)",
+          "from": "https://github.com/([A-Za-z0-9_\\-\\.]+)/([A-Za-z0-9_\\-\\.]+)([\\n\\r\\t ]+)",
+          "to": "[$2 | $1 | GH](https://github.com/$1/$2)$3",
           "caseInsensitive": false,
           "global": false,
           "multiline": false,
@@ -372,7 +372,7 @@
           "disabled": false
         }
       ],
-      "collapsed": true,
+      "collapsed": false,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     }
