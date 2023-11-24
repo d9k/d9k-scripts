@@ -282,9 +282,18 @@
           "multiline": false,
           "sticky": false,
           "disabled": false
+        },
+        {
+          "from": "^([ \\t]*)- \\[.([^\\]])",
+          "to": "$1- [-] [$2",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
         }
       ],
-      "collapsed": true,
+      "collapsed": false,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -301,7 +310,24 @@
           "disabled": false
         }
       ],
-      "collapsed": true,
+      "collapsed": false,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
+      "name": "__test example: duplicate word__",
+      "rules": [
+        {
+          "from": "\\[([A-Za-z0-9\\-_\\.]+) \\| \\1 \\|",
+          "to": "[$1 |",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -370,9 +396,18 @@
           "multiline": false,
           "sticky": false,
           "disabled": false
+        },
+        {
+          "from": "\\[([A-Za-z0-9\\-_\\.]+) \\| \\1 \\|",
+          "to": "[$1 |",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     }
