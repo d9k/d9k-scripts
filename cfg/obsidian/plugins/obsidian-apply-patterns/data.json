@@ -120,7 +120,7 @@
           "disabled": false
         }
       ],
-      "collapsed": false,
+      "collapsed": true,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     },
@@ -259,6 +259,59 @@
         }
       ],
       "collapsed": true,
+      "cursorRegexStart": "$",
+      "cursorRegexEnd": "^"
+    },
+    {
+      "name": "sourcegraph.com source code link fix",
+      "rules": [
+        {
+          "from": "sourcegraph.com/",
+          "to": "",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "/github.com/([A-Za-z0-9_\\-]+)/([A-Za-z0-9_\\-]+)@([A-Za-z0-9]+)/",
+          "to": "/github.com/$1/$2/",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "/-/blob/src",
+          "to": "/blob/-/src",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "/package.json",
+          "to": "",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        },
+        {
+          "from": "/-/blob([^\\/])",
+          "to": "$1",
+          "caseInsensitive": false,
+          "global": false,
+          "multiline": false,
+          "sticky": false,
+          "disabled": false
+        }
+      ],
+      "collapsed": false,
       "cursorRegexStart": "$",
       "cursorRegexEnd": "^"
     }
