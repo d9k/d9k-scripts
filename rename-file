@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+CURRENT_DIR=$(pwd)
+
 STORE_LAST_FILE_PATH=$HOME/.rename_file_last
 
 FILE_PATH="$1"
@@ -50,6 +53,15 @@ echo "$NEW_FILE_PATH" > $STORE_LAST_FILE_PATH
 
 echo "New path:"
 echo "$NEW_FILE_PATH"
+
+# case when we renamed current directory `(rename-file .`)
+if [[ ! -d "$CURRENT_DIR" ]]; then
+  if [[ -d "$NEW_FILE_PATH" ]]; then
+    echo "Warning!"
+    echo "Current directory was renamed!"
+    echo "Run \`cd \"$NEW_FILE_PATH\"\` to switch to the new directory"
+  fi
+fi
 
 # add this to .bashrc and call rename_file to save last file name to variable
 #
