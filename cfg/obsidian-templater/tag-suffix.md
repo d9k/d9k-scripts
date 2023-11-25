@@ -1,1 +1,0 @@
-<span>&hairsp;s</span>
