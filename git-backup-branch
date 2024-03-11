@@ -88,7 +88,7 @@ EXISTING_BRANCHES=$(git branch | grep "$BACKUP_PREFIX" | trim | sort -V)
 
 PREVIOUS_BRANCH=$(echo -e "$EXISTING_BRANCHES" | tail -n 1)
 
-PREVIOUS_BRANCH_PREFIX=$(echo "$PREVIOUS_BRANCH" | sed --regexp-extended "s/${BACKUP_PREFIX}-?//")
+PREVIOUS_BRANCH_PREFIX=$(echo "$PREVIOUS_BRANCH" | sed --regexp-extended "s|${BACKUP_PREFIX}-?||")
 
 PREVIOUS_BRANCH_NUM=$(echo "$PREVIOUS_BRANCH_PREFIX" | grep --only-matching --no-filename --extended-regexp "^[0-9]+")
 
