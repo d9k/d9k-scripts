@@ -1,0 +1,1 @@
+echo */ | sed -E "s/\///g" | sed -E "s/ /, /g"
