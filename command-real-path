@@ -20,8 +20,8 @@ echoerr "COMMAND_TYPE: $COMMAND_TYPE"
 if [[ -n "$IS_ALIAS" ]]; then
   #echo "$COMMAND_TYPE"
   ALIAS_SOURCE_FULL=$(type "$@" | sed 's/^.*aliased to \(.*\)$/\1/')
-  echo "ALIAS_SOURCE_FULL: $ALIAS_SOURCE_FULL"
-  COMMAND=$(echo $ALIAS_SOURCE_FULL | grep --only-matching --max-count=1 -E '[[:alnum:]\.\-]+')
+  echoerr "ALIAS_SOURCE_FULL: $ALIAS_SOURCE_FULL"
+  COMMAND=$(echo "$ALIAS_SOURCE_FULL" | grep --only-matching --max-count=1 -E '[[:alnum:]\.\-]+')
   echoerr $COMMAND
 fi
 
