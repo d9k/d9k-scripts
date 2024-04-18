@@ -10,6 +10,7 @@ COMMAND_PATH=$($SCRIPT_DIR/command-real-path "$1")
 
 if [[ -n "$COMMAND_PATH" ]]; then
   echoerr "Found command \"$COMMAND_PATH\""
+  echo -e "\n# Command content:\n"
   cat "$COMMAND_PATH"
 else
   echoerr "Command not found"
