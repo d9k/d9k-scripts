@@ -171,6 +171,10 @@ function prompt_part_git {
     if [[ "${GIT_BRANCH}" == "HEAD" ]]; then
       GIT_TAG=$(git describe --exact-match 2>/dev/null)
 
+      if [[ -z "$GIT_TAG" ]]; then
+        GIT_TAG=$(git describe --tags 2>/dev/null)
+      fi
+
       if [[ -n "${GIT_TAG}" ]]; then
         GIT_BRANCH="${GIT_TAG}"
         GIT_BRANCH_ICON="${ICON_TAG}"
@@ -310,17 +314,21 @@ alias default_audio_player=smplayer
 alias default_image_viewer=gpicview
 alias default_mail_viewer=thunderbird
 alias default_office_editor=libreoffice
-alias default_pdf_viewer=xreader
+alias default_pdf_viewer=zathura
+alias default_markdown_editor=obsidian-open
 alias default_text_editor=ta
 alias default_torrent_app=qbittorrent
 alias default_video_player=smplayer
+alias default_windows_emulator=wine
 
+alias alternative_pdf_viewer=xreader
 
 # File extension open default
 alias -s aliases=default_text_editor
 alias -s csv=default_office_editor
 alias -s doc=default_office_editor
 alias -s docx=default_office_editor
+alias -s exe=wine
 alias -s gif=default_image_viewer
 alias -s jpeg=default_image_viewer
 alias -s jpg=default_image_viewer
@@ -328,8 +336,9 @@ alias -s eml=default_mail_viewer
 alias -s ini=default_text_editor
 #alias -s js=default_text_editor
 alias -s json=default_text_editor
-alias -s md=default_text_editor
+alias -s md=default_markdown_editor
 alias -s mp3=default_audio_player
+alias -s mp4=default_video_player
 alias -s mkv=default_video_player
 alias -s pdf=default_pdf_viewer
 alias -s php=default_text_editor
