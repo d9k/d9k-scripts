@@ -1,4 +1,5 @@
 {
+  "deno.path": "/home/d9k/.deno/bin/deno",
     "telemetry.telemetryLevel": "off",
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "always",
@@ -15,7 +16,8 @@
     "workbench.colorTheme": "Slime",
     "theme-by-language.themes": {
         "markdown": "Slime",
-        "typescriptreact": "Material Theme"
+    "typescript": "Slime"
+    // "typescriptreact": "Material Theme"
     },
     "workbench.colorCustomizations": {
         "[Community Material Theme Palenight High Contrast]": {
@@ -27,6 +29,12 @@
             "editor.background": "#121b1f",
             // "sideBar.background": "#1b2020",
             "sideBar.background": "#192022",
+      // "editorStickyScroll.background": "#030b0e",
+      // "editorStickyScroll.background": "#677175",
+      // "editorStickyScroll.background": "#142c1e",
+      "scrollbar.shadow": "#5d8086",
+      "editorStickyScroll.background": "#132b24",
+      "editorStickyScroll.border": "#143b47",
             // "statusBar.background": "#282e2f",
             // "statusBar.background": "#131c24",
             //"editorPane.background": "#1e2324",
@@ -35,7 +43,9 @@
             // "panel.background": "#131c24",
             // "editorGutter.background": "#1e2324",
             // "editorGutter.background": "#131c24",
-            "editorGutter.background": "#121b1f",
+      // "editorGutter.background": "#121b1f",
+      // "editorGutter.background": "#1a1e20",
+      "editorGutter.background": "#161d20",
             // "editorGutter.foldingControlForeground": "#c5c5c5",
             "editorGutter.foldingControlForeground": "#6fd6ff",
             //"breadcrumb.background": "#1e2324",
@@ -45,8 +55,9 @@
             // "titleBar.inactiveBackground": "#282e2f",
             // "titleBar.inactiveBackground": "#FF2e2f",
             // "editorGroupHeader.tabsBackground": "#131c24",
-            "editorGroupHeader.tabsBackground": "#192022",
-            "tab.activeBackground": "#3a4547",
+      // "editorGroupHeader.tabsBackground": "#254149",
+      "editorGroupHeader.tabsBackground": "#333a3d",
+      "tab.activeBackground": "#33474b"
         }
     },
     "editor.tokenColorCustomizations": {
@@ -61,7 +72,7 @@
                     "settings": {
                         "foreground": "#819774"
                     }
-                },
+        }
             ]
         }
     },
@@ -80,4 +91,48 @@
     "git.suggestSmartCommit": false,
     "files.trimTrailingWhitespace": true,
     "git.confirmSync": false,
+  "glean.jsFilesExtensions": [
+    "js",
+    "jsx",
+    "ts",
+    "tsx"
+  ],
+  "vscode-openai.serviceProvider": "VSCode-OpenAI",
+  "vscode-openai.logLevel": "Debug",
+  "editor.unicodeHighlight.allowedLocales": {
+    "ru": true
+  },
+  "editor.renderWhitespace": "all",
+  "vscode-openai.baseUrl": "https://api.arbs.io/openai/inference/v1",
+  "vscode-openai.defaultModel": "gpt-35-turbo",
+  "vscode-openai.embeddingModel": "text-embedding-ada-002",
+  "vscode-openai.azureDeployment": "gpt-35-turbo",
+  "vscode-openai.embeddingsDeployment": "text-embedding-ada-002",
+  "vscode-openai.azureApiVersion": "2023-05-15",
+  "update.mode": "manual",
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "editor.largeFileOptimizations": false,
+  "cSpell.language": "en,ru",
+  "cSpell.userWords": [
+    "Devino",
+    "openapi",
+    "pinia",
+    "sber"
+  ],
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "workbench.sideBar.location": "right",
+  "workbench.editor.labelFormat": "short",
+  // "workbench.editor.customLabels.patterns": {
+  //   // "**/index.vue": "${filename} - <${dirname}> (${extname})"
+  //   "**/index.vue": "<${dirname}>"
+  // }
+  "vim.useSystemClipboard": true
 }

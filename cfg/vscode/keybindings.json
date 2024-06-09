@@ -87,7 +87,7 @@
         "when": "searchViewletFocus"
     },
     {
-        "key": "alt+r",
+    "key": "alt+w",
         "command": "workbench.files.action.showActiveFileInExplorer"
     },
     {
@@ -108,7 +108,7 @@
         "when": "editorFocus"
     },
     {
-        "key": "ctrl+d",
+    "key": "ctrl+shift+d",
         "command": "editor.action.copyLinesDownAction",
         "when": "editorTextFocus && !editorReadonly"
     },
@@ -147,5 +147,77 @@
         "key": "ctrl+enter",
         "command": "editor.action.openLink",
         "when": "editorTextFocus && editorLangId == 'markdown'"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "-workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "eslint.executeAutofix"
+  },
+  {
+    "key": "ctrl+shift+0",
+    "command": "editor.emmet.action.matchTag"
+  },
+  {
+    "key": "alt+c",
+    "command": "-gitlens.showQuickCommitFileDetails",
+    "when": "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'alternate'"
+  },
+  {
+    "key": "alt+c",
+    "command": "gitlens.diffWithRevisionFrom"
+  },
+  {
+    "key": "alt+w",
+    "command": "-toggleSearchEditorWholeWord",
+    "when": "inSearchEditor && searchInputBoxFocus"
+  },
+  {
+    "key": "alt+w",
+    "command": "-workbench.action.terminal.toggleFindWholeWord",
+    "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+w",
+    "command": "-toggleFindWholeWord",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+w",
+    "command": "-toggleSearchWholeWord",
+    "when": "searchViewletFocus"
+  },
+  {
+    "key": "alt+q",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+shift+f8",
+    "command": "typescript.findAllFileReferences"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "-workbench.view.debug",
+    "when": "viewContainer.workbench.view.debug.enabled"
+  },
+  {
+    "key": "alt+e",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "alt+f",
+    "command": "workbench.action.nextEditor"
     }
 ]
