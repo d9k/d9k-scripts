@@ -1,0 +1,5 @@
+#   --allow-outdated-plugins \
+
+chrome  \
+  --wm-window-animations-disabled \
+  --force-dark-mode
