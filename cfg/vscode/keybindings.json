@@ -213,14 +213,6 @@
     "when": "viewContainer.workbench.view.debug.enabled"
   },
   {
-    "key": "alt+e",
-    "command": "workbench.action.previousEditor"
-  },
-  {
-    "key": "alt+f",
-    "command": "workbench.action.nextEditor"
-  },
-  {
     "key": "ctrl+shift+up",
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
@@ -277,5 +269,17 @@
     "key": "alt+right",
     "command": "-gitlens.key.alt+right",
     "when": "gitlens:key:alt+right"
-    }
+  },
+  {
+    "key": "alt+x",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "alt+e",
+    "command": "workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "alt+f",
+    "command": "workbench.action.nextEditorInGroup"
+  }
 ]
