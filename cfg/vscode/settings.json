@@ -134,5 +134,7 @@
   //   // "**/index.vue": "${filename} - <${dirname}> (${extname})"
   //   "**/index.vue": "<${dirname}>"
   // }
-  "vim.useSystemClipboard": true
+  "vim.useSystemClipboard": true,
+  "vim.vimrc.path": "$HOME/.vscode.vimrc",
+  "vim.vimrc.enable": true
 }
