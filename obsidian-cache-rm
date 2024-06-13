@@ -1,0 +1,10 @@
+#!/bin/bash
+
+OBS=$HOME/.config/obsidian
+
+set -x
+rm -r --interactive=once "$OBS/DawnCache/"
+rm -r --interactive=once "$OBS/Code Cache/"
+rm -r --interactive=once "$OBS/GPUCache/"
+rm -r --interactive=once "$OBS/IndexedDB/"
+

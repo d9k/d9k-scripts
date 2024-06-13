@@ -1,0 +1,9 @@
+#!/bin/bash
+
+OBS=$HOME/.config/obsidian
+VAULT=$HOME/tx
+VAULT_CFG=$VAULT/.obsidian
+
+set -x
+rm -r --interactive=once "$OBS"
+rm --interactive=once "$VAULT_CFG/workspace.json"
