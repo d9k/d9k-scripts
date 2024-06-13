@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+COMMAND_PATH=$($SCRIPT_DIR/command-real-path "$1")
+
+if [[ -n "$COMMAND_PATH" ]]; then
+  echo "Found command \"$COMMAND_PATH\""
+  nvim $COMMAND_PATH
+else
+  echo "Command not found"
+fi
