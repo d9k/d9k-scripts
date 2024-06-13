@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function show_help() {
+  echo -e "
+Usage:  grep-in-extension  EXTENSION PATTERN
+
+"
+}
+
+if [ "$#" -lt 2 ]; then
+  show_help
+  exit 1
+fi
+
+EXTENSION=$1
+shift
+
+grep --color -nr --include \*.$EXTENSION "$@"
