@@ -6,6 +6,37 @@ LIB_DIR="$SCRIPT_DIR/lib"
 
 source "$LIB_DIR/ask_continue.inc.sh"
 
+help_exit() {
+  echo "Help: ${SCRIPT_NAME} [--local] BRANCH"
+  exit
+}
+
+LOCAL=
+
+while [[ $# > 0 ]]; do
+    OPTION="$1"
+
+    case "$OPTION" in
+      -h|--help)
+          help_exit
+      ;;
+      -l|--local)
+          LOCAL=1
+      ;;
+      *)
+        if [[ "${OPTION:0:1}" == "-" ]]; then
+          echo -e "Error: unknown option \"$OPTION\" \n"
+          help_exit
+        else
+          echo "(breaking)"
+          break
+        fi
+      ;;
+    esac
+    shift # past argument or value
+done
+
+
 BRANCH="$1"
 
 if [[ -z "$BRANCH" ]]; then
@@ -16,6 +47,11 @@ fi
 
 if [[ "$(ask_continue 'backup branch before rebase')" == "1" ]]; then
   git-backup-branch "${BRANCH}" rebase
+fi
+
+if [ -n "$LOCAL" ]; then
+  git rebase -i --autostash "$BRANCH"
+  exit
 fi
 
 git fetch
