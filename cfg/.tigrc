@@ -23,12 +23,15 @@ bind status D !@?rm %(file)
 bind status B @backup-conf %(file)
 bind status H >tig %(file)
 bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+bind status v !sh -c 'nvim %(file)'
+bind status P !push
 
 bind main & ?git commit --fixup=%(commit)
 bind main * ?git commit --fixup=%(commit)
+bind main P !push
 
 bind diff A +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
-bind diff P +sh -c 'echo Opening in PhpStorm: %(file); silent.sh pstorm %(file)'
+# bind diff P +sh -c 'echo Opening in PhpStorm: %(file); silent.sh pstorm %(file)'
 bind diff T +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
 bind diff <Up> move-up
 bind diff <Down> move-down
@@ -44,10 +47,18 @@ bind main H +sh -c 'COMMIT=$(printf %(commit) | head -c 20); printf $COMMIT | xc
 bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
 bind generic L @silent.sh git-compare-rev-dir %(commit)
+bind generic <Ctrl-F> !?git checkout %(commit) %(file)
+
+bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --color "$D"'
+
+# ; echo "# $D" ; ls -lh --color $D
 bind main T ?git checkout %(commit)
 
 bind ref T ?git checkout %(branch)
-bind main <Ctrl-s> ?!<git-squash %(commit)
+
+# bind main <Ctrl-s> ?!<git-squash %(commit)
+#bind main <Ctrl-s> ?!<git-squash --autostash %(commit)
+bind main <Ctrl-s> ?!git-squash %(commit)
 
 #######################################################################
 ##  https://github.com/cbertoldi/dotfiles/blob/master/tigrc.symlink  ##
@@ -154,5 +165,5 @@ color   tree.directory         221     default
 
 set main-view	= line-number:no,interval=5 id:no date:custom,format="%Y-%m-%d %H:%M" author:full commit-title:yes,graph,refs,overflow=no
 
-set main-view-date = local
+#set main-view-date = date-local
 set main-view-date-display = custom
