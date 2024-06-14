@@ -1,8 +1,18 @@
 #!/bin/bash
 
-git-branch-prefix "$1" bugfix --silent-exit
-
-if [ $? -ne 0 ]; then
-  git-branch-prefix "$1" feature
+BUGFIX_PREFIX=$(git config --local --get user.branchBugfixPrefix 2> /dev/null)
+if [[ -z "$BUGFIX_PREFIX" ]]; then
+  BUGFIX_PREFIX="bugfix"
 fi
 
+FEATURE_PREFIX=$(git config --local --get user.branchFeaturePrefix 2> /dev/null)
+if [[ -z "$FEATURE_PREFIX" ]]; then
+  FEATURE_PREFIX="feature"
+fi
+
+
+git-branch-prefix "$1" "$BUGFIX_PREFIX" --silent-exit
+
+if [ $? -ne 0 ]; then
+  git-branch-prefix "$1" "$FEATURE_PREFIX" bugfi
+fi
