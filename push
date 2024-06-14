@@ -76,6 +76,7 @@ if [ "$REPO_TYPE" == "git" ]; then
   #git push
   # only current branch
   git push origin HEAD
+  git pull
   git push origin --tags
   exit
 fi
