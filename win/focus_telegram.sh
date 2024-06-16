@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# Use `wmctrl -lx` to see opened windows classes
 WINDOW_CLASS="Telegram"
+WINDOW_CLASS="TelegramDesktop"
 
 #COMMAND="~/soft/Telegram/Telegram &"
 COMMAND="flatpak run org.telegram.desktop &"
