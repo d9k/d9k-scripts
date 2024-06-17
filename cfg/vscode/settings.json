@@ -138,5 +138,50 @@
   "editor.lineNumbers": "relative",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.vscode.vimrc",
-  "vim.vimrc.enable": true
+  "vim.vimrc.enable": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "g",
+        "d"
+      ],
+      "commands": [
+        "editor.actions.revealDefinition"
+      ]
+    },
+    {
+      "before": "u",
+      "commands": [
+        "undo"
+      ]
+    },
+    {
+      "before": [
+        "<C-r>",
+      ],
+      "commands": [
+        "redo"
+      ]
+    },
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<C-f>",
+      ],
+      "commands": [
+        "actions.find"
+      ]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [
+        "<C-f>",
+      ],
+      "commands": [
+        "actions.find"
+      ]
+    }
+  ]
 }
