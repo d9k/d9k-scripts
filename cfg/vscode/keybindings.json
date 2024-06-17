@@ -37,11 +37,6 @@
         "when": "terminalFocus && terminalHasBeenCreated && terminalTextSelected || terminalFocus && terminalProcessSupported && terminalTextSelected"
     },
     {
-        "key": "ctrl+shift+c",
-        "command": "copyRelativeFilePath",
-        "when": "editorFocus"
-    },
-    {
         "key": "ctrl+shift+alt+c",
         "command": "-copyRelativeFilePath",
         "when": "!editorFocus"
@@ -172,7 +167,7 @@
     "when": "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'alternate'"
   },
   {
-    "key": "alt+c",
+    "key": "ctrl+shift+c",
     "command": "gitlens.diffWithRevisionFrom"
   },
   {
@@ -281,5 +276,24 @@
   {
     "key": "alt+f",
     "command": "workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "-filesExplorer.findInFolder",
+    "when": "explorerResourceIsFolder && filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "-search.action.restrictSearchToFolder",
+    "when": "folderMatchWithResourceFocus && searchViewletVisible"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "alt+c",
+    "command": "copyRelativeFilePath",
+    "when": "editorFocus"
   }
 ]
