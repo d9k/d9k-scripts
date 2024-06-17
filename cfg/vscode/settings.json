@@ -57,6 +57,7 @@
             // "editorGroupHeader.tabsBackground": "#131c24",
       // "editorGroupHeader.tabsBackground": "#254149",
       "editorGroupHeader.tabsBackground": "#333a3d",
+      "editorLineNumber.activeForeground": "#b0b0ff",
       "tab.activeBackground": "#33474b"
         }
     },
@@ -134,6 +135,7 @@
   //   // "**/index.vue": "${filename} - <${dirname}> (${extname})"
   //   "**/index.vue": "<${dirname}>"
   // }
+  "editor.lineNumbers": "relative",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.vscode.vimrc",
   "vim.vimrc.enable": true
