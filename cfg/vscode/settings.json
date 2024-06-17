@@ -136,9 +136,11 @@
   //   "**/index.vue": "<${dirname}>"
   // }
   "editor.lineNumbers": "relative",
+  "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.vscode.vimrc",
   "vim.vimrc.enable": true,
+  "vim.camelCaseMotion.enable": true,
   "vim.insertModeKeyBindings": [
     {
       "before": [
