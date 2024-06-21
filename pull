@@ -1,6 +1,7 @@
 #!/bin/bash
 
 REPO_TYPE=$(get-repo-type)
+FROM="origin"
 
 if [[ -z "$REPO_TYPE" ]]; then
   echo "Repo not detected"
@@ -21,11 +22,11 @@ if [ "$REPO_TYPE" == "git" ]; then
   # TODO check if changed https://stackoverflow.com/a/52307619
   # git remote update ; git status -uno
 
-  git remote update
+  git remote update $FROM 
 
   #git status -uno
 
-  git fetch
+  git fetch $FROM
 
   #PULL_REQUIRED=$(git status -uno | grep 'Your branch is behind')
 
@@ -42,15 +43,15 @@ if [ "$REPO_TYPE" == "git" ]; then
 
       BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
       LOCAL_COMMIT=$(git_last_commit_from_branch $BRANCH)
-      REMOTE_COMMIT=$(git_last_commit_from_branch origin/$BRANCH)
+      REMOTE_COMMIT=$(git_last_commit_from_branch $FROM/$BRANCH)
 
       if [[ -n "$REMOTE_COMMIT" ]]; then
         if [[ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]]; then
           echo "Local and origin last commits differ ($LOCAL_COMMIT and $REMOTE_COMMIT)"
 
           echo
-          echo "Origin commit:"
-          git log -n 1 origin/$BRANCH
+          echo "$FROM commit:"
+          git log -n 1 $FROM/$BRANCH
           echo
 
           BRANCH_DIVERGED="Branch diverged"
@@ -72,7 +73,7 @@ if [ "$REPO_TYPE" == "git" ]; then
     exit;
   fi
 
-  ( set -x; git pull)
+  ( set -x; git pull $FROM)
 
   echo
   echo "Commit after pull:"
