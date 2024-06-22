@@ -26,6 +26,9 @@ bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selectio
 bind status v !sh -c 'nvim %(file)'
 bind status P !push
 
+# open with default app by zsh 
+bind status z !zsh -i -c '%(file)'
+
 bind main & ?git commit --fixup=%(commit)
 bind main * ?git commit --fixup=%(commit)
 bind main P !push
