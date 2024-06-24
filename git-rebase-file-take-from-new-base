@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# https://stackoverflow.com/questions/6650215/how-to-keep-the-local-file-or-the-remote-file-during-merge-using-git-and-the-com
+# https://stackoverflow.com/questions/6650215/how-to-keep-the-local-file-or-the-remote-file-during-merge-using-git-and-the-com
+
+# The reason the "ours" and "theirs" notions get swapped around during rebase is that rebase works by doing a series of cherry-picks, into an anonymous branch (detached HEAD mode). The target branch is the anonymous branch, and the merge-from branch is your original (pre-rebase) branch: so "--ours" means the anonymous one rebase is building while "--theirs" means "our branch being rebased".
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: git-rebase-file-take-from-new-base FILE_PATH"
+  exit
+fi
+
+git checkout --ours "$@"
+
