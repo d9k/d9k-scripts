@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: git-mergetool-file-rerun FILE_PATH"
+  exit
+fi
+
+git checkout --merge "$@"
