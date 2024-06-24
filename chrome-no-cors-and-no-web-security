@@ -10,4 +10,6 @@ chrome \
   --disable-site-isolation-trials \
   --disable-gpu \
   --allow-running-insecure-content
+#  --ignore-certificate-error \
+#  --ignore-ssl-errors
 
