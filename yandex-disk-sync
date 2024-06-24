@@ -1,0 +1,7 @@
+#!/bin/bash
+
+yandex-disk start 
+
+watch yandex-disk status
+
+yandex-disk stop 
