@@ -90,10 +90,6 @@
         "command": "-workbench.action.showCommands"
     },
     {
-        "key": "f1",
-        "command": "workbench.action.quickOpen"
-    },
-    {
         "key": "ctrl+p",
         "command": "workbench.action.quickOpen",
         "when": "!vim.active || vim.mode != 'Insert'"
@@ -305,5 +301,14 @@
   {
     "key": "alt+n",
     "command": "workbench.action.files.newUntitledFile"
+  },
+  {
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f8",
+    "command": "go-to-next-error.next.error"
   }
 ]
