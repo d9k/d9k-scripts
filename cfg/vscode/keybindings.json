@@ -95,6 +95,11 @@
     },
     {
         "key": "ctrl+p",
+        "command": "workbench.action.quickOpen",
+        "when": "!vim.active || vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+p",
         "command": "-workbench.action.quickOpen"
     },
     {
@@ -103,18 +108,9 @@
         "when": "editorFocus"
     },
     {
-    "key": "ctrl+shift+d",
-        "command": "editor.action.copyLinesDownAction",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
         "key": "ctrl+shift+alt+down",
         "command": "-editor.action.copyLinesDownAction",
         "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+p",
-        "command": "workbench.action.quickOpen"
     },
     {
         "key": "ctrl+alt+w",
@@ -295,5 +291,19 @@
     "key": "alt+c",
     "command": "copyRelativeFilePath",
     "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "extension.vim_ctrl+u",
+    "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+x",
+    "command": "-extension.vim_ctrl+x",
+    "when": "editorTextFocus && vim.active && vim.use<C-x> && !inDebugRepl"
+  },
+  {
+    "key": "alt+n",
+    "command": "workbench.action.files.newUntitledFile"
   }
 ]

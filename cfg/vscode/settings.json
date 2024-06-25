@@ -165,6 +165,14 @@
         "redo"
       ]
     },
+    {
+      "before": [
+        "<C-c>"
+      ],
+      "commands": [
+        "editor.action.clipboardCopyAction"
+      ]
+    },
   ],
   "vim.normalModeKeyBindings": [
     {
