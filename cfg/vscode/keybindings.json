@@ -121,11 +121,6 @@
         "command": "workbench.action.splitEditorDown"
     },
     {
-        "key": "ctrl+e",
-        "command": "editor.action.deleteLines",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
         "key": "ctrl+shift+k",
         "command": "-editor.action.deleteLines",
         "when": "textInputFocus && !editorReadonly"
@@ -310,5 +305,9 @@
   {
     "key": "f8",
     "command": "go-to-next-error.next.error"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "-workbench.action.quickOpen"
   }
 ]

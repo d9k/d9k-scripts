@@ -138,7 +138,7 @@
   "editor.lineNumbers": "relative",
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
-  "vim.vimrc.path": "$HOME/.vscode.vimrc",
+  "vim.vimrc.path": "$HOME/.config/Code/User/.vscode.vimrc",
   "vim.vimrc.enable": true,
   "vim.camelCaseMotion.enable": true,
   "vim.insertModeKeyBindings": [
@@ -181,6 +181,14 @@
       ],
       "commands": [
         "actions.find"
+      ]
+    },
+    {
+      "before": [
+        "<C-e>"
+      ],
+      "after": [
+        "<C-u>"
       ]
     }
   ],
