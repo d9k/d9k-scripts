@@ -58,6 +58,9 @@
       // "editorGroupHeader.tabsBackground": "#254149",
       "editorGroupHeader.tabsBackground": "#333a3d",
       "editorLineNumber.activeForeground": "#b0b0ff",
+
+      // hide active line number for extension "Double Line Numbers"
+      // "editorLineNumber.activeForeground": "#161d20",
       "tab.activeBackground": "#33474b"
         }
     },
@@ -135,7 +138,12 @@
   //   // "**/index.vue": "${filename} - <${dirname}> (${extname})"
   //   "**/index.vue": "<${dirname}>"
   // }
-  "editor.lineNumbers": "relative",
+
+  /** Both relative and abs. line numbers with extension "Double Line Numbers" */
+  // "editor.lineNumbers": "relative",
+  "editor.lineNumbers": "on",
+  "editor.glyphMargin": true,
+
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.config/Code/User/.vscode.vimrc",
