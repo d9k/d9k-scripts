@@ -358,5 +358,9 @@
   {
     "key": "alt+2",
     "command": "outline.focus"
+  },
+  {
+    "key": "ctrl+shift+alt+f",
+    "command": "search.action.focusSearchList"
   }
 ]
