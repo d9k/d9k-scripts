@@ -20,6 +20,8 @@
     // "typescriptreact": "Material Theme"
     },
     "workbench.colorCustomizations": {
+    "statusBar.background": "#0b0b0b",
+    "statusBar.foreground": "#bfffff",
         "[Community Material Theme Palenight High Contrast]": {
             "editor.background": "#1b150c"
         },
