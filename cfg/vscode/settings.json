@@ -60,7 +60,6 @@
       // "editorGroupHeader.tabsBackground": "#254149",
       "editorGroupHeader.tabsBackground": "#333a3d",
       "editorLineNumber.activeForeground": "#b0b0ff",
-
       // hide active line number for extension "Double Line Numbers"
       // "editorLineNumber.activeForeground": "#161d20",
       "tab.activeBackground": "#33474b"
@@ -126,10 +125,13 @@
   "editor.largeFileOptimizations": false,
   "cSpell.language": "en,ru",
   "cSpell.userWords": [
+    "composables",
     "Devino",
     "openapi",
     "pinia",
-    "sber"
+    "sber",
+    "unref",
+    "VITE"
   ],
   "editor.unicodeHighlight.nonBasicASCII": false,
   "javascript.preferences.importModuleSpecifier": "non-relative",
@@ -140,27 +142,33 @@
   //   // "**/index.vue": "${filename} - <${dirname}> (${extname})"
   //   "**/index.vue": "<${dirname}>"
   // }
-
+  // -----
   /** Both relative and abs. line numbers with extension "Double Line Numbers" */
   // "editor.lineNumbers": "relative",
   "editor.lineNumbers": "on",
   "editor.glyphMargin": true,
-
+  // -----
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.config/Code/User/.vscode.vimrc",
   "vim.vimrc.enable": true,
   "vim.camelCaseMotion.enable": true,
+  // -----
+  "editor.cursorSurroundingLines": 8,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "#5CFAC0",
+  "vim.highlightedyank.duration": 472,
+  // -----
   "vim.insertModeKeyBindings": [
-    {
-      "before": [
-        "g",
-        "d"
-      ],
-      "commands": [
-        "editor.actions.revealDefinition"
-      ]
-    },
+    // {
+    //   "before": [
+    //     "g",
+    //     "d"
+    //   ],
+    //   "commands": [
+    //     "editor.actions.revealDefinition"
+    //   ]
+    // },
     {
       "before": "u",
       "commands": [
@@ -183,8 +191,139 @@
         "editor.action.clipboardCopyAction"
       ]
     },
+    {
+      "before": [
+        "<C-a>"
+      ],
+      "commands": [
+        "editor.action.selectAll"
+      ]
+    }
   ],
   "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<C-f>",
+      ],
+      "commands": [
+        "actions.find"
+      ]
+    },
+    {
+      "before": [
+        "<C-e>"
+      ],
+      "after": [
+        // scroll 1/2 page up
+        "<C-u>"
+      ]
+    },
+    // https://dev.to/ansonh/10-vs-code-vim-tricks-to-boost-your-productivity-1b0n#5-lsp-keybindings
+    {
+      "before": [
+        "g",
+        "d"
+      ],
+      "commands": [
+        "editor.action.peekDefinition",
+        // "editor.actions.revealDefinition"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "q"
+      ],
+      "commands": [
+        "editor.action.quickFix"
+      ]
+    },
+    // https://dev.to/ansonh/10-vs-code-vim-tricks-to-boost-your-productivity-1b0n#6-scroll-in-show-hover
+    {
+      "before": [
+        "g",
+        "h"
+      ],
+      "commands": [
+        // "editor.action.showDefinitionPreviewHover"
+        "editor.action.showHover",
+        // focus hover
+        "editor.action.showHover"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "i"
+      ],
+      "commands": [
+        "editor.action.goToImplementation"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "r"
+      ],
+      "commands": [
+        "editor.action.referenceSearch.trigger"
+      ]
+    },
+    // "g p" - "go peek" keys
+    {
+      "before": [
+        "g",
+        "p",
+        "d"
+      ],
+      "commands": [
+        "editor.action.peekDefinition",
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "p",
+        "i"
+      ],
+      "commands": [
+        "editor.action.peekImplementation"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "p",
+        "t"
+      ],
+      "commands": [
+        "editor.action.peekTypeDefinition"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "p",
+        "h"
+      ],
+      "commands": [
+        "editor.action.showDefinitionPreviewHover"
+      ]
+    },
+    // "g n" - "go navigate" - keys
+    {
+      "before": [
+        "g",
+        "n",
+        "d"
+      ],
+      "commands": [
+        "editor.action.revealDefinition"
+        // "editor.action.peekDefinition",
+      ]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
     {
       "before": [
         "<C-f>",
@@ -202,14 +341,5 @@
       ]
     }
   ],
-  "vim.visualModeKeyBindings": [
-    {
-      "before": [
-        "<C-f>",
-      ],
-      "commands": [
-        "actions.find"
-      ]
-    }
-  ]
+  "workbench.editor.editorActionsLocation": "hidden"
 }
