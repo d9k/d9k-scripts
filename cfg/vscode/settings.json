@@ -153,6 +153,7 @@
   "vim.vimrc.path": "$HOME/.config/Code/User/.vscode.vimrc",
   "vim.vimrc.enable": true,
   "vim.camelCaseMotion.enable": true,
+  "editor.peekWidgetDefaultFocus": "editor",
   // -----
   "editor.cursorSurroundingLines": 8,
   "vim.highlightedyank.enable": true,
