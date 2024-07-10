@@ -1,3 +1,8 @@
+[/]
+custom-list=['custom63', 'custom61', 'custom60', 'custom59', 'custom58', 'custom57', 'custom53', 'custom52', 'custom51', 'custom49', 'custom47', 'custom45', 'custom46', 'custom40', 'custom39', 'custom38', 'custom37', 'custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom5', 'custom6', 'custom8', 'custom9', 'custom10', 'custom11', 'custom12', 'custom13', 'custom14', 'custom15', 'custom16', 'custom17', 'custom20', 'custom21', 'custom25', 'custom26', 'custom27', 'custom28', 'custom18', 'custom22', 'custom23', 'custom24', 'custom19', 'custom29', 'custom30', 'custom31', 'custom32', 'custom33', 'custom34', 'custom35', 'custom36', 'custom41', 'custom42', 'custom43', 'custom44', 'custom48', 'custom50', 'custom7', 'custom54', 'custom55', 'custom56', 'custom62']
+looking-glass-keybinding=@as []
+show-desklets=@as []
+
 [custom-keybindings/custom0]
 binding=@as []
 command='/home/d9k/scripts/win/focus_emacs.sh'
@@ -8,65 +13,25 @@ binding=['<Primary><Alt>Delete']
 command='/home/d9k/scripts/win/focus_taskman.sh'
 name='taskman'
 
-[custom-keybindings/custom2]
-binding=['<Super>4']
-command='/home/d9k/scripts/win/focus_tortoisehg.sh'
-name='thg'
-
-[custom-keybindings/custom3]
-binding=['<Primary><Super>k']
-command='/home/d9k/scripts/win/focus_keepassx.sh'
-name='keepassx'
-
-[custom-keybindings/custom4]
-binding=['Print']
-command='gnome-screenshot -a --interactive'
-name='gnome-screenshot'
-
-[custom-keybindings/custom5]
-binding=@as []
-command='/home/d9k/scripts/win/focus_chrome.sh'
-name='focus_chrome'
-
 [custom-keybindings/custom10]
-binding=['<Alt><Super>Left', 'Back']
-command='/home/d9k/scripts/bright -'
+binding=['Back']
+command='/home/d9k/scripts/win/backlight -2'
 name='bright -'
-
-[custom-keybindings/custom6]
-binding=['<Primary>grave']
-command='/home/d9k/scripts/win/focus_terminal.sh'
-name='focus_terminal.sh'
 
 [custom-keybindings/custom11]
 binding=['<Primary><Super>s']
 command='/home/d9k/scripts/win/focus_textadept.sh'
 name='textadept'
 
-[custom-keybindings/custom7]
-binding=['<Primary>backslash']
-command='/home/d9k/scripts/take_screenshot.sh'
-name='take_screenshot.sh'
-
 [custom-keybindings/custom12]
 binding=['<Super>1']
-command='/home/d9k/scripts/win/focus_browser.sh'
+command='/home/d9k/scripts/win/focus_chrome-fix-suspend.sh'
 name='browser'
-
-[custom-keybindings/custom8]
-binding=['<Super>e']
-command='/home/d9k/scripts/win/focus_doublecmd.sh'
-name='focus_doublecmd.sh'
 
 [custom-keybindings/custom13]
 binding=['<Primary>Forward']
 command='/home/d9k/scripts/win/key-next-tab.sh'
 name='next tab'
-
-[custom-keybindings/custom9]
-binding=['<Alt><Super>Right', 'Forward']
-command='/home/d9k/scripts/bright +'
-name='bright +'
 
 [custom-keybindings/custom14]
 binding=['<Primary>Back']
@@ -74,51 +39,329 @@ command='/home/d9k/scripts/win/key-prev-tab.sh'
 name='prev tab'
 
 [custom-keybindings/custom15]
-binding=['<Super>z']
+binding=['<Super>x']
 command='/home/d9k/scripts/win/focus_telegram.sh'
 name='Telegram'
 
 [custom-keybindings/custom16]
-binding=['<Super>3']
-command='/home/d9k/scripts/win/focus_heidisql.sh'
-name='heidisql'
+binding=['<Super>q']
+command='/home/d9k/scripts/win/focus-db-client.sh'
+name='db client'
 
 [custom-keybindings/custom17]
-binding=['<Super>2']
+binding=['<Super>3']
 command='/home/d9k/scripts/win/focus_ide.sh'
 name='focus_ide'
 
 [custom-keybindings/custom18]
-binding=['<Super>s']
-command='/home/d9k/scripts/win/say-selection.sh'
-name='say selection'
+binding=['<Super>y', '<Shift><Super>q', '<Super>w']
+command='/home/d9k/scripts/win/say-selection-rhvoice.sh'
+name='say-selection-rhvoice'
 
 [custom-keybindings/custom19]
-binding=['<Super>q']
-command='/home/d9k/scripts/win/say-selection-ru.sh'
-name='say selection ru'
+binding=@as []
+command='/home/d9k/scripts/win/focus_rocketchat.sh'
+name='rocketchat'
 
-[/]
-looking-glass-keybinding=@as []
-custom-list=['custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom5', 'custom6', 'custom7', 'custom8', 'custom9', 'custom10', 'custom11', 'custom12', 'custom13', 'custom14', 'custom15', 'custom16', 'custom17', 'custom18', 'custom19']
+[custom-keybindings/custom2]
+binding=@as []
+command='/home/d9k/scripts/win/focus_tortoisehg.sh'
+name='thg'
+
+[custom-keybindings/custom20]
+binding=['<Super>Page_Down']
+command='/home/d9k/scripts/win/border-remove.sh'
+name='border-remove'
+
+[custom-keybindings/custom21]
+binding=['<Super>Page_Up']
+command='/home/d9k/scripts/win/border-add.sh'
+name='border-add'
+
+[custom-keybindings/custom22]
+binding=@as []
+command='/home/d9k/scripts/win/focus_webstorm_first.sh'
+name='focus_webstorm_first'
+
+[custom-keybindings/custom23]
+binding=@as []
+command='/home/d9k/scripts/win/focus_webstorm_second.sh'
+name='focus_webstorm_second'
+
+[custom-keybindings/custom24]
+binding=['<Super>4']
+command='/home/d9k/scripts/win/focus_webstorm_third.sh'
+name='focus_webstorm_third'
+
+[custom-keybindings/custom25]
+binding=['<Primary><Alt>Insert']
+command='/home/d9k/scripts/win/spotify-stop.sh'
+name='spotify pause'
+
+[custom-keybindings/custom26]
+binding=['<Primary><Alt>Page_Down']
+command='/home/d9k/scripts/win/spotify-next.sh'
+name='spotify next'
+
+[custom-keybindings/custom27]
+binding=['<Primary><Alt>Page_Up']
+command='/home/d9k/scripts/win/spotify-previous.sh'
+name='spotify previous'
+
+[custom-keybindings/custom28]
+binding=['<Primary><Alt>Home']
+command='/home/d9k/scripts/win/focus_spotify.sh'
+name='spotify'
+
+[custom-keybindings/custom29]
+binding=['<Shift>F12']
+command='/home/d9k/scripts/win/shift-f12.sh'
+name='shift-F12'
+
+[custom-keybindings/custom3]
+binding=['<Primary><Super>k']
+command='/home/d9k/scripts/win/focus_keepassx.sh'
+name='keepassx'
+
+[custom-keybindings/custom30]
+binding=['<Shift>F11']
+command='/home/d9k/scripts/win/shift-f11.sh'
+name='shift-F11'
+
+[custom-keybindings/custom31]
+binding=['<Shift>F10']
+command='/home/d9k/scripts/win/shift-f10.sh'
+name='shift-F10'
+
+[custom-keybindings/custom32]
+binding=['<Super>5']
+command='/home/d9k/scripts/win/focus_webstorm_4.sh'
+name='focus_webstorm_4'
+
+[custom-keybindings/custom33]
+binding=['<Super>F1']
+command='/home/d9k/scripts/win/focus-vscode-num.sh'
+name='focus_vscode'
+
+[custom-keybindings/custom34]
+binding=['<Super>F2']
+command='/home/d9k/scripts/win/focus-vscode-num.sh 2'
+name='focus_vscode 2'
+
+[custom-keybindings/custom35]
+binding=['<Super>equal']
+command='/home/d9k/scripts/win/set-opacity.sh +3'
+name='opacity +3'
+
+[custom-keybindings/custom36]
+binding=['<Super>minus']
+command='/home/d9k/scripts/win/set-opacity.sh -3'
+name='opacity -3'
+
+[custom-keybindings/custom37]
+binding=['<Super>0']
+command='/home/d9k/scripts/win/set-opacity.sh 70'
+name='opacity 70'
+
+[custom-keybindings/custom38]
+binding=['<Super>BackSpace']
+command='/home/d9k/scripts/win/set-opacity.sh 100'
+name='opacity 100'
+
+[custom-keybindings/custom39]
+binding=@as []
+command='/home/d9k/scripts/win/focus-vscode-diary.sh'
+name='diary'
+
+[custom-keybindings/custom4]
+binding=['<Primary><Shift>Print']
+command='gnome-screenshot -a --interactive'
+name='gnome-screenshot'
+
+[custom-keybindings/custom40]
+binding=@as []
+command='/home/d9k/scripts/win/focus-vscode-textbook.sh'
+name='textbook'
+
+[custom-keybindings/custom41]
+binding=['<Super>s']
+command='/home/d9k/scripts/win/focus-vscode-scripts.sh'
+name='vscode-scripts'
+
+[custom-keybindings/custom42]
+binding=['<Super>F3']
+command='/home/d9k/scripts/win/focus-vscode-num.sh 3'
+name='focus_vscode 3'
+
+[custom-keybindings/custom43]
+binding=['<Super>F4']
+command='/home/d9k/scripts/win/focus-vscode-num.sh 4'
+name='focus_vscode 4'
+
+[custom-keybindings/custom44]
+binding=['<Alt><Super>b', '<Alt><Super>Cyrillic_i']
+command='/home/d9k/scripts/win/volume-up'
+name='volume up 1%'
+
+[custom-keybindings/custom45]
+binding=['<Alt><Super>Left']
+command='/home/d9k/scripts/win/brightness-smart -1'
+name='bright-smart -'
+
+[custom-keybindings/custom46]
+binding=['<Alt><Super>Right']
+command='/home/d9k/scripts/win/brightness-smart +1'
+name='bright-smart +'
+
+[custom-keybindings/custom47]
+binding=['<Super>d', '<Shift><Super>y']
+command='/home/d9k/scripts/win/focus-obsidian.sh'
+name='obsidian'
+
+[custom-keybindings/custom48]
+binding=['<Super>e']
+command='/home/d9k/scripts/win/run-selection-in-terminal.sh'
+name='run-selection-in-terminal'
+
+[custom-keybindings/custom49]
+binding=['<Super>n']
+command='/home/d9k/scripts/win/chrome-devtools-copy-token.sh'
+name='chrome-devtools-copy-token'
+
+[custom-keybindings/custom5]
+binding=@as []
+command='/home/d9k/scripts/win/focus_chrome.sh'
+name='focus_chrome'
+
+[custom-keybindings/custom50]
+binding=['<Super>b']
+command='/home/d9k/scripts/win/chrome-devtools-copy-token.sh'
+name='chrome-devtools-copy-token'
+
+[custom-keybindings/custom51]
+binding=['<Super>m']
+command='/home/d9k/scripts/win/chrome-devtools-copy-curl-mod.sh'
+name='chrome-devtools-copy-curl'
+
+[custom-keybindings/custom52]
+binding=['<Super>t']
+command='/home/d9k/scripts/win/selection-curl-args-transform.sh'
+name='selection-curl-args-transform'
+
+[custom-keybindings/custom53]
+binding=['Print']
+command='/home/d9k/scripts/win/focus_shutter.sh'
+name='shutter'
+
+[custom-keybindings/custom54]
+binding=['<Super>z']
+command='/home/d9k/scripts/win/focus_discord.sh'
+name='discord'
+
+[custom-keybindings/custom55]
+binding=['<Alt><Super>v', '<Alt><Super>Cyrillic_em']
+command='/home/d9k/scripts/win/volume-down'
+name='volume down 1%'
+
+[custom-keybindings/custom56]
+binding=['<Super>2']
+command='/home/d9k/scripts/win/focus_firefox.sh'
+name='focus_firefox'
+
+[custom-keybindings/custom57]
+binding=['<Super>k']
+command='/home/d9k/scripts/win/mouse-up.sh'
+name='mouse up'
+
+[custom-keybindings/custom58]
+binding=['<Super>j']
+command='/home/d9k/scripts/win/mouse-down.sh'
+name='mouse down'
+
+[custom-keybindings/custom59]
+binding=['<Super>h']
+command='/home/d9k/scripts/win/mouse-left.sh'
+name='mouse left'
+
+[custom-keybindings/custom6]
+binding=['<Super>a', '<Primary>grave']
+command='/home/d9k/scripts/win/focus_terminal.sh'
+name='focus_terminal.sh'
+
+[custom-keybindings/custom60]
+binding=['<Super>l']
+command='/home/d9k/scripts/win/mouse-right.sh'
+name='mouse right'
+
+[custom-keybindings/custom61]
+binding=['<Super>u']
+command='/home/d9k/scripts/win/mouse-click-left.sh'
+name='mouse click left'
+
+[custom-keybindings/custom62]
+binding=['<Super>o']
+command='/home/d9k/scripts/win/mouse-click-right.sh'
+name='mouse click right'
+
+[custom-keybindings/custom63]
+binding=['<Super>p']
+command='/home/d9k/scripts/win/emulate-menu-key.sh'
+name='Context menu key'
+
+[custom-keybindings/custom7]
+binding=['<Primary>backslash']
+command='/home/d9k/scripts/take_screenshot_optimized.sh'
+name='take_screenshot_optimized'
+
+[custom-keybindings/custom8]
+binding=['<Super>f']
+command='/home/d9k/scripts/win/focus_doublecmd.sh'
+name='focus_doublecmd.sh'
+
+[custom-keybindings/custom9]
+binding=['Forward']
+command='/home/d9k/scripts/win/backlight +2'
+name='bright +'
 
 [media-keys]
-screen-brightness-down=['XF86MonBrightnessDown']
-screenshot=@as []
+area-screenshot-clip=@as []
+hibernate=['<Shift><Super>F12', 'Launch1']
+home=['XF86Explorer']
 logout=@as []
+screen-brightness-down=['XF86MonBrightnessDown']
+screen-brightness-up=['XF86MonBrightnessUp']
+screensaver=['<Alt><Super>l', '<Primary><Shift><Alt>l', '<Shift><Super>l']
+screenshot=@as []
+search=['XF86Search', '<Primary><Alt>End']
+shutdown=['<Primary><Alt>Multi_key', 'XF86PowerOff']
+suspend=['XF86Sleep']
+video-rotation-lock=@as []
 volume-down=['XF86AudioLowerVolume', '<Alt><Super>Down']
 volume-up=['XF86AudioRaiseVolume', '<Alt><Super>Up']
-screen-brightness-up=['XF86MonBrightnessUp']
-hibernate=['XF86Suspend', 'Launch1', '<Shift><Super>l']
-home=['XF86Explorer']
-screensaver=['<Super>l', 'XF86ScreenSaver']
-suspend=['XF86Sleep', '<Shift><Super>l']
 
 [wm]
-panel-run-dialog=['<Alt>F2', '<Super>r']
+begin-move=['<Alt>F7', '<Alt><Super>space']
+begin-resize=['<Alt>F8', '<Super>space']
+decrease-opacity=['<Alt>minus']
+increase-opacity=['<Alt>equal']
 minimize=['<Super>Down']
-push-tile-down=@as []
+move-to-center=@as []
+move-to-side-e=['<Super>Right']
+move-to-side-w=['<Super>Left']
+panel-run-dialog=['<Alt>F2', '<Super>r']
 push-snap-up=@as []
+push-tile-down=@as []
+push-tile-left=@as []
+push-tile-right=@as []
 push-tile-up=@as []
+show-desktop=['<Super>period', '<Shift><Super>d']
+switch-group=['<Alt>grave', '<Super>grave']
+switch-monitor=['XF86Display']
+switch-to-workspace-left=['<Primary><Super>minus']
+switch-to-workspace-right=['<Primary><Super>equal']
+switch-windows=['<Alt>Tab', '<Super>Tab']
+switch-windows-backward=['<Shift><Super>Tab']
+toggle-above=['<Alt><Super>Return']
 toggle-fullscreen=['<Primary><Super>Up']
 toggle-maximized=['<Alt>F10', '<Super>Up']
+toggle-on-all-workspaces=@as []
