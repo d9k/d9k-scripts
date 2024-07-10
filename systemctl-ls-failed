@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# [systemd - How to list all enabled services from systemctl? - Ask Ubuntu](https://askubuntu.com/questions/795226/how-to-list-all-enabled-services-from-systemctl)
+# systemctl list-unit-files "$@"
+
+# --state=running,enabled,failed,generated
+systemctl list-units --type=service --state=failed "$@"
