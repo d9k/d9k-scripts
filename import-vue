@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# nix profile install nixpkgs#fzf
+# nix profile install nixpkgs#silver-searcher
+
+set -x
+# FILE=$(find . -name "*.vue" | fzf)
+#
+#
+FILE_PATH_REL=$(ag -g "\.vue$" | sort -r | fzf)
+
+PATH_ALIAS_SRC="@"
+
+if [[ -z "$FILE_PATH_REL" ]]; then
+  echo "File was not selected. Exitting"
+  exit 1
+fi
+
+FILE_EXTENSION=$(echo "$FILE_PATH_REL" | rev | cut -f 1 -d '.' | rev)
+FILE_PATH_NO_EXT=$(echo "$FILE_PATH_REL" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+# echo "$FILE_PATH_REL"
+# echo "$FILE_PATH_NO_EXT"
+
+function gen_component_name { N="$1"
+  # echo $(echo "$N" | tr '[:upper:]' '[:lower:]' | sed 's/.*/\u&/')
+  echo $(echo "$N" | sed 's/.*/\u&/')
+}
+
+NAME_SEGMENT_LAST=$(basename "$FILE_PATH_NO_EXT")
+
+COMPONENT_NAME=$(gen_component_name "$NAME_SEGMENT_LAST")
+
+if [[ "$COMPONENT_NAME" == "Index" ]]; then
+  PATH_STRIPPED=$(dirname "$FILE_PATH_NO_EXT")
+  NAME_SEGMENT_BEFORE_LAST=$(basename "$PATH_STRIPPED")
+  COMPONENT_NAME=$(gen_component_name "$NAME_SEGMENT_BEFORE_LAST")
+fi
+
+# echo "$COMPONENT_NAME"
+
+CODE="import ${COMPONENT_NAME} from '${FILE_PATH_REL}';"
+
+if [ -n "${PATH_ALIAS_SRC}" ]; then
+  CODE=$(echo "$CODE" | sed "s|^src/|${PATH_ALIAS_SRC}/|")
+fi
+
+echo "$CODE"
+
+echo "$CODE" | xclip -selection c
