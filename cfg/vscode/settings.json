@@ -85,6 +85,7 @@
     "editor.minimap.enabled": false,
     "editor.scrollbar.verticalScrollbarSize": 8,
     "editor.scrollbar.vertical": "visible",
+    "terminal.integrated.fontFamily": "monospace",
     "remote.SSH.showLoginTerminal": true,
     "remote.SSH.useLocalServer": false,
     "remote.SSH.remotePlatform": {
@@ -133,6 +134,15 @@
     "unref",
     "VITE"
   ],
+  // https://marketplace.visualstudio.com/items?itemName=usernamehw.commands
+  "command-runner.terminal.name": "runCommand",
+  "command-runner.terminal.autoClear": true,
+  "command-runner.terminal.autoFocus": true,
+  "command-runner.commands": {
+    "echo workspaceFolder": "echo ${workspaceFolder}",
+    "echo file": "echo ${file}",
+    "import vue file": "/home/d9k/scripts/import-vue ${file} ${lineNumber}",
+  },
   "editor.unicodeHighlight.nonBasicASCII": false,
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -311,7 +321,7 @@
         "editor.action.showDefinitionPreviewHover"
       ]
     },
-    // "g n" - "go navigate" - keys
+    // "g n" - "go navigate"
     {
       "before": [
         "g",
@@ -320,7 +330,68 @@
       ],
       "commands": [
         "editor.action.revealDefinition"
-        // "editor.action.peekDefinition",
+      ]
+    },
+    // tasks
+    {
+      "before": [
+        "<leader>",
+        "t"
+      ],
+      "commands": [
+        "workbench.action.tasks.runTask"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        "workbench.action.files.save",
+        "terminal.focus",
+        "command-runner.run"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "`"
+      ],
+      "commands": [
+        "terminal.focus",
+      ]
+    },
+    // git peek
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "p"
+      ], // Peek Git diff for the changed line
+      "commands": [
+        "editor.action.dirtydiff.next"
+      ]
+    },
+    // jump to prev/next git changes
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "j"
+      ], // Jump to next Git change
+      "commands": [
+        "workbench.action.editor.nextChange"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g",
+        "k"
+      ], // Jump to previous Git change
+      "commands": [
+        "workbench.action.editor.previousChange"
       ]
     }
   ],

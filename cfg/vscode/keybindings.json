@@ -400,4 +400,27 @@
     "command": "togglePeekWidgetFocus",
     "when": "inReferenceSearchEditor || referenceSearchVisible"
   },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-solargraph.search"
+  },
+  {
+    "key": "alt+z",
+    "command": "-workbench.action.terminal.sizeToContentWidth",
+    "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen || terminalFocus && terminalIsOpen && terminalProcessSupported"
+  },
+  {
+    "key": "alt+z",
+    "command": "-editor.action.toggleWordWrap"
+  },
+  {
+    "key": "alt+z",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusActiveEditorGroup",
+        "workbench.action.closePanel"
+      ]
+    }
+  },
 ]
