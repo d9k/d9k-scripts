@@ -3,6 +3,28 @@
 # nix profile install nixpkgs#fzf
 # nix profile install nixpkgs#silver-searcher
 
+# VSCode integration:
+#
+# tasks.json:
+#  "tasks": [
+#    {
+#      "label": "import vue file",
+#      "type": "shell",
+#      "command": "zsh -i -c \"/home/d9k/scripts/import-vue ${file} ${lineNumber}\"",
+#      "presentation": {
+#        "echo": true,
+#        "reveal": "always",
+#        "focus": true,
+#        "panel": "new",
+#        "clear": true
+#      },
+#      "problemMatcher": []
+#    }
+#  ]
+
+OUTPUT_FILE="$1"
+OUTPUT_LINE_NUMBER="$2"
+
 set -x
 # FILE=$(find . -name "*.vue" | fzf)
 #
@@ -45,6 +67,16 @@ if [ -n "${PATH_ALIAS_SRC}" ]; then
   CODE=$(echo "$CODE" | sed "s|^src/|${PATH_ALIAS_SRC}/|")
 fi
 
-echo "$CODE"
+if [[ -z "$OUTPUT_FILE" ]]; then
+  echo "$CODE"
+  echo "$CODE" | xclip -selection c
+  exit
+fi
 
-echo "$CODE" | xclip -selection c
+if [[ -z "$OUTPUT_LINE_NUMBER" ]]; then
+  OUTPUT_LINE_NUMBER=2
+fi
+
+sed -i "${OUTPUT_LINE_NUMBER} i ${CODE}" "${OUTPUT_FILE}"
+
+echo "Pasted to \"$OUTPUT_FILE\" at line $OUTPUT_LINE_NUMBER"
