@@ -257,7 +257,7 @@
     "command": "workbench.action.closeActiveEditor"
   },
   {
-    "key": "alt+e",
+    "key": "alt+r",
     "command": "workbench.action.previousEditorInGroup"
   },
   {
@@ -423,4 +423,19 @@
       ]
     }
   },
+  {
+    "key": "alt+r",
+    "command": "-workbench.action.terminal.toggleFindRegex",
+    "when": "terminalFindVisible && terminalHasBeenCreated || terminalFindVisible && terminalProcessSupported"
+  },
+  {
+    "key": "alt+d",
+    "command": "extension.vim_ctrl+d",
+    "when": "editorTextFocus && vim.active && vim.use<C-d> && !inDebugRepl"
+  },
+  {
+    "key": "alt+e",
+    "command": "extension.vim_ctrl+u",
+    "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
+  }
 ]
