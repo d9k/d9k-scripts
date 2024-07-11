@@ -316,7 +316,8 @@ alias default_mail_viewer=thunderbird
 alias default_office_editor=libreoffice
 alias default_pdf_viewer=zathura
 alias default_markdown_editor=obsidian-open
-alias default_text_editor=ta
+#alias default_text_editor=ta
+alias default_text_editor=nvim
 alias default_torrent_app=qbittorrent
 alias default_video_player=smplayer
 alias default_windows_emulator=wine
@@ -338,6 +339,7 @@ alias -s ini=default_text_editor
 alias -s json=default_text_editor
 alias -s md=default_markdown_editor
 alias -s mp3=default_audio_player
+alias -s mov=default_video_player
 alias -s mp4=default_video_player
 alias -s mkv=default_video_player
 alias -s pdf=default_pdf_viewer
@@ -381,3 +383,94 @@ fi
 source_if_exists /etc/profile.d/rvm.sh
 
 source_if_exists ~/scripts/cfg/zsh-submodules/zsh-yarn-completions/zsh-yarn-completions.plugin.zsh
+[[ "$PATH" == *"$HOME/bin:"* ]] || export PATH="$HOME/bin:$PATH"
+! { which werf | grep -qsE "^/home/d9k/.trdl/"; } && [[ -x "$HOME/bin/trdl" ]] && source $("$HOME/bin/trdl" use werf "1.2" "stable")
+
+# bun completions
+[ -s "/home/d9k/.bun/_bun" ] && source "/home/d9k/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bum
+export BUM_INSTALL="$HOME/.bum"
+export PATH="$BUM_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/d9k/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# vim mode
+# https://github.com/jeffreytse/zsh-vi-mode - A better and friendly vi(vim) mode plugin for ZSH.
+ZSH_VIM_MODE_PLUGIN_PATH="/home/d9k/.zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+
+alias cbread='xclip -selection c'
+alias cbprint='xclip -o -selection clipboard'
+
+if [[ -f "$ZSH_VIM_MODE_PLUGIN_PATH" ]]; then
+  if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+    source "$ZSH_VIM_MODE_PLUGIN_PATH"
+
+  #  zvm_vi_yank () {
+  #	  zvm_yank
+  #  	printf %s "${CUTBUFFER}" | xclip -sel c
+  #	  zvm_exit_visual_mode
+  #  }
+
+    # https://github.com/jeffreytse/zsh-vi-mode/issues/19#issuecomment-1268057812
+
+    my_zvm_vi_yank() {
+      zvm_vi_yank
+      echo -en "${CUTBUFFER}" | cbread
+    }
+
+    my_zvm_vi_delete() {
+      zvm_vi_delete
+      echo -en "${CUTBUFFER}" | cbread
+    }
+
+    my_zvm_vi_change() {
+      zvm_vi_change
+      echo -en "${CUTBUFFER}" | cbread
+    }
+
+    my_zvm_vi_change_eol() {
+      zvm_vi_change_eol
+      echo -en "${CUTBUFFER}" | cbread
+    }
+
+    my_zvm_vi_put_after() {
+      CUTBUFFER=$(cbprint)
+      zvm_vi_put_after
+      zvm_highlight clear # zvm_vi_put_after introduces weird highlighting for me
+    }
+
+    my_zvm_vi_put_before() {
+      CUTBUFFER=$(cbprint)
+      zvm_vi_put_before
+      zvm_highlight clear # zvm_vi_put_before introduces weird highlighting for me
+    }
+
+    zvm_after_lazy_keybindings() {
+      zvm_define_widget my_zvm_vi_yank
+      zvm_define_widget my_zvm_vi_delete
+      zvm_define_widget my_zvm_vi_change
+      zvm_define_widget my_zvm_vi_change_eol
+      zvm_define_widget my_zvm_vi_put_after
+      zvm_define_widget my_zvm_vi_put_before
+
+      zvm_bindkey visual 'y' my_zvm_vi_yank
+      zvm_bindkey visual 'd' my_zvm_vi_delete
+      zvm_bindkey visual 'x' my_zvm_vi_delete
+      zvm_bindkey vicmd  'C' my_zvm_vi_change_eol
+      zvm_bindkey visual 'c' my_zvm_vi_change
+      zvm_bindkey vicmd  'p' my_zvm_vi_put_after
+      zvm_bindkey vicmd  'P' my_zvm_vi_put_before
+    }
+  fi # check not VSCode
+fi
