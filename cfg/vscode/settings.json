@@ -154,8 +154,8 @@
   // }
   // -----
   /** Both relative and abs. line numbers with extension "Double Line Numbers" */
-  // "editor.lineNumbers": "relative",
-  "editor.lineNumbers": "on",
+  "editor.lineNumbers": "relative",
+  // "editor.lineNumbers": "on",
   "editor.glyphMargin": true,
   // -----
   "vim.leader": "<Space>",
