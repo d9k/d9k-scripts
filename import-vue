@@ -61,11 +61,14 @@ fi
 
 # echo "$COMPONENT_NAME"
 
-CODE="import ${COMPONENT_NAME} from '${FILE_PATH_REL}';"
+FILE_PATH_IMPORT=${FILE_PATH_REL}
 
 if [ -n "${PATH_ALIAS_SRC}" ]; then
-  CODE=$(echo "$CODE" | sed "s|^src/|${PATH_ALIAS_SRC}/|")
+  echo "!!! Replace alias"
+  FILE_PATH_IMPORT=$(echo "$FILE_PATH_IMPORT" | sed "s|^src/|${PATH_ALIAS_SRC}/|")
 fi
+
+CODE="import ${COMPONENT_NAME} from '${FILE_PATH_IMPORT}';"
 
 if [[ -z "$OUTPUT_FILE" ]]; then
   echo "$CODE"
