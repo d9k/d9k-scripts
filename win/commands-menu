@@ -1,0 +1,29 @@
+#!/bin/bash
+
+COMMAND_RUN_SELECTION_IN_TERMINAL="/home/d9k/scripts/win/run-selection-in-terminal.sh"
+COMMAND_RUN_SELECTION_IN_TERMINAL_TITLE="Run selection in terminal (Win-E)"
+
+COMMAND_SAY_SELECTION_WITH_RHVOICE="/home/d9k/scripts/win/say-selection-rhvoice.sh"
+COMMAND_SAY_SELECTION_WITH_RHVOICE_TITLE="Say selection with rhvoice (Win-Y)"
+
+# sleep 1
+# $COMMAND_RUN_SELECTION_IN_TERMINAL
+# exit
+
+read -r -d '' MENU_ITEMS << END_OF_MENU
+${COMMAND_RUN_SELECTION_IN_TERMINAL_TITLE}
+${COMMAND_SAY_SELECTION_WITH_RHVOICE_TITLE}
+END_OF_MENU
+
+RESULT=$(echo -e "$MENU_ITEMS" | rofi -dmenu)
+
+sleep 0.1
+
+case "$RESULT" in
+  "$COMMAND_RUN_SELECTION_IN_TERMINAL_TITLE" )
+    $COMMAND_RUN_SELECTION_IN_TERMINAL
+  ;;
+"$COMMAND_SAY_SELECTION_WITH_RHVOICE_TITLE" )
+    $COMMAND_SAY_SELECTION_WITH_RHVOICE
+  ;;
+esac
