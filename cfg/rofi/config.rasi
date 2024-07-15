@@ -1,0 +1,8 @@
+/** @theme "gruvbox-light" */
+/** @theme "Indego" */
+@theme "android_notification"
+
+window {
+   /* transparency */
+   background-color:  rgba ( 39, 50, 56, 92 % );
+}
