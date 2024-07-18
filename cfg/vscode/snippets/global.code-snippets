@@ -45,8 +45,8 @@
   },
   "Vue props add number": {
     "prefix": [
-      "Vue_PRops_add_Number",
-      "vpron",
+      "Vue_Props_add_Number",
+      "vpn",
     ],
     "body": [
       "id: {",
@@ -57,14 +57,68 @@
   },
   "Vue props add string": {
     "prefix": [
-      "Vue_PRops_add_String",
-      "vpros",
+      "Vue_Props_add_String",
+      "vps",
     ],
     "body": [
       "id: {",
       "  type: String,",
       "  required: true,",
       "},",
+    ]
+  },
+  "Vue props add object": {
+    "prefix": [
+      "Vue_Props_add_Object",
+      "vpo",
+    ],
+    "body": [
+      "id: {",
+      "  type: Object as PropType<>,",
+      "  required: true,",
+      "},",
+    ]
+  },
+  "Vue script tag": {
+    "prefix": [
+      "Vue_Tag_SCript",
+      "vtsc",
+    ],
+    "body": [
+      "<script setup lang=\"tsx\">",
+      "",
+      "</script>"
+    ]
+  },
+  "Vue style tag": {
+    "prefix": [
+      "Vue_Tag_STyle",
+      "vtst",
+    ],
+    "body": [
+      "<style module>",
+      "",
+      "</style>"
+    ]
+  },
+  "Vue define emits": {
+    "prefix": [
+      "Vue_Define_Emits",
+      "vde",
+    ],
+    "body": [
+      "const emit = defineEmits({",
+      "  change: (_: any) => true,",
+      "});"
+    ]
+  },
+  "Vue define options": {
+    "prefix": [
+      "Vue_Define_Options",
+      "vdo",
+    ],
+    "body": [
+      "defineOptions({ name: '' });"
     ]
   },
 }
