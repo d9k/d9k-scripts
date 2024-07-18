@@ -1,19 +1,139 @@
-alias ls='/bin/ls --color=auto'
-alias ll='/bin/ls -hlF --color=auto'
-alias lla='/bin/ls -halF --color=auto'
-alias la='/bin/ls -A --color=auto'
-alias l='/bin/ls -CF --color=auto'
+## Aliases suffixes:
+#
+# <no suffix>: run
+# +: add / additional features
+# -: revert / less
+# ,: alter/edit
+# .: stop
+
+## Meta / System
+
+function _less() {
+  $@ | less --RAW-CONTROL-CHARS
+}
+
+function aliases_temp_update() {
+  TA=$HOME/.aliases-temp
+  cat $TA
+  . $TA
+}
+
+# https://lukasmestan.com/simple-zsh-calculator/
+function =
+{
+  echo "$@" | /usr/bin/bc -l
+}
+
+alias -- -="cd -"
+alias _=echo
+alias ali='source $HOME/.aliases'
+alias apti="sudo apt install"
+alias bk='backup-conf'
+alias calc="="
+alias dfh='/usr/bin/df -h /home | grep -A 1 Avail'
+alias pa='pass'
+alias pf='pass-find'
+alias pe='pass edit'
+alias pc='pass -c'
+alias pk='sudo dpkg -i'
+alias pki='sudo dpkg -i'
+alias pkgi='sudo dpkg -i'
+alias pp='pass git pull'
+alias pw='pass-print-n-copy'
+alias pP='pass git push'
+alias PP='pass git push'
+
+## FIle system
+
+function fullpathcopy { FILE_REL="$@"
+  if [[ -z "$FILE_REL" ]]; then
+    FILE_REL='.'
+  fi
+
+  fpath "$FILE_REL" | c
+}
+
+alias cpath='fullpathcopy'
+alias el='eza -l --git --icons=always -@ --group-directories-first'
+alias ela='eza -l -a --git --icons=always -@ --group-directories-first'
+alias full='readlink -f'
+alias ful='readlink -f'
+alias fpathc='fullpathcopy'
+alias l='LC_COLLATE=C /bin/ls -CF --color=auto'
+alias l='/bin/ls -CF --color=auto -v1'
+alias la='/bin/ls -A --color=auto -v1'
+alias ll='/bin/ls -hlF --group-directories-first --color=auto -v1'
+alias lla='/bin/ls -halF --group-directories-first --color=auto -v1'
+alias lsd='ls -ld */ -v1'
+alias lel='_less eza -l --git --color=always --icons=always -@ --group-directories-first'
+alias lela='_less eza -l -a --git --color=always --icons=always -@ --group-directories-first'
+alias md='mkdir -p'
+alias tre='_less eza --tree --color=always --icons=always --group-directories-first'
+
+## FileSystem: archives
+
+
+
+## Search
+
+function findgr() {
+  #find | gr "$@"
+  find | rg -i "$@"
+}
+
 alias grep='grep --color=auto'
 
-alias dkn='diakonos '
+## Text editors
 
+alias ob='obsidian-open'
+
+## Programming
+
+# bat --list-themes
+alias ba='bat --theme "Visual Studio Dark+"'
+alias co=vscode-open
+
+
+## Version control
+
+alias add='git-add'
+alias bkbr='git-backup-branch'
+alias br=branch
+alias cln='git clone'
+alias cln1='git clone --single-branch'
+alias cmt="commit"
+alias fe='git fetch'
+alias ga="tig-all-without-backups"
 alias hgl="hg vlog"
+alias P='push'
+alias p='pull'
+alias pul='pull'
+alias -- rebase-='git rebase --abort'
+alias -- rebase+='git rebase --continue'
+alias -- rebase-continue='git rebase --continue'
+alias revert="git-revert"
+alias s='st'
 
-d9k_scripts=~/scripts
-#d9k_scripts=~/d9k-scripts
+## Global variables
 
-PATH=$PATH:~/scripts-local:${d9k_scripts}:${d9k_scripts}/meta
+export LOADED_ALIASES=1
+
+PATH=$PATH:~/scripts-local:~/scripts:$/scripts/meta
+
+# eza (ls alternative) configuration:
+# man eza_colors
+# 9 - strikethrough
+export EZA_COLORS="di=1;96:ex=1;3;32:uu=2;34:gu=90:ur=90:uw=90:ux=37:ue=37:ux=90:gr=90:gw=90:gx=37:tr=90:da=90:sn=90:nb=34:nk=37:nm=32:ng=93:nt=31:*.tar=3;93:*.zip=3;93:*.rar=3;93:*.7z=3;93:*.gz=3;93:*.tgz=3;93:*.deb=3;93:*.mp4=2;91:*.mkv=2;91:*.avi=2;91:*.webm=2;91:*.avif=31:*.mov=31:*.mp3=34:README=1;97:README.*=1;97:readme.*=1;97:.*=2:37:*.jpg=34:*.png=34:*.jpeg=34:*.webp=34:*.svg=34:*.html=2;93:*.css=93:*.gif=5;34:*.js=32:*.json=32:*.ts=32:*.vue=32:*.lua=32:*.go=32:*.php=32:*.el=32:*.py=32:*.sh=32:*.clj=32:*.cpp=32:*.bk=9;90:*.*~=9;90:*.bk.*=9;90:LICENCE=37:*.md=94:*.csv=94:*.sql=3;96:package.json=95:.gitignore=95:*.config.js=95:package-lock.json=95:tsconfig.json=95:.browserslistrc=95:.eslintrc=95:.eslintrc.js=95:jsconfig.json=95:*.code-workspace=95:Makefile=95:go.mod=95:go.sum=95:*.crdownload=9;31:*.doc=92:*.docx=92:*.pdf=92:*.rtf=92:*.xlsx=92:*.odt=92:*.djvu=92:*.xcf=1;2;34"
+
+# for Nerd Font Regular
+export EXA_ICON_SPACING=2 
+
+## Load additional scripts
 
 if [ -f ~/.aliases-private ]; then
     . ~/.aliases-private
+fi
+
+if [ -f ~/.aliases-temp ]; then
+    . ~/.aliases-temp
 fi
