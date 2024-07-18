@@ -1,8 +1,8 @@
 #!/bin/bash
 
 CFG_DIR=~
-REPO_CFG_PATH=~/scripts/cfg
-FILE_REL_PATH=.aliases
+REPO_CFG_PATH=~/scripts-private/cfg
+FILE_REL_PATH=.aliases-private
 
 FILE_FULL_PATH="${REPO_CFG_PATH}/${FILE_REL_PATH}"
 

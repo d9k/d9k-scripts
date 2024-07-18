@@ -13,3 +13,7 @@ d9k_scripts=~/scripts
 #d9k_scripts=~/d9k-scripts
 
 PATH=$PATH:~/scripts-local:${d9k_scripts}:${d9k_scripts}/meta
+
+if [ -f ~/.aliases-private ]; then
+    . ~/.aliases-private
+fi
