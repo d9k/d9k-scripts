@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# VSCode integration example:
+# svg-clean-fill-attr.vscode.tasks.json
+
+FILE_PATH_REL="$1"
+
+if [[ -z "$FILE_PATH_REL" ]]; then
+  echo "File was not selected. Exitting"
+  exit 1
+fi
+
+set -x
+
+sed -i -E -e 's|fill=\"[#a-zA-Z0-9]*\"||g' "$FILE_PATH_REL"

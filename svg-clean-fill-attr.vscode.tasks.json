@@ -1,0 +1,21 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "svg clean \"fill\" attribute",
+      "type": "shell",
+      "command": "/home/d9k/scripts/svg-clean-fill-attr ${file}",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "close": false,
+        "panel": "shared",
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
+}
