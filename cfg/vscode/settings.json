@@ -128,8 +128,10 @@
   "editor.largeFileOptimizations": false,
   "cSpell.language": "en,ru",
   "cSpell.userWords": [
+    "autodocs",
     "composables",
     "Devino",
+    "docgen",
     "openapi",
     "pinia",
     "sber",
@@ -415,5 +417,6 @@
       ]
     }
   ],
-  "workbench.editor.editorActionsLocation": "hidden"
+  "workbench.editor.editorActionsLocation": "hidden",
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }

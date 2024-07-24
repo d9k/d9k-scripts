@@ -1,0 +1,27 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    // {
+    //   "label": "echo",
+    //   "type": "shell",
+    //   "command": "echo Hello"
+    // }
+    {
+      "label": "import vue file",
+      "type": "shell",
+      // "command": "zsh -i -c \"/home/d9k/scripts/import-vue ${file} ${lineNumber}\"",
+      "command": "/home/d9k/scripts/import-vue ${file} ${lineNumber}",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "close": false,
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
