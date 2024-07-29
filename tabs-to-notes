@@ -4,6 +4,8 @@
 # 
 # https://chromewebstore.google.com/detail/copy-as-markdown/fkeaekngjflipcockcnpobkpbbfbhmdn
 
+SCRIPTS_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 OUTPUT_TABS_PATH_PREFIX="$HOME/tx/notes/fastnote/tabs/tabs-"
 OUTPUT_TABS_PATH_SUFFIX=".txt"
 DEFAULT_GROUP_NAME="sort"
@@ -16,11 +18,30 @@ else
   ALL_LINES_RAW=$(xclip -selection clipboard -o)
 fi
 
+function all_links_count {
+  echo -e "$1" \
+    | rg '://' \
+    | wc -l
+}
+
+echo "Links count raw: "$(all_links_count "$ALL_LINES_RAW")
+
+ALL_LINES_FILTERED=$(
+  echo -e "$ALL_LINES_RAW" \
+    | rg --fixed-strings -v "chrome-extension://"
+    # rg -v 'chrome'
+  # rg -v 'chrome-extension'
+  # rg --fixed-strings -v 'chrome-extension'
+  # rg --fixed-strings -v 'chrome-extension://'
+)
+
+echo "Links count filtered: "$(all_links_count "$ALL_LINES_FILTERED")
+
 # echo "$ALL_LINES_RAW" 
 
 # add group header
 ALL_LINES_FIX_UNSORTED_1=$( \
-  echo -e "$ALL_LINES_RAW" \
+  echo -e "$ALL_LINES_FILTERED" \
   | rg '^((-.*://.*\n)+)' \
     --replace "- ${DEFAULT_GROUP_NAME}\n\$1" \
     --multiline \
@@ -42,6 +63,7 @@ ALL_LINES_FIX_UNSORTED_2=$( \
 ALL_LINES=$(echo -e "$ALL_LINES_FIX_UNSORTED_2")
 
 echo -e "$ALL_LINES"
+
 
 GROUPS_INFO=$( \
   echo -e "$ALL_LINES" \
