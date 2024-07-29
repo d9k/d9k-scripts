@@ -23,10 +23,17 @@ DEFAULT_GROUP_NAME="sort"
 
 INPUT_FILE_PATH="$1"
 
-RIPGREP_URL_PATTERN='[a-z]+://[^)\]#\s]+'
+# RIPGREP_URL_PATTERN='[a-z]+://[^)\]#\s]+'
+RIPGREP_URL_PATTERN='[a-z]+://[^)\]\s]+'
+
+DIRECTIVE_LINK_IGNORE_FILTERING="tabs-to-link-allow-sublinks"
+
+if [[ -z "$DEBUG_OUTPUT_FIRST_LINES" ]]; then
+  DEBUG_OUTPUT_FIRST_LINES=7
+fi
 
 if [ -n "$INPUT_FILE_PATH" ]; then
-  ALL_LINES_RAW=$(cat "$INPUT_FILE_PATH")
+ALL_LINES_RAW=$(cat "$INPUT_FILE_PATH")
 else
   ALL_LINES_RAW=$(xclip -selection clipboard -o)
 fi
@@ -35,6 +42,12 @@ function all_links_count {
   echo -e "$1" \
     | rg '://' \
     | wc -l
+}
+
+# https://www.unix.com/shell-programming-and-scripting/101372-how-sort-strings-length.html
+function lines_sort_by_length {
+  echo -e "$@" \
+    | awk '{ print length(), $0 | "sort -n" }'
 }
 
 function ask_continue { action_name="$@"
@@ -71,6 +84,11 @@ function ask_continue { action_name="$@"
 #if [[ "$ASK_RESULT" != "1" ]]; then
 #  exit
 #fi
+
+echo "Hint: use DEBUG_OUTPUT_FIRST_LINES=30 before command to configure existing links number to show"
+echo
+echo "You can add <!-- ${DIRECTIVE_LINK_IGNORE_FILTERING} --> to line with existing link in output file to prevent sublinks being filtered"
+echo 
 
 echo $(all_links_count "$ALL_LINES_RAW") "total input links"
 
@@ -183,10 +201,22 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
 
   EXISTING_LINKS=$( \
     cat "$OUTPUT_TABS_PATH" \
+    | rg -v --fixed-strings -v "$DIRECTIVE_LINK_IGNORE_FILTERING" \
     | rg  $RIPGREP_URL_PATTERN \
       --only-matching 
     # | rg  '[a-z]+://[^)\]#\s]+' \
   )
+
+  EXISTING_LINK_SORTED_TEXT=$(lines_sort_by_length "$EXISTING_LINKS")
+  EXISTING_LINKS_LEN=$(echo -e "$EXISTING_LINKS" | wc -l)
+
+  echo
+  echo "## These existing links would be exluded from output (beginning link match)"
+  echo
+  echo -e "$EXISTING_LINK_SORTED_TEXT" | head -n "${DEBUG_OUTPUT_FIRST_LINES}"
+  echo "... (showing first ${DEBUG_OUTPUT_FIRST_LINES} of ${EXISTING_LINKS_LEN})"
+
+  # echo -e "$EXISTING_LINK_SORTED_TEXT"
 
   GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_RAW")
 
@@ -211,6 +241,8 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
   GROUP_LINES_FILTERED_LEN=$(echo -e "$GROUP_LINES_FILTERED" | wc -l)
   GROUP_LINES_DELTA=$(expr $GROUP_LINES_RAW_LEN - $GROUP_LINES_FILTERED_LEN)
 
+  echo
+  echo
   echo "## Lines to add:"
   echo
   echo -e "$GROUP_LINES_FILTERED"
