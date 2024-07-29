@@ -16,6 +16,9 @@ SCRIPTS_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 OUTPUT_TABS_PATH_PREFIX="$HOME/tx/notes/fastnote/tabs/tabs-"
 OUTPUT_TABS_PATH_SUFFIX=".txt"
+
+OUTPUT_HEADER=$(date +"%Y.%m.%d %H:%M")
+
 DEFAULT_GROUP_NAME="sort"
 
 INPUT_FILE_PATH="$1"
@@ -175,7 +178,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
       continue
     fi
 
-    echo -e "# Tabs: $GROUP_NAME\n" > "$OUTPUT_TABS_PATH"
+    echo -e "tabs-$GROUP_NAME\n" > "$OUTPUT_TABS_PATH"
   fi # if not path
 
   EXISTING_LINKS=$( \
@@ -198,16 +201,16 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
       # GROUPS_INFO_ARRAY+=("$LINE")
   done <<< "$EXISTING_LINKS"
 
-  GROUP_LINES_RAW_LEN=$(echo -e "$GROUP_LINES_RAW" | wc -l)
-  GROUP_LINES_FILTERED_LEN=$(echo -e "$GROUP_LINES_FILTERED" | wc -l)
-  GROUP_LINES_DELTA=$(expr $GROUP_LINES_RAW_LEN - $GROUP_LINES_FILTERED_LEN)
-
-  if [ "$GROUP_LINES_FILTERED_LEN" -eq 0 ]; then
+  echo
+  if [ -z "$GROUP_LINES_FILTERED" ]; then
     echo "No lines to add"
     continue
   fi
 
-  echo
+  GROUP_LINES_RAW_LEN=$(echo -e "$GROUP_LINES_RAW" | wc -l)
+  GROUP_LINES_FILTERED_LEN=$(echo -e "$GROUP_LINES_FILTERED" | wc -l)
+  GROUP_LINES_DELTA=$(expr $GROUP_LINES_RAW_LEN - $GROUP_LINES_FILTERED_LEN)
+
   echo "## Lines to add:"
   echo
   echo -e "$GROUP_LINES_FILTERED"
@@ -226,5 +229,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
     continue
   fi
 
-  echo Adding
+  echo Adding...
+
+  echo -e "\n## ${OUTPUT_HEADER}\n\n${GROUP_LINES_FILTERED}" >> "${OUTPUT_TABS_PATH}"
 done
