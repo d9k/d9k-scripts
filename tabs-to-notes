@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Copy as Markdown extension for Chrome
+# 
+# https://chromewebstore.google.com/detail/copy-as-markdown/fkeaekngjflipcockcnpobkpbbfbhmdn
+
+OUTPUT_TABS_PATH_PREFIX="$HOME/tx/notes/fastnote/tabs/tabs-"
+OUTPUT_TABS_PATH_END=".txt"
+DEFAULT_GROUP_NAME="sort"
+
+INPUT_FILE_PATH="$1"
+
+if [ -n "$INPUT_FILE_PATH" ]; then
+  ALL_LINES_RAW=$(cat "$INPUT_FILE_PATH")
+else
+  ALL_LINES_RAW=$(xclip -selection clipboard -o)
+fi
+
+# echo "$ALL_LINES_RAW" 
+
+# add group header
+ALL_LINES_FIX_UNSORTED_1=$( \
+  echo -e "$ALL_LINES_RAW" \
+  | rg '^((-.*://.*\n)+)' \
+    --replace "- ${DEFAULT_GROUP_NAME}\n\$1" \
+    --multiline \
+    --passthru \
+  | sed -e 's|\\n|\n|g'
+)
+
+# echo "$ALL_LINES_FIX_UNSORTED_1"
+
+# add padding to tabs withour group
+ALL_LINES_FIX_UNSORTED_2=$( \
+  echo -e "$ALL_LINES_FIX_UNSORTED_1" \
+  | rg '^(-.*://.*)' \
+    --replace "  \$1" \
+    --multiline \
+    --passthru
+)
+
+ALL_LINES=$(echo -e "$ALL_LINES_FIX_UNSORTED_2")
+
+echo -e "$ALL_LINES"
