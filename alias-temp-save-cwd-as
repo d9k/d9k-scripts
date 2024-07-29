@@ -4,12 +4,13 @@ ALIAS="$1"
 
 DIR="$(pwd)"
 
-OUTPUT="$HOME/.temp_aliases"
+OUTPUT="$HOME/.aliases-temp"
 
 export $ALIAS="$DIR"
 
 echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
 
+echo "..."
 tail "$OUTPUT"
 
 echo
