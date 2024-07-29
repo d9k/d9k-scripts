@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# Copy as Markdown extension for Chrome
+# Requirements:
+#
+# 1) ripgrep
+#
+# https://github.com/BurntSushi/ripgrep
+# 
+# 2) Copy as Markdown extension for Chrome
 # 
 # https://chromewebstore.google.com/detail/copy-as-markdown/fkeaekngjflipcockcnpobkpbbfbhmdn
+#
+# Save lints to file or just copy to clipboard
 
 SCRIPTS_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -11,6 +19,8 @@ OUTPUT_TABS_PATH_SUFFIX=".txt"
 DEFAULT_GROUP_NAME="sort"
 
 INPUT_FILE_PATH="$1"
+
+RIPGREP_URL_PATTERN='[a-z]+://[^)\]#\s]+'
 
 if [ -n "$INPUT_FILE_PATH" ]; then
   ALL_LINES_RAW=$(cat "$INPUT_FILE_PATH")
@@ -59,7 +69,7 @@ function ask_continue { action_name="$@"
 #  exit
 #fi
 
-echo "Links count raw: "$(all_links_count "$ALL_LINES_RAW")
+echo $(all_links_count "$ALL_LINES_RAW") "total input links"
 
 ALL_LINES_FILTERED=$(
   echo -e "$ALL_LINES_RAW" \
@@ -70,7 +80,7 @@ ALL_LINES_FILTERED=$(
   # rg --fixed-strings -v 'chrome-extension://'
 )
 
-echo "Links count filtered: "$(all_links_count "$ALL_LINES_FILTERED")
+echo $(all_links_count "$ALL_LINES_FILTERED") "filteted input links (not extension tabs)"
 
 # echo "$ALL_LINES_RAW" 
 
@@ -97,8 +107,7 @@ ALL_LINES_FIX_UNSORTED_2=$( \
 
 ALL_LINES=$(echo -e "$ALL_LINES_FIX_UNSORTED_2")
 
-echo -e "$ALL_LINES"
-
+# echo -e "$ALL_LINES"
 
 GROUPS_INFO=$( \
   echo -e "$ALL_LINES" \
@@ -108,12 +117,12 @@ GROUPS_INFO=$( \
 
 ALL_LINES_LEN=$(echo -e "$ALL_LINES" | wc -l)
 
-echo "ALL_LINES_LEN: $ALL_LINES_LEN"
+# echo "ALL_LINES_LEN: $ALL_LINES_LEN"
 
-echo
-echo "GROUPS_INFO:"
-echo -e "$GROUPS_INFO"
-echo
+# echo
+# echo "GROUPS_INFO:"
+# echo -e "$GROUPS_INFO"
+# echo
 
 GROUPS_INFO_ARRAY=()
 
@@ -137,7 +146,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
   GROUP_INFO_PARTS=(${GROUP_INFO//:/ })
   GROUP_NAME_LINE_NUM=${GROUP_INFO_PARTS[0]}
   GROUP_NAME=${GROUP_INFO_PARTS[1]}
-  echo "$GROUP_NAME"
+  # echo "$GROUP_NAME"
   # echo "$GROUP_NAME_LINE_NUM"
 
   NEXT_GROUP_INFO_PARTS=(${NEXT_GROUP_INFO//:/ })
@@ -151,18 +160,16 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
     GROUP_LINES_END=$(expr $NEXT_GROUP_NAME_LINE_NUM - 1)
   fi
 
-  echo "$GROUP_LINES_BEGIN - $GROUP_LINES_END"
+  # echo "$GROUP_LINES_BEGIN - $GROUP_LINES_END"
 
-  GROUP_LINES=$(echo "$ALL_LINES" | sed -n "${GROUP_LINES_BEGIN},${GROUP_LINES_END}p")
+  GROUP_LINES_RAW=$(echo "$ALL_LINES" | sed -n "${GROUP_LINES_BEGIN},${GROUP_LINES_END}p")
 
-  echo -e "$GROUP_LINES"
+  # echo -e "$GROUP_LINES_RAW"
 
   OUTPUT_TABS_PATH="${OUTPUT_TABS_PATH_PREFIX}${GROUP_NAME}${OUTPUT_TABS_PATH_SUFFIX}"
-  echo "$OUTPUT_TABS_PATH"
-  echo
+  # echo "$OUTPUT_TABS_PATH"
+  # echo
 
-  # cat "$OUTPUT_TABS_PATH"
-  
   if [ ! -f "$OUTPUT_TABS_PATH" ]; then
     if [[ "$(ask_continue "create $OUTPUT_TABS_PATH (it doesn't exist yet)")" != "1" ]]; then
       continue
@@ -171,6 +178,53 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
     echo -e "# Tabs: $GROUP_NAME\n" > "$OUTPUT_TABS_PATH"
   fi # if not path
 
+  EXISTING_LINKS=$( \
+    cat "$OUTPUT_TABS_PATH" \
+    | rg  $RIPGREP_URL_PATTERN \
+      --only-matching 
+    # | rg  '[a-z]+://[^)\]#\s]+' \
+  )
+
+  GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_RAW")
+
+  while read EXISTING_LINK; do
+      # echo "LINK: $EXISTING_LINK"
+      GROUP_LINES_FILTERED_TEMP=$(\
+          echo -e "$GROUP_LINES_FILTERED" \
+            | rg --fixed-strings -v "$EXISTING_LINK"
+      )
+
+      GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_FILTERED_TEMP")
+      # GROUPS_INFO_ARRAY+=("$LINE")
+  done <<< "$EXISTING_LINKS"
+
+  GROUP_LINES_RAW_LEN=$(echo -e "$GROUP_LINES_RAW" | wc -l)
+  GROUP_LINES_FILTERED_LEN=$(echo -e "$GROUP_LINES_FILTERED" | wc -l)
+  GROUP_LINES_DELTA=$(expr $GROUP_LINES_RAW_LEN - $GROUP_LINES_FILTERED_LEN)
+
+  if [ "$GROUP_LINES_FILTERED_LEN" -eq 0 ]; then
+    echo "No lines to add"
+    continue
+  fi
+
+  echo
+  echo "## Lines to add:"
+  echo
+  echo -e "$GROUP_LINES_FILTERED"
+
+  LINES_NUMBER_ADDITIONAL_TEXT=""
+
+  if [ $GROUP_LINES_DELTA -ne 0 ]; then
+    LINES_NUMBER_ADDITIONAL_TEXT="($GROUP_LINES_RAW_LEN-$GROUP_LINES_DELTA) "
+  fi
+
+  # echo "${GROUP_LINES_RAW_LEN}"
+
+  echo
+
+  if [[ "$(ask_continue "add ${GROUP_LINES_FILTERED_LEN} lines ${LINES_NUMBER_ADDITIONAL_TEXT}to $OUTPUT_TABS_PATH")" != "1" ]]; then
+    continue
+  fi
+
+  echo Adding
 done
-
-
