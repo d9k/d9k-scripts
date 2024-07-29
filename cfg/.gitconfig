@@ -46,9 +46,13 @@ dump = cat-file -p
 
 [core]
 	editor = nano
+	commentChar = ";"
+	precomposeunicode = true
+	quotePath = false
 #	commentchar = \\
 
 [diff]
+	submodule = log
 #  tool = meld
 
 [log]
@@ -63,3 +67,8 @@ date=format:%Y.%m.%d %H:%M
   keepBackup = false
 [init]
 	defaultBranch = main
+[merge]
+	tool = meld
+
+[includeIf "gitdir:~/cr/wb/"]
+  path = ~/cr/wb/.gitconfig
