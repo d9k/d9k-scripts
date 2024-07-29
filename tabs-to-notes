@@ -5,7 +5,7 @@
 # https://chromewebstore.google.com/detail/copy-as-markdown/fkeaekngjflipcockcnpobkpbbfbhmdn
 
 OUTPUT_TABS_PATH_PREFIX="$HOME/tx/notes/fastnote/tabs/tabs-"
-OUTPUT_TABS_PATH_END=".txt"
+OUTPUT_TABS_PATH_SUFFIX=".txt"
 DEFAULT_GROUP_NAME="sort"
 
 INPUT_FILE_PATH="$1"
@@ -42,3 +42,69 @@ ALL_LINES_FIX_UNSORTED_2=$( \
 ALL_LINES=$(echo -e "$ALL_LINES_FIX_UNSORTED_2")
 
 echo -e "$ALL_LINES"
+
+GROUPS_INFO=$( \
+  echo -e "$ALL_LINES" \
+  | rg -n -v '://' \
+  | rg --replace "" '([- \[\]]+)'
+)
+
+ALL_LINES_LEN=$(echo -e "$ALL_LINES" | wc -l)
+
+echo "ALL_LINES_LEN: $ALL_LINES_LEN"
+
+echo
+echo "GROUPS_INFO:"
+echo -e "$GROUPS_INFO"
+echo
+
+GROUPS_INFO_ARRAY=()
+
+# Set the Internal Field Separator to newline
+IFS=$'\n'
+  while read LINE; do
+      # echo "LINE: $LINE"
+      GROUPS_INFO_ARRAY+=("$LINE")
+  done <<< "$GROUPS_INFO"
+unset IFS
+
+GROUPS_INFO_LEN=${#GROUPS_INFO_ARRAY[@]}
+
+for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
+	GROUP_INFO="${GROUPS_INFO_ARRAY[i]}"
+	NEXT_GROUP_INFO="${GROUPS_INFO_ARRAY[i+1]}"
+
+  # echo -e "cur: $GROUP_INFO"
+  # echo -e "next: $NEXT_GROUP_INFO"
+
+  GROUP_INFO_PARTS=(${GROUP_INFO//:/ })
+  GROUP_NAME_LINE_NUM=${GROUP_INFO_PARTS[0]}
+  GROUP_NAME=${GROUP_INFO_PARTS[1]}
+  echo "$GROUP_NAME"
+  # echo "$GROUP_NAME_LINE_NUM"
+
+  NEXT_GROUP_INFO_PARTS=(${NEXT_GROUP_INFO//:/ })
+  NEXT_GROUP_NAME_LINE_NUM=${NEXT_GROUP_INFO_PARTS[0]}
+  # echo "$NEXT_GROUP_NAME_LINE_NUM"
+  
+  GROUP_LINES_BEGIN=$(expr $GROUP_NAME_LINE_NUM + 1)
+  GROUP_LINES_END=$ALL_LINES_LEN
+
+  if [ -n "$NEXT_GROUP_INFO_PARTS" ]; then
+    GROUP_LINES_END=$(expr $NEXT_GROUP_NAME_LINE_NUM - 1)
+  fi
+
+  echo "$GROUP_LINES_BEGIN - $GROUP_LINES_END"
+
+  GROUP_LINES=$(echo "$ALL_LINES" | sed -n "${GROUP_LINES_BEGIN},${GROUP_LINES_END}p")
+
+  echo -e "$GROUP_LINES"
+
+  OUTPUT_TABS_PATH="${OUTPUT_TABS_PATH_PREFIX}${GROUP_NAME}${OUTPUT_TABS_PATH_SUFFIX}"
+  echo "$OUTPUT_TABS_PATH"
+
+  echo
+  cat "$OUTPUT_TABS_PATH"
+done
+
+
