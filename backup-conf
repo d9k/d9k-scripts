@@ -23,7 +23,7 @@ if [[ -f "${backup_file_name}" ]]; then
   MAX_BACKUP_NUMBER=100
   for ((number=1; number <= ${MAX_BACKUP_NUMBER}; number++))
   {
-    backup_file_name="${file_name}.bk.${number}"
+    backup_file_name="${file_name}.${number}.bk"
     if [[ ! -f "${backup_file_name}" ]]; then
       break;
     fi
@@ -46,4 +46,6 @@ fi
 
 cd /
 ls -l "${directory}/${file_name}"
-ls -l "${directory}/${file_name}.bk"*
+ls -l "${directory}/${file_name}.bk"
+ls -l "${directory}/${file_name}.bk".* 2>/dev/null
+ls -l "${directory}/${file_name}."*".bk" 2>/dev/null
