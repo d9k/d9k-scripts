@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# See also: pass-ui-cli
+
 OUT="$HOME/.keyring-fix"
 
 sudo killall ssh-agent
 sudo killall gnome-keyring-daemon
+sudo killall pinentry
 
 ssh-agent -s > "$OUT"
 
