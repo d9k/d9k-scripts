@@ -24,6 +24,7 @@ bind status B @backup-conf %(file)
 bind status H >tig %(file)
 bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 bind status v !sh -c 'nvim %(file)'
+bind status V !sh -c 'code %(file)'
 bind status P !push
 
 # open with default app by zsh 
@@ -51,7 +52,7 @@ bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=
 bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
 bind generic L @silent.sh git-compare-rev-dir %(commit)
 bind generic <Ctrl-F> !?git checkout %(commit) %(file)
-
+bind generic Y +sh -c 'echo "%(text)" | xclip -selection c && echo "Line was [Y]anked to clipboard ($FPATH)"'
 bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --color "$D"'
 
 # ; echo "# $D" ; ls -lh --color $D
