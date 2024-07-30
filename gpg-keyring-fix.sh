@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# See also: pass-ui-cli
+# See also: 
+# pass-gpg-ui-cli.sh
+# pass-gpg-ui-x.sh
 
 OUT="$HOME/.keyring-fix"
 
