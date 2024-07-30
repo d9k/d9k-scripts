@@ -26,7 +26,7 @@ INPUT_FILE_PATH="$1"
 # RIPGREP_URL_PATTERN='[a-z]+://[^)\]#\s]+'
 RIPGREP_URL_PATTERN='[a-z]+://[^)\]\s]+'
 
-DIRECTIVE_LINK_IGNORE_FILTERING="tabs-to-link-allow-sublinks"
+DIRECTIVE_LINK_IGNORE_FILTERING="tabs-to-notes-allow-sublinks"
 
 if [[ -z "$DEBUG_OUTPUT_FIRST_LINES" ]]; then
   DEBUG_OUTPUT_FIRST_LINES=7
@@ -220,15 +220,21 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
 
   GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_RAW")
 
-  while read EXISTING_LINK; do
-      # echo "LINK: $EXISTING_LINK"
-      GROUP_LINES_FILTERED_TEMP=$(\
-          echo -e "$GROUP_LINES_FILTERED" \
-            | rg --fixed-strings -v "$EXISTING_LINK"
-      )
+  echo -e $GROUP_LINES_FILTERED
 
-      GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_FILTERED_TEMP")
-      # GROUPS_INFO_ARRAY+=("$LINE")
+  while read EXISTING_LINK; do
+    if [ -z "$EXISTING_LINK" ]; then
+      continue
+    fi 
+
+    # echo "LINK: $EXISTING_LINK"
+    GROUP_LINES_FILTERED=$(\
+      echo -e "$GROUP_LINES_FILTERED" \
+        | rg --fixed-strings -v "$EXISTING_LINK"
+    )
+
+    # GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_FILTERED_TEMP")
+    # GROUPS_INFO_ARRAY+=("$LINE")
   done <<< "$EXISTING_LINKS"
 
   echo
@@ -263,5 +269,5 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
 
   echo Adding...
 
-  echo -e "\n## ${OUTPUT_HEADER}\n\n${GROUP_LINES_FILTERED}" >> "${OUTPUT_TABS_PATH}"
+  echo -e "\n\n## ${OUTPUT_HEADER}\n\n${GROUP_LINES_FILTERED}" >> "${OUTPUT_TABS_PATH}"
 done
