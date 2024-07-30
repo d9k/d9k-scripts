@@ -136,6 +136,12 @@ GROUPS_INFO=$( \
   | rg --replace "" '([- \[\]]+)'
 )
 
+if [ -z "$GROUPS_INFO" ]; then
+  echo
+  echo "No groups detected. Exitting"
+  exit 1
+fi
+
 ALL_LINES_LEN=$(echo -e "$ALL_LINES" | wc -l)
 
 # echo "ALL_LINES_LEN: $ALL_LINES_LEN"
@@ -220,7 +226,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
 
   GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_RAW")
 
-  echo -e $GROUP_LINES_FILTERED
+  # echo -e $GROUP_LINES_FILTERED
 
   while read EXISTING_LINK; do
     if [ -z "$EXISTING_LINK" ]; then
@@ -232,14 +238,11 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
       echo -e "$GROUP_LINES_FILTERED" \
         | rg --fixed-strings -v "$EXISTING_LINK"
     )
-
-    # GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_FILTERED_TEMP")
-    # GROUPS_INFO_ARRAY+=("$LINE")
   done <<< "$EXISTING_LINKS"
 
   echo
   if [ -z "$GROUP_LINES_FILTERED" ]; then
-    echo "No lines to add"
+    echo "No lines to add into ${OUTPUT_TABS_PATH}"
     continue
   fi
 
