@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# https://superuser.com/questions/231002/how-can-i-search-within-the-output-buffer-of-a-tmux-shell
+tmux capture-pane -pS -300 \
+    | rg -v "^#" \
+    | nvim "+ normal G"
+
+
+
