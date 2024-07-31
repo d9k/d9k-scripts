@@ -19,6 +19,10 @@ LINE=$(\
   \
 )
 
+set +e
+
+LINE=$(echo "$LINE" | rg --passthrough --replace "" "^> ")
+
 # EXIT_CODE="$#"
 
 if [[ -z "$LINE" ]]; then
