@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ripgrep required!
+# https://github.com/BurntSushi/ripgrep
+
 # Use Ctrl-C to exit
 
 export INFO_PREFIX="$@"
