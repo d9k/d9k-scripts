@@ -14,5 +14,5 @@ fi
 git-branch-prefix "$1" "$BUGFIX_PREFIX" --silent-exit
 
 if [ $? -ne 0 ]; then
-  git-branch-prefix "$1" "$FEATURE_PREFIX" bugfi
+  git-branch-prefix "$1" "$FEATURE_PREFIX"
 fi
