@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Use Ctrl-C to exit
+
+# Any subsequent(*) commands which fail will cause the shell script to exit immediately
+set -e
+
 # https://superuser.com/questions/231002/how-can-i-search-within-the-output-buffer-of-a-tmux-shell
 LINE=$(\
   tmux capture-pane -pS -300 \
@@ -10,6 +15,15 @@ LINE=$(\
   | fzf \
 )
 
+# EXIT_CODE="$#"
+
+if [[ -z "$LINE" ]]; then
+  exit
+fi
+
 echo "$LINE" | xclip -selection c
 
+# echo "$EXIT_CODE"
 
+# restart to copy another line
+$0 "$@"
