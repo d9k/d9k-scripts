@@ -2,6 +2,8 @@
 
 # Use Ctrl-C to exit
 
+export INFO_PREFIX="$@"
+
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 set -e
 
@@ -13,6 +15,8 @@ LINE=$(\
   | rg -v "^[\s]*$" \
   | tac \
   | fzf \
+    --info-command='echo "${INFO_PREFIX}[Ctrl-C] to exit. Select line to copy. After copy selector will rerun automatically."'  \
+  \
 )
 
 # EXIT_CODE="$#"
@@ -26,4 +30,4 @@ echo "$LINE" | xclip -selection c
 # echo "$EXIT_CODE"
 
 # restart to copy another line
-$0 "$@"
+$0 "Copied « $LINE ».   "
