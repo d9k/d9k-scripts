@@ -87,15 +87,29 @@
     "editor.minimap.enabled": false,
     "editor.scrollbar.verticalScrollbarSize": 8,
     "editor.scrollbar.vertical": "visible",
-    "terminal.integrated.fontFamily": "monospace",
     "remote.SSH.showLoginTerminal": true,
     "remote.SSH.useLocalServer": false,
     "remote.SSH.remotePlatform": {
         "109.71.8.230": "linux"
     },
     "php.suggest.basic": false,
-    "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
-    "editor.letterSpacing": 1.2,
+  // == saxMono font ==
+  "editor.fontFamily": "'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.fontSize": 13.5,
+  "editor.fontWeight": "bold",
+  "editor.letterSpacing": 0.7,
+  "editor.lineHeight": 1.9,
+  // == Monofoki font ==
+  // "editor.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  // "editor.fontSize": 14,
+  // "editor.fontWeight": "bold",
+  // "editor.letterSpacing": 0.8,
+  // "editor.lineHeight": 1.9,
+  // "window.zoomLevel": 0,
+  // =======================
+  // "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  "terminal.integrated.fontSize": 15,
     "git.suggestSmartCommit": false,
     "files.trimTrailingWhitespace": true,
     "git.confirmSync": false,
@@ -366,6 +380,16 @@
         "terminal.focus",
       ]
     },
+    // other leader actions
+    {
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "commands": [
+        "editor.action.commentLine",
+      ]
+    },
     // git peek
     {
       "before": [
@@ -415,7 +439,17 @@
       "after": [
         "<C-u>"
       ]
-    }
+    },
+    // other leader actions
+    {
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "commands": [
+        "editor.action.commentLine",
+      ]
+    },
   ],
   "workbench.editor.editorActionsLocation": "hidden",
   "javascript.updateImportsOnFileMove.enabled": "always"
