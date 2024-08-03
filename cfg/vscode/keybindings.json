@@ -454,5 +454,853 @@
   {
     "key": "ctrl+shift+tab",
     "command": "workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "capslock",
+    "command": "extension.vim_escape",
+    "when": "editorTextFocus && vim.active && !inDebugRepl"
+  },
+  {
+    "key": "escape",
+    "command": "-extension.vim_escape",
+    "when": "editorTextFocus && vim.active && !inDebugRepl"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.cancelSelectionAnchor",
+    "when": "editorTextFocus && selectionAnchorSet"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.cancelSelectionAnchor",
+    "when": "editorTextFocus && selectionAnchorSet"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.chat.stopListening",
+    "when": "voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || voiceChatInProgress && scopedVoiceChatInProgress == 'terminal' || voiceChatInProgress && scopedVoiceChatInProgress == 'view'"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.chat.stopListening",
+    "when": "voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || voiceChatInProgress && scopedVoiceChatInProgress == 'terminal' || voiceChatInProgress && scopedVoiceChatInProgress == 'view'"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.speech.stopReadAloud",
+    "when": "scopedChatSynthesisInProgress && textToSpeechInProgress"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.speech.stopReadAloud",
+    "when": "scopedChatSynthesisInProgress && textToSpeechInProgress"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.debug.action.closeExceptionWidget",
+    "when": "exceptionWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.debug.action.closeExceptionWidget",
+    "when": "exceptionWidgetVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.inlineEdits.hide",
+    "when": "inlineEditsVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.inlineEdits.hide",
+    "when": "inlineEditsVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.inlineSuggest.hide",
+    "when": "inlineSuggestionVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.inlineSuggest.hide",
+    "when": "inlineSuggestionVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.hideColorPicker",
+    "when": "standaloneColorPickerVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.hideColorPicker",
+    "when": "standaloneColorPickerVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "notebook.cell.quitEdit",
+    "when": "notebookEditorFocused && notebookOutputFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.quitEdit",
+    "when": "notebookEditorFocused && notebookOutputFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+  },
+  {
+    "key": "capslock",
+    "command": "notifications.hideList",
+    "when": "notificationCenterVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-notifications.hideList",
+    "when": "notificationCenterVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "settings.action.clearSearchResults",
+    "when": "inSettingsEditor && inSettingsSearch"
+  },
+  {
+    "key": "escape",
+    "command": "-settings.action.clearSearchResults",
+    "when": "inSettingsEditor && inSettingsSearch"
+  },
+  {
+    "key": "capslock",
+    "command": "settings.action.focusLevelUp",
+    "when": "inSettingsEditor && !inSettingsJSONEditor && !inSettingsSearch"
+  },
+  {
+    "key": "escape",
+    "command": "-settings.action.focusLevelUp",
+    "when": "inSettingsEditor && !inSettingsJSONEditor && !inSettingsSearch"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.inlineEdit.reject",
+    "when": "inlineEditVisible && !editorReadonly"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.inlineEdit.reject",
+    "when": "inlineEditVisible && !editorReadonly"
+  },
+  {
+    "key": "capslock",
+    "command": "search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "escape",
+    "command": "-search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "capslock",
+    "command": "search.action.cancel",
+    "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
+  },
+  {
+    "key": "escape",
+    "command": "-search.action.cancel",
+    "when": "listFocus && searchViewletVisible && !inputFocus && !treestickyScrollFocused && searchState != '0'"
+  },
+  {
+    "key": "capslock",
+    "command": "inlayHints.stopReadingLineWithHint",
+    "when": "isReadingLineWithInlayHints"
+  },
+  {
+    "key": "escape",
+    "command": "-inlayHints.stopReadingLineWithHint",
+    "when": "isReadingLineWithInlayHints"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.terminal.clearSelection",
+    "when": "terminalFocusInAny && terminalHasBeenCreated && terminalTextSelected && !terminalFindVisible || terminalFocusInAny && terminalProcessSupported && terminalTextSelected && !terminalFindVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.terminal.clearSelection",
+    "when": "terminalFocusInAny && terminalHasBeenCreated && terminalTextSelected && !terminalFindVisible || terminalFocusInAny && terminalProcessSupported && terminalTextSelected && !terminalFindVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.terminal.chat.close",
+    "when": "terminalChatFocus && terminalChatVisible"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-workbench.action.terminal.chat.close",
+    "when": "terminalChatFocus && terminalChatVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.terminal.hideFind",
+    "when": "terminalFindVisible && terminalFocusInAny && terminalHasBeenCreated || terminalFindVisible && terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-workbench.action.terminal.hideFind",
+    "when": "terminalFindVisible && terminalFocusInAny && terminalHasBeenCreated || terminalFindVisible && terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.terminal.chat.close",
+    "when": "terminalChatFocus && terminalChatVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.terminal.hideFind",
+    "when": "terminalFindVisible && terminalFocusInAny && terminalHasBeenCreated || terminalFindVisible && terminalFocusInAny && terminalProcessSupported"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.editorDictation.stop",
+    "when": "editorDictation.inProgress"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.editorDictation.stop",
+    "when": "editorDictation.inProgress"
+  },
+  {
+    "key": "capslock",
+    "command": "welcome.goBack",
+    "when": "inWelcome && activeEditor == 'gettingStartedPage'"
+  },
+  {
+    "key": "escape",
+    "command": "-welcome.goBack",
+    "when": "inWelcome && activeEditor == 'gettingStartedPage'"
+  },
+  {
+    "key": "capslock",
+    "command": "breadcrumbs.selectEditor",
+    "when": "breadcrumbsActive && breadcrumbsVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-breadcrumbs.selectEditor",
+    "when": "breadcrumbsActive && breadcrumbsVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "cancelLinkedEditingInput",
+    "when": "LinkedEditingInputVisible && editorTextFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-cancelLinkedEditingInput",
+    "when": "LinkedEditingInputVisible && editorTextFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "cancelRenameInput",
+    "when": "editorFocus && renameInputVisible"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-cancelRenameInput",
+    "when": "editorFocus && renameInputVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "cancelSelection",
+    "when": "editorHasSelection && textInputFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-cancelSelection",
+    "when": "editorHasSelection && textInputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "closeBreakpointWidget",
+    "when": "breakpointWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeBreakpointWidget",
+    "when": "breakpointWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "closeDirtyDiff",
+    "when": "dirtyDiffVisible"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeDirtyDiff",
+    "when": "dirtyDiffVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "closeFindWidget",
+    "when": "editorFocus && findWidgetVisible && !isComposing"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeFindWidget",
+    "when": "editorFocus && findWidgetVisible && !isComposing"
+  },
+  {
+    "key": "capslock",
+    "command": "closeMarkersNavigation",
+    "when": "editorFocus && markersNavigationVisible"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeMarkersNavigation",
+    "when": "editorFocus && markersNavigationVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "closeParameterHints",
+    "when": "editorFocus && parameterHintsVisible"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeParameterHints",
+    "when": "editorFocus && parameterHintsVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "closeReferenceSearch",
+    "when": "inReferenceSearchEditor && !config.editor.stablePeek"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeReferenceSearch",
+    "when": "inReferenceSearchEditor && !config.editor.stablePeek"
+  },
+  {
+    "key": "capslock",
+    "command": "closeReferenceSearch",
+    "when": "editorTextFocus && referenceSearchVisible && !config.editor.stablePeek || referenceSearchVisible && !config.editor.stablePeek && !inputFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-closeReferenceSearch",
+    "when": "editorTextFocus && referenceSearchVisible && !config.editor.stablePeek || referenceSearchVisible && !config.editor.stablePeek && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-cancelLinkedEditingInput",
+    "when": "LinkedEditingInputVisible && editorTextFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-cancelRenameInput",
+    "when": "editorFocus && renameInputVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-cancelSelection",
+    "when": "editorHasSelection && textInputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-closeBreakpointWidget",
+    "when": "breakpointWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-closeDirtyDiff",
+    "when": "dirtyDiffVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-closeFindWidget",
+    "when": "editorFocus && findWidgetVisible && !isComposing"
+  },
+  {
+    "key": "escape",
+    "command": "-closeMarkersNavigation",
+    "when": "editorFocus && markersNavigationVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-closeParameterHints",
+    "when": "editorFocus && parameterHintsVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-closeReferenceSearch",
+    "when": "inReferenceSearchEditor && !config.editor.stablePeek"
+  },
+  {
+    "key": "escape",
+    "command": "-closeReferenceSearch",
+    "when": "editorTextFocus && referenceSearchVisible && !config.editor.stablePeek || referenceSearchVisible && !config.editor.stablePeek && !inputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "closeReplaceInFilesWidget",
+    "when": "replaceInputBoxFocus && searchViewletVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-closeReplaceInFilesWidget",
+    "when": "replaceInputBoxFocus && searchViewletVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "commentsClearFilterText",
+    "when": "commentsFilterFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-commentsClearFilterText",
+    "when": "commentsFilterFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "diffEditor.exitCompareMove",
+    "when": "comparingMovedCode"
+  },
+  {
+    "key": "escape",
+    "command": "-diffEditor.exitCompareMove",
+    "when": "comparingMovedCode"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.selectEditor",
+    "when": "stickyScrollFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.selectEditor",
+    "when": "stickyScrollFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.action.webvieweditor.hideFind",
+    "when": "webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.action.webvieweditor.hideFind",
+    "when": "webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.cancelOperation",
+    "when": "cancellableOperation"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.cancelOperation",
+    "when": "cancellableOperation"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.closeCallHierarchy",
+    "when": "callHierarchyVisible && !config.editor.stablePeek"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.closeCallHierarchy",
+    "when": "callHierarchyVisible && !config.editor.stablePeek"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.closeTestPeek",
+    "when": "testing.isInPeek && !config.editor.stablePeek || testing.isPeekVisible && !config.editor.stablePeek"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.closeTestPeek",
+    "when": "testing.isInPeek && !config.editor.stablePeek || testing.isPeekVisible && !config.editor.stablePeek"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.closeTypeHierarchy",
+    "when": "typeHierarchyVisible && !config.editor.stablePeek"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.closeTypeHierarchy",
+    "when": "typeHierarchyVisible && !config.editor.stablePeek"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.gotoNextSymbolFromResult.cancel",
+    "when": "hasSymbols"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.gotoNextSymbolFromResult.cancel",
+    "when": "hasSymbols"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.hideDropWidget",
+    "when": "dropWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.hideDropWidget",
+    "when": "dropWidgetVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "editor.hidePasteWidget",
+    "when": "pasteWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-editor.hidePasteWidget",
+    "when": "pasteWidgetVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "filesExplorer.cancelCut",
+    "when": "explorerResourceCut && filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-filesExplorer.cancelCut",
+    "when": "explorerResourceCut && filesExplorerFocus && foldersViewVisible && !inputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "gitlens.key.escape",
+    "when": "editorTextFocus && gitlens:key:escape && !codeActionMenuVisible && !findWidgetVisible && !isInEmbeddedEditor && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-gitlens.key.escape",
+    "when": "editorTextFocus && gitlens:key:escape && !codeActionMenuVisible && !findWidgetVisible && !isInEmbeddedEditor && !parameterHintsVisible && !quickFixWidgetVisible && !referenceSearchVisible && !renameInputVisible && !suggestWidgetVisible"
+  },
+  {
+    "key": "backspace",
+    "command": "hideCodeActionWidget",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-hideCodeActionWidget",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "shift+capslock",
+    "command": "hideSuggestWidget",
+    "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-hideSuggestWidget",
+    "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "inlineChat.close",
+    "when": "inlineChatHasProvider && inlineChatVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-inlineChat.close",
+    "when": "inlineChatHasProvider && inlineChatVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "inlineChat.discard",
+    "when": "inlineChatHasProvider && inlineChatVisible && !inlineChatUserDidEdit"
+  },
+  {
+    "key": "escape",
+    "command": "-inlineChat.discard",
+    "when": "inlineChatHasProvider && inlineChatVisible && !inlineChatUserDidEdit"
+  },
+  {
+    "key": "capslock",
+    "command": "inlineChat.discardHunkChange",
+    "when": "inlineChatHasProvider && inlineChatVisible && inlineChatResponseType == 'messagesAndEdits'"
+  },
+  {
+    "key": "escape",
+    "command": "-inlineChat.discardHunkChange",
+    "when": "inlineChatHasProvider && inlineChatVisible && inlineChatResponseType == 'messagesAndEdits'"
+  },
+  {
+    "key": "capslock",
+    "command": "interactive.input.clear",
+    "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && activeEditor == 'workbench.editor.interactive'"
+  },
+  {
+    "key": "escape",
+    "command": "-interactive.input.clear",
+    "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && activeEditor == 'workbench.editor.interactive'"
+  },
+  {
+    "key": "capslock",
+    "command": "keybindings.editor.clearSearchResults",
+    "when": "inKeybindings && inKeybindingsSearch"
+  },
+  {
+    "key": "escape",
+    "command": "-keybindings.editor.clearSearchResults",
+    "when": "inKeybindings && inKeybindingsSearch"
+  },
+  {
+    "key": "capslock",
+    "command": "keybindings.editor.rejectWhenExpression",
+    "when": "inKeybindings && whenFocus && !suggestWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-keybindings.editor.rejectWhenExpression",
+    "when": "inKeybindings && whenFocus && !suggestWidgetVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "leaveEditorMessage",
+    "when": "messageVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-leaveEditorMessage",
+    "when": "messageVisible"
+  },
+  {
+    "key": "shift+capslock",
+    "command": "leaveSnippet",
+    "when": "inSnippetMode && textInputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-leaveSnippet",
+    "when": "inSnippetMode && textInputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "list.clear",
+    "when": "listFocus && listHasSelectionOrFocus && !inputFocus && !treestickyScrollFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-list.clear",
+    "when": "listFocus && listHasSelectionOrFocus && !inputFocus && !treestickyScrollFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "list.closeFind",
+    "when": "listFocus && treeFindOpen"
+  },
+  {
+    "key": "escape",
+    "command": "-list.closeFind",
+    "when": "listFocus && treeFindOpen"
+  },
+  {
+    "key": "capslock",
+    "command": "notebook.cell.chat.acceptChanges",
+    "when": "inlineChatFocused && notebookCellChatFocused && notebookChatUserDidEdit && !notebookCellEditorFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.chat.acceptChanges",
+    "when": "inlineChatFocused && notebookCellChatFocused && notebookChatUserDidEdit && !notebookCellEditorFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "notebook.cell.chat.discard",
+    "when": "inlineChatFocused && notebookCellChatFocused && !notebookCellEditorFocused && !notebookChatUserDidEdit"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.chat.discard",
+    "when": "inlineChatFocused && notebookCellChatFocused && !notebookCellEditorFocused && !notebookChatUserDidEdit"
+  },
+  {
+    "key": "capslock",
+    "command": "notebook.hideFind",
+    "when": "notebookEditorFocused && notebookFindWidgetFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.hideFind",
+    "when": "notebookEditorFocused && notebookFindWidgetFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "notifications.hideToasts",
+    "when": "notificationToastsVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-notifications.hideToasts",
+    "when": "notificationToastsVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "notifications.hideToasts",
+    "when": "notificationFocus && notificationToastsVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-notifications.hideToasts",
+    "when": "notificationFocus && notificationToastsVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "problems.action.clearFilterText",
+    "when": "problemsFilterFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-problems.action.clearFilterText",
+    "when": "problemsFilterFocus"
+  },
+  {
+    "key": "shift+capslock",
+    "command": "removeSecondaryCursors",
+    "when": "editorHasMultipleSelections && textInputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "-removeSecondaryCursors",
+    "when": "editorHasMultipleSelections && textInputFocus"
+  },
+  {
+    "key": "capslock",
+    "command": "scm.clearInput",
+    "when": "scmRepository && !suggestWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-scm.clearInput",
+    "when": "scmRepository && !suggestWidgetVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.chat.stopReadChatItemAloud",
+    "when": "scopedChatSynthesisInProgress"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.chat.stopReadChatItemAloud",
+    "when": "scopedChatSynthesisInProgress"
+  },
+  {
+    "key": "shift+capslock",
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "shift+capslock",
+    "command": "workbench.action.hideComment",
+    "when": "commentEditorFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.hideComment",
+    "when": "commentEditorFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.terminal.hideSuggestWidget",
+    "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.terminal.hideSuggestWidget",
+    "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.banner.focusBanner",
+    "when": "bannerFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.banner.focusBanner",
+    "when": "bannerFocused"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.statusBar.clearFocus",
+    "when": "statusBarFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.statusBar.clearFocus",
+    "when": "statusBarFocused"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-hideCodeActionWidget",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-hideSuggestWidget",
+    "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-leaveSnippet",
+    "when": "inSnippetMode && textInputFocus"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-removeSecondaryCursors",
+    "when": "editorHasMultipleSelections && textInputFocus"
+  },
+  {
+    "key": "ctrl+capslock",
+    "command": "workbench.action.chat.cancel"
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "-workbench.action.chat.cancel"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "capslock",
+    "command": "workbench.action.exitZenMode",
+    "when": "inZenMode"
+  },
+  {
+    "key": "escape escape",
+    "command": "-workbench.action.exitZenMode",
+    "when": "inZenMode"
+  },
+  {
+    "key": "shift+escape",
+    "command": "-workbench.action.hideComment",
+    "when": "commentEditorFocused"
   }
 ]
