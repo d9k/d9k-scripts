@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# export PAGE="https://metrics.torproject.org/rs.html"
+
+export PAGE="https://youtube.com"
+
+chrome \
+  --private \
+  --proxy-server="http://127.0.0.1:9119" \
+  --user-data-dir="$HOME/temp/chrome-data-dir-proxy" \
+  --profile-directory="Default" \
+  "$PAGE"
+
+
+# NOTE
+# may require you to run
+# `chrome --profile-directory="Default"`
+# after
