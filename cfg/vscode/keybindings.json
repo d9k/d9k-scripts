@@ -244,10 +244,6 @@
   },
   {
     "key": "alt+right",
-    "command": "workbench.action.focusRightGroup"
-  },
-  {
-    "key": "alt+right",
     "command": "-gitlens.key.alt+right",
     "when": "gitlens:key:alt+right"
   },
@@ -1302,5 +1298,13 @@
     "key": "shift+escape",
     "command": "-workbench.action.hideComment",
     "when": "commentEditorFocused"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "alt+left",
+    "command": "workbench.action.focusPreviousGroup"
   }
 ]
