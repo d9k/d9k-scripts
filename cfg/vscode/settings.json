@@ -190,7 +190,7 @@
   "vim.highlightedyank.color": "#5CFAC0",
   "vim.highlightedyank.duration": 472,
   // -----
-  "vim.insertModeKeyBindings": [
+  "vim.insertModeKeyBindingsNonRecursive": [
     // {
     //   "before": [
     //     "g",
@@ -231,7 +231,28 @@
       ]
     }
   ],
-  "vim.normalModeKeyBindings": [
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // https://superuser.com/a/321726/31155
+    {
+      "before": [
+        "c",
+      ],
+      "after": [
+        "\"",
+        "_",
+        "c",
+      ]
+    },
+    {
+      "before": [
+        "x",
+      ],
+      "after": [
+        "\"",
+        "_",
+        "x",
+      ]
+    },
     {
       "before": [
         "<C-f>",
@@ -425,7 +446,7 @@
       ]
     }
   ],
-  "vim.visualModeKeyBindings": [
+  "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": [
         "<C-f>",
@@ -452,6 +473,17 @@
         "editor.action.commentLine",
       ]
     },
+    // https://superuser.com/a/321726/31155
+    {
+      "before": [
+        "c",
+      ],
+      "after": [
+        "\"",
+        "_",
+        "c",
+      ]
+    }
   ],
   "workbench.editor.editorActionsLocation": "hidden",
   "javascript.updateImportsOnFileMove.enabled": "always"
