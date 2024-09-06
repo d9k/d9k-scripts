@@ -14,8 +14,10 @@
 
 SCRIPTS_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-OUTPUT_TABS_PATH_PREFIX="$HOME/tx/notes/fastnote/tabs/tabs-"
-OUTPUT_TABS_PATH_SUFFIX=".txt"
+OUTPUT_TABS_PATH_PREFIX="$HOME/tx/diary/tabs/tabs-"
+# OUTPUT_TABS_PATH_PREFIX="$HOME/tx/notes/fastnote/tabs/tabs-"
+# OUTPUT_TABS_PATH_SUFFIX=".txt"
+OUTPUT_TABS_PATH_SUFFIX=".md"
 
 OUTPUT_HEADER=$(date +"%Y.%m.%d %H:%M")
 
