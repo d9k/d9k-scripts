@@ -2,12 +2,12 @@
 
 BUGFIX_PREFIX=$(git config --local --get user.branchBugfixPrefix 2> /dev/null)
 if [[ -z "$BUGFIX_PREFIX" ]]; then
-  BUGFIX_PREFIX="bugfix"
+  BUGFIX_PREFIX="bugfix-"
 fi
 
 FEATURE_PREFIX=$(git config --local --get user.branchFeaturePrefix 2> /dev/null)
 if [[ -z "$FEATURE_PREFIX" ]]; then
-  FEATURE_PREFIX="feature"
+  FEATURE_PREFIX="feature-"
 fi
 
 
