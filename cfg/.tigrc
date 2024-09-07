@@ -45,14 +45,16 @@ bind diff <Down> move-down
 #   %b: multiline
 #   %B: multiline raw
 
-bind main c !@sh -c "git show -s --format=%s %(commit) | xclip -selection c"
+bind main c +sh -c "git show -s --format=%s %(commit) | xclip -selection c; echo Commit name copied to clipboard"
 bind main H +sh -c 'COMMIT=$(printf %(commit) | head -c 20); printf $COMMIT | xclip -selection c && echo [H]ash $COMMIT copied to clipboard'
 
 bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
 bind generic L @silent.sh git-compare-rev-dir %(commit)
 bind generic <Ctrl-F> !?git checkout %(commit) %(file)
-bind generic Y +sh -c 'echo "%(text)" | xclip -selection c && echo "Line was [Y]anked to clipboard ($FPATH)"'
+bind generic <Ctrl-E> move-half-page-up
+bind generic Y +sh -c 'echo "%(text)" | xclip -selection c; echo "Line was [Y]anked to clipboard"'
+bind generic U +sh -c "echo '%(text)' | xclip -selection c; echo 'Line was Yanked alternatively (U) to clipboard'"
 bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --color "$D"'
 
 # ; echo "# $D" ; ls -lh --color $D
@@ -168,6 +170,9 @@ color   tree.directory         221     default
 #  date:custom,format="%Y-%m-%d"
 
 set main-view	= line-number:no,interval=5 id:no date:custom,format="%Y-%m-%d %H:%M" author:full commit-title:yes,graph,refs,overflow=no
+
+# Shift-X
+# set main-view-id = yes
 
 #set main-view-date = date-local
 set main-view-date-display = custom
