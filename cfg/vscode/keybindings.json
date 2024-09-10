@@ -1306,5 +1306,10 @@
   {
     "key": "alt+left",
     "command": "workbench.action.focusPreviousGroup"
+  },
+  {
+    "key": "ctrl+g",
+    "command": "-extension.vim_ctrl+g",
+    "when": "editorTextFocus && vim.active && vim.use<C-g> && !inDebugRepl"
   }
 ]
