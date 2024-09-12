@@ -1,8 +1,25 @@
 #!/bin/bash
 
+RUN_SELECTOR=
+
 if [[ "$#" -lt 1 ]]; then
-    git branch-select
+  RUN_SELECTOR=1
+fi
+
+ARG_FIRST="$1"
+ARGS_FIRST_SYMBOL="${ARG_FIRST:0:1}"
+
+if [[ "$ARGS_FIRST_SYMBOL" == "-" ]]; then
+  RUN_SELECTOR=1
+fi
+
+if [[ -n "$RUN_SELECTOR" ]]; then
+    # npm install --global git-branch-select
+    # https://github.com/jhermsmeier/git-branch-select
+    # -r: remote branches
+    # -t: tags
+    git branch-select "$@"
     exit
 fi
 
-git checkout $@
+git checkout "$@"
