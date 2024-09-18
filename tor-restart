@@ -1,0 +1,2 @@
+sudo service tor restart
+tail -fn 10000 /var/log/tor/notices.log
