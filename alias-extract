@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ALIASES_FILE=/home/d9k/.aliases
+
+if [ -f $ALIASES_FILE ]; then
+    shopt -s expand_aliases
+    source $ALIASES_FILE
+fi
+
+
+alias "$1" | cut -d "'" -f2
