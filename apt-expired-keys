@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo apt-key list | grep -B 1 -A 1 expired
