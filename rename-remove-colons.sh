@@ -6,14 +6,15 @@ function echo_and_eval() {
   EVAL_RESULT=$(eval "$@")
 }
 
-CMD="rename-ask \"s/:+//g\""
+CMD="rename-ask \"s/[:：]+//g\""
 
 if [ "$#" -lt 1 ]; then
-    CMD="$CMD *"
+  echo "> $CMD *"
+  eval "$CMD *"
 else
-    QUOTED_ARGS=$(printf ' %q' "$@")
-    CMD="$CMD $QUOTED_ARGS"
+  QUOTED_ARGS=$(printf ' %q' "$@")
+  CMD="$CMD $QUOTED_ARGS"
+  echo "> $CMD"
+  eval "$CMD"
 fi
 
-echo "> $CMD"
-eval $CMD
