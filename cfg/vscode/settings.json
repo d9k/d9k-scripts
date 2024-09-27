@@ -449,6 +449,27 @@
   "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": [
+        "p",
+      ],
+      "after": [
+        "\"",
+        "_",
+        "x",
+        "P"
+      ]
+    },
+    {
+      "before": [
+        "x",
+      ],
+      "after": [
+        "\"",
+        "_",
+        "x",
+      ]
+    },
+    {
+      "before": [
         "<C-f>",
       ],
       "commands": [
