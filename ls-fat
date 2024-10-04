@@ -1,0 +1,3 @@
+#/bin/bash
+
+/bin/ls -l --sort=none "$@"
