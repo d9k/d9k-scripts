@@ -1,101 +1,109 @@
 {
   "deno.path": "/home/d9k/.deno/bin/deno",
-    "telemetry.telemetryLevel": "off",
-    "scm.workingSets.enabled": true,
-    "workbench.tree.indent": 20,
-    "workbench.tree.renderIndentGuides": "always",
-    "workbench.list.horizontalScrolling": true,
-    "workbench.hover.delay": 100,
-    "workbench.iconTheme": "vs-nomo-dark",
-    "editor.wordWrap": "on",
-    "gitlens.currentLine.enabled": false,
-    "gitlens.codeLens.enabled": false,
-    "gitlens.blame.highlight.enabled": false,
-    "gitlens.blame.format": "${author|14?} ${agoOrDateShort|8-}",
-    "gitlens.hovers.currentLine.enabled": false,
-    "editor.lineHeight": 1.65,
-    "workbench.colorTheme": "Slime",
-    "theme-by-language.themes": {
-        "markdown": "Slime",
-    "typescript": "Slime"
-    // "typescriptreact": "Material Theme"
-    },
-    "workbench.colorCustomizations": {
+  "telemetry.telemetryLevel": "off",
+  "scm.workingSets.enabled": true,
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.list.horizontalScrolling": true,
+  "workbench.hover.delay": 100,
+  "workbench.iconTheme": "vs-nomo-dark",
+  "editor.wordWrap": "on",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.blame.highlight.enabled": false,
+  "gitlens.blame.format": "${author|14?} ${agoOrDateShort|8-}",
+  "gitlens.hovers.currentLine.enabled": false,
+  //  "editor.lineHeight": 1.65,
+  "workbench.colorTheme": "Palenight Italic",
+  // "theme-by-language.themes": {
+  //   "markdown": "Slime",
+  //   "typescript": "Slime"
+  //   // "typescriptreact": "Material Theme"
+  // },
+  "workbench.colorCustomizations": {
     "statusBar.background": "#0b0b0b",
     "statusBar.foreground": "#bfffff",
-        "[Community Material Theme Palenight High Contrast]": {
-            "editor.background": "#1b150c"
-        },
-        "[Slime]": {
-          // "editor.background": "#131c24",
-          // "editor.background": "#1b292e",
-          // "editor.background": "#121b1f",
+    "[Community Material Theme Palenight High Contrast]": {
+      "editor.background": "#1b150c"
+    },
+    "[Palenight Italic]": {
+      "editor.background": "#100518",
+      "sideBar.background": "#1d0a36cb",
+      "sideBar.foreground": "#8aafc9",
+      "tab.activeBackground": "#0f0125",
+      "list.focusBackground": "#05000f",
+      "list.focusOutline": "#6e94a3",
+    },
+    "[Slime]": {
+      // "editor.background": "#131c24",
+      // "editor.background": "#1b292e",
+      // "editor.background": "#121b1f",
       // "editor.background": "#081214",
       // "editor.background": "#050c0e",
       "editor.background": "#020b0e",
-          // "sideBar.background": "#1b2020",
-          // "sideBar.background": "#192022",
+      // "sideBar.background": "#1b2020",
+      // "sideBar.background": "#192022",
       "sideBar.background": "#091214",
-          // "editorStickyScroll.background": "#030b0e",
-          // "editorStickyScroll.background": "#677175",
-          // "editorStickyScroll.background": "#142c1e",
-          "scrollbar.shadow": "#5d8086",
-          "editorStickyScroll.background": "#132b24",
-          "editorStickyScroll.border": "#143b47",
-          // "statusBar.background": "#282e2f",
-          // "statusBar.background": "#131c24",
-          //"editorPane.background": "#1e2324",
-          // "editorPane.background": "#131c24",
-          //"panel.background": "#1e2324",
-          // "panel.background": "#131c24",
-          // "editorGutter.background": "#1e2324",
-          // "editorGutter.background": "#131c24",
-          // "editorGutter.background": "#121b1f",
-          // "editorGutter.background": "#1a1e20",
-          "editorGutter.background": "#161d20",
-          // "editorGutter.foldingControlForeground": "#c5c5c5",
-          "editorGutter.foldingControlForeground": "#6fd6ff",
-          //"breadcrumb.background": "#1e2324",
-          //"panel.background": "#1e2324",
-          // "panel.background": "#131c24",
-          // "titleBar.activeBackground": "#282e2f",
-          // "titleBar.inactiveBackground": "#282e2f",
-          // "titleBar.inactiveBackground": "#FF2e2f",
-          // "editorGroupHeader.tabsBackground": "#131c24",
-          // "editorGroupHeader.tabsBackground": "#254149",
-          "editorGroupHeader.tabsBackground": "#333a3d",
-          "editorLineNumber.activeForeground": "#b0b0ff",
-          // hide active line number for extension "Double Line Numbers"
-          // "editorLineNumber.activeForeground": "#161d20",
-          "tab.activeBackground": "#33474b"
-        }
-    },
-    "editor.tokenColorCustomizations": {
-        "[Slime]": {
-            "textMateRules": [
-                {
-                    "scope": [
-                        "markup.inline.raw.markdown",
-                        "text.html.markdown markup.fenced_code.block.markdown",
-                        "markup.inline.raw.string.markdown"
-                    ],
-                    "settings": {
-                        "foreground": "#819774"
-                    }
-        }
-            ]
-        }
-    },
-    "editor.minimap.renderCharacters": false,
-    "editor.minimap.enabled": false,
-    "editor.scrollbar.verticalScrollbarSize": 8,
-    "editor.scrollbar.vertical": "visible",
-    "remote.SSH.showLoginTerminal": true,
-    "remote.SSH.useLocalServer": false,
-    "remote.SSH.remotePlatform": {
-        "109.71.8.230": "linux"
-    },
-    "php.suggest.basic": false,
+      // "editorStickyScroll.background": "#030b0e",
+      // "editorStickyScroll.background": "#677175",
+      // "editorStickyScroll.background": "#142c1e",
+      "scrollbar.shadow": "#5d8086",
+      "editorStickyScroll.background": "#132b24",
+      "editorStickyScroll.border": "#143b47",
+      // "statusBar.background": "#282e2f",
+      // "statusBar.background": "#131c24",
+      //"editorPane.background": "#1e2324",
+      // "editorPane.background": "#131c24",
+      //"panel.background": "#1e2324",
+      // "panel.background": "#131c24",
+      // "editorGutter.background": "#1e2324",
+      // "editorGutter.background": "#131c24",
+      // "editorGutter.background": "#121b1f",
+      // "editorGutter.background": "#1a1e20",
+      "editorGutter.background": "#161d20",
+      // "editorGutter.foldingControlForeground": "#c5c5c5",
+      "editorGutter.foldingControlForeground": "#6fd6ff",
+      //"breadcrumb.background": "#1e2324",
+      //"panel.background": "#1e2324",
+      // "panel.background": "#131c24",
+      // "titleBar.activeBackground": "#282e2f",
+      // "titleBar.inactiveBackground": "#282e2f",
+      // "titleBar.inactiveBackground": "#FF2e2f",
+      // "editorGroupHeader.tabsBackground": "#131c24",
+      // "editorGroupHeader.tabsBackground": "#254149",
+      "editorGroupHeader.tabsBackground": "#333a3d",
+      "editorLineNumber.activeForeground": "#b0b0ff",
+      // hide active line number for extension "Double Line Numbers"
+      // "editorLineNumber.activeForeground": "#161d20",
+      "tab.activeBackground": "#33474b"
+    }
+  },
+  "editor.tokenColorCustomizations": {
+      "[Slime]": {
+          "textMateRules": [
+              {
+                  "scope": [
+                      "markup.inline.raw.markdown",
+                      "text.html.markdown markup.fenced_code.block.markdown",
+                      "markup.inline.raw.string.markdown"
+                  ],
+                  "settings": {
+                      "foreground": "#819774"
+                  }
+      }
+          ]
+      }
+  },
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.verticalScrollbarSize": 8,
+  "editor.scrollbar.vertical": "visible",
+  "remote.SSH.showLoginTerminal": true,
+  "remote.SSH.useLocalServer": false,
+  "remote.SSH.remotePlatform": {
+      "109.71.8.230": "linux"
+  },
+  "php.suggest.basic": false,
   // == saxMono font ==
   "editor.fontFamily": "'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
   "editor.fontSize": 13.5,
