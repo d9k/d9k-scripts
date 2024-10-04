@@ -382,16 +382,6 @@
   },
   // peek widget: switch occurences/code
   {
-    "key": "alt+right",
-    "command": "togglePeekWidgetFocus",
-    "when": "inReferenceSearchEditor || referenceSearchVisible"
-  },
-  {
-    "key": "alt+left",
-    "command": "togglePeekWidgetFocus",
-    "when": "referenceSearchVisible"
-  },
-  {
     "key": "ctrl+shift+r",
     "command": "-solargraph.search"
   },
@@ -1335,5 +1325,10 @@
     "key": "alt+left",
     "command": "togglePeekWidgetFocus",
     "when": "referenceSearchVisible"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "filesExplorer.findInFolder",
+    "when": "filesExplorerFocus && foldersViewVisible"
   }
 ]
