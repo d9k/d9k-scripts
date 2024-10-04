@@ -1,6 +1,7 @@
 {
   "deno.path": "/home/d9k/.deno/bin/deno",
     "telemetry.telemetryLevel": "off",
+    "scm.workingSets.enabled": true,
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "always",
     "workbench.list.horizontalScrolling": true,
