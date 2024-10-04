@@ -153,10 +153,6 @@
     "when": "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'alternate'"
   },
   {
-    "key": "ctrl+shift+c",
-    "command": "gitlens.diffWithRevisionFrom"
-  },
-  {
     "key": "alt+w",
     "command": "-toggleSearchEditorWholeWord",
     "when": "inSearchEditor && searchInputBoxFocus"
@@ -393,7 +389,7 @@
   {
     "key": "alt+left",
     "command": "togglePeekWidgetFocus",
-    "when": "inReferenceSearchEditor || referenceSearchVisible"
+    "when": "referenceSearchVisible"
   },
   {
     "key": "ctrl+shift+r",
@@ -1311,5 +1307,33 @@
     "key": "ctrl+g",
     "command": "-extension.vim_ctrl+g",
     "when": "editorTextFocus && vim.active && vim.use<C-g> && !inDebugRepl"
+  },
+  {
+    "key": "alt+m",
+    "command": "vscode-copy-fqn.copy-fqn"
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "-theme-by-language.setThemeForCurrentFileLanguage"
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.closeActiveEditor",
+        "workbench.action.reopenClosedEditor"
+      ]
+    }
+  },
+  {
+    "key": "alt+right",
+    "command": "togglePeekWidgetFocus",
+    "when": "referenceSearchVisible"
+  },
+  {
+    "key": "alt+left",
+    "command": "togglePeekWidgetFocus",
+    "when": "referenceSearchVisible"
   }
 ]
