@@ -201,7 +201,20 @@
   "editor.lineNumbers": "relative",
   // "editor.lineNumbers": "on",
   "editor.glyphMargin": true,
-  // -----
+  //
+  // # Outline Map
+  //
+  // https://marketplace.visualstudio.com/items?itemName=Gerrnperl.outline-map
+  "outline-map.follow": "cursor",
+  "outline-map.expand": "cursor",
+  "outline-map.customCSS": ".outline-node, .outline-node > .outline-children { transition: none !important; }",
+  // "outline-map.defaultMaxDepth": 4,
+  // "outline-map.customCSS": "* { background-color: red; }",
+  //
+  // ## disable animations
+  // https://github.com/Gerrnperl/outline-map/issues/71
+  //
+  // # VSCodeVim
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.config/Code/User/.vscode.vimrc",
