@@ -347,7 +347,7 @@
     "command": "workbench.explorer.fileView.focus"
   },
   {
-    "key": "alt+2",
+    "key": "shift+alt+2",
     "command": "outline.focus"
   },
   {
@@ -1330,5 +1330,9 @@
     "key": "ctrl+shift+i",
     "command": "filesExplorer.findInFolder",
     "when": "filesExplorerFocus && foldersViewVisible"
+  },
+  {
+    "key": "alt+2",
+    "command": "workbench.view.extension.outline-map"
   }
 ]
