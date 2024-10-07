@@ -481,6 +481,24 @@
       "commands": [
         "workbench.action.editor.previousChange"
       ]
+    },
+    // Go to Next/Previous Member extension:
+    // https://marketplace.visualstudio.com/items?itemName=mishkinf.goto-next-previous-member
+    {
+      "before": [
+        "<c-j>"
+      ],
+      "commands": [
+        "gotoNextPreviousMember.nextMember"
+      ]
+    },
+    {
+      "before": [
+        "<c-k>"
+      ],
+      "commands": [
+        "gotoNextPreviousMember.previousMember"
+      ]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
