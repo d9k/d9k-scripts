@@ -213,6 +213,18 @@
   //
   // ## disable animations
   // https://github.com/Gerrnperl/outline-map/issues/71
+  "workbench.editor.editorActionsLocation": "hidden",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  // "editor.multiCursorModifier": "ctrlCmd",
+  // "[css]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  "gotoNextPreviousMember.symbolKinds": [
+    "class",
+    "method",
+    "function"
+  ],
+  "breadcrumbs.symbolSortOrder": "name",
   //
   // # VSCodeVim
   "vim.leader": "<Space>",
@@ -561,6 +573,4 @@
       ]
     }
   ],
-  "workbench.editor.editorActionsLocation": "hidden",
-  "javascript.updateImportsOnFileMove.enabled": "always"
 }
