@@ -1334,5 +1334,56 @@
   {
     "key": "alt+2",
     "command": "workbench.view.extension.outline-map"
+  },
+  {
+    "key": "shift+alt+h",
+    "command": "gitlens.showQuickFileHistory",
+    "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
+  },
+  {
+    "key": "alt+h",
+    "command": "-gitlens.showQuickFileHistory",
+    "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
+  },
+  {
+    "key": "shift+alt+h",
+    "command": "-gitlens.showQuickRepoHistory",
+    "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
+  },
+  {
+    "key": "shift+alt+l",
+    "command": "outline-map.focusSearch"
+  },
+  {
+    "key": "alt+l",
+    "command": "-outline-map.focusSearch"
+  },
+  {
+    "key": "shift+alt+l",
+    "command": "toggleSearchEditorContextLines",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "alt+l",
+    "command": "-toggleSearchEditorContextLines",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "shift+alt+l",
+    "command": "toggleFindInSelection",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+l",
+    "command": "-toggleFindInSelection",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+l",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "alt+h",
+    "command": "workbench.action.focusPreviousGroup"
   }
 ]
