@@ -120,21 +120,29 @@
   // == saxMono font ==
   "editor.fontFamily": "'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
   // "editor.fontSize": 13.5,
-  "editor.fontSize": 14,
-  "editor.fontWeight": "bold",
-  "editor.letterSpacing": 0.7,
-  "editor.lineHeight": 1.9,
+  // "editor.fontSize": 14,
+  // "editor.fontWeight": "bold",
+  // "editor.letterSpacing": 0.7,
+  // "editor.lineHeight": 1.9,
   // == Monofoki font ==
   // "editor.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
   // "editor.fontSize": 14,
   // "editor.fontWeight": "bold",
   // "editor.letterSpacing": 0.8,
   // "editor.lineHeight": 1.9,
-  // "window.zoomLevel": 0,
+  // "window.zoomLevel": 0.33,
   // =======================
   // "terminal.integrated.fontFamily": "monospace",
   "terminal.integrated.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
-  "terminal.integrated.fontSize": 15,
+  // "terminal.integrated.fontSize": 15,
+  // # Zoom (mostly for debugger variables font)
+  "window.zoomLevel": 0.33,
+  // "terminal.integrated.fontSize": 14,
+  "editor.fontSize": 13.5,
+  "editor.fontWeight": "bold",
+  "editor.letterSpacing": 0.8,
+  "editor.lineHeight": 2.0,
+  // etc
     "git.suggestSmartCommit": false,
     "files.trimTrailingWhitespace": true,
     "git.confirmSync": false,
@@ -226,6 +234,22 @@
   ],
   "breadcrumbs.symbolSortOrder": "name",
   //
+  // # Apc Customize UI++ extension
+  // To ensure the extension works, allow VSCode or VSCodium to modify itself by fixing read-only code files and permission issues.
+  "apc.stylesheet": {
+    // ## Tabs
+    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label a, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-label a": "font-size: 12px;",
+    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab": "padding-left: 3px;",
+    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab>.tab-actions>.monaco-action-bar": "width: 20px",
+    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab>.tab-actions": "width: 18px",
+    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-actions .action-label": "padding-left: 0",
+    // ## Debug panel
+    ".debug-pane .scope": "font-size: 13px;",
+    ".monaco-workbench .debug-hover-widget .monaco-list-row .expression, .monaco-workbench .debug-pane .monaco-list-row .expression": "font-size: 16px; line-height: 21px;"
+  },
+  // "apc.electron": {
+  //   "titleBarStyle": "customButtonsOnHover",
+  // },
   // # VSCodeVim
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
