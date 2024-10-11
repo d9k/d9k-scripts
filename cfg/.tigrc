@@ -19,10 +19,15 @@ set wrap-lines = 1
 
 bind status a !amend
 bind status A !amend
-bind status D !@?rm %(file)
+# bind status D !@?sh -c "rm '%(file)'"
+bind status D !@?rm ./%(file)
 bind status B @backup-conf %(file)
 bind status H >tig %(file)
 bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+
+# stage file par[T]
+bind status T !git add -i --patch '%(file)'
+
 bind status v !sh -c 'nvim %(file)'
 bind status V !sh -c 'code %(file)'
 bind status P !push
@@ -178,6 +183,8 @@ set main-view	= line-number:no,interval=5 id:no date:custom,format="%Y-%m-%d %H:
 set main-view-date-display = custom
 
 set vertical-split = horizontal
+set split-view-height = 90%
+# set split-view-width = 60%
 
 # show hex commit hash:
 # :set main-view-id = yes
