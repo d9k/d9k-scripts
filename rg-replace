@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "See wrg (https://github.com/BurntSushi/ripgrep/issues/74#issuecomment-309213936)"
+echo
+echo "1) rg something"
+echo "2) rg something --replace SOMETHING"
+echo "3) wrg something --replace SOMETHING"
