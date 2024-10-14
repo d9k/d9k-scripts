@@ -1385,5 +1385,13 @@
   {
     "key": "alt+h",
     "command": "workbench.action.focusPreviousGroup"
+  },
+  {
+    "key": "alt+j",
+    "command": "gotoNextPreviousMember.nextMember"
+  },
+  {
+    "key": "alt+k",
+    "command": "gotoNextPreviousMember.previousMember"
   }
 ]
