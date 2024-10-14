@@ -535,6 +535,14 @@
       "commands": [
         "gotoNextPreviousMember.previousMember"
       ]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "after": ["k", "d", "d"]
+    },
+    {
+      "before": ["<leader>", "D"],
+      "after": ["j", "d", "d", "k"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
