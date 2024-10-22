@@ -1,0 +1,20 @@
+#!/bin/bash
+
+FILE="$1"
+
+if [[ -z "$FILE" ]]; then
+  echo "No file provided"
+fi
+
+FILE_PATH_ABS=$(readlink -f "$FILE")
+FILE_NAME_WITH_EXT=$(basename -- "$FILE_PATH_ABS")
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+MARKDOWN_IMG="![${FILE_NAME_NO_EXT}](file://${FILE_PATH_ABS})"
+
+echo "$MARKDOWN_IMG" | xclip -selection c
+
+echo "# Image url copied to clipboard:"
+echo
+echo "$MARKDOWN_IMG"
