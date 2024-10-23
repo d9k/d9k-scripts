@@ -1,0 +1,11 @@
+#!/bin/bash
+
+MAX="$1"
+
+if [[ -z "$MAX" ]]; then
+  MAX=9999
+fi
+
+# from coreutils
+# https://stackoverflow.com/questions/1194882/how-to-generate-random-number-in-bash 
+shuf -i 1-$MAX -n 1
