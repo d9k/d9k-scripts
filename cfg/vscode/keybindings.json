@@ -1398,5 +1398,10 @@
     "key": "ctrl+k",
     "command": "-extension.vim_ctrl+k",
     "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+t",
+    "command": "-extension.vim_ctrl+t",
+    "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
   }
 ]
