@@ -1393,5 +1393,10 @@
   {
     "key": "alt+k",
     "command": "gotoNextPreviousMember.previousMember"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "-extension.vim_ctrl+k",
+    "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
   }
 ]
