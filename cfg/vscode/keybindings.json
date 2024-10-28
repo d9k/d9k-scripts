@@ -1403,5 +1403,9 @@
     "key": "ctrl+t",
     "command": "-extension.vim_ctrl+t",
     "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
+  },
+  {
+    "key": "shift shift",
+    "command": "workbench.action.showAllSymbols"
   }
 ]
