@@ -1307,7 +1307,7 @@
     "command": "-theme-by-language.setThemeForCurrentFileLanguage"
   },
   {
-    "key": "shift+alt+t",
+    "key": "ctrl+shift+r",
     "command": "runCommands",
     "args": {
       "commands": [
@@ -1407,5 +1407,63 @@
   {
     "key": "shift shift",
     "command": "workbench.action.showAllSymbols"
+  },
+  {
+    "key": "shift+alt+r",
+    "command": "-remote-wsl.revealInExplorer",
+    "when": "editorFocus && remoteName == 'wsl'"
+  },
+  {
+    "key": "shift+alt+r",
+    "command": "editor.action.refactor",
+    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-editor.action.refactor",
+    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+r",
+    "command": "command-runner.run"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-command-runner.run"
+  },
+  {
+    "key": "shift+alt+r",
+    "command": "rerunSearchEditorSearch",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-rerunSearchEditorSearch",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "shift+alt+r ctrl+e",
+    "command": "editor.action.codeAction",
+    "when": "editorTextFocus && editorLangId =~ /^(c|(cuda-)?cpp)$/ && !(config.C_Cpp.intelliSenseEngine =~ /^[dD]isabled$/)"
+  },
+  {
+    "key": "ctrl+shift+r ctrl+i",
+    "command": "-editor.action.codeAction",
+    "when": "editorTextFocus && editorLangId =~ /^(c|(cuda-)?cpp)$/ && !(config.C_Cpp.intelliSenseEngine =~ /^[dD]isabled$/)"
+  },
+  {
+    "key": "ctrl+shift+r ctrl+e",
+    "command": "-editor.action.codeAction",
+    "when": "editorTextFocus && editorLangId =~ /^(c|(cuda-)?cpp)$/ && !(config.C_Cpp.intelliSenseEngine =~ /^[dD]isabled$/)"
+  },
+  {
+    "key": "shift+alt+r",
+    "command": "workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
+    "when": "inQuickOpen && inRecentFilesPicker"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
+    "when": "inQuickOpen && inRecentFilesPicker"
   }
 ]
