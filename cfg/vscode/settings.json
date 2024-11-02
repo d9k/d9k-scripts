@@ -347,11 +347,20 @@
     {
       "before": [
         "g",
-        "d"
+        "D"
       ],
       "commands": [
         "editor.action.peekDefinition",
         // "editor.actions.revealDefinition"
+      ]
+    },
+    {
+      "before": [
+        "g",
+        "d"
+      ],
+      "commands": [
+        "editor.action.revealDefinition",
       ]
     },
     {
@@ -536,13 +545,30 @@
         "gotoNextPreviousMember.previousMember"
       ]
     },
+    // delete line above
     {
-      "before": ["<leader>", "d"],
-      "after": ["k", "d", "d"]
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "after": [
+        "k",
+        "d",
+        "d"
+      ]
     },
+    // delete line below
     {
-      "before": ["<leader>", "D"],
-      "after": ["j", "d", "d", "k"]
+      "before": [
+        "<leader>",
+        "D"
+      ],
+      "after": [
+        "j",
+        "d",
+        "d",
+        "k"
+      ]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
