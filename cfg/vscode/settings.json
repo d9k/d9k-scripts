@@ -631,4 +631,8 @@
       ]
     }
   ],
+  // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
+  "docsView.documentationView.updateMode": "sticky",
+  // Prevent tabs duplication
+  "workbench.editor.revealIfOpen": true
 }
