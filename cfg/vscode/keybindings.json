@@ -1465,5 +1465,20 @@
     "key": "ctrl+shift+r",
     "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
     "when": "inQuickOpen && inRecentFilesPicker"
+  },
+  // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
+  {
+    "key": "shift+alt+d",
+    "command": "docsView.documentation.focus"
+  },
+  {
+    "key": "shift+alt+d",
+    "command": "-editor.detectLanguage",
+    "when": "editorTextFocus && !notebookEditable"
+  },
+  {
+    "key": "shift+alt+d",
+    "command": "-notebook.cell.detectLanguage",
+    "when": "notebookCellEditable && notebookEditable"
   }
 ]
