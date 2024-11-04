@@ -395,16 +395,6 @@
     "command": "-editor.action.toggleWordWrap"
   },
   {
-    "key": "alt+z",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        "workbench.action.focusActiveEditorGroup",
-        "workbench.action.closePanel"
-      ]
-    }
-  },
-  {
     "key": "alt+r",
     "command": "-workbench.action.terminal.toggleFindRegex",
     "when": "terminalFindVisible && terminalHasBeenCreated || terminalFindVisible && terminalProcessSupported"
@@ -1499,5 +1489,10 @@
   {
     "key": "alt+p",
     "command": "diffEditor.switchSide"
+  },
+  // zoom editor group
+  {
+    "key": "alt+z",
+    "command": "workbench.action.toggleEditorWidths"
   }
 ]
