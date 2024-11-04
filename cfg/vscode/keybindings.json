@@ -1480,5 +1480,24 @@
     "key": "shift+alt+d",
     "command": "-notebook.cell.detectLanguage",
     "when": "notebookCellEditable && notebookEditable"
+  },
+  {
+    "key": "alt+p",
+    "command": "-keybindings.editor.toggleSortByPrecedence",
+    "when": "inKeybindings"
+  },
+  {
+    "key": "alt+p",
+    "command": "-togglePreserveCase",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+p",
+    "command": "-toggleSearchPreserveCase",
+    "when": "searchViewletFocus"
+  },
+  {
+    "key": "alt+p",
+    "command": "diffEditor.switchSide"
   }
 ]
