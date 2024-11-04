@@ -629,6 +629,26 @@
         "_",
         "c",
       ]
+    },
+    // indent
+    {
+      "before": [
+        "<leader>",
+        ">"
+      ],
+      "commands": [
+        "editor.action.indentLines"
+      ]
+    },
+    // Decrease indent
+    {
+      "before": [
+        "<leader>",
+        "<"
+      ],
+      "commands": [
+        "editor.action.outdentLines"
+      ]
     }
   ],
   // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
