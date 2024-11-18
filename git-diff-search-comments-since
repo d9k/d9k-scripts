@@ -16,6 +16,6 @@ COMMIT=$1
 #git diff $COMMIT..HEAD | \
 git diff $COMMIT | \
   egrep -v "^\-" | \
-  grep -E --color=always "^diff.*|^\+[[:space:]]*\/\/|^\+[[:space:]]*\/\*|^\+[[:space:]]*\*|^\+.*console." | \
+  grep -E --color=always "^diff.*|^\+[[:space:]]*\/\/|^\+[[:space:]]*\/\*|^\+[[:space:]]*\*|^\+.*console.|TODO|FIXME|todo|fixme" | \
   less -r
 
