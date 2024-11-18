@@ -28,7 +28,7 @@ setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
 # If the argument to a cd command (or an implied cd with the AUTO_CD option set)
 # is not a directory, and does not begin with a slash, try to expand the
 # expression as if it were preceded by a '~'
-setopt cdablevars
+#setopt cdablevars
 
 # Try to make the completion list smaller (occupying less lines) by printing
 # the matches in columns with different widths
@@ -321,12 +321,16 @@ alias default_text_editor=nvim
 alias default_torrent_app=qbittorrent
 alias default_video_player=smplayer
 alias default_windows_emulator=wine
+alias default_gba_emulator=mgba-qt
+alias -- gba-emulator=mgba-qt
 
 alias alternative_pdf_viewer=xreader
 
 # File extension open default
 alias -s aliases=default_text_editor
 alias -s csv=default_office_editor
+alias -s xls=default_office_editor
+alias -s xlsx=default_office_editor
 alias -s doc=default_office_editor
 alias -s docx=default_office_editor
 alias -s exe=wine
@@ -343,6 +347,7 @@ alias -s mov=default_video_player
 alias -s mp4=default_video_player
 alias -s mkv=default_video_player
 alias -s pdf=default_pdf_viewer
+alias -s gitignore=default_text_editor
 alias -s php=default_text_editor
 alias -s png=default_image_viewer
 alias -s tigrc=default_text_editor
@@ -407,13 +412,13 @@ esac
 
 # vim mode
 # https://github.com/jeffreytse/zsh-vi-mode - A better and friendly vi(vim) mode plugin for ZSH.
-ZSH_VIM_MODE_PLUGIN_PATH="/home/d9k/.zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+export ZSH_VIM_MODE_PLUGIN_PATH="/home/d9k/.zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+export ZSH_AUTOLOAD_VI_MODE=1
 
 alias cbread='xclip -selection c'
 alias cbprint='xclip -o -selection clipboard'
 
-if [[ -f "$ZSH_VIM_MODE_PLUGIN_PATH" ]]; then
-  if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+function zsh_vi_mode_enable {
     source "$ZSH_VIM_MODE_PLUGIN_PATH"
 
   #  zvm_vi_yank () {
@@ -472,5 +477,21 @@ if [[ -f "$ZSH_VIM_MODE_PLUGIN_PATH" ]]; then
       zvm_bindkey vicmd  'p' my_zvm_vi_put_after
       zvm_bindkey vicmd  'P' my_zvm_vi_put_before
     }
+
+    # Fix alt+.
+    # [alt + . in insert mode doesn't substitute to last argument! · Issue #287 · jeffreytse/zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode/issues/287)
+    function append-last-word { ((++CURSOR)); zle insert-last-word; }
+    zle -N append-last-word
+    bindkey -M vicmd '\e.' append-last-word
+
+    # Insert mode
+    bindkey -M viins '\e.' insert-last-word
+}
+
+if [[ -f "$ZSH_VIM_MODE_PLUGIN_PATH" ]]; then
+  if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+    if [[ -n "$ZSH_AUTOLOAD_VI_MODE" ]]; then
+      zsh_vi_mode_enable
+    fi
   fi # check not VSCode
 fi
