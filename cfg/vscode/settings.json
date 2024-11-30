@@ -275,69 +275,37 @@
     // },
     {
       "before": "u",
-      "commands": [
-        "undo"
-      ]
+      "commands": ["undo"]
     },
     {
-      "before": [
-        "<C-r>",
-      ],
-      "commands": [
-        "redo"
-      ]
+      "before": ["<C-r>"],
+      "commands": ["redo"]
     },
     {
-      "before": [
-        "<C-c>"
-      ],
-      "commands": [
-        "editor.action.clipboardCopyAction"
-      ]
+      "before": ["<C-c>"],
+      "commands": ["editor.action.clipboardCopyAction"]
     },
     {
-      "before": [
-        "<C-a>"
-      ],
-      "commands": [
-        "editor.action.selectAll"
-      ]
+      "before": ["<C-a>"],
+      "commands": ["editor.action.selectAll"]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     // https://superuser.com/a/321726/31155
     {
-      "before": [
-        "c",
-      ],
-      "after": [
-        "\"",
-        "_",
-        "c",
-      ]
+      "before": ["c"],
+      "after": ["\"", "_", "c"]
     },
     {
-      "before": [
-        "x",
-      ],
-      "after": [
-        "\"",
-        "_",
-        "x",
-      ]
+      "before": ["x"],
+      "after": ["\"", "_", "x"]
     },
     {
-      "before": [
-        "<C-f>",
-      ],
-      "commands": [
-        "actions.find"
-      ]
+      "before": ["<C-f>"],
+      "commands": ["actions.find"]
     },
     {
-      "before": [
-        "<C-e>"
-      ],
+      "before": ["<C-e>"],
       "after": [
         // scroll 1/2 page up
         "<C-u>"
@@ -345,39 +313,23 @@
     },
     // https://dev.to/ansonh/10-vs-code-vim-tricks-to-boost-your-productivity-1b0n#5-lsp-keybindings
     {
-      "before": [
-        "g",
-        "D"
-      ],
+      "before": ["g", "D"],
       "commands": [
-        "editor.action.peekDefinition",
+        "editor.action.peekDefinition"
         // "editor.actions.revealDefinition"
       ]
     },
     {
-      "before": [
-        "g",
-        "d"
-      ],
-      "commands": [
-        "editor.action.revealDefinition",
-      ]
+      "before": ["g", "d"],
+      "commands": ["editor.action.revealDefinition"]
     },
     {
-      "before": [
-        "g",
-        "q"
-      ],
-      "commands": [
-        "editor.action.quickFix"
-      ]
+      "before": ["g", "q"],
+      "commands": ["editor.action.quickFix"]
     },
     // https://dev.to/ansonh/10-vs-code-vim-tricks-to-boost-your-productivity-1b0n#6-scroll-in-show-hover
     {
-      "before": [
-        "g",
-        "h"
-      ],
+      "before": ["g", "h"],
       "commands": [
         // "editor.action.showDefinitionPreviewHover"
         "editor.action.showHover",
@@ -386,90 +338,42 @@
       ]
     },
     {
-      "before": [
-        "g",
-        "i"
-      ],
-      "commands": [
-        "editor.action.goToImplementation"
-      ]
+      "before": ["g", "i"],
+      "commands": ["editor.action.goToImplementation"]
     },
     {
-      "before": [
-        "g",
-        "r"
-      ],
-      "commands": [
-        "editor.action.referenceSearch.trigger"
-      ]
+      "before": ["g", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"]
     },
     // "g p" - "go peek" keys
     {
-      "before": [
-        "g",
-        "p",
-        "d"
-      ],
-      "commands": [
-        "editor.action.peekDefinition",
-      ]
+      "before": ["g", "p", "d"],
+      "commands": ["editor.action.peekDefinition"]
     },
     {
-      "before": [
-        "g",
-        "p",
-        "i"
-      ],
-      "commands": [
-        "editor.action.peekImplementation"
-      ]
+      "before": ["g", "p", "i"],
+      "commands": ["editor.action.peekImplementation"]
     },
     {
-      "before": [
-        "g",
-        "p",
-        "t"
-      ],
-      "commands": [
-        "editor.action.peekTypeDefinition"
-      ]
+      "before": ["g", "p", "t"],
+      "commands": ["editor.action.peekTypeDefinition"]
     },
     {
-      "before": [
-        "g",
-        "p",
-        "h"
-      ],
-      "commands": [
-        "editor.action.showDefinitionPreviewHover"
-      ]
+      "before": ["g", "p", "h"],
+      "commands": ["editor.action.showDefinitionPreviewHover"]
     },
     // "g n" - "go navigate"
     {
-      "before": [
-        "g",
-        "n",
-        "d"
-      ],
-      "commands": [
-        "editor.action.revealDefinition"
-      ]
+      "before": ["g", "n", "d"],
+      "commands": ["editor.action.revealDefinition"]
     },
     // tasks
     {
-      "before": [
-        "<leader>",
-        "t"
-      ],
-      "commands": [
-        "workbench.action.tasks.runTask"
-      ]
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.tasks.runTask"]
     },
     {
-      "before": [
-        "<leader>",
-        "r"
-      ],
+      "before": ["<leader>", "r"],
       "commands": [
         "workbench.action.files.save",
         "terminal.focus",
@@ -477,178 +381,115 @@
       ]
     },
     {
-      "before": [
-        "<leader>",
-        "`"
-      ],
-      "commands": [
-        "terminal.focus",
-      ]
+      "before": ["<leader>", "`"],
+      "commands": ["terminal.focus"]
     },
     // other leader actions
     {
-      "before": [
-        "<leader>",
-        "/"
-      ],
-      "commands": [
-        "editor.action.commentLine",
-      ]
+      "before": ["<leader>", "/"],
+      "commands": ["editor.action.commentLine"]
     },
     // git peek
     {
-      "before": [
-        "<leader>",
-        "g",
-        "p"
-      ], // Peek Git diff for the changed line
-      "commands": [
-        "editor.action.dirtydiff.next"
-      ]
+      "before": ["<leader>", "g", "p"], // Peek Git diff for the changed line
+      "commands": ["editor.action.dirtydiff.next"]
     },
     // jump to prev/next git changes
     {
-      "before": [
-        "<leader>",
-        "g",
-        "j"
-      ], // Jump to next Git change
-      "commands": [
-        "workbench.action.editor.nextChange"
-      ]
+      // Jump to next Git change
+      "before": ["<leader>", "g", "j"], 
+      "commands": ["workbench.action.editor.nextChange"]
     },
     {
-      "before": [
-        "<leader>",
-        "g",
-        "k"
-      ], // Jump to previous Git change
-      "commands": [
-        "workbench.action.editor.previousChange"
-      ]
+      // Jump to previous Git change
+      "before": ["<leader>", "g", "k"], 
+      "commands": ["workbench.action.editor.previousChange"]
     },
     // Go to Next/Previous Member extension:
     // https://marketplace.visualstudio.com/items?itemName=mishkinf.goto-next-previous-member
     {
-      "before": [
-        "<c-j>"
-      ],
-      "commands": [
-        "gotoNextPreviousMember.nextMember"
-      ]
+      "before": ["<c-j>"],
+      "commands": ["gotoNextPreviousMember.nextMember"]
     },
     {
-      "before": [
-        "<c-k>"
-      ],
-      "commands": [
-        "gotoNextPreviousMember.previousMember"
-      ]
+      "before": ["<c-k>"],
+      "commands": ["gotoNextPreviousMember.previousMember"]
     },
     // delete line above
     {
-      "before": [
-        "<leader>",
-        "d"
-      ],
-      "after": [
-        "k",
-        "d",
-        "d"
-      ]
+      "before": ["<leader>", "d"],
+      "after": ["k", "d", "d"]
+    },
+    {
+      "before": ["2", "<leader>", "d"],
+      "after": ["2", "k", "2", "d", "d"]
     },
     // delete line below
     {
-      "before": [
-        "<leader>",
-        "D"
-      ],
-      "after": [
-        "j",
-        "d",
-        "d",
-        "k"
-      ]
+      "before": ["<leader>", "D"],
+      "after": ["j", "d", "d", "k"]
+    },
+    // indent
+    {
+      "before": ["<leader>", ">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    // Decrease indent
+    {
+      "before": ["<leader>", "<"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    // Visual block mode
+    {
+      "before": ["<C-b>"],
+      "after": ["<C-v>"]
+    },
+    // Remap center view
+    {
+      "before": ["z", "<Enter>"],
+      "after": ["z", "z"]
+    },
+    {
+      "before": ["z", "z"],
+      "after": ["z", "<Enter>"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "p",
-      ],
-      "after": [
-        "\"",
-        "_",
-        "x",
-        "P"
-      ]
+      "before": ["p"],
+      "after": ["\"", "_", "x", "P"]
     },
     {
-      "before": [
-        "x",
-      ],
-      "after": [
-        "\"",
-        "_",
-        "x",
-      ]
+      "before": ["x"],
+      "after": ["\"", "_", "x"]
     },
     {
-      "before": [
-        "<C-f>",
-      ],
-      "commands": [
-        "actions.find"
-      ]
+      "before": ["<C-f>"],
+      "commands": ["actions.find"]
     },
     {
-      "before": [
-        "<C-e>"
-      ],
-      "after": [
-        "<C-u>"
-      ]
+      "before": ["<C-e>"],
+      "after": ["<C-u>"]
     },
     // other leader actions
     {
-      "before": [
-        "<leader>",
-        "/"
-      ],
-      "commands": [
-        "editor.action.commentLine",
-      ]
+      "before": ["<leader>", "/"],
+      "commands": ["editor.action.commentLine"]
     },
     // https://superuser.com/a/321726/31155
     {
-      "before": [
-        "c",
-      ],
-      "after": [
-        "\"",
-        "_",
-        "c",
-      ]
+      "before": ["c"],
+      "after": ["\"", "_", "c"]
     },
     // indent
     {
-      "before": [
-        "<leader>",
-        ">"
-      ],
-      "commands": [
-        "editor.action.indentLines"
-      ]
+      "before": ["<leader>", ">"],
+      "commands": ["editor.action.indentLines"]
     },
     // Decrease indent
     {
-      "before": [
-        "<leader>",
-        "<"
-      ],
-      "commands": [
-        "editor.action.outdentLines"
-      ]
+      "before": ["<leader>", "<"],
+      "commands": ["editor.action.outdentLines"]
     }
   ],
   // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
