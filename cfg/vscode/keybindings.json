@@ -1494,5 +1494,9 @@
   {
     "key": "alt+z",
     "command": "workbench.action.toggleEditorWidths"
+  },
+  {
+    "key": "alt+3",
+    "command": "gitlens.showCommitsView"
   }
 ]
