@@ -6,7 +6,7 @@
   "workbench.tree.renderIndentGuides": "always",
   "workbench.list.horizontalScrolling": true,
   "workbench.hover.delay": 100,
-  "workbench.iconTheme": "vs-nomo-dark",
+  "workbench.iconTheme": "a-file-icon-vscode",
   "editor.wordWrap": "on",
   "gitlens.currentLine.enabled": false,
   "gitlens.codeLens.enabled": false,
@@ -14,7 +14,9 @@
   "gitlens.blame.format": "${author|14?} ${agoOrDateShort|8-}",
   "gitlens.hovers.currentLine.enabled": false,
   //  "editor.lineHeight": 1.65,
-  "workbench.colorTheme": "Palenight Italic",
+  //"workbench.colorTheme": "Palenight Italic",
+  "debug.console.fontSize": 14,
+  "debug.console.lineHeight": 21,
   // "theme-by-language.themes": {
   //   "markdown": "Slime",
   //   "typescript": "Slime"
@@ -45,7 +47,7 @@
       // "editorStickyScroll.background": "#132b24",
       "editorStickyScroll.background": "#05222b",
       // "editorStickyScroll.border": "#143b47",
-      "editorStickyScroll.border": "#127560",
+      "editorStickyScroll.border": "#127560"
     },
     "[Slime]": {
       // "editor.background": "#131c24",
@@ -146,12 +148,7 @@
     "git.suggestSmartCommit": false,
     "files.trimTrailingWhitespace": true,
     "git.confirmSync": false,
-  "glean.jsFilesExtensions": [
-    "js",
-    "jsx",
-    "ts",
-    "tsx"
-  ],
+  "glean.jsFilesExtensions": ["js", "jsx", "ts", "tsx"],
   "vscode-openai.serviceProvider": "VSCode-OpenAI",
   "vscode-openai.logLevel": "Debug",
   "editor.unicodeHighlight.allowedLocales": {
@@ -170,7 +167,8 @@
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    // "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.largeFileOptimizations": false,
   "cSpell.language": "en,ru",
@@ -193,7 +191,7 @@
   "command-runner.commands": {
     "echo workspaceFolder": "echo ${workspaceFolder}",
     "echo file": "echo ${file}",
-    "import vue file": "/home/d9k/scripts/import-vue ${file} ${lineNumber}",
+    "import vue file": "/home/d9k/scripts/import-vue ${file} ${lineNumber}"
   },
   "editor.unicodeHighlight.nonBasicASCII": false,
   "javascript.preferences.importModuleSpecifier": "non-relative",
@@ -206,7 +204,7 @@
   // }
   // -----
   /** Both relative and abs. line numbers with extension "Double Line Numbers" */
-  "editor.lineNumbers": "relative",
+  // "editor.lineNumbers": "relative",
   // "editor.lineNumbers": "on",
   "editor.glyphMargin": true,
   //
@@ -227,11 +225,7 @@
   // "[css]": {
   //   "editor.defaultFormatter": "esbenp.prettier-vscode"
   // },
-  "gotoNextPreviousMember.symbolKinds": [
-    "class",
-    "method",
-    "function"
-  ],
+  "gotoNextPreviousMember.symbolKinds": ["class", "method", "function"],
   "breadcrumbs.symbolSortOrder": "name",
   //
   // # Apc Customize UI++ extension
@@ -250,6 +244,19 @@
   // "apc.electron": {
   //   "titleBarStyle": "customButtonsOnHover",
   // },
+  // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
+  "docsView.documentationView.updateMode": "sticky",
+  // Prevent tabs duplication
+  "workbench.editor.revealIfOpen": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "Palenight Italic",
+  "[json5]": {
+    "editor.defaultFormatter": "BlueGlassBlock.better-json5"
+  },
+  // Disable select word under mouse with ctrl+f find
+  "editor.find.seedSearchStringFromSelection": "never"
   // # VSCodeVim
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
@@ -495,5 +502,14 @@
   // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
   "docsView.documentationView.updateMode": "sticky",
   // Prevent tabs duplication
-  "workbench.editor.revealIfOpen": true
+  "workbench.editor.revealIfOpen": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "Palenight Italic",
+  "[json5]": {
+    "editor.defaultFormatter": "BlueGlassBlock.better-json5"
+  },
+  // Disable select word under mouse with ctrl+f find
+  "editor.find.seedSearchStringFromSelection": "never"
 }
