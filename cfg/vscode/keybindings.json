@@ -1341,10 +1341,6 @@
     "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
   },
   {
-    "key": "shift+alt+l",
-    "command": "outline-map.focusSearch"
-  },
-  {
     "key": "alt+l",
     "command": "-outline-map.focusSearch"
   },
@@ -1498,5 +1494,24 @@
   {
     "key": "alt+3",
     "command": "gitlens.showCommitsView"
+  },
+  {
+    "key": "shift+alt+l",
+    "command": "outline-map-view.focus"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "-extension.vim_ctrl+h",
+    "when": "editorTextFocus && vim.active && vim.use<C-h> && !inDebugRepl"
+  },
+  {
+    "key": "alt+l",
+    "command": "togglePeekWidgetFocus",
+    "when": "referenceSearchVisible"
+  },
+  {
+    "key": "alt+h",
+    "command": "togglePeekWidgetFocus",
+    "when": "referenceSearchVisible"
   }
 ]
