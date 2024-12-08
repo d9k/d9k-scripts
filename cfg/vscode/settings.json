@@ -256,7 +256,7 @@
     "editor.defaultFormatter": "BlueGlassBlock.better-json5"
   },
   // Disable select word under mouse with ctrl+f find
-  "editor.find.seedSearchStringFromSelection": "never"
+  "editor.find.seedSearchStringFromSelection": "never",
   // # VSCodeVim
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
