@@ -307,6 +307,11 @@
       "before": ["x"],
       "after": ["\"", "_", "x"]
     },
+    // delete line, not saving to clipboard
+    {
+      "before": ["X"],
+      "after": ["\"", "_", "d", "d"]
+    },
     {
       "before": ["<C-f>"],
       "commands": ["actions.find"]
@@ -422,19 +427,19 @@
       "before": ["<c-k>"],
       "commands": ["gotoNextPreviousMember.previousMember"]
     },
-    // delete line above
+    // delete line above, not saving to clipboard
     {
       "before": ["<leader>", "d"],
-      "after": ["k", "d", "d"]
+      "after": ["k", "\"", "_", "d", "d"]
     },
     {
       "before": ["2", "<leader>", "d"],
-      "after": ["2", "k", "2", "d", "d"]
+      "after": ["2", "k", "2", "\"", "_", "d", "d"]
     },
-    // delete line below
+    // delete line below, not saving to clipboard
     {
       "before": ["<leader>", "D"],
-      "after": ["j", "d", "d", "k"]
+      "after": ["j", "\"", "_", "d", "d", "k"]
     },
     // indent
     {
