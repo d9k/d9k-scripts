@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# See https://stackoverflow.com/questions/17328823/how-do-i-get-all-refs-that-point-to-a-commit-in-git
+
+COMMIT_HASH="$1"
+
+SCRIPT_NAME=$(basename "$0")
+export INFO_PREFIX="$SCRIPT_NAME: "
+
+if [[ -z "$COMMIT_HASH" ]]; then
+  echo "Commit hash not provided. Using hash of HEAD"
+  echo
+  COMMIT_HASH=$(git rev-parse HEAD)
+fi
+
+echo "Searching branches of $COMMIT_HASH:"
+echo
+
+REFS=$( \
+  git show-ref \
+ | grep "$COMMIT_HASH" \
+ | awk  '{print $2}' \
+ | sed 's|refs/heads/||' \
+ | sed 's|refs/remotes/||' \
+)
+
+REF_FIRST=$(echo -e "$REFS" | head -n 1)
+REFS_REST=$(echo -e "$REFS" | tail -n +2)
+
+echo -e "$REFS"
+
+OPTIONS="${REF_FIRST}\n${COMMIT_HASH}\n${REFS_REST}"
+
+# echo
+# echo -e "$OPTIONS"
+# echo "Info prefix: ${INFO_PREFIX}"
+
+LINE=$(\
+  echo -e "$OPTIONS" \
+  | fzf \
+      --info-command='echo "${INFO_PREFIX}[Ctrl-C] to exit. [Enter] to copy selected ref"'  \
+)
+
+if [[ -z "$LINE" ]]; then
+  exit
+fi
+
+echo "$LINE" | xclip -selection c
+
+echo
+echo "\"$LINE\" copied to clipboard"
+
