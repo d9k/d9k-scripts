@@ -3,23 +3,61 @@
 COMMIT_HASH="$1"
 
 if [[ -z "$COMMIT_HASH" ]]; then
-  echo "Provide commit";
+  echo "Provide commit hash"
   exit
 fi
 
 # git branch -a --contains "$COMMIT_HASH"
-RESULT=$(git name-rev --name-only "$COMMIT_HASH")
-
+# TODO one might want to use --no-undefined 
 # TODO If you want to find only branch name and except tags following command can be used: git name-rev --refs="refs/heads/*" --name-only <SHA>
+RESULT=$(git name-rev --name-only "$COMMIT_HASH")
+# --name-only 
 
-if [[ -z "$RESULT" ]]; then
-  echo "Branch not found. Switching to commit $COMMIT_HASH"
-  RESULT="$COMMIT_HASH"
+#if [[ -z "$RESULT" ]]; then
+#  echo "Branch not found. Switching to commit $COMMIT_HASH"
+#  RESULT="$COMMIT_HASH"
+#else
+#  echo "Found:"
+#  echo "$RESULT"
+#  echo
+#fi
+
+# TODO rewrite to
+# git show -s --format="%H"
+
+echo "Searching branches of $COMMIT_HASH:"
+echo
+
+REFS=$( \
+  git show-ref \
+ | grep "$COMMIT_HASH" \
+ | awk  '{print $2}' \
+ | sed 's|refs/heads/||' \
+ | sed 's|refs/remotes/||' \
+)
+
+REF_FIRST=$(echo -e "$REFS" | head -n 1)
+REFS_REST=$(echo -e "$REFS" | tail -n +2)
+
+echo -e "$REFS"
+
+OPTIONS="${REF_FIRST}\n${COMMIT_HASH}\n${REFS_REST}"
+
+# echo
+# echo -e "$OPTIONS"
+# echo "Info prefix: ${INFO_PREFIX}"
+
+LINE=$(\
+  echo -e "$OPTIONS" \
+  | fzf \
+      --info-command='echo "${INFO_PREFIX}[Ctrl-C] to exit. [Enter] to checkout to selected ref"'  \
+)
+
+if [[ -z "$LINE" ]]; then
+  exit
 fi
 
-echo "Found:"
-echo "$RESULT"
-echo
+echo "Checking out to $LINE"
 
 set -x
 git checkout "$RESULT"
