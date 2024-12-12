@@ -51,7 +51,9 @@ bind diff <Down> move-down
 #   %B: multiline raw
 
 bind main c +sh -c "git show -s --format=%s %(commit) | xclip -selection c; echo Commit name copied to clipboard"
-bind main H +sh -c 'COMMIT=$(printf %(commit) | head -c 20); printf $COMMIT | xclip -selection c && echo [H]ash $COMMIT copied to clipboard'
+
+# bind main H +sh -c 'COMMIT=$(printf %(commit) | head -c 20); printf $COMMIT | xclip -selection c && echo [H]ash $COMMIT copied to clipboard'
+bind main H !git-commit-copy-branch %(commit) 
 
 bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
