@@ -1,0 +1,25 @@
+#!/bin/bash
+
+COMMIT_HASH="$1"
+
+if [[ -z "$COMMIT_HASH" ]]; then
+  echo "Provide commit";
+  exit
+fi
+
+# git branch -a --contains "$COMMIT_HASH"
+RESULT=$(git name-rev --name-only "$COMMIT_HASH")
+
+# TODO If you want to find only branch name and except tags following command can be used: git name-rev --refs="refs/heads/*" --name-only <SHA>
+
+if [[ -z "$RESULT" ]]; then
+  echo "Branch not found. Switching to commit $COMMIT_HASH"
+  RESULT="$COMMIT_HASH"
+fi
+
+echo "Found:"
+echo "$RESULT"
+echo
+
+set -x
+git checkout "$RESULT"
