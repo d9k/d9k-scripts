@@ -21,7 +21,7 @@ bind status a !amend
 bind status A !amend
 # bind status D !@?sh -c "rm '%(file)'"
 bind status D !@?rm ./%(file)
-bind status B @backup-conf %(file)
+bind status B !backup-conf %(file)
 bind status H >tig %(file)
 bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
@@ -63,7 +63,8 @@ bind generic U +sh -c "echo '%(text)' | xclip -selection c; echo 'Line was Yanke
 bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --color "$D"'
 
 # ; echo "# $D" ; ls -lh --color $D
-bind main T ?git checkout %(commit)
+#bind main T ?git checkout %(commit)
+bind main T ?!git-to-commit-branch %(commit)
 
 bind ref T ?git checkout %(branch)
 
