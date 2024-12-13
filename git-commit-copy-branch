@@ -45,7 +45,7 @@ if [[ -z "$LINE" ]]; then
   exit
 fi
 
-echo "$LINE" | xclip -selection c
+printf "$LINE" | xclip -selection c
 
 echo
 echo "\"$LINE\" copied to clipboard"
