@@ -2,6 +2,9 @@
 
 DESTINATION="$1"
 
+SOURCE="$(git rev-parse --show-toplevel)"
+cd "$SOURCE"
+
 if [[ -z "$DESTINATION" ]]; then
   echo "Destination was not set"
   exit
