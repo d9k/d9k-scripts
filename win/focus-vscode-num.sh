@@ -14,8 +14,10 @@ function echoerr {
   printf "%s\n" "$*" >&2;             
 }
 
+# wmctrl -lx | \
+
 WMCTRL_SEARCH_OUTPUT=$(\
-  wmctrl -lx | \
+  $SCRIPT_DIR/wmctrl-list-reorder.sh -x | \
   grep ${WINDOW_CLASS} | \
   # исключения \
   grep -v "diary (Workspace)" | \
