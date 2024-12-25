@@ -10,14 +10,14 @@ if [ ! -f "$WMCTRL_CFG_ORDER" ]; then
   exit
 fi
 
-WMCTRL_CFG_ORDER_CONTENT=$(cat "$WMCTRL_CFG_ORDER")
+WMCTRL_CFG_ORDER_CONTENT_REVERSE=$(tac "$WMCTRL_CFG_ORDER")
 
-if [[ -z "$WMCTRL_CFG_ORDER_CONTENT" ]]; then
+if [[ -z "$WMCTRL_CFG_ORDER_CONTENT_REVERSE" ]]; then
   wmctrl -l "$@" 
   exit
 fi
 
-ORDER_REGEX=$(echo -e "$WMCTRL_CFG_ORDER_CONTENT" | awk 'ORS="\\|"' 2>/dev/null | head -c -2)
+ORDER_REGEX=$(echo -e "$WMCTRL_CFG_ORDER_CONTENT_REVERSE" | awk 'ORS="\\|"' 2>/dev/null | head -c -2)
 
 RESULT_BEGIN=$(wmctrl -l "$@" | grep "$ORDER_REGEX")
 RESULT_END=$(wmctrl -l "$@" | grep -v "$ORDER_REGEX")
