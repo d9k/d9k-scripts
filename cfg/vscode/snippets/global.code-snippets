@@ -121,4 +121,51 @@
       "defineOptions({ name: '' });"
     ]
   },
+  "Vue define use": {
+    "prefix": [
+      "Vue_Define_Use",
+      "vdu",
+    ],
+    "body": [
+      "export function useNewBlockTypeListItems() {",
+      "  return {}",
+      "}"
+    ]
+  },
+  "Vue use": {
+    "prefix": [
+      "Vue_Use",
+      "vus",
+    ],
+    "body": [
+      "const = use();",
+    ]
+  },
+  "Vue use store state": {
+    "prefix": [
+      "Vue_use_STOre_state",
+      "vsto",
+    ],
+    "body": [
+      "const storeState = useStoreState();",
+    ]
+  },
+  "Vue class from style module": {
+    "prefix": [
+      "Vue_CLass_from_style_module",
+      "vcl",
+    ],
+    "body": [
+      ":class=\"\\$style.\""
+    ]
+  },
+  // https://stackoverflow.com/questions/65156083/implement-vscode-snippet-for-c-header-guard
+  "C++ header guard": {
+    "prefix": "cpph",
+    "body": [
+      "#ifndef ${TM_FILENAME/(?:^.*\\\\src\\\\)?(\\w+)(?!\\w*$)|(\\W)|(\\w+)$/${1:/upcase}${2:+_}${3:/upcase}/g}",
+      "#define ${TM_FILENAME/(?:^.*\\\\src\\\\)?(\\w+)(?!\\w*$)|(\\W)|(\\w+)$/${1:/upcase}${2:+_}${3:/upcase}/g}",
+      "\n#endif // ${TM_FILENAME/(?:^.*\\\\src\\\\)?(\\w+)(?!\\w*$)|(\\W)|(\\w+)$/${1:/upcase}${2:+_}${3:/upcase}/g}"
+    ]
+  }
 }
