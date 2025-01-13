@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DISCORD_PROXY="socks5://127.0.0.1:1080"
+
+http_proxy="$DISCORD_PROXY" https_proxy="$DISCORD_PROXY" discord --proxy-server="$DISCORD_PROXY"
