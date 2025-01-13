@@ -38,10 +38,11 @@ vim.schedule(function()
   require "mappings"
 end)
 
-vim.wo.relativenumber = true
+-- vim.wo.relativenumber = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank({ timeout = 200 })
   end,
 })
+
