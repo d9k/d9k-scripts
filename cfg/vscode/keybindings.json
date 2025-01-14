@@ -244,10 +244,6 @@
     "when": "gitlens:key:alt+right"
   },
   {
-    "key": "alt+x",
-    "command": "workbench.action.closeActiveEditor"
-  },
-  {
     "key": "alt+r",
     "command": "workbench.action.previousEditorInGroup"
   },
@@ -1517,5 +1513,71 @@
   {
     "key": "alt+t",
     "command": "workbench.view.extension.typescript-explorer"
+  },
+  {
+    "key": "ctrl+shift+z",
+    "command": "redo"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "-redo"
+  },
+  {
+    "key": "shift+alt+x",
+    "command": "terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "shift+alt+x",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closePanel",
+    "when": "panelFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.terminal.killEditor",
+    "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated || terminalEditorFocus && terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closeGroup",
+    "when": "activeEditorGroupEmpty && multipleEditorGroups && !panelFocus && !terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeGroup",
+    "when": "activeEditorGroupEmpty && multipleEditorGroups"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "!panelFocus && !terminalFocus"
+  },
+  {
+    "key": "alt+x",
+    "command": "-vue-helper.blockSelect",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+x",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "!panelFocus && !terminalFocus"
   }
 ]
