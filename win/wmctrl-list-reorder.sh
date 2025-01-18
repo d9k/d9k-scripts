@@ -10,17 +10,18 @@ if [ ! -f "$WMCTRL_CFG_ORDER" ]; then
   exit
 fi
 
-WMCTRL_CFG_ORDER_CONTENT_REVERSE=$(tac "$WMCTRL_CFG_ORDER")
+WMCTRL_LIST_LINES=$(wmctrl -l "$@")
 
-if [[ -z "$WMCTRL_CFG_ORDER_CONTENT_REVERSE" ]]; then
-  wmctrl -l "$@" 
-  exit
-fi
+while read WMCTRL_CFG_FIRST_IDS_LINE; do
+  # echo "$WMCTRL_CFG_FIRST_IDS_LINE"
+  WMCTRL_LIST_LINES_BEGIN=$(echo -e "$WMCTRL_LIST_LINES" | grep "$WMCTRL_CFG_FIRST_IDS_LINE")
+  WMCTRL_LIST_LINES_END=$(echo -e "$WMCTRL_LIST_LINES" | grep -v "$WMCTRL_CFG_FIRST_IDS_LINE")
 
-ORDER_REGEX=$(echo -e "$WMCTRL_CFG_ORDER_CONTENT_REVERSE" | awk 'ORS="\\|"' 2>/dev/null | head -c -2)
+  if [[ -n "$WMCTRL_LIST_LINES_BEGIN" ]]; then
+    WMCTRL_LIST_LINES_BEGIN="$WMCTRL_LIST_LINES_BEGIN\n"
+  fi
+  
+  WMCTRL_LIST_LINES=$(echo -e "$WMCTRL_LIST_LINES_BEGIN$WMCTRL_LIST_LINES_END")
+done < $WMCTRL_CFG_ORDER
 
-RESULT_BEGIN=$(wmctrl -l "$@" | grep "$ORDER_REGEX")
-RESULT_END=$(wmctrl -l "$@" | grep -v "$ORDER_REGEX")
-
-echo -e "$RESULT_BEGIN"
-echo -e "$RESULT_END"
+echo "$WMCTRL_LIST_LINES"
