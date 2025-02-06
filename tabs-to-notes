@@ -138,6 +138,8 @@ GROUPS_INFO=$( \
   | rg --replace "" '([- \[\]]+)'
 )
 
+# echo " "
+
 if [ -z "$GROUPS_INFO" ]; then
   echo
   echo "No groups detected. Exitting"
@@ -175,6 +177,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
   GROUP_INFO_PARTS=(${GROUP_INFO//:/ })
   GROUP_NAME_LINE_NUM=${GROUP_INFO_PARTS[0]}
   GROUP_NAME=${GROUP_INFO_PARTS[1]}
+  GROUP_NAME_ACTUAL=$(echo ${GROUP_NAME} | sed 's|[0-9]||g')
   # echo "$GROUP_NAME"
   # echo "$GROUP_NAME_LINE_NUM"
 
@@ -195,7 +198,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
 
   # echo -e "$GROUP_LINES_RAW"
 
-  OUTPUT_TABS_PATH="${OUTPUT_TABS_PATH_PREFIX}${GROUP_NAME}${OUTPUT_TABS_PATH_SUFFIX}"
+  OUTPUT_TABS_PATH="${OUTPUT_TABS_PATH_PREFIX}${GROUP_NAME_ACTUAL}${OUTPUT_TABS_PATH_SUFFIX}"
   # echo "$OUTPUT_TABS_PATH"
   # echo
 
@@ -204,7 +207,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
       continue
     fi
 
-    echo -e "tabs-$GROUP_NAME\n" > "$OUTPUT_TABS_PATH"
+    echo -e "tabs-$GROUP_NAME_ACTUAL\n" > "$OUTPUT_TABS_PATH"
   fi # if not path
 
   EXISTING_LINKS=$( \
@@ -217,12 +220,6 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
 
   EXISTING_LINK_SORTED_TEXT=$(lines_sort_by_length "$EXISTING_LINKS")
   EXISTING_LINKS_LEN=$(echo -e "$EXISTING_LINKS" | wc -l)
-
-  echo
-  echo "## These existing links would be exluded from output (beginning link match)"
-  echo
-  echo -e "$EXISTING_LINK_SORTED_TEXT" | head -n "${DEBUG_OUTPUT_FIRST_LINES}"
-  echo "... (showing first ${DEBUG_OUTPUT_FIRST_LINES} of ${EXISTING_LINKS_LEN})"
 
   # echo -e "$EXISTING_LINK_SORTED_TEXT"
 
@@ -252,9 +249,18 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
   GROUP_LINES_FILTERED_LEN=$(echo -e "$GROUP_LINES_FILTERED" | wc -l)
   GROUP_LINES_DELTA=$(expr $GROUP_LINES_RAW_LEN - $GROUP_LINES_FILTERED_LEN)
 
+
+  if [ $GROUP_LINES_DELTA -ne 0 ]; then
+    echo
+    echo "## Rules for existing links to exlude from output (beginning link match)"
+    echo
+    echo -e "$EXISTING_LINK_SORTED_TEXT" | head -n "${DEBUG_OUTPUT_FIRST_LINES}"
+    echo "... (showing first ${DEBUG_OUTPUT_FIRST_LINES} of ${EXISTING_LINKS_LEN})"
+  fi
+
   echo
   echo
-  echo "## Lines to add:"
+  echo "## Lines to add for group \"${GROUP_NAME}\":"
   echo
   echo -e "$GROUP_LINES_FILTERED"
 
