@@ -224,6 +224,7 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
   # echo -e "$EXISTING_LINK_SORTED_TEXT"
 
   GROUP_LINES_FILTERED=$(echo -e "$GROUP_LINES_RAW")
+  GROUP_LINES_DELETED=""
 
   # echo -e $GROUP_LINES_FILTERED
 
@@ -233,10 +234,20 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
     fi 
 
     # echo "LINK: $EXISTING_LINK"
+    GROUP_LINES_DELETED_NEW=$(\
+      echo -e "$GROUP_LINES_FILTERED" \
+        | rg --fixed-strings "$EXISTING_LINK"
+    )
+
+    if [[ -n "GROUP_LINES_DELETED_NEW" ]]; then
+      GROUP_LINES_DELETED=$(echo -e "$GROUP_LINES_DELETED\n${GROUP_LINES_DELETED_NEW}")
+    fi
+
     GROUP_LINES_FILTERED=$(\
       echo -e "$GROUP_LINES_FILTERED" \
         | rg --fixed-strings -v "$EXISTING_LINK"
     )
+
   done <<< "$EXISTING_LINKS"
 
   echo
@@ -256,6 +267,10 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
     echo
     echo -e "$EXISTING_LINK_SORTED_TEXT" | head -n "${DEBUG_OUTPUT_FIRST_LINES}"
     echo "... (showing first ${DEBUG_OUTPUT_FIRST_LINES} of ${EXISTING_LINKS_LEN})"
+    echo
+    echo "## Lines deleted from output"
+    echo 
+    echo -e "${GROUP_LINES_DELETED}"
   fi
 
   echo
