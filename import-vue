@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# brew install fzf ripgrep
+# or
 # nix profile install nixpkgs#fzf
 # nix profile install nixpkgs#silver-searcher
 
@@ -10,11 +12,13 @@
 #    {
 #      "label": "import vue file",
 #      "type": "shell",
-#      "command": "zsh -i -c \"/home/d9k/scripts/import-vue ${file} ${lineNumber}\"",
+#      //"command": "zsh -i -c \"/home/d9k/scripts/import-vue ${file} ${lineNumber}\"",
+#      "command": "/home/d9k/scripts/import-vue ${file} ${lineNumber}",
 #      "presentation": {
 #        "echo": true,
 #        "reveal": "always",
 #        "focus": true,
+#        "close": false,
 #        "panel": "new",
 #        "clear": true
 #      },
