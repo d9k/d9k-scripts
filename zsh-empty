@@ -1,0 +1,5 @@
+# https://unix.stackexchange.com/questions/579104/start-interactive-zsh-without-running-any-configuration-files-like-zsc
+# https://unix.stackexchange.com/questions/67603/switching-to-another-shell-without-copying-environment-variables
+# https://stackoverflow.com/questions/17627193/backspace-in-zsh-fails-to-work-in-quite-the-strange-way
+
+env -i TERM=$TERM zsh -d -f -i
