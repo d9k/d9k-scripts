@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# https://unix.stackexchange.com/a/388462
+
+INPUT=
+
+if [ ! -t 0 ]; then
+  # echo "(pipe has data)"
+  INPUT=$(< /dev/stdin)
+fi
+
+# echo "Args:"
+# echo "$@"
+
+COMMAND_PARTS=( jq )
+COMMAND_PARTS+=( "$@" )
+COMMAND_PARTS+=(". | length") 
+# echo "$COMMAND"
+# echo "Command:"
+echo "> ${COMMAND_PARTS[@]}"
+
+if [[ -z "INPUT" ]]; then
+  "${COMMAND_PARTS[@]}"
+else
+  echo -e "$INPUT" | "${COMMAND_PARTS[@]}"
+  eval "$C"
+fi
