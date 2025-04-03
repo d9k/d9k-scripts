@@ -10,7 +10,11 @@ if [[ -z "$SCROLL_COUNT" ]]; then
   SCROLL_COUNT=1
 fi
 
-for run in {1..SCROLL_COUNT}; do
+# https://unix.stackexchange.com/questions/505833/how-do-ranges-in-dash-work
+i=1
+while [ "$i" -le $SCROLL_COUNT ]; do
   xdotool click 5
+  sleep 0.05
+  i=$(( i + 1 )) 
 done
 
