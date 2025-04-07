@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -x
+
+mediainfo "$@"
+
+echo
+file "$@"
+
+echo
+identify "$@"
+
+echo
+exiftool "$@"
+
+echo
+feh -l "$@"
