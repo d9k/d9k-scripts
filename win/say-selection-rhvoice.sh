@@ -5,14 +5,15 @@
 # sudo apt-get install rhvoice rhvoice-english rhvoice-russian
 # sudo apt-get install xsel sox
 
+# ! It is adviced to run hw-audio-sync script by d9k (which runs pavucontrol) to minimize speech delays
 SCRIPTS="$HOME/scripts"
 SCRIPT_RHVOICE_FIXED="$SCRIPTS/rhvoice-fixed.sh"
 
 killall RHVoice-client
 killall RHVoice-service
-sleep 1
+sleep 0.4
 RHVoice-service &
-sleep 1
+sleep 0.4
 
 
 
@@ -23,7 +24,7 @@ sleep 1
 
 #xsel | "$SCRIPT_RHVOICE_FIXED" | aplay
 xsel | "$SCRIPT_RHVOICE_FIXED" > /tmp/t.wav
-sleep 1
+sleep 0.5
 aplay /tmp/t.wav
 sleep 1
 killall RHVoice-service
