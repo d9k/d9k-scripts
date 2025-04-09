@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 REPO_TYPE=$(get-repo-type)
 
 #args_parse() {
@@ -76,7 +78,8 @@ if [ "$REPO_TYPE" == "git" ]; then
   #git push
   # only current branch
   git push origin HEAD
-  git pull
+  $SCRIPTS_DIR/pull
+  git fetch --tags
   git push origin --tags
   exit
 fi
