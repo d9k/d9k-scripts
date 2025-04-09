@@ -1,0 +1,70 @@
+{
+  "keyMappings": "# user custom\n\nmap  й LinkHints.activateMode\nmap  Й LinkHints.activateModeToOpenInNewTab\nmap  <q-1> LinkHints.activateModeWithQueue\nmap  <й-1> LinkHints.activateModeWithQueue\n\nmap  q LinkHints.activateMode\nmap  Q LinkHints.activateModeToOpenInNewTab\n\nunmap t\nunmap е\nmap t Vomnibar.activateEditUrl\nmap е Vomnibar.activateEditUrl\n\nmap  e scrollPageUp\nmap  у scrollPageUp\n\nmap  D scrollPageUp\nmap  В scrollPageUp\n\nmap  <a-f> nextTab\nmap  <a-а> nextTab\n\n# Alt+E doesn't work in Chrome\n# map  <a-e> previousTab\n\nmap  <a-r> previousTab\nmap  <a-к> previousTab\n\nmap  <a-F> previousTab\nmap  <a-А> previousTab\n\nmap  <a-x> removeTab\nmap  <a-ч> removeTab\n\nunmap .\n\nmap  . nextTab\nmap  ю nextTab\n\nmap  , previousTab\nmap б  previousTab\n\n\n# ru\n\nmap пу Vomnibar.activateEditUrl\nmap пУ Vomnibar.activateEditUrlInNewTab\n\n#map  , showHelp\nmap  о scrollDown\nmap  л scrollUp\nmap  р scrollLeft\nmap  д scrollRight\nmap  пп scrollToTop\nmap  П scrollToBottom\nmap  яР scrollToLeft\nmap  яД scrollToRight\nmap  <с-у> scrollDown\nmap  <с-н> scrollUp\n\nmap  в scrollPageDown\nmap  г scrollPageUp\nmap  к reload\nmap  пы toggleViewSource\n\nmap  ш enterInsertMode\n\nmap  Р goBack\nmap  Д goForward\nmap  пг goUp\nmap  пГ goToRoot\n\nmap  пш focusInput\n\nmap  а LinkHints.activateMode\nmap  А LinkHints.activateModeToOpenInNewTab\n# map  <a-а> LinkHints.activateModeWithQueue\n\n# map  . enterFindMode\nmap  т performFind\nmap  Т performBackwardsFind\n\nmap  хх goPrevious\nmap  ъъ goNext\n\nmap  нн copyCurrentUrl\nmap  на LinkHints.activateModeToCopyLinkUrl\n\nmap  з openCopiedUrlInCurrentTab\nmap  З openCopiedUrlInNewTab\n\nmap  Л nextTab\nmap  О previousTab\nmap  пе nextTab\nmap  пЕ previousTab\nmap  п0 firstTab\nmap  п; lastTab\n\n\nmap  Ц moveTabToNewWindow\n# map  е createTab\nmap  не duplicateTab\nmap  ч removeTab\nmap  Ч restoreTab\n\nmap  щ Vomnibar.activate\nmap  Щ Vomnibar.activateInNewTab\n\nmap  Е Vomnibar.activateTabSelection\n\nmap  и Vomnibar.activateBookmarks\nmap  И Vomnibar.activateBookmarksInNewTab\n\nmap  па nextFrame\n\nmap  ь Marks.activateCreateMode\nmap  ё Marks.activateGotoMode\n\nmap  <a-з> togglePinTab\n\nmap  ББ moveTabLeft\nmap  ЮЮ moveTabRight\n\nmap  м enterVisualMode\nmap  М enterVisualLineMode",
+  "linkHintCharacters": "12345",
+  "linkHintNumbers": "2345789",
+  "scrollStepSize": 140,
+  "settingsVersion": "2.2.1",
+  "userDefinedLinkHintCss": "#vomnibar input {\n    font-size: 16px;\n}\n\ndiv > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 12px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}",
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "fF<>tъеаАmьNТPЗ",
+      "pattern": "https://www.youtube.com/*"
+    },
+    {
+      "passKeys": "rк",
+      "pattern": "https://vk.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://miro.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://once-in-museum-stage-1-07905fffe8ea.herokuapp.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://once-in-museum-*.herokuapp.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.lexaloffle.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://andychase.me/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://127.0.0.1:8080/gbajs2/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https://d9k.github.io/d9k-gamedev-examples/gbajs2/*"
+    },
+    {
+      "passKeys": "tеfа",
+      "pattern": "https?://rutube.ru/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://artgeneration.me/*"
+    },
+    {
+      "passKeys": "tеfа<б>ю",
+      "pattern": "https?://odysee.com/*"
+    },
+    {
+      "passKeys": "fаmь",
+      "pattern": "https?://vkvideo.ru/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://pisaiah.com/*"
+    }
+  ]
+}
