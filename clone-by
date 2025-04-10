@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# rg (ripgrep) is required!
+
+URL="$1"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [[ -z "$URL" ]]; then
+  echoerr "Error: URL is not provided"
+  exit 1
+fi
+
+REPO_NAME_WITH_EXT=$(echo "$URL" | rg --only-matching '[^\/]*$')
+echo "$REPO_NAME_WITH_EXT"
+
+URL_WITHOUT_REPO_NAME=$(echo "$URL" | rg '/[^\/]*$' -r '')
+echo "$URL_WITHOUT_REPO_NAME"
+
+REPO_NAME=$(echo "$REPO_NAME_WITH_EXT" | rg --only-matching '^[^\.]*')
+echo "$REPO_NAME"
+
+REPO_USER_NAME=$(echo "$URL_WITHOUT_REPO_NAME" | rg --only-matching '[^\/]*$')
+echo "$REPO_USER_NAME"
+
+OUTPUT_DIR="${REPO_NAME}-by-${REPO_USER_NAME}"
+
+git clone "$URL" "$OUTPUT_DIR"
