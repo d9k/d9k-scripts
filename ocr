@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# sudo apt-get install tesseract-ocr
+
+FILE_REL_PATH="$1"
+
+if [[ -z "$FILE_REL_PATH" ]]; then
+  echo "picture file name required"
+  exit
+fi
+
+DPI="$2"
+
+if [[ -z "$DPI" ]]; then
+  DPI=70
+fi
+
+FILE_DIR_PATH=$(dirname "$FILE_REL_PATH")
+FILE_NAME_WITH_EXT=$(basename "$FILE_REL_PATH")
+
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+# TARGET_PATH="${FILE_DIR_PATH}/${FILE_NAME_NO_EXT}.mp3"
+
+set -x
+cd "$FILE_DIR_PATH"
+tesseract "$FILE_REL_PATH"  "$FILE_NAME_NO_EXT" --dpi $DPI
