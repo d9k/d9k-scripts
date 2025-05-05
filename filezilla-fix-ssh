@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# https://askubuntu.com/questions/555381/too-many-authentication-failures-for-root-in-filezilla
+SSH_AUTH_SOCK=null filezilla
