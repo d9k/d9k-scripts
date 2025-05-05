@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Separate installation with extenions specifically to analyze technologies used by site
+
+DATA_DIR="$HOME/temp/chrome-data-dir-analyze"
+
+mkdir -p "$DATA_DIR"
+
+chrome \
+  --user-data-dir="$DATA_DIR" \
+  --profile-directory="Default" 
+
+# NOTE
+# may require you to run
+# `chrome --profile-directory="Default"`
+# after
