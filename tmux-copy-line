@@ -24,7 +24,7 @@ LINE=$(\
 
 set +e
 
-LINE=$(echo "$LINE" | rg --passthrough --replace "" "^> ")
+LINE=$(echo "$LINE" | rg --passthrough --replace "" "^> " | trim)
 
 # EXIT_CODE="$#"
 
@@ -32,7 +32,7 @@ if [[ -z "$LINE" ]]; then
   exit
 fi
 
-echo "$LINE" | xclip -selection c
+printf "$LINE" | xclip -selection c
 
 # echo "$EXIT_CODE"
 
