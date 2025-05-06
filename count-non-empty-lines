@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [[ -z "$1" ]]; then
+  echoerr "Filename arg required"
+  exit 1;
+fi
+
+cat "$@" | grep -v "^$" | wc -l
