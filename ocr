@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# sudo apt-get install tesseract-ocr
+# sudo apt-get install tesseract-ocr tesseract-ocr-rus
 
 FILE_REL_PATH="$1"
 
@@ -22,7 +22,23 @@ FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
 FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
 
 # TARGET_PATH="${FILE_DIR_PATH}/${FILE_NAME_NO_EXT}.mp3"
+ 
+OUTPUT_FILE="$FILE_DIR_PATH/$FILE_NAME_NO_EXT.txt"
+OUTPUT_FILE_ABS=$(readlink -f "$OUTPUT_FILE")
 
-set -x
-cd "$FILE_DIR_PATH"
-tesseract "$FILE_REL_PATH"  "$FILE_NAME_NO_EXT" --dpi $DPI
+if [ -f "$OUTPUT_FILE_ABS" ]; then
+  echo "Warning! Output text file $OUTPUT_FILE_ABS already exists! Skipping OCR"
+else  
+  (
+    set -x
+    cd "$FILE_DIR_PATH"
+    tesseract "$FILE_REL_PATH" "$FILE_NAME_NO_EXT" -l eng+rus --dpi $DPI
+  )
+  echo "Output:"
+  echo "$OUTPUT_FILE_ABS"
+fi
+
+if [ -n "$EDITOR" ]; then
+  set -x
+  $EDITOR "$OUTPUT_FILE"
+fi
