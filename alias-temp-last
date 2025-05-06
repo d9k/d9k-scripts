@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TEMP_ALIASES_PATH="$HOME/.aliases-temp"
+
+echo "# Temp aliases"
+echo
+
+echo "- Path: \"$TEMP_ALIASES_PATH\""
+echo
+
+tail -n 10 "$TEMP_ALIASES_PATH" | tac
+echo "....."
