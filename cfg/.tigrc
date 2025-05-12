@@ -23,7 +23,7 @@ bind status A !amend
 bind status D !@?rm ./%(file)
 bind status B !backup-conf %(file)
 bind status H >tig %(file)
-bind status p +sh -c 'FPATH=$(printf "%(file)"); printf $FPATH | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+bind status p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
 # stage file par[T]
 bind status T !git add -i --patch '%(file)'
@@ -66,7 +66,8 @@ bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --c
 
 # ; echo "# $D" ; ls -lh --color $D
 #bind main T ?git checkout %(commit)
-bind main T ?!git-to-commit-branch %(commit)
+# bind main T ?!git-to-commit-branch %(commit)
+bind main T !git-to-commit-branch %(commit)
 
 bind ref T ?git checkout %(branch)
 
