@@ -6,7 +6,9 @@ function echo_and_eval() {
   EVAL_RESULT=$(eval "$@")
 }
 
-CMD="rename-ask \"s/[:：]+//g\""
+# удаляет ме в слове смерть
+# CMD="rename-ask \"s/[:：]+//g\""
+CMD="rename-ask \"s/[:]+//g\""
 
 if [ "$#" -lt 1 ]; then
   echo "> $CMD *"
