@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Add .deprecated to file extension
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+FILE="$1"
+
+if [[ -z "$1" ]]; then
+  echoerr "Error: markdown file path required"
+  exit 1
+fi 
+
+mv "$FILE" "$FILE.deprecated"
+ls -l $FILE*
