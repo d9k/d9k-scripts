@@ -6,6 +6,15 @@ set wrap-lines = 1
 
 # see https://github.com/jonas/tig/wiki/Bindings
 
+# Valid keymaps are:
+# https://jonas.github.io/tig/doc/tigrc.5.html
+# main, diff, log, reflog, help, pager, status, stage, tree, blob, blame, refs, stash, grep and generic. Use generic to set key mapping in all keymaps.
+
+# Modifiers
+# https://github.com/jonas/tig/issues/131
+# ^ - ctrl: not working!
+# <Esc> - alt
+
 # see https://jonas.github.io/tig/doc/tigrc.5.html
 # "External user-defined command"
 #
@@ -24,11 +33,14 @@ bind status D !@?rm ./%(file)
 bind status B !backup-conf %(file)
 bind status H >tig %(file)
 bind status p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+bind status <Esc>r !sh -c '$HOME/scripts/rename-file %(file)'
 
 # stage file par[T]
 bind status T !git add -i --patch '%(file)'
 
-bind status v !sh -c 'nvim %(file)'
+# bind status v !sh -c 'nvim %(file)'
+bind generic v !sh -c 'nvim %(file)'
+bind generic <Esc>v show-version
 bind status V !sh -c 'code %(file)'
 bind status P !push
 
