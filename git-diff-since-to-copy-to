@@ -1,0 +1,33 @@
+#!/bin/bash
+\
+
+function echo_help {
+  echo "Examples:"
+  echo "    git-diff-since-to-copy-to v0.1 v0.2 ~/temp/my-repo-diff/dev-master"
+}
+
+
+if [ "$#" -lt 3 ]; then
+  echo_help
+  exit
+fi
+
+
+SINCE="$1"
+TO="$2"
+DESTINATION="$3"
+
+mkdir -p "$DESTINATION"
+
+DIFF_FILES=$(git diff --name-only "$SINCE".."$TO")
+
+echo "Diff files:"
+echo -e "$DIFF_FILES"
+
+echo -e "$DIFF_FILES" | xargs --max-lines=1 -I{} cp --parent {} "$DESTINATION"
+#echo -e "$STAGED_FILES" | xargs --max-lines=1 -I{} echo {} "$DESTINATION"
+#ls -l | xargs -I{} echo {}
+
+echo
+echo Result:
+tree -a "$DESTINATION"
