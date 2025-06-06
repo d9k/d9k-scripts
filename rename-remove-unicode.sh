@@ -33,6 +33,6 @@ fi
 # thx phemmer
 # see https://serverfault.com/a/348496/155512
 find . -type f -print0 | \
-perl -n0e '$new = $_; if($new =~ s/[^[:ascii:]]//g) {
+perl -n0e '$new = $_; if($new =~ s/[^[:ascii:A-Яа-я]]//g) {
   print("Renaming $_ to $new\n"); rename($_, $new);
 }'
