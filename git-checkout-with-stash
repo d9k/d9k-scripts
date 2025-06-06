@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]; then
+  echo "illegal number of parameters"
+  exit 1;
+fi
+
+git stash --include-untracked
+
+if [ $? -ne 0 ]; then
+    echo "stash error. extting"
+    exit 20;
+fi
+
+git checkout "$@"
+
+echo "\n# Reapplying stash:\n"
+
+git stash apply
