@@ -11,4 +11,4 @@ if [[ -z "$1" ]]; then
   exit 1
 fi 
 
-cat "$FILE" | grep -E "^#"
+cat "$FILE" | grep -E "^#" | sed 's|^# |\n# |'
