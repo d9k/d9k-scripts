@@ -44,7 +44,7 @@ fi
 ALL_LINES_RAW=$(xclip -selection clipboard -o)
 # fi
 
-echo "ALL_LINES_RAW: $ALL_LINES_RAW"
+# echo "ALL_LINES_RAW: $ALL_LINES_RAW"
 
 function all_links_count {
   echo -e "$1" \
@@ -109,7 +109,7 @@ ALL_LINES_FILTERED=$(
   # rg --fixed-strings -v 'chrome-extension://'
 )
 
-echo "ALL_LINES_FILTERED: $ALL_LINES_FILTERED"
+# echo "ALL_LINES_FILTERED: $ALL_LINES_FILTERED"
 
 echo $(all_links_count "$ALL_LINES_FILTERED") "filteted input links (not extension tabs)"
 
@@ -125,7 +125,7 @@ ALL_LINES_FIX_UNSORTED_1=$( \
   | sed -e 's|\\n|\n|g'
 )
 
-echo "ALL_LINES_FIX_UNSORTED_1: $ALL_LINES_FIX_UNSORTED_1"
+# echo "ALL_LINES_FIX_UNSORTED_1: $ALL_LINES_FIX_UNSORTED_1"
 
 # add padding to tabs withour group
 ALL_LINES_FIX_UNSORTED_2=$( \
@@ -136,7 +136,7 @@ ALL_LINES_FIX_UNSORTED_2=$( \
     --passthru
 )
 
-echo "ALL_LINES_FIX_UNSORTED_2: $ALL_LINES_FIX_UNSORTED_2"
+# echo "ALL_LINES_FIX_UNSORTED_2: $ALL_LINES_FIX_UNSORTED_2"
 
 ALL_LINES=$(echo -e "$ALL_LINES_FIX_UNSORTED_2")
 
