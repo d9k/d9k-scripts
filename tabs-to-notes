@@ -21,9 +21,13 @@ OUTPUT_TABS_PATH_SUFFIX=".md"
 
 OUTPUT_HEADER=$(date +"%Y.%m.%d %H:%M")
 
-DEFAULT_GROUP_NAME="sort"
+DEFAULT_GROUP_NAME="$1"
 
-INPUT_FILE_PATH="$1"
+if [ -z "$DEFAULT_GROUP_NAME" ]; then
+  DEFAULT_GROUP_NAME="sort"
+fi
+
+# INPUT_FILE_PATH="$1"
 
 # RIPGREP_URL_PATTERN='[a-z]+://[^)\]#\s]+'
 RIPGREP_URL_PATTERN='[a-z]+://[^)\]\s]+'
@@ -34,11 +38,13 @@ if [[ -z "$DEBUG_OUTPUT_FIRST_LINES" ]]; then
   DEBUG_OUTPUT_FIRST_LINES=7
 fi
 
-if [ -n "$INPUT_FILE_PATH" ]; then
-ALL_LINES_RAW=$(cat "$INPUT_FILE_PATH")
-else
-  ALL_LINES_RAW=$(xclip -selection clipboard -o)
-fi
+# if [ -n "$INPUT_FILE_PATH" ]; then
+# ALL_LINES_RAW=$(cat "$INPUT_FILE_PATH")
+# else
+ALL_LINES_RAW=$(xclip -selection clipboard -o)
+# fi
+
+echo "ALL_LINES_RAW: $ALL_LINES_RAW"
 
 function all_links_count {
   echo -e "$1" \
@@ -103,6 +109,8 @@ ALL_LINES_FILTERED=$(
   # rg --fixed-strings -v 'chrome-extension://'
 )
 
+echo "ALL_LINES_FILTERED: $ALL_LINES_FILTERED"
+
 echo $(all_links_count "$ALL_LINES_FILTERED") "filteted input links (not extension tabs)"
 
 # echo "$ALL_LINES_RAW" 
@@ -117,7 +125,7 @@ ALL_LINES_FIX_UNSORTED_1=$( \
   | sed -e 's|\\n|\n|g'
 )
 
-# echo "$ALL_LINES_FIX_UNSORTED_1"
+echo "ALL_LINES_FIX_UNSORTED_1: $ALL_LINES_FIX_UNSORTED_1"
 
 # add padding to tabs withour group
 ALL_LINES_FIX_UNSORTED_2=$( \
@@ -127,6 +135,8 @@ ALL_LINES_FIX_UNSORTED_2=$( \
     --multiline \
     --passthru
 )
+
+echo "ALL_LINES_FIX_UNSORTED_2: $ALL_LINES_FIX_UNSORTED_2"
 
 ALL_LINES=$(echo -e "$ALL_LINES_FIX_UNSORTED_2")
 
