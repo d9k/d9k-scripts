@@ -8,11 +8,17 @@ OUTPUT="$HOME/.aliases-temp"
 
 export $ALIAS="$DIR"
 
-echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
+if [[ -n "$ALIAS" ]]; then
+  echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
+fi
 
 echo "..."
 tail "$OUTPUT"
-
 echo
-echo "Run"
-echo ". $OUTPUT"
+
+if [[ -z "$ALIAS" ]]; then
+  echo "Error: Alias was not provided!"
+else
+  echo "Run"
+  echo ". $OUTPUT"
+fi
