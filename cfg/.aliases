@@ -24,13 +24,14 @@ function =
   echo "$@" | /usr/bin/bc -l
 }
 
-alias -- -="cd -"
+alias -- -='cd -'
 alias _=echo
 alias ali='source $HOME/.aliases'
 alias apti="sudo apt install"
 alias bk='backup-conf'
 alias calc="="
 alias dfh='/usr/bin/df -h /home | grep -A 1 Avail'
+alias -- less-color='less --RAW-CONTROL-CHARS'
 alias pa='pass'
 alias pf='pass-find'
 alias pe='pass edit'
@@ -69,6 +70,8 @@ alias lel='_less eza -l --git --color=always --icons=always -@ --group-directori
 alias lela='_less eza -l -a --git --color=always --icons=always -@ --group-directories-first'
 alias md='mkdir -p'
 alias tre='_less eza --tree --color=always --icons=always --group-directories-first'
+alias -- tree-dirs='_less eza --tree --color=always --icons=always --only-dirs'
+alias -- tree-filtered='tre -I "**/node_modules"'
 
 ## FileSystem: archives
 
