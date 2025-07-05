@@ -5,7 +5,7 @@
 #     source ~/.aliases
 # fi
 
-proxychains bash -O expand_aliases -c "set -x; \
+proxychains bash -O expand_aliases -c "\
   shopt -s expand_aliases; \
   source ~/.aliases; \
   eval $@"
