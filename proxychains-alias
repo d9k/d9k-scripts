@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# if [ -f ~/.aliases ]; then
+#     shopt -s expand_aliases
+#     source ~/.aliases
+# fi
+
+proxychains bash -O expand_aliases -c "set -x; \
+  shopt -s expand_aliases; \
+  source ~/.aliases; \
+  eval $@"
+
+# proxychains bash -c "shopt -s expand_aliases; source ~/.aliases; $@"
