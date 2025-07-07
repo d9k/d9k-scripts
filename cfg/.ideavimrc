@@ -1,0 +1,15 @@
+"clipboard+=ideaput
+"clipboard+=unnamed
+"set clipboard=ideaput
+
+set clipboard=unnamed
+
+let mapleader=" "
+
+" Don't overwrite clipboard for "c ..." and "x" commands
+nnoremap c "_c
+nnoremap x "_x
+
+" Delete line above/below
+nnoremap <leader>d k"_dd
+nnoremap <leader>D j"_ddk
