@@ -7,10 +7,10 @@ function echoerr {
 if [ -f ~/.aliases ]; then
     #echoerr "Loading aliases"
     shopt -s expand_aliases
-    source ~/.aliases
+    source ~/.aliases > /dev/null
 fi
 
-#set -x
+# set -x
 
 COMMAND="$@"
 COMMAND_TYPE=$(type "$COMMAND" 2>&1)
@@ -21,7 +21,7 @@ if [[ -n "$IS_ALIAS" ]]; then
   #echo "$COMMAND_TYPE"
   ALIAS_SOURCE_FULL=$(type "$@" | sed 's/^.*aliased to \(.*\)$/\1/')
   echoerr "ALIAS_SOURCE_FULL: $ALIAS_SOURCE_FULL"
-  COMMAND=$(echo "$ALIAS_SOURCE_FULL" | grep --only-matching --max-count=1 -E '[[:alnum:]\.\-]+')
+  COMMAND=$(echo "$ALIAS_SOURCE_FULL" | awk '{print $1;}' | grep --only-matching --max-count=1 -E '[[:alnum:]\.\-]+')
   echoerr $COMMAND
 fi
 
