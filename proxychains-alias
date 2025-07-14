@@ -1,6 +1,10 @@
 #!/bin/bash
 
+set -x
+
+EVAL="eval $@"
+
 proxychains bash -O expand_aliases -c "\
   shopt -s expand_aliases; \
   source ~/.aliases; \
-  eval $@"
+  eval $EVAL"
