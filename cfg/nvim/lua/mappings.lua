@@ -23,3 +23,5 @@ map('n', '<A-m>', '}}{j', { desc = 'next text block'})
 map('n', '<A-n>', '{{j', { desc = 'previous text block'})
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+map('n', 'sd', 'viwohdw')
