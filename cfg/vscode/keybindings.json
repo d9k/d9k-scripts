@@ -1579,5 +1579,19 @@
     "key": "alt+x",
     "command": "workbench.action.closeActiveEditor",
     "when": "!panelFocus && !terminalFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "-editor.action.selectFromAnchorToCursor",
+    "when": "editorTextFocus && selectionAnchorSet"
+  },
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "-editor.action.defineKeybinding",
+    "when": "resource == 'vscode-userdata:/home/d9k/.config/Code/User/keybindings.json'"
+  },
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "workbench.action.keepEditor"
   }
 ]
