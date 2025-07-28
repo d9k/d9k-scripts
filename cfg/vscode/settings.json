@@ -163,13 +163,16 @@
   "vscode-openai.azureApiVersion": "2023-05-15",
   "update.mode": "manual",
   "editor.unicodeHighlight.invisibleCharacters": false,
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[jsonc]": {
-    // "editor.defaultFormatter": "vscode.json-language-features"
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  //
+  // Default formatter disabled: better configure it in project .vscode/settings.json, example:
+  // `"editor.defaultFormatter": "dbaeumer.vscode-eslint",`
+  //
+  // "[typescript]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  // "[jsonc]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
   "editor.largeFileOptimizations": false,
   "cSpell.language": "en,ru",
   "cSpell.userWords": [
@@ -177,6 +180,7 @@
     "composables",
     "Devino",
     "docgen",
+    "Nuxt",
     "openapi",
     "pinia",
     "sber",
