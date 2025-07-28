@@ -19,4 +19,7 @@ map('n', '<leader>d', 'kdd', { desc = 'delete line above'})
 -- map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
 map('n', '<leader>D', 'jdd', { desc = 'delete line below'})
 
+map('n', '<A-m>', '}}{j', { desc = 'next text block'})
+map('n', '<A-n>', '{{j', { desc = 'previous text block'})
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
