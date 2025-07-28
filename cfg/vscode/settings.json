@@ -173,6 +173,15 @@
   // "[jsonc]": {
   //   "editor.defaultFormatter": "esbenp.prettier-vscode"
   // },
+  // "[json]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
+  // "[json5]": {
+  //   "editor.defaultFormatter": "BlueGlassBlock.better-json5"
+  // },
+  // "[css]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
   "editor.largeFileOptimizations": false,
   "cSpell.language": "en,ru",
   "cSpell.userWords": [
@@ -226,10 +235,13 @@
   "workbench.editor.editorActionsLocation": "hidden",
   "javascript.updateImportsOnFileMove.enabled": "always",
   // "editor.multiCursorModifier": "ctrlCmd",
-  // "[css]": {
-  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
-  // },
-  "gotoNextPreviousMember.symbolKinds": ["class", "method", "function"],
+  "gotoNextPreviousMember.symbolKinds": [
+    "class",
+    "enum",
+    "interface",
+    "method",
+    "function"
+  ],
   "breadcrumbs.symbolSortOrder": "name",
   //
   // # Apc Customize UI++ extension
@@ -252,13 +264,7 @@
   "docsView.documentationView.updateMode": "sticky",
   // Prevent tabs duplication
   "workbench.editor.revealIfOpen": true,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "workbench.colorTheme": "Palenight Italic",
-  "[json5]": {
-    "editor.defaultFormatter": "BlueGlassBlock.better-json5"
-  },
   // Disable select word under mouse with ctrl+f find
   "editor.find.seedSearchStringFromSelection": "never",
   // # VSCodeVim
