@@ -1,8 +1,15 @@
+" Config for IDEA vim plugin
+" https://github.com/JetBrains/ideavim
+" https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
+
 "clipboard+=ideaput
 "clipboard+=unnamed
 "set clipboard=ideaput
 
-set clipboard=unnamed
+" https://stackoverflow.com/questions/21250707/what-is-the-difference-between-quoteplus-and-quotestar-registers-in-vim
+" The "+ register" is the vim equivalent to a CTRL+C in another program, while the "* register" is the "mouse selection and middle click" equivalent
+set clipboard=unnamedplus
+set commentary
 
 let mapleader=" "
 
@@ -13,3 +20,25 @@ nnoremap x "_x
 " Delete line above/below
 nnoremap <leader>d k"_dd
 nnoremap <leader>D j"_ddk
+
+" Comment out line
+nnoremap <leader>/ gcc
+vnoremap <leader>/ gcc
+
+set highlightedyank
+let g:highlightedyank_highlight_color = "rgba(200, 120, 200, 175)" 
+let g:highlightedyank_highlight_duration = "1000" 
+
+" delete to system clipboard
+vnoremap d "+d
+nnoremap da "+da
+nnoremap di "+di
+
+" yank to system clipboard
+vnoremap y "+y
+nnoremap yi "+yi
+nnoremap ya "+ya
+nnoremap y$ "+y$
+"nnoremap yt "+yt
+
+noremap <C-c> "+y
