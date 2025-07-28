@@ -59,18 +59,21 @@ if [ "$REPO_TYPE" == "git" ]; then
       fi
     fi
 
-    if [[ -z "$BRANCH_DIVERGED" ]]; then
-      echo "Pull is not required"
-    else
+    if [[ -n "$BRANCH_DIVERGED" ]]; then
       echo "$BRANCH_DIVERGED"
       echo "Resolve conflicts manually"
 
       BRANCH=$(git branch --show-current)
       echo "If you want to destroy local changes, you can run:"
       echo "    git-branch-rollback-to-origin $BRANCH"
-    fi
 
-    exit;
+      exit
+    fi
+  fi
+
+  if [[ -z "$PULL_REQUIRED" ]]; then
+    echo "Pull not required! Exitting"
+    exit
   fi
 
   ( set -x; git pull $FROM)
