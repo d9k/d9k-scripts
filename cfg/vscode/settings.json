@@ -408,11 +408,12 @@
     },
     // other leader actions
     {
+      // comment line
       "before": ["<leader>", "/"],
       "commands": ["editor.action.commentLine"]
     },
-    // git peek
     {
+    // git peek
       "before": ["<leader>", "g", "p"], // Peek Git diff for the changed line
       "commands": ["editor.action.dirtydiff.next"]
     },
@@ -427,9 +428,9 @@
       "before": ["<leader>", "g", "k"], 
       "commands": ["workbench.action.editor.previousChange"]
     },
+    {
     // Go to Next/Previous Member extension:
     // https://marketplace.visualstudio.com/items?itemName=mishkinf.goto-next-previous-member
-    {
       "before": ["<c-j>"],
       "commands": ["gotoNextPreviousMember.nextMember"]
     },
@@ -437,8 +438,8 @@
       "before": ["<c-k>"],
       "commands": ["gotoNextPreviousMember.previousMember"]
     },
-    // delete line above, not saving to clipboard
     {
+    // delete line above, not saving to clipboard
       "before": ["<leader>", "d"],
       "after": ["k", "\"", "_", "d", "d"]
     },
@@ -446,35 +447,46 @@
       "before": ["2", "<leader>", "d"],
       "after": ["2", "k", "2", "\"", "_", "d", "d"]
     },
-    // delete line below, not saving to clipboard
     {
+    // delete line below, not saving to clipboard
       "before": ["<leader>", "D"],
       "after": ["j", "\"", "_", "d", "d", "k"]
     },
-    // indent
     {
+    // indent
       "before": ["<leader>", ">"],
       "commands": ["editor.action.indentLines"]
     },
-    // Decrease indent
     {
+    // Decrease indent
       "before": ["<leader>", "<"],
       "commands": ["editor.action.outdentLines"]
     },
-    // Visual block mode
     {
+    // Visual block mode
       "before": ["<C-b>"],
       "after": ["<C-v>"]
     },
-    // Remap center view
     {
+    // Remap center view
       "before": ["z", "<Enter>"],
       "after": ["z", "z"]
     },
     {
       "before": ["z", "z"],
       "after": ["z", "<Enter>"]
-    }
+    },
+    {
+      // Unmap "s" (switched to insert mode)
+      "before": ["s"],
+      "after": [],
+    },
+    {
+      // Delete word with
+      // Doesn't work!
+      "before": ["s", "d"],
+      "after": ["v", "i", "w", "o", "h", "d", "w"]
+    },
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
@@ -514,17 +526,4 @@
       "commands": ["editor.action.outdentLines"]
     }
   ],
-  // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
-  "docsView.documentationView.updateMode": "sticky",
-  // Prevent tabs duplication
-  "workbench.editor.revealIfOpen": true,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "workbench.colorTheme": "Palenight Italic",
-  "[json5]": {
-    "editor.defaultFormatter": "BlueGlassBlock.better-json5"
-  },
-  // Disable select word under mouse with ctrl+f find
-  "editor.find.seedSearchStringFromSelection": "never"
 }
