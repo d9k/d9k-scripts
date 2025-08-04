@@ -7,4 +7,4 @@ EVAL="eval $@"
 proxychains bash -O expand_aliases -c "\
   shopt -s expand_aliases; \
   source ~/.aliases; \
-  eval $EVAL"
+  $EVAL"
