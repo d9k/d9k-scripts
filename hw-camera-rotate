@@ -1,0 +1,22 @@
+#!/bin/bash
+
+u+x
+
+sudo modprobe -r v4l2loopback
+
+sleep 1
+
+sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2
+
+sleep 5
+
+# ffmpeg -i /dev/video0 -vf "transpose=1,format=yuv420p" -f v4l2 /dev/video2
+
+# ffmpeg -r 30 -i /dev/video0 -vf "transpose=1,format=yuv420p" -f v4l2 /dev/video2
+
+ffmpeg -input_format mjpeg -framerate 30 -s 1280x720 -threads 6 -i /dev/video0 -vf "transpose=2,format=yuv420p" -f v4l2 /dev/video2
+
+# ffmpeg -input_format mjpeg -framerate 30 -s 1280x720 -i /dev/video0 -vf "transpose=2,format=yuv420p" -f v4l2 /dev/video2
+
+# ffmpeg -r 12 -threads 6 -f v4l2 -i /dev/video0 -vf "transpose=dir=2:passthrough=portrait,format=yuv420p" -f v4l2 /dev/video2
+# ffmpeg -r 30 -threads 6 -f v4l2 -i /dev/video0 -vf "transpose=dir=2:passthrough=portrait,format=yuv420p" -f v4l2 /dev/video2
