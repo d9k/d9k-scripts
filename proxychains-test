@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DETECT_IP_SERVICE="ifconfig.me"
+
+( set -x; curl $DETECT_IP_SERVICE )
+echo -e "\n"
+( set -x; proxychains curl $DETECT_IP_SERVICE )
