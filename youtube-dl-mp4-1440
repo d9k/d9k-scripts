@@ -10,4 +10,5 @@ youtube-dl \
   --convert-thumbnails jpg \
   --sub-format srt \
   --convert-subtitles srt \
+  --ignore-errors \
   "$@"
