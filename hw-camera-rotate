@@ -4,17 +4,31 @@ u+x
 
 sudo modprobe -r v4l2loopback
 
-sleep 1
+# sleep 1
 
 sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2
 
-sleep 5
+sleep 1
 
 # ffmpeg -i /dev/video0 -vf "transpose=1,format=yuv420p" -f v4l2 /dev/video2
 
 # ffmpeg -r 30 -i /dev/video0 -vf "transpose=1,format=yuv420p" -f v4l2 /dev/video2
 
-ffmpeg -input_format mjpeg -framerate 30 -s 1280x720 -threads 6 -i /dev/video0 -vf "transpose=2,format=yuv420p" -f v4l2 /dev/video2
+
+# Unrecognized:
+# -framedrop \
+
+ffmpeg \
+  -threads 6 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -input_format mjpeg \
+  -framerate 30 \
+  -s 1280x720 \
+  -i /dev/video0 \
+  -vf "transpose=2,format=yuv420p" \
+  -f v4l2 \
+  /dev/video2
 
 # ffmpeg -input_format mjpeg -framerate 30 -s 1280x720 -i /dev/video0 -vf "transpose=2,format=yuv420p" -f v4l2 /dev/video2
 
