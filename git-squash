@@ -15,4 +15,4 @@ fi
 
 "$SCRIPT_DIR/git-backup-branch" squash
 
-git rebase --autosquash --autostash --interactive "$@"
+git rebase --autosquash --autostash --committer-date-is-author-date --interactive "$@"
