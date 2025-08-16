@@ -50,10 +50,12 @@ if [[ "$(ask_continue 'backup branch before rebase')" == "1" ]]; then
 fi
 
 if [ -n "$LOCAL" ]; then
-  git rebase -i --autostash "$BRANCH"
+  # git rebase --ignore-date -i --autostash "$BRANCH"
+  git rebase --committer-date-is-author-date -i --autostash "$BRANCH"
   exit
 fi
 
 git fetch
 #git rebase origin/"$BRANCH"
-git rebase -i --autostash origin/"$BRANCH"
+# git rebase --ignore-date -i --autostash origin/"$BRANCH"
+git rebase --committer-date-is-author-date -i --autostash origin/"$BRANCH"
