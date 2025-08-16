@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+
+sudo alsa force-reload
+
+systemctl --user restart pulseaudio.service
