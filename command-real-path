@@ -23,8 +23,12 @@ if [[ -n "$IS_ALIAS" ]]; then
   echoerr "ALIAS_SOURCE_FULL: $ALIAS_SOURCE_FULL"
   COMMAND=$(echo "$ALIAS_SOURCE_FULL" | awk '{print $1;}' | grep --only-matching --max-count=1 -E '[[:alnum:]\.\-]+')
   echoerr $COMMAND
-fi
+fi 
 
 COMMAND_PATH=$(which $COMMAND)
+
+if [[ -z "$COMMAND_PATH" ]]; then
+  echoerr "Error: Command path not found! Make sure command file have executable rigts"
+fi
 
 echo "$COMMAND_PATH"
