@@ -52,3 +52,12 @@ nnoremap yl "+^y$
 "nnoremap yt "+yt
 
 noremap <C-c> "+y
+
+" Scroll half-page up
+nnoremap <C-e> <C-u>
+
+" Delete word with space
+nnoremap sd viwohdw
+
+" testing reload config
+noremap [t hhh
