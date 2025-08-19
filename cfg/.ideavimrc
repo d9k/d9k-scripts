@@ -8,10 +8,17 @@
 
 " https://stackoverflow.com/questions/21250707/what-is-the-difference-between-quoteplus-and-quotestar-registers-in-vim
 " The "+ register" is the vim equivalent to a CTRL+C in another program, while the "* register" is the "mouse selection and middle click" equivalent
+
+" Example configs:
+" https://github.com/JetBrains/ideavim/discussions/303
+
 set clipboard=unnamedplus
 set commentary
 
 let mapleader=" "
+
+" Reload this config
+nmap <leader>vr <Action>(IdeaVim.ReloadVimRc.reload)
 
 " Don't overwrite clipboard for "c ..." and "x" commands
 nnoremap c "_c
@@ -39,6 +46,9 @@ vnoremap y "+y
 nnoremap yi "+yi
 nnoremap ya "+ya
 nnoremap y$ "+y$
+
+" yank trimmed text inside line
+nnoremap yl "+^y$
 "nnoremap yt "+yt
 
 noremap <C-c> "+y
