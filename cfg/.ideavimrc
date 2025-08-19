@@ -56,8 +56,30 @@ noremap <C-c> "+y
 " Scroll half-page up
 nnoremap <C-e> <C-u>
 
+" Go to next/previous capital letter
+map <A-i> /[A-ZА-Я]<CR>
+map ]a /[A-ZА-Я]<CR>
+map [a ?[A-ZА-Я]<CR>
+
+" Go to next/previous alphanum word
+map <A-u> /[a-zA-Zа-яА-Я0-9]\+<CR>
+map ]w /[a-zA-Zа-яА-Я0-9]\+<CR>
+map [w ?[a-zA-Zа-яА-Я0-9]\+<CR>
+
 " Delete word with space
 nnoremap sd viwohdw
+
+" Next/previous block of text
+map <A-m> }}{j
+map <A-n> {{j
+
+map ]b }}{j
+map [b {{j
+
+" Next/previous `code` inside backticks
+noremap ]` <Esc>/`<CR>n<Esc>vi`o
+"noremap ]` <Esc>/`[^`]/+`<CR><Esc>lvi`
+noremap [` <Esc>?`<CR>nhvi`
 
 " testing reload config
 noremap [t hhh
