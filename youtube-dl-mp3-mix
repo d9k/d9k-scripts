@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# self update:
+# sudo youtube-dl -U
+#
+# sudo add-apt-repository ppa:nilarimogard/webupd8
+# sudo apt update
+# sudo apt install youtube-dl ffmpeg
+#
+
+# --write-description              Write video description to a .description file
+# --write-info-json                Write video metadata to a .info.json file
+
+#  --write-description \
+#  --write-info-json \
+
+set -x
+
+youtube-dl \
+  --format bestaudio \
+  --audio-quality 0 \
+  --extract-audio \
+  --audio-format mp3 \
+  --split-tracks \
+  --output="%(title)s.%(ext)s" \
+  --no-mtime \
+  --write-thumbnail \
+  --convert-thumbnails jpg \
+  --no-playlist \
+  --write-description \
+  --write-info-json \
+  "$@"
