@@ -1,0 +1,14 @@
+#!/bin/bash
+
+youtube-dl \
+  --skip-download \
+  --no-playlist \
+  --write-thumbnail \
+  --write-auto-subs \
+  --write-info-json \
+  --convert-thumbnails jpg \
+  --sub-format srt \
+  --sub-langs en,ru-orig,ru \
+  --convert-subtitles srt \
+  --ignore-errors \
+  "$@"
