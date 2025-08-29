@@ -26,6 +26,8 @@ youtube-dl \
   --no-mtime \
   --write-thumbnail \
   --convert-thumbnails jpg \
+  --add-metadata \
+  --embed-thumbnail \
   --no-playlist \
   --write-description \
   --write-info-json \
