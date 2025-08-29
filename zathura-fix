@@ -2,14 +2,15 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-function remove_borders_delayed
+function borders_remove_delayed
 {
   sleep 2
-  ${SCRIPT_DIR}/win/zathura-remove-border.sh
+  ${SCRIPT_DIR}/win/zathura-border-remove.sh
 }
 
-remove_borders_delayed &
+borders_remove_delayed &
 
+# httpc://rodrigo.morales.pe/2025/02/18/compile-zathura-0-5-11-in-ubuntu-24-04-lts/
 LD_LIBRARY_PATH=/usr/local/lib/x86_64-linux-gnu \
   ZATHURA_PLUGINS_PATH=/usr/local/lib/x86_64-linux-gnu \
   /usr/local/bin/zathura \
