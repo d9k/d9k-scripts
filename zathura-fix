@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+function remove_borders_delayed
+{
+  sleep 2
+  ${SCRIPT_DIR}/win/zathura-remove-border.sh
+}
+
+remove_borders_delayed &
+
+LD_LIBRARY_PATH=/usr/local/lib/x86_64-linux-gnu \
+  ZATHURA_PLUGINS_PATH=/usr/local/lib/x86_64-linux-gnu \
+  /usr/local/bin/zathura \
+  "$@"
