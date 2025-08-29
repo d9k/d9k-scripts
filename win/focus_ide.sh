@@ -2,7 +2,8 @@
 
 # Посмотреть список классов открытых окон:
 # wmctrl -lx
-# (чем выше, тем приоритетнее)
+
+# (Чем выше, тем приоритетнее)
 WINDOW_CLASSES=(
   "jetbrains-webstorm"
   "jetbrains-idea"

@@ -1,22 +1,35 @@
 #!/bin/bash
 
-#lower => better priority
-titles=(
+# Посмотреть список классов открытых окон:
+# wmctrl -lx
+
+# (чем выше, тем приоритетнее)
+WINDOW_CLASSES=(
  "Okular"
  "xreader"
+ "Zathura"
 )
 
-for (( ix=${#titles[@]}-1 ; ix>=0 ; ix-- )); do
-	echo "checking \"${titles[ix]}\":"
-	t=$(wmctrl -lp | grep "${titles[ix]}")
-	if [ $? -eq 1 ]; then
-		if [ "${ix}" -eq "0" ]; then
-			echo "Not found"
-			exit
-		fi				
-	else
-		echo "focusing \"${t}\""
-		wmctrl -a "${titles[ix]}"
-		break
-    fi
+for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
+  WINDOW_CLASS="${WINDOW_CLASSES[ix]}"
+	echo "checking \"${WINDOW_CLASS}\":"
+  WINDOW_NUMBER=1
+
+  # wmctrl: -x: output WIN CLASS too
+  WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n ${WINDOW_NUMBER}p)
+
+  echo $WMCTRL_SEARCH_OUTPUT
+
+  WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
+
+  if [[ -n "$WMCTRL_NUMBER" ]]; then
+    echo "Focusing ${WMCTRL_NUMBER}"
+
+    # wmctrl:
+    # -a: activate
+    # -i: int value, not caption text
+    # -v: verbose
+    ( set -x; wmctrl -v -i -a  ${WMCTRL_NUMBER} )
+    exit
+  fi
 done
