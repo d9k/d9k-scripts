@@ -1,0 +1,33 @@
+set selection-clipboard clipboard
+
+# expand window on startup
+set window-height 3000
+set window-width 3000
+
+# set smooth-scroll true
+set scroll-step 150
+
+set continuous-hist-save true
+
+# [i]nverse colors
+map <C-i> recolor
+
+map <C-h> toggle_statusbar
+
+map <C-e> scroll half-up
+map e scroll half-up
+map d scroll half-down
+
+# toggle [s]tatusbar
+map <C-s> toggle_statusbar
+map <A-s> toggle_statusbar
+
+# https://askubuntu.com/a/619793
+set recolor true
+# set recolor-darkcolor "#f2f0e5"
+set recolor-darkcolor "#f4f2e7"
+# set recolor-lightcolor "#0d0905"
+set recolor-lightcolor "#140707"
+
+# https://unix.stackexchange.com/questions/467524/open-file-from-history-in-zathura
+map H feedkeys ":exec sh -c \"cat ~/.local/share/zathura/history | grep -Po '\[\K[^\]]*' | grep -v '\=\$' | tac | dmenu -l 40 | xargs zathura\""
