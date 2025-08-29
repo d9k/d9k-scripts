@@ -1,13 +1,15 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 # Посмотреть список классов открытых окон:
 # wmctrl -lx
 
 # (чем выше, тем приоритетнее)
 WINDOW_CLASSES=(
+ "Zathura"
  "Okular"
  "xreader"
- "Zathura"
 )
 
 for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
@@ -15,21 +17,12 @@ for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
 	echo "checking \"${WINDOW_CLASS}\":"
   WINDOW_NUMBER=1
 
-  # wmctrl: -x: output WIN CLASS too
-  WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n ${WINDOW_NUMBER}p)
+  ${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS"
 
-  echo $WMCTRL_SEARCH_OUTPUT
-
-  WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
-
-  if [[ -n "$WMCTRL_NUMBER" ]]; then
-    echo "Focusing ${WMCTRL_NUMBER}"
-
-    # wmctrl:
-    # -a: activate
-    # -i: int value, not caption text
-    # -v: verbose
-    ( set -x; wmctrl -v -i -a  ${WMCTRL_NUMBER} )
-    exit
+  if [ $? == 0 ]; then
+    echo "Found. Exitting"
+    exit;
   fi
 done
+
+"$SCRIPT_DIR/../pdf-history.sh"
