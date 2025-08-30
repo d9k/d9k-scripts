@@ -1,5 +1,5 @@
 [/]
-custom-list=['custom63', 'custom61', 'custom60', 'custom59', 'custom58', 'custom57', 'custom53', 'custom52', 'custom51', 'custom49', 'custom47', 'custom45', 'custom46', 'custom40', 'custom39', 'custom38', 'custom37', 'custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom5', 'custom6', 'custom8', 'custom9', 'custom10', 'custom11', 'custom12', 'custom13', 'custom14', 'custom15', 'custom16', 'custom17', 'custom20', 'custom21', 'custom25', 'custom26', 'custom27', 'custom28', 'custom18', 'custom22', 'custom23', 'custom24', 'custom19', 'custom29', 'custom30', 'custom31', 'custom32', 'custom33', 'custom34', 'custom35', 'custom36', 'custom41', 'custom42', 'custom43', 'custom44', 'custom48', 'custom50', 'custom7', 'custom54', 'custom55', 'custom56', 'custom62']
+custom-list=['custom79', 'custom77', 'custom75', 'custom74', 'custom73', 'custom72', 'custom71', 'custom70', 'custom69', 'custom67', 'custom66', 'custom12', 'custom63', 'custom61', 'custom60', 'custom59', 'custom58', 'custom57', 'custom53', 'custom52', 'custom51', 'custom49', 'custom47', 'custom45', 'custom46', 'custom40', 'custom39', 'custom38', 'custom37', 'custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom6', 'custom8', 'custom9', 'custom10', 'custom11', 'custom13', 'custom14', 'custom15', 'custom16', 'custom17', 'custom20', 'custom21', 'custom25', 'custom26', 'custom27', 'custom28', 'custom18', 'custom22', 'custom23', 'custom24', 'custom19', 'custom29', 'custom30', 'custom31', 'custom32', 'custom33', 'custom34', 'custom35', 'custom36', 'custom41', 'custom42', 'custom43', 'custom44', 'custom48', 'custom50', 'custom7', 'custom54', 'custom55', 'custom56', 'custom62', 'custom64', 'custom65', 'custom5', 'custom68', 'custom76', 'custom78', 'custom80', 'custom81']
 looking-glass-keybinding=@as []
 show-desklets=@as []
 
@@ -25,8 +25,8 @@ name='textadept'
 
 [custom-keybindings/custom12]
 binding=['<Super>1']
-command='/home/d9k/scripts/win/focus_chrome-fix-suspend.sh'
-name='browser'
+command='/home/d9k/scripts/win/focus_chrome.sh'
+name='chrome'
 
 [custom-keybindings/custom13]
 binding=['<Primary>Forward']
@@ -139,12 +139,12 @@ command='/home/d9k/scripts/win/focus_webstorm_4.sh'
 name='focus_webstorm_4'
 
 [custom-keybindings/custom33]
-binding=['<Super>F1']
+binding=['<Super>F1', '<Super>HomePage']
 command='/home/d9k/scripts/win/focus-vscode-num.sh'
 name='focus_vscode'
 
 [custom-keybindings/custom34]
-binding=['<Super>F2']
+binding=['<Super>F2', '<Super>Alt_L']
 command='/home/d9k/scripts/win/focus-vscode-num.sh 2'
 name='focus_vscode 2'
 
@@ -184,7 +184,7 @@ command='/home/d9k/scripts/win/focus-vscode-textbook.sh'
 name='textbook'
 
 [custom-keybindings/custom41]
-binding=['<Super>s']
+binding=@as []
 command='/home/d9k/scripts/win/focus-vscode-scripts.sh'
 name='vscode-scripts'
 
@@ -204,22 +204,22 @@ command='/home/d9k/scripts/win/volume-up'
 name='volume up 1%'
 
 [custom-keybindings/custom45]
-binding=['<Alt><Super>Left']
+binding=['<Primary><Super>Left']
 command='/home/d9k/scripts/win/brightness-smart -1'
 name='bright-smart -'
 
 [custom-keybindings/custom46]
-binding=['<Alt><Super>Right']
+binding=['<Primary><Super>Right']
 command='/home/d9k/scripts/win/brightness-smart +1'
 name='bright-smart +'
 
 [custom-keybindings/custom47]
-binding=['<Super>d', '<Shift><Super>y']
+binding=['<Super>s', '<Shift><Super>y']
 command='/home/d9k/scripts/win/focus-obsidian.sh'
 name='obsidian'
 
 [custom-keybindings/custom48]
-binding=['<Super>e']
+binding=@as []
 command='/home/d9k/scripts/win/run-selection-in-terminal.sh'
 name='run-selection-in-terminal'
 
@@ -230,16 +230,16 @@ name='chrome-devtools-copy-token'
 
 [custom-keybindings/custom5]
 binding=@as []
-command='/home/d9k/scripts/win/focus_chrome.sh'
-name='focus_chrome'
+command='/home/d9k/scripts/win/focus_book.sh'
+name='focus book'
 
 [custom-keybindings/custom50]
-binding=['<Super>b']
+binding=@as []
 command='/home/d9k/scripts/win/chrome-devtools-copy-token.sh'
 name='chrome-devtools-copy-token'
 
 [custom-keybindings/custom51]
-binding=['<Super>m']
+binding=@as []
 command='/home/d9k/scripts/win/chrome-devtools-copy-curl-mod.sh'
 name='chrome-devtools-copy-curl'
 
@@ -254,7 +254,7 @@ command='/home/d9k/scripts/win/focus_shutter.sh'
 name='shutter'
 
 [custom-keybindings/custom54]
-binding=['<Super>z']
+binding=['<Alt><Super>z', '<Shift><Super>z', '<Alt><Super>z']
 command='/home/d9k/scripts/win/focus_discord.sh'
 name='discord'
 
@@ -264,7 +264,7 @@ command='/home/d9k/scripts/win/volume-down'
 name='volume down 1%'
 
 [custom-keybindings/custom56]
-binding=['<Super>2']
+binding=@as []
 command='/home/d9k/scripts/win/focus_firefox.sh'
 name='focus_firefox'
 
@@ -284,7 +284,7 @@ command='/home/d9k/scripts/win/mouse-left.sh'
 name='mouse left'
 
 [custom-keybindings/custom6]
-binding=['<Super>a', '<Primary>grave']
+binding=['<Primary>grave']
 command='/home/d9k/scripts/win/focus_terminal.sh'
 name='focus_terminal.sh'
 
@@ -308,15 +308,105 @@ binding=['<Super>p']
 command='/home/d9k/scripts/win/emulate-menu-key.sh'
 name='Context menu key'
 
+[custom-keybindings/custom64]
+binding=['<Super>c']
+command='/home/d9k/scripts/win/commands-menu-with-log.sh'
+name='Commands menu'
+
+[custom-keybindings/custom65]
+binding=['<Super>2']
+command='/home/d9k/scripts/win/focus_firefox_dev.sh'
+name='focus_firefox_dev'
+
+[custom-keybindings/custom66]
+binding=@as []
+command='/home/d9k/scripts/win/focus_discord_proxy.sh'
+name='discord-proxy'
+
+[custom-keybindings/custom67]
+binding=['<Shift><Super>exclam']
+command='/home/d9k/scripts/win/wmctrl-list-first-ids-add.sh'
+name='wmctrl-list-first-ids-add'
+
+[custom-keybindings/custom68]
+binding=['<Super>bracketright', '<Super>d']
+command='/home/d9k/scripts/win/mouse-scroll-down.sh 2 5'
+name='mouse scroll down'
+
+[custom-keybindings/custom69]
+binding=['<Super>bracketleft', '<Super>e']
+command='/home/d9k/scripts/win/mouse-scroll-up.sh 1 3'
+name='mouse scroll up'
+
 [custom-keybindings/custom7]
 binding=['<Primary>backslash']
 command='/home/d9k/scripts/take_screenshot_optimized.sh'
 name='take_screenshot_optimized'
 
+[custom-keybindings/custom70]
+binding=['<Primary><Shift>w']
+command='/home/d9k/scripts/win/do-nothing.sh'
+name='do nothing: bind to it to prevent exit'
+
+[custom-keybindings/custom71]
+binding=@as []
+command='/home/d9k/scripts/win/arrow-up.sh 3'
+name='arrow up turbo'
+
+[custom-keybindings/custom72]
+binding=@as []
+command='/home/d9k/scripts/win/arrow-right.sh 3'
+name='arrow down turbo'
+
+[custom-keybindings/custom73]
+binding=@as []
+command='/home/d9k/scripts/win/arrow-right.sh 3'
+name='arrow right turbo'
+
+[custom-keybindings/custom74]
+binding=@as []
+command='/home/d9k/scripts/win/arrow-left.sh 3'
+name='arrow left turbo'
+
+[custom-keybindings/custom75]
+binding=['<Super>z']
+command='/home/d9k/scripts/hw-keyboard-repeat-rate-boost.sh'
+name='keyboard repeat speed boost'
+
+[custom-keybindings/custom76]
+binding=['<Super>a']
+command='/home/d9k/scripts/win/focus_ai.sh'
+name='Focus AI'
+
+[custom-keybindings/custom77]
+binding=['AudioPlay']
+command='playerctl play-pause'
+name='playerctrl play-pause'
+
+[custom-keybindings/custom78]
+binding=['AudioNext']
+command='playerctl next'
+name='playerctl next'
+
+[custom-keybindings/custom79]
+binding=['AudioPrev']
+command='playerctl previous'
+name='playerctl previous'
+
 [custom-keybindings/custom8]
 binding=['<Super>f']
 command='/home/d9k/scripts/win/focus_doublecmd.sh'
 name='focus_doublecmd.sh'
+
+[custom-keybindings/custom80]
+binding=['<Super>b']
+command='/home/d9k/scripts/win/focus_book.sh'
+name='book'
+
+[custom-keybindings/custom81]
+binding=['<Shift><Super>e', '<Alt><Super>e', '<Primary><Super>e']
+command='/home/d9k/scripts/win/focus_equalizer.sh'
+name='equalizer'
 
 [custom-keybindings/custom9]
 binding=['Forward']
@@ -328,25 +418,38 @@ area-screenshot-clip=@as []
 hibernate=['<Shift><Super>F12', 'Launch1']
 home=['XF86Explorer']
 logout=@as []
+next=@as []
+play=@as []
+previous=@as []
 screen-brightness-down=['XF86MonBrightnessDown']
 screen-brightness-up=['XF86MonBrightnessUp']
+screenreader=@as []
 screensaver=['<Alt><Super>l', '<Primary><Shift><Alt>l', '<Shift><Super>l']
 screenshot=@as []
 search=['XF86Search', '<Primary><Alt>End']
 shutdown=['<Primary><Alt>Multi_key', 'XF86PowerOff']
 suspend=['XF86Sleep']
+terminal=['<Shift><Super>t']
 video-rotation-lock=@as []
-volume-down=['XF86AudioLowerVolume', '<Alt><Super>Down']
-volume-up=['XF86AudioRaiseVolume', '<Alt><Super>Up']
+volume-down=['XF86AudioLowerVolume', '<Primary><Super>Down']
+volume-up=['XF86AudioRaiseVolume', '<Primary><Super>Up']
 
 [wm]
-begin-move=['<Alt>F7', '<Alt><Super>space']
-begin-resize=['<Alt>F8', '<Super>space']
+begin-move=['<Alt><Super>space', '<Primary><Alt><Super>space']
+begin-resize=['<Alt>F8', '<Super>space', '<Primary><Super>space']
 decrease-opacity=['<Alt>minus']
 increase-opacity=['<Alt>equal']
+maximize-horizontally=['<Alt><Super>Left']
+maximize-vertically=['<Alt><Super>Right']
 minimize=['<Super>Down']
 move-to-center=@as []
+move-to-monitor-down=@as []
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-monitor-up=@as []
 move-to-side-e=['<Super>Right']
+move-to-side-n=['<Alt><Super>Up']
+move-to-side-s=['<Alt><Super>Down']
 move-to-side-w=['<Super>Left']
 panel-run-dialog=['<Alt>F2', '<Super>r']
 push-snap-up=@as []
@@ -362,6 +465,6 @@ switch-to-workspace-right=['<Primary><Super>equal']
 switch-windows=['<Alt>Tab', '<Super>Tab']
 switch-windows-backward=['<Shift><Super>Tab']
 toggle-above=['<Alt><Super>Return']
-toggle-fullscreen=['<Primary><Super>Up']
+toggle-fullscreen=['<Shift><Super>Up']
 toggle-maximized=['<Alt>F10', '<Super>Up']
 toggle-on-all-workspaces=@as []
