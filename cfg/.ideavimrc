@@ -29,8 +29,8 @@ nnoremap <leader>d k"_dd
 nnoremap <leader>D j"_ddk
 
 " Comment out line
-nnoremap <leader>/ gcc
-vnoremap <leader>/ gcc
+nmap <leader>/ gcc
+vmap <leader>/ gcc
 
 set highlightedyank
 let g:highlightedyank_highlight_color = "rgba(200, 120, 200, 175)" 
