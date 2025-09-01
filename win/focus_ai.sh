@@ -4,8 +4,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 #lower => better priority
 
-# Закомментировал, т. к. в некоторых случаях неподходящий под шаблон класс jetbrains-phpstorm-debug
-#WINDOW_CLASS=jetbrains-phpstorm.jetbrains-phpstorm
 WINDOW_CLASS="lm studio.LM Studio"
 
 COMMAND="echo Autorun not implemented! Run manually!"
