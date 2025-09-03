@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# export PAGE="https://metrics.torproject.org/rs.html"
+TEST_PAGE="https://mynoise.net/"
+DATA_DIR="$HOME/temp/chrome-data-dir-audio-proxy"
+WINDOW_NAME="Chrome Audio"
+# --proxy-server="http://127.0.0.1:9119" \
+
+# PROXY_WG_PORT=25344
+PROXY_PORT=2080
+
+set -x
+
+mkdir -p "$DATA_DIR"
+
+chrome \
+  --private \
+  --proxy-server="socks5://127.0.0.1:$PROXY_PORT" \
+  --window-name="$WINDOW_NAME" \
+  --user-data-dir="$DATA_DIR" \
+  --profile-directory="Default" \
+  "$TEST_PAGE"
+
+
+# NOTE
+# may require you to run
+# `chrome --profile-directory="Default"`
+# after

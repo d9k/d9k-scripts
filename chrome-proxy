@@ -2,7 +2,8 @@
 
 # export PAGE="https://metrics.torproject.org/rs.html"
 
-export PAGE="https://youtube.com"
+PAGE="https://youtube.com"
+WINDOW_NAME="Chrome Proxy"
 
 
 # --proxy-server="http://127.0.0.1:9119" \
@@ -10,6 +11,7 @@ export PAGE="https://youtube.com"
 chrome \
   --private \
   --proxy-server="socks5://127.0.0.1:1080" \
+  --window-name="$WINDOW_NAME" \
   --user-data-dir="$HOME/temp/chrome-data-dir-proxy" \
   --profile-directory="Default" \
   "$PAGE"
