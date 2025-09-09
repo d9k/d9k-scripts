@@ -26,7 +26,7 @@ set wrap-lines = 1
 # > - Re-open Tig instantly in the last displayed view after executing the command. (only in new versions of tig!)
 #bind status A !?git commit --amend
 
-bind status a !amend
+bind status a !sh -c '$HOME/scripts/git-partial-add-to-commit %(file)'
 bind status A !amend
 # bind status D !@?sh -c "rm '%(file)'"
 bind status D !@?rm ./%(file)
