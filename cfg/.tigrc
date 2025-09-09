@@ -34,7 +34,12 @@ bind status B !backup-conf %(file)
 bind status H >tig %(file)
 bind status <Esc>r !sh -c '$HOME/scripts/rename-file %(file)'
 bind status <Esc>d ?sh -c '$HOME/scripts/deprecate %(file)'
-bind status p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+
+# TODO fix
+bind status p !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+# bind status 0 +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+bind generic 0 !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
+# bind stage p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
 
 # stage file par[T]
