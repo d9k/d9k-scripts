@@ -32,8 +32,10 @@ bind status A !amend
 bind status D !@?rm ./%(file)
 bind status B !backup-conf %(file)
 bind status H >tig %(file)
-bind status p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 bind status <Esc>r !sh -c '$HOME/scripts/rename-file %(file)'
+bind status <Esc>d ?sh -c '$HOME/scripts/deprecate %(file)'
+bind status p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+
 
 # stage file par[T]
 bind status T !git add -i --patch '%(file)'
