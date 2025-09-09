@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+cd ~/.password-store/
+"$SCRIPTS_DIR"/git-undo-commit
