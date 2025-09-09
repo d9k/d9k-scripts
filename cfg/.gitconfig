@@ -46,13 +46,21 @@ dump = cat-file -p
 
 [core]
 	editor = nano
-	commentChar = ";"
+	# editor = nvim
+
+  # https://github.com/dandavison/delta
+	pager = delta
+
 	precomposeunicode = true
 	quotePath = false
+
 #	commentchar = \\
+	commentChar = ";"
+
 
 [diff]
 	submodule = log
+	context = 10
 #  tool = meld
 
 [log]
@@ -72,3 +80,8 @@ date=format:%Y.%m.%d %H:%M
 
 [includeIf "gitdir:~/cr/wb/"]
   path = ~/cr/wb/.gitconfig
+
+[delta]
+    side-by-side = true
+    syntax-theme = Dracula
+    paging = always
