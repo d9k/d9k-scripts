@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Configure prefix for git-branch-feature, git-branch-bugfix scripts
+
+# CONFIG_KEY_BUGFIX_PREFIX="user.branchBugfixPrefix"
+# CONFIG_KEY_FEATURE_PREFIX="user.branchFeaturePrefix"
+
+# CONFIG_BUGFIX_PREFIX=$(git config --local "$CONFIG_KEY_BUGFIX_PREFIX")
+# CONFIG_FEATURE_PREFIX=$(git config --local "$CONFIG_KEY_FEATURE_PREFIX")
+
+function ensure_git_config_by_key_default { 
+  CONFIG_KEY="$1"
+  DEFAULT_VALUE="$2"
+
+  CONFIG_VALUE=$(git config --local "$CONFIG_KEY")
+
+  if [ -n "$CONFIG_VALUE" ]; then
+    echo "$CONFIG_KEY: $CONFIG_VALUE"
+  else 
+    ( set -x; git config --local "$CONFIG_KEY" "$DEFAULT_VALUE" )
+  fi
+}
+
+ensure_git_config_by_key_default "user.branchBugfixPrefix" "bugfix-"
+ensure_git_config_by_key_default "user.branchFeaturePrefix" "feature-"
+
+# if [ -n "$CONFIG_BUGFIX_PREFIX"]; then
+# else 
+#   ( set -x; git config --local "$CONFIG_KEY_BUGFIX_PREFIX" "bugfix-" )
+# fi
+#
+# if [ -n "$CONFIG_FEATURE_PREFIX"]; then
+# else 
+#   ( set -x; git config --local "$CONFIG_KEY_FEATURE_PREFIX" "feature-" )
+# fi
