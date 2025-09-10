@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# --first-parent: only one commit visible for merges. Bitbucket branch history style.
+# --no-merges: no merges visible at all
+tig --first-parent --date-order "$@"
