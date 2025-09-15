@@ -19,6 +19,8 @@ echo -e "In OBS Studio add \"Media Source\", uncheck \"Local File\", copy \"$STR
 
 # https://trac.ffmpeg.org/wiki/Capture/PulseAudio
 # /bin/ffmpeg -f pulse -i default out.wav
+# pactl list short sources
+# pactl list sources
 
 # -probesize 3M \
 
