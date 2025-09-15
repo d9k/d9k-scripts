@@ -1,11 +1,15 @@
 #!/bin/bash
 
 WINDOW_ID="$1"
+STREAM_OUTPUT='udp://127.0.0.1:2000'
 
 if [[ -z "$WINDOW_ID" ]]; then
   echo "Error! Provide window id (use xwininfo or wmctrl -lx)"
+  ( set -x; wmctrl -lx )
   exit
 fi
+
+echo -e "In OBS Studio add \"Media Source\", uncheck \"Local File\", copy \"$STREAM_OUTPUT\" value to Input field\n\n"
 
 # https://ffmpeg.org/ffmpeg-devices.html#x11grab
 # https://www.youtube.com/watch?v=eXbndLq5P7I
@@ -28,8 +32,7 @@ ffmpeg \
   -tune zerolatency \
   -preset ultrafast \
   -f mpegts \
-  udp://127.0.0.1:2000
-
+  "$STREAM_OUTPUT"
 #  -f rtsp \
 #  -rtsp_transport tcp \
 #  rtsp://localhost:8888/live.sdp
