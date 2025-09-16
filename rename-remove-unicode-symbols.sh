@@ -1,5 +1,14 @@
 #!/bin/bash
 
+function echoerr {                                                                      
+  printf "%s\n" "$*" >&2;             
+}  
+
+if [ $# -lt 1 ]; then
+  echoerr "Files names not provided"
+  exit
+fi
+
 function ask_continue { action_name=$1
   if [[ -z "${action_name}" ]]; then
     action_name="continue"
@@ -22,17 +31,14 @@ function ask_continue { action_name=$1
   echo 1
 }
 
-CURRENT_DIR="$(pwd)"
+echo 'See https://askubuntu.com/questions/1530084/rename-files-with-non-latin-characters/1530087#1530087'
 
-ASK_RESULT=$(ask_continue "remove ALL unicode characters in \"$CURRENT_DIR\" RECURSIVELY")
+rename -n -u utf8 'BEGIN {use Text::Unidecode}; unidecode($_)' "$@"
+
+ASK_RESULT=$(ask_continue "rename files")
 
 if [[ "$ASK_RESULT" != "1" ]]; then
   exit
 fi
 
-# thx phemmer
-# see https://serverfault.com/a/348496/155512
-find . -type f -print0 | \
-perl -n0e '$new = $_; if($new =~ s/[^[:ascii:A-Яа-я]]//g) {
-  print("Renaming $_ to $new\n"); rename($_, $new);
-}'
+rename -u utf8 'BEGIN {use Text::Unidecode}; unidecode($_)' "$@"
