@@ -1640,5 +1640,18 @@
     // linjun.git-graph-pro
     "key": "ctrl+shift+g l",
     "command": "git-graph.view"
+  },
+  {
+    "key": "ctrl+k o",
+    "command": "git-graph.openFile"
+  },
+  {
+    "key": "ctrl+k o",
+    "command": "-workbench.action.copyEditorToNewWindow",
+    "when": "activeEditor"
+  },
+  {
+    "key": "ctrl+k ctrl+o",
+    "command": "git-graph.openFile"
   }
 ]
