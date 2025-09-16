@@ -260,6 +260,12 @@
   // "apc.electron": {
   //   "titleBarStyle": "customButtonsOnHover",
   // },
+
+  "markdown-preview-enhanced.liveUpdate": false,
+
+  // Allow overwrite files on paste
+  "explorer.incrementalNaming": "disabled",
+
   // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
   "docsView.documentationView.updateMode": "sticky",
   // Prevent tabs duplication
@@ -274,6 +280,23 @@
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.hideUnchangedRegions.contextLineCount": 12,
   "diffEditor.hideUnchangedRegions.minimumLineCount": 20,
+
+  "git.openRepositoryInParentFolders": "never",
+
+  // "vue.server.hybridMode": false,
+  // "codeQL.variantAnalysis.controllerRepo": "ajaxorg/ace",
+
+  "http.proxyStrictSSL": false,
+  "zig.zls.enabled": "on",
+  // "gitlens.graph.minimap.enabled": false,
+  // "gitlens.graph.onlyFollowFirstParent": true,
+  // "gitlens.graph.dimMergeCommits": true,
+  //"betterGitLineBlame.showStatusBarItem": true,
+  //"betterGitLineBlame.showInlineAnnotations": false,
+  "git.blame.editorDecoration.enabled": false,
+  "git.blame.statusBarItem.enabled": false,
+  // "git-graph.commitDetailsView.location": "Docked to Bottom",
+  // "git-graph.dialog.deleteBranch.forceDelete": true,
 
   // # VSCodeVim
   "vim.leader": "<Space>",
