@@ -265,20 +265,23 @@
   // Prevent tabs duplication
   "workbench.editor.revealIfOpen": true,
   "workbench.colorTheme": "Palenight Italic",
+
   // Disable select word under mouse with ctrl+f find
   "editor.find.seedSearchStringFromSelection": "never",
+  "editor.peekWidgetDefaultFocus": "editor",
+  "editor.cursorSurroundingLines": 8,
+
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.hideUnchangedRegions.contextLineCount": 12,
+  "diffEditor.hideUnchangedRegions.minimumLineCount": 20,
+
   // # VSCodeVim
   "vim.leader": "<Space>",
   "vim.useSystemClipboard": true,
   "vim.vimrc.path": "$HOME/.config/Code/User/.vscode.vimrc",
   "vim.vimrc.enable": true,
   "vim.camelCaseMotion.enable": true,
-  "editor.peekWidgetDefaultFocus": "editor",
-  // -----
-  "editor.cursorSurroundingLines": 8,
-  "diffEditor.hideUnchangedRegions.enabled": true,
-  "diffEditor.hideUnchangedRegions.contextLineCount": 12,
-  "diffEditor.hideUnchangedRegions.minimumLineCount": 20,
+
   "vim.highlightedyank.enable": true,
   "vim.highlightedyank.color": "#5CFAC0",
   "vim.highlightedyank.duration": 472,
