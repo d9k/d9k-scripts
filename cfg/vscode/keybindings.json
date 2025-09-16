@@ -1653,5 +1653,15 @@
   {
     "key": "ctrl+k ctrl+o",
     "command": "git-graph.openFile"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "workbench.action.compareEditor.nextChange",
+    "when": "textCompareEditorVisible"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "workbench.action.compareEditor.previousChange",
+    "when": "textCompareEditorVisible"
   }
 ]
