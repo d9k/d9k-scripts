@@ -490,6 +490,11 @@
       "before": ["s", "d"],
       "after": ["v", "i", "w", "o", "h", "d", "w"]
     },
+    {
+      // Yank line
+      "before": ["y", "l"],
+      "after": ["^", "y", "$"]
+    },
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
