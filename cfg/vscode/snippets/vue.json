@@ -16,7 +16,7 @@
   // Doesn't work! Moved to global
   "Vue template comments (from vue.json)": {
     "prefix": [
-      "com",
+      "vcom",
       "///"
     ],
     "body": [
