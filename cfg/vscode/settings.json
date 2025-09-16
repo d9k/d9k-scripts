@@ -276,6 +276,9 @@
   "editor.peekWidgetDefaultFocus": "editor",
   // -----
   "editor.cursorSurroundingLines": 8,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.hideUnchangedRegions.contextLineCount": 12,
+  "diffEditor.hideUnchangedRegions.minimumLineCount": 20,
   "vim.highlightedyank.enable": true,
   "vim.highlightedyank.color": "#5CFAC0",
   "vim.highlightedyank.duration": 472,
@@ -305,7 +308,7 @@
     {
       "before": ["<C-a>"],
       "commands": ["editor.action.selectAll"]
-    }
+    },
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     // https://superuser.com/a/321726/31155
