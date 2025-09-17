@@ -6,7 +6,7 @@ FOLDER_REL_PATH=.config/Code/User
 
 mkdir -p "${CFG_BACKUP_DIR}"
 
-meld "$CFG_DIR/${FOLDER_REL_PATH}" "${CFG_BACKUP_DIR}"
+( set -x; meld "$CFG_DIR/${FOLDER_REL_PATH}" "${CFG_BACKUP_DIR}" )
 
 echo "After merging data to \"${CFG_BACKUP_DIR}\":"
 echo
