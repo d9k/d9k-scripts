@@ -11,6 +11,8 @@
 
 " Example configs:
 " https://github.com/JetBrains/ideavim/discussions/303
+"
+" Search for word boundaries: `\<`, `\>`
 
 set clipboard=unnamedplus
 set commentary
@@ -72,14 +74,30 @@ nnoremap sd viwohdw
 " Next/previous block of text
 map <A-m> }}{j
 map <A-n> {{j
-
 map ]b }}{j
 map [b {{j
+
+" Next/previous class definition
+map ]c /\<class\><CR>
+map [c ?\<class\><CR>
+
+" Next/previous class definition
+map ]t /\<type\><CR>
+map [t ?\<type\><CR>
 
 " Next/previous `code` inside backticks
 noremap ]` <Esc>/`<CR>n<Esc>vi`o
 "noremap ]` <Esc>/`[^`]/+`<CR><Esc>lvi`
 noremap [` <Esc>?`<CR>nhvi`
 
-" testing reload config
-noremap [t hhh
+" temporary binding for testing 
+noremap <leader>T hhh
+
+" Search in Vue single find component for sections
+nmap <leader>gs /^<script<CR>
+nmap <leader>gt /^<template<CR>
+nmap <leader>gc /^<style<CR>
+nmap gs /^<script<CR>
+nmap gt /^<template<CR>
+nmap gc /^<style<CR>
+
