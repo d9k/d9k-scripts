@@ -232,7 +232,7 @@
   //
   // ## disable animations
   // https://github.com/Gerrnperl/outline-map/issues/71
-  "workbench.editor.editorActionsLocation": "hidden",
+  "workbench.editor.editorActionsLocation": "titleBar",
   "javascript.updateImportsOnFileMove.enabled": "always",
   // "editor.multiCursorModifier": "ctrlCmd",
   "gotoNextPreviousMember.symbolKinds": [
@@ -246,17 +246,17 @@
   //
   // # Apc Customize UI++ extension
   // To ensure the extension works, allow VSCode or VSCodium to modify itself by fixing read-only code files and permission issues.
-  "apc.stylesheet": {
-    // ## Tabs
-    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label a, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-label a": "font-size: 12px;",
-    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab": "padding-left: 3px;",
-    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab>.tab-actions>.monaco-action-bar": "width: 20px",
-    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab>.tab-actions": "width: 18px",
-    ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-actions .action-label": "padding-left: 0",
-    // ## Debug panel
-    ".debug-pane .scope": "font-size: 13px;",
-    ".monaco-workbench .debug-hover-widget .monaco-list-row .expression, .monaco-workbench .debug-pane .monaco-list-row .expression": "font-size: 16px; line-height: 21px;"
-  },
+  // "apc.stylesheet": {
+  //   // ## Tabs
+  //   ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label a, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-label a": "font-size: 12px;",
+  //   ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab": "padding-left: 3px;",
+  //   ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab>.tab-actions>.monaco-action-bar": "width: 20px",
+  //   ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab>.tab-actions": "width: 18px",
+  //   ".monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-actions .action-label": "padding-left: 0",
+  //   // ## Debug panel
+  //   ".debug-pane .scope": "font-size: 13px;",
+  //   ".monaco-workbench .debug-hover-widget .monaco-list-row .expression, .monaco-workbench .debug-pane .monaco-list-row .expression": "font-size: 16px; line-height: 21px;"
+  // },
   // "apc.electron": {
   //   "titleBarStyle": "customButtonsOnHover",
   // },
@@ -417,6 +417,11 @@
     {
       "before": ["g", "n", "d"],
       "commands": ["editor.action.revealDefinition"]
+    },
+    // reload config
+    {
+      "before": ["<leader>", "v", "r"],
+      "commands": ["workbench.action.reloadWindow"]
     },
     // tasks
     {
