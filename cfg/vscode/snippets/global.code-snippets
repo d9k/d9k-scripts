@@ -101,6 +101,25 @@
       "</style>"
     ]
   },
+  "Vue SFC all tags": {
+    "prefix": [
+      "Vue_SFC_all_tags",
+      "vsfc",
+    ],
+    "body": [
+      "<script setup lang=\"tsx\">",
+      "",
+      "</script>",
+      "",
+      "<template>",
+      "<div></div>",
+      "</template>",
+      "",
+      "<style module>",
+      "",
+      "</style>",
+    ]
+  },
   "Vue define emits": {
     "prefix": [
       "Vue_Define_Emits",
