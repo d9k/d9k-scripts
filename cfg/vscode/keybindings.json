@@ -281,7 +281,7 @@
     "when": "editorTextFocus && vim.active && vim.use<C-x> && !inDebugRepl"
   },
   {
-    "key": "alt+n",
+    "key": "shift+alt+n",
     "command": "workbench.action.files.newUntitledFile"
   },
   {
@@ -1285,10 +1285,6 @@
     "when": "editorTextFocus && vim.active && vim.use<C-g> && !inDebugRepl"
   },
   {
-    "key": "alt+m",
-    "command": "vscode-copy-fqn.copy-fqn"
-  },
-  {
     "key": "shift+alt+t",
     "command": "-theme-by-language.setThemeForCurrentFileLanguage"
   },
@@ -1448,7 +1444,7 @@
     "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
     "when": "inQuickOpen && inRecentFilesPicker"
   },
-  // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
+  // https://marketplace.studio.com/items?itemName=bierner.docs-view
   {
     "key": "shift+alt+d",
     "command": "docsView.documentation.focus"
@@ -1671,5 +1667,28 @@
   {
     "key": "ctrl+k ctrl+w",
     "command": "workbench.action.reloadWindow"
+  },
+  {
+    "key": "shift+alt+m",
+    "command": "vscode-copy-fqn.copy-fqn"
+  },
+  {
+    // next text block
+    "key": "alt+m",
+    "command": "vim.remap",
+    // "when": "inputfocus && vim.mode",
+    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+    "args": {
+      "after": ["}", "}", "{", "j"]
   }
+  },
+  {
+    // previous text block
+    "key": "alt+n",
+    "command": "vim.remap",
+    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+    "args": {
+      "after": ["{", "{", "j"]
+    }
+  },
 ]
