@@ -1,0 +1,12 @@
+#!/bin/bash
+
+GREP_PATTERN="$1"
+
+MAX_DEPTH="$2"
+
+if [[ -z "$MAX_DEPTH" ]]; then
+  MAX_DEPTH=100
+fi 
+
+
+find -maxdepth $MAX_DEPTH | rg --color=always -i "$GREP_PATTERN"
