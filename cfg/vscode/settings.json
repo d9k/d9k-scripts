@@ -11,12 +11,13 @@
   "gitlens.currentLine.enabled": false,
   "gitlens.codeLens.enabled": false,
   "gitlens.blame.highlight.enabled": false,
-  "gitlens.blame.format": "${author|14?} ${agoOrDateShort|8-}",
   "gitlens.hovers.currentLine.enabled": false,
-  //  "editor.lineHeight": 1.65,
-  //"workbench.colorTheme": "Palenight Italic",
   "debug.console.fontSize": 14,
   "debug.console.lineHeight": 21,
+  // "gitlens.blame.format": "${author|14?} ${agoOrDateShort|8-}",
+  "gitlens.blame.format":"${date|9} ${author|8-} ${message|16}",
+  "gitlens.blame.dateFormat": "'YY-MM-DD",
+  "gitlens.blame.avatars": false,
   // "theme-by-language.themes": {
   //   "markdown": "Slime",
   //   "typescript": "Slime"
