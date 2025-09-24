@@ -49,7 +49,8 @@
       // "editorStickyScroll.border": "#143b47",
       "editorStickyScroll.border": "#127560",
       // "editor.lineHighlightBackground": "#4c406c",
-      "editor.lineHighlightBackground": "#005858",
+      // "editor.lineHighlightBackground": "#005858",
+      "editor.lineHighlightBackground": "#034040",
       // "editor.lineHighlightBackground": "#401584",
       // selection
       "editor.selectionBackground": "#60a0a0",
@@ -60,7 +61,24 @@
       "editor.wordHighlightBackground": "#00251d98",
       "editor.wordHighlightTextBackground": "#00000000",
       // "editor.wordHighlightStrongBackground": "#002e3250",
-      "editor.wordHighlightBorder":"#81bf94"
+      "editor.wordHighlightBorder":"#81bf94",
+      "editor.wordHighlightStrongBorder": "#81bf94",
+      "editor.wordHighlightTextBorder": "#81bf94",
+      "editor.symbolHighlightBorder":"#81bf94",
+      "editor.findMatchHighlightBorder": "#d9d024"
+      // Выделение линии, на которой найденое слово
+      // "editor.rangeHighlightBorder": "#81bf94",
+
+      // ???
+      // "editor.findMatchHighlightBorder": "#81bf94",
+      // "editor.findMatchBorder": "#81bf94",
+      // "editor.hoverHighlightBackground": "#B0ff0000",
+      // "editor.wordHighlightBorder":"#ff0000",
+      // "editor.wordHighlightStrongBorder": "#ff0000",
+      // "editor.wordHighlightTextBorder": "#ff0000",
+      // "editor.symbolHighlightBorder":"#ff0000",
+      // "editor.rangeHighlightBorder": "#ff0000",
+      // "editor.highligh"
       // "highlight"
       // "editorOverviewRuler.se": "#00000000",
     },
@@ -105,7 +123,8 @@
       "editorLineNumber.activeForeground": "#b0b0ff",
       // hide active line number for extension "Double Line Numbers"
       // "editorLineNumber.activeForeground": "#161d20",
-      "tab.activeBackground": "#33474b"
+      "tab.activeBackground": "#33474b",
+      // "editor.lineHighlightBackground": "#000",
     }
   },
   "editor.tokenColorCustomizations": {
