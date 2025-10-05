@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# https://www.1728.org/colrchr5.htm
-
-PALETTE_NAME="Nokia N-Gage (4096)"
+PALETTE_NAME="Nokia N-Gage (4096 colors)"
+OUTPUT_FILE_NAME="Nokia_N-Gage_4096_colors"
 
 R=0
 G=0
@@ -16,59 +15,93 @@ STEP=16
 
 PRINT_COLOR_LAST=
 
+SKIP_COLOR_LEVEL=240
+
+OUTPUT_FILE_PATH="./$OUTPUT_FILE_NAME.gpl"
+OUTPUT_FILE_PATH_ABS=$(readlink -f "$OUTPUT_FILE_PATH")
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
 function print_color() {
   PRINT_COLOR_NEW=$(printf "%3s %3s %3s" $R $G $B)
 
-  if [[ "$R" == "$R_255_printed" ]]; then
+  if [[ "$R" == "255" ]]; then
     R_255_printed=1
   fi
 
-  if [[ "$R" == "$R_255_printed" ]]; then
+  if [[ "$G" == "255" ]]; then
     G_255_printed=1
   fi
 
-  if [[ "$R" == "$R_255_printed" ]]; then
+  if [[ "$B" == "255" ]]; then
     B_255_printed=1
   fi
 
-  if [[ "$PRINT_COLOR_NEW" != "$PRINT_COLOR_LAST" ]]; then
-    echo "$PRINT_COLOR_NEW"
+  if [[ "$PRINT_COLOR_NEW" == "$PRINT_COLOR_LAST" ]]; then
+    return
   fi
 
   PRINT_COLOR_LAST="$PRINT_COLOR_NEW"
+
+  if [[ "$R" == "$SKIP_COLOR_LEVEL" ]]; then
+    return
+  fi
+
+  if [[ "$G" == "$SKIP_COLOR_LEVEL" ]]; then
+    return
+  fi
+
+  if [[ "$B" == "$SKIP_COLOR_LEVEL" ]]; then
+    return
+  fi
+
+  HEX=$(printf "#%02x%02x%02x" $R $G $B)
+  echo "$PRINT_COLOR_NEW" $HEX >> "$OUTPUT_FILE_PATH_ABS"
 }
 
-while [ "$R" -le "255" ]; do
+echo "Used https://www.1728.org/colrchr5.htm for reference"
+echo "Writing palette to file \"$OUTPUT_FILE_PATH_ABS\"..."
+
+# Clearing file contents:
+> "$OUTPUT_FILE_PATH_ABS"
+
+echo "GIMP Palette" >> "$OUTPUT_FILE_PATH_ABS"
+echo "Name: $PALETTE_NAME" >> "$OUTPUT_FILE_PATH_ABS"
+echo "#" >> "$OUTPUT_FILE_PATH_ABS"
+
+while [ ! "$R_255_printed" ]; do
   print_color
 
-  while [ "$G" -le "255" ]; do
+  while [ ! "$G_255_printed" ]; do
     print_color
 
-    while [ "$B" -le "255" ]; do
+    while [ ! "$B_255_printed" ]; do
       print_color
       B=`expr $B + $STEP`
+
+      if [[ "$B" -gt 255 ]]; then
+        B=255
+      fi
     done # B
 
-    if [[ -z "$B_255_printed" ]]; then
-      B=255
-      print_color
+    G=`expr $G + $STEP`
+    if [[ "$G" -gt 255 ]]; then
+      G=255
     fi
 
     B=0
     B_255_printed=
-
-    G=`expr $G + $STEP`
   done # G
 
-  if [[ -z "$G_255_printed" ]]; then
-    G=255
-    print_color
+  R=`expr $R + $STEP`
+  if [[ "$R" -gt 255 ]]; then
+    R=255
   fi
 
   G=0
   G_255_printed=
-
-  R=`expr $R + $STEP`
 done # R
 
 if [[ -z "$R_255_printed" ]]; then
@@ -76,4 +109,4 @@ if [[ -z "$R_255_printed" ]]; then
   print_color
 fi
 
-
+echo "Copy the palette file to the GIMP palettes directory, something like \"~/.config/GIMP/2.10/palettes/\" (on Linux)"
