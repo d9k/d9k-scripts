@@ -11,11 +11,12 @@ R_255_printed=
 G_255_printed=
 B_255_printed=
 
-STEP=16
+STEP=17
 
 PRINT_COLOR_LAST=
 
-SKIP_COLOR_LEVEL=240
+# SKIP_COLOR_LEVEL=240
+SKIP_COLOR_LEVEL=
 
 OUTPUT_FILE_PATH="./$OUTPUT_FILE_NAME.gpl"
 OUTPUT_FILE_PATH_ABS=$(readlink -f "$OUTPUT_FILE_PATH")
@@ -61,7 +62,8 @@ function print_color() {
   echo "$PRINT_COLOR_NEW" $HEX >> "$OUTPUT_FILE_PATH_ABS"
 }
 
-echo "Used https://www.1728.org/colrchr5.htm for reference"
+# echo "Used https://www.1728.org/colrchr5.htm for reference"
+echo "Used http://www.ficml.org/jemimap/style/color/wheel.html for reference"
 echo "Writing palette to file \"$OUTPUT_FILE_PATH_ABS\"..."
 
 # Clearing file contents:
@@ -109,4 +111,4 @@ if [[ -z "$R_255_printed" ]]; then
   print_color
 fi
 
-echo "Copy the palette file to the GIMP palettes directory, something like \"~/.config/GIMP/2.10/palettes/\" (on Linux)"
+echo "Copy the palette file to the GIMP palettes directory, something like \"~/.config/GIMP/3.0/palettes/\" (on Linux)"
