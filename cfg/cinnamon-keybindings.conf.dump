@@ -1,5 +1,5 @@
 [/]
-custom-list=['custom79', 'custom77', 'custom75', 'custom74', 'custom73', 'custom72', 'custom71', 'custom70', 'custom69', 'custom67', 'custom66', 'custom12', 'custom63', 'custom61', 'custom60', 'custom59', 'custom58', 'custom57', 'custom53', 'custom52', 'custom51', 'custom49', 'custom47', 'custom45', 'custom46', 'custom40', 'custom39', 'custom38', 'custom37', 'custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom6', 'custom8', 'custom9', 'custom10', 'custom11', 'custom13', 'custom14', 'custom15', 'custom16', 'custom17', 'custom20', 'custom21', 'custom25', 'custom26', 'custom27', 'custom28', 'custom18', 'custom22', 'custom23', 'custom24', 'custom19', 'custom29', 'custom30', 'custom31', 'custom32', 'custom33', 'custom34', 'custom35', 'custom36', 'custom41', 'custom42', 'custom43', 'custom44', 'custom48', 'custom50', 'custom7', 'custom54', 'custom55', 'custom56', 'custom62', 'custom64', 'custom65', 'custom5', 'custom68', 'custom76', 'custom78', 'custom80', 'custom81']
+custom-list=['custom84', 'custom82', 'custom81', 'custom80', 'custom78', 'custom76', 'custom68', 'custom5', 'custom65', 'custom64', 'custom62', 'custom56', 'custom55', 'custom54', 'custom7', 'custom50', 'custom48', 'custom44', 'custom43', 'custom42', 'custom41', 'custom36', 'custom35', 'custom34', 'custom33', 'custom32', 'custom31', 'custom30', 'custom29', 'custom19', 'custom24', 'custom23', 'custom22', 'custom18', 'custom28', 'custom27', 'custom26', 'custom25', 'custom21', 'custom20', 'custom17', 'custom16', 'custom15', 'custom14', 'custom13', 'custom11', 'custom10', 'custom9', 'custom8', 'custom6', 'custom4', 'custom3', 'custom2', 'custom1', 'custom0', 'custom37', 'custom38', 'custom39', 'custom40', 'custom46', 'custom45', 'custom47', 'custom49', 'custom51', 'custom52', 'custom53', 'custom57', 'custom58', 'custom59', 'custom60', 'custom61', 'custom63', 'custom12', 'custom66', 'custom67', 'custom69', 'custom70', 'custom71', 'custom72', 'custom73', 'custom74', 'custom75', 'custom77', 'custom79', 'custom83']
 looking-glass-keybinding=@as []
 show-desklets=@as []
 
@@ -374,7 +374,7 @@ command='/home/d9k/scripts/hw-keyboard-repeat-rate-boost.sh'
 name='keyboard repeat speed boost'
 
 [custom-keybindings/custom76]
-binding=['<Super>a']
+binding=['<Shift><Super>a']
 command='/home/d9k/scripts/win/focus_ai.sh'
 name='Focus AI'
 
@@ -407,6 +407,21 @@ name='book'
 binding=['<Shift><Super>e', '<Alt><Super>e', '<Primary><Super>e']
 command='/home/d9k/scripts/win/focus_equalizer.sh'
 name='equalizer'
+
+[custom-keybindings/custom82]
+binding=['<Shift><Super>s']
+command='/home/d9k/scripts/win/focus_sound.sh'
+name='sound settings'
+
+[custom-keybindings/custom83]
+binding=['<Super>a']
+command='/home/d9k/scripts/win/focus_chrome_audio.sh'
+name='chrome audio'
+
+[custom-keybindings/custom84]
+binding=['<Super>v']
+command='/home/d9k/scripts/win/focus_chrome_proxy.sh'
+name='chrome proxy'
 
 [custom-keybindings/custom9]
 binding=['Forward']
