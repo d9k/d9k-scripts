@@ -8,7 +8,7 @@ function borders_remove_delayed
   ${SCRIPT_DIR}/win/zathura-border-remove.sh
 }
 
-# borders_remove_delayed &
+borders_remove_delayed &
 
 # httpc://rodrigo.morales.pe/2025/02/18/compile-zathura-0-5-11-in-ubuntu-24-04-lts/
 LD_LIBRARY_PATH=/usr/local/lib/x86_64-linux-gnu \
