@@ -4,6 +4,9 @@ WINDOW_ID="$1"
 STREAM_OUTPUT='udp://127.0.0.1:2000'
 MICROPHONE="default"
 QUEUE_SIZE=128
+MIC_SAMPLING_RATE_HZ=48000
+
+# TODO Slow and broken! Better configure mic stream audio manual delay
 
 if [[ -z "$WINDOW_ID" ]]; then
   echo "Error! Provide window id (use xwininfo or wmctrl -lx)"
@@ -52,6 +55,7 @@ set -x
   -tune zerolatency \
   -preset ultrafast \
   -f mpegts \
+  -ar "$MIC_SAMPLING_RATE_HZ" \
   "$STREAM_OUTPUT"
 #  -f rtsp \
 #  -rtsp_transport tcp \
