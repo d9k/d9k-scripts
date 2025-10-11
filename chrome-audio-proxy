@@ -13,9 +13,15 @@ set -x
 
 mkdir -p "$DATA_DIR"
 
+
+# Routing inside Chrome with 
+# "Proxy Switcher and Manager" extension
+# https://chromewebstore.google.com/detail/proxy-switcher-and-manage/onnfghpihccifgojkpnnncpagjcdbjod
+#
+# --proxy-server="socks5://127.0.0.1:$PROXY_PORT" \
+
 chrome \
   --private \
-  --proxy-server="socks5://127.0.0.1:$PROXY_PORT" \
   --window-name="$WINDOW_NAME" \
   --user-data-dir="$DATA_DIR" \
   --profile-directory="Default" \
