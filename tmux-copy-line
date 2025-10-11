@@ -18,7 +18,7 @@ LINE=$(\
   | rg -v "^[\s]*$" \
   | tac \
   | fzf \
-    --info-command='echo "${INFO_PREFIX}[Ctrl-C] to exit. Select line to copy. After copy selector will rerun automatically."'  \
+    --info-command='echo "${INFO_PREFIX}[Ctrl-C] to exit. Select line to copy, press [Enter]. After copy selector will rerun automatically."'  \
   \
 )
 
