@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Allow game capture source, disable Xcomposite window capture
+OBS_USE_EGL=1 /bin/obs
