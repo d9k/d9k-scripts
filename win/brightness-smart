@@ -5,6 +5,8 @@ BACKLIGHT_GET_SCRIPT="$HOME/scripts/win/backlight-get"
 
 ARG="$1"
 
+DEV="dev:/dev/i2c-4"
+
 # https://askubuntu.com/a/1181157/156571
 # https://github.com/ddccontrol/ddccontrol/issues/20
 
@@ -18,8 +20,6 @@ if [[ -z "$ARG" ]]; then
 fi
 
 ARG_BEGIN="${ARG:0:1}"
-
-DEV="dev:/dev/i2c-4"
 
 if [ "$ARG_BEGIN" = "+" ]; then
   ddccontrol -r 0x10 -W "$ARG" "$DEV"
