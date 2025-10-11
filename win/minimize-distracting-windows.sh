@@ -8,6 +8,7 @@ WINDOW_CLASSES=(
   "Chrome Proxy"
   "Chrome Audio"
   "discord.discord"
+  "FileZilla"
 )
 
 for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
