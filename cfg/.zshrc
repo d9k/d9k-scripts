@@ -1,3 +1,15 @@
+# Path to your Oh My Zsh installation.
+# export ZSH="$HOME/.oh-my-zsh"
+
+# plugins=()
+
+# Doesn't work
+# plugins+=(zsh-better-npm-completion)
+
+#plugins+=(zsh-npm-scripts-autocomplete)
+
+# source $ZSH/oh-my-zsh.sh
+
 # Set up the prompt
 
 #autoload -Uz promptinit
@@ -49,6 +61,8 @@ setopt NO_NOMATCH
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+
+INC_APPEND_HISTORY=1
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -158,12 +172,11 @@ function prompt_part_git {
       GIT_NAME_REQUIRED=1
     fi
 
-    if [[ -n "$GIT_NAME_REQUIRED" ]]; then
-      PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%F{yellow}name?%b '
-    fi
+    # if [[ -n "$GIT_NAME_REQUIRED" ]]; then
+    #  PROMPT_PART_GIT="${PROMPT_PART_GIT}${PROMPT_SEP}"$'%F{yellow}name?%b '
+    # fi
 
     GIT_BRANCH_DEFAULT="$(git config --get user.defaultbranch)"
-
     GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 
     GIT_BRANCH_ICON="${ICON_BRANCH}"
@@ -213,6 +226,8 @@ export ICON_THREE_DOTS=$(unichr 0x2026)
 export ICON_TWO_DOTS=$(unichr 0x2025)
 export ICON_TAG=$(unichr 0x1F3F7)
 
+OS_NAME=$(cat /etc/os-release | grep "^NAME=" | cut -d\" -f2)
+
 # prompt setup:
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # %B (%b) - Start (stop) boldface mode.
@@ -251,8 +266,16 @@ function precmd {
     _USER="k${ICON_TWO_DOTS}"
   fi
 
+  COMPUTER_NAME_OUTPUT="$COMPUTER_NAME"
+  COMPUTER_NAME_COLOR=$'%F{blue}'
+
+  if [[ "$OS_NAME" == "Arch Linux" ]]; then
+    COMPUTER_NAME_OUTPUT="arch"
+    COMPUTER_NAME_COLOR=$'%B'$'%F{cyan}'
+  fi
+
   # (%n is $USER)
-  PROMPT="${PROMPT}${PROMPT_SEP}"$'%F{blue}'"$_USER@${COMPUTER_NAME} "
+  PROMPT="${PROMPT}${PROMPT_SEP}${COMPUTER_NAME_COLOR}$_USER@${COMPUTER_NAME_OUTPUT} "
   PROMPT="${PROMPT}${PROMPT_END}"$'\n%F{blue}> %b%f%k'
   #PROMPT="${PROMPT}"
 
@@ -288,6 +311,7 @@ export NVM_DIR="$HOME/.nvm"
 # `npm install --cli ...` modules work globally
 export NODE_PATH="$NVM_DIR/node_modules"
 
+# Awesome tool that highlights your terminal commands red or green telling you if they are valid as you are typing them. Requires zsh.
 ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # see http://naxoc.net/2014/02/02/syntax-highlighting-commands-with-zsh/
 # see https://github.com/zsh-users/zsh-syntax-highlighting
@@ -314,7 +338,7 @@ alias default_audio_player=smplayer
 alias default_image_viewer=gpicview
 alias default_mail_viewer=thunderbird
 alias default_office_editor=libreoffice
-alias default_pdf_viewer=zathura
+alias default_pdf_viewer=zathura-fix
 alias default_markdown_editor=obsidian-open
 #alias default_text_editor=ta
 alias default_text_editor=nvim
@@ -338,6 +362,9 @@ alias -s gif=default_image_viewer
 alias -s jpeg=default_image_viewer
 alias -s jpg=default_image_viewer
 alias -s eml=default_mail_viewer
+alias -s gba=default_gba_emulator
+alias -s conf=default_text_editor
+alias -s ideavimrc=default_text_editor
 alias -s ini=default_text_editor
 #alias -s js=default_text_editor
 alias -s json=default_text_editor
@@ -353,6 +380,7 @@ alias -s png=default_image_viewer
 alias -s tigrc=default_text_editor
 alias -s torrent=default_torrent_app
 alias -s txt=default_text_editor
+alias -s vimrc=default_text_editor
 alias -s zshrc=default_text_editor
 
 alias -s webm=default_video_player
@@ -361,11 +389,12 @@ alias -s mkv=default_video_player
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # [ -f ~/.nix-profile/etc/profile.d/nix.sh ] && source ~/.nix-profile/etc/profile.d/nix.sh
 
-C() {} # you'll want this so that you don't get a command unrecognized error
+# https://stackoverflow.com/questions/14177700/copy-current-command-at-bash-prompt-to-clipboard
+Y() {} # you'll want this so that you don't get a command unrecognized error
 
 preexec() {
   tmp="";
-  if [ "${1:0:1}" = "C" ] && [ "${1:1:1}" = " " ] && [ "${1:2:1}" != " " ]; then
+  if [ "${1:0:1}" = "Y" ] && [ "${1:1:1}" = " " ] && [ "${1:2:1}" != " " ]; then
     for (( i=2; i<${#1}; i++ )); do
       tmp="${tmp}${1:$i:1}";
     done
@@ -495,3 +524,4 @@ if [[ -f "$ZSH_VIM_MODE_PLUGIN_PATH" ]]; then
     fi
   fi # check not VSCode
 fi
+
