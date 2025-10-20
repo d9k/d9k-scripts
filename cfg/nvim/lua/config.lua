@@ -15,6 +15,7 @@ local lazy_config = require "configs.lazy"
 
 -- load plugins
 require("lazy").setup({
+  -- https://github.com/johmsalas/text-case.nvim
   {
     "johmsalas/text-case.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
@@ -40,6 +41,7 @@ require("lazy").setup({
     lazy = false,
   },
 
+  -- https://github.com/kylechui/nvim-surround
   {
     "NvChad/NvChad",
     lazy = false,
