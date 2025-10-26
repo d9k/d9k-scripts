@@ -1,0 +1,46 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function echo_help_exit {
+  echoerr "Usage: ${SCRIPT_NAME} process_name niceness"
+  exit 1 
+}
+
+PROCESS_NAME="$1"
+NICENESS="$2"
+
+if [[ -z "$PROCESS_NAME" ]]; then
+   echoerr "Process name not define. Exitting"
+fi
+
+if [[ -z "$NICENESS" ]]; then
+  NICENESS="-10"
+fi
+
+
+PROCESS_IDS=$(pgrep ^${PROCESS_NAME}$)
+
+echo "Found process IDs:"
+echo "${PROCESS_IDS}"
+
+for PROCESS_ID in $(pgrep ^${PROCESS_NAME}$); do 
+  CHILD_PROCESSES_IDS=$(pstree -p $PROCESS_ID | grep -o '([0-9]\+)' | grep -o '[0-9]\+')
+  echo
+  # echo "$CHILD_PROCESSES_IDS"
+  echo "Child processes of \"$PROCESS_ID\"":
+
+  i=1
+  while read CHILD_PROCESS_ID; do
+      echo "$i. $CHILD_PROCESS_ID"
+      sudo renice -n "$NICENESS" -p "$CHILD_PROCESS_ID"
+      i=$(($i+1)); 
+  done <<< "$CHILD_PROCESSES_IDS" 
+  # for 
+
+  # ( set -x; sudo renice -n "$NICENESS" -p ${PROCESS_ID} )
+done
