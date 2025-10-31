@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname "$0")
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function list_ignored_files {
+  echo
+  echo "Ignored files:"
+  "$SCRIPT_DIR/git-ignored-locally"
+}
+
+if [ "$#" -lt 1 ]; then
+    echoerr "Error: file path required"
+    list_ignored_files
+    exit
+fi
+
+( set -x; git update-index --no-assume-unchanged "$@" )
+list_ignored_files
+
