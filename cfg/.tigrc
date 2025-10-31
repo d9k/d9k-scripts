@@ -12,8 +12,8 @@ set wrap-lines = 1
 
 # Modifiers
 # https://github.com/jonas/tig/issues/131
-# ^ - ctrl: not working!
-# <Esc> - alt
+# Ctrl: ^: not working!
+# Alt: <Esc>
 
 # see https://jonas.github.io/tig/doc/tigrc.5.html
 # "External user-defined command"
@@ -41,9 +41,16 @@ bind status p !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -select
 bind generic 0 !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
 # bind stage p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
+# %(file) is empty:
+# https://github.com/jonas/tig/issues/1387:
+bind diff P !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [P]ath copied to clipboard ($FPATH)"'
+
+#bind diff P +sh -c 'FPATH=$(printf "%(diffargs)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
 # stage file par[T]
 bind status T !git add -i --patch '%(file)'
+
+bind status <Esc>n ?git-ignore-locally '%(file)'
 
 # bind status v !sh -c 'nvim %(file)'
 bind generic v !sh -c 'nvim %(file)'
@@ -74,7 +81,15 @@ bind main c +sh -c "git show -s --format=%s %(commit) | xclip -selection c; echo
 # bind main H +sh -c 'COMMIT=$(printf %(commit) | head -c 20); printf $COMMIT | xclip -selection c && echo [H]ash $COMMIT copied to clipboard'
 bind main H !git-commit-copy-branch %(commit) 
 
-bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
+bind main I !git show -w %(commit)
+bind diff I !git show -w %(commit)
+# bind main I !git-show-delta-fix %(commit)
+# bind diff I !git-show-delta-fix %(commit)
+
+bind status I !git diff %(file)
+bind status i !git staged
+
+# bind main I !bash -c 'clear; ~/scripts-private/hm-issue "$(git show -s --format=%s %(commit))"'
 bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
 bind generic L @silent.sh git-compare-rev-dir %(commit)
 bind generic <Ctrl-F> !?git checkout %(commit) %(file)
