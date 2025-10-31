@@ -2,6 +2,12 @@
 
 set -x
 
+sudo killall pulseeffects
+
+systemctl --user stop pulseaudio.service
+
+sudo alsa suspend
+sudo alsa unload
 sudo alsa force-reload
 
 systemctl --user restart pulseaudio.service
