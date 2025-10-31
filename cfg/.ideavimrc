@@ -101,3 +101,4 @@ nmap gs /^<script<CR>
 nmap gt /^<template<CR>
 nmap gc /^<style<CR>
 
+nmap gu <Action>(FindUsages)
