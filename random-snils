@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+RANDOM_SNILS=$($SCRIPT_DIR/random-snils.js)
+printf "%s" "$RANDOM_SNILS" | xclip -selection clipboard
+echo "\"$RANDOM_SNILS\" was copied to clipboard"

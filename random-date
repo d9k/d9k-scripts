@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# https://www.linuxquestions.org/questions/linux-newbie-8/bash-generate-random-dates-with-times-4175608647/
+
+MAX_STEP=100
+CURRENT_STEP=0
+CURRENT_YEAR="$(date +%Y)"
+MAX_YEAR=$((CURRENT_YEAR+1))
+
+function random_date {
+  RANDOM_UNIXTIME=$(echo "$RANDOM * $RANDOM * $RANDOM / 1000" | bc -l)
+  date -d @$RANDOM_UNIXTIME +%Y.%m.%d
+}
+
+while [ $CURRENT_STEP -le $MAX_STEP ]; do
+  RANDOM_DATE=$(random_date)
+  RANDOM_DATE_YEAR=$(echo $RANDOM_DATE | awk -F'.' '{print $1}')
+  CURRENT_STEP=$((CURRENT_STEP+1))
+  if [ $RANDOM_DATE_YEAR -le $MAX_YEAR ]; then
+     printf "$RANDOM_DATE"
+     exit
+  fi
+done
+
