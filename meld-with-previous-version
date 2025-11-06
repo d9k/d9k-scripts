@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+FILE_PATH_REL="$1"
+
+if [[ -z "$FILE_PATH_REL" ]]; then
+  echo "Error: no file path provided"
+  exit 1
+fi
+
+PREVIOUS_FILE_VERSION_PATH_REL=$($SCRIPT_DIR/file-name-previous-version.sh "$FILE_PATH_REL")
+
+set -x
+meld "$PREVIOUS_FILE_VERSION_PATH_REL" "$FILE_PATH_REL"
