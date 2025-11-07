@@ -36,14 +36,17 @@ bind status <Esc>r !sh -c '$HOME/scripts/rename-file %(file)'
 bind status <Esc>d ?sh -c '$HOME/scripts/deprecate %(file)'
 
 # TODO fix
-bind status p !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+bind status p !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 # bind status 0 +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
-bind generic 0 !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
+bind generic 0 !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
+
+# Alt-p
+bind generic <Esc>p !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
 # bind stage p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
 # %(file) is empty:
 # https://github.com/jonas/tig/issues/1387:
-bind diff P !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [P]ath copied to clipboard ($FPATH)"'
+bind diff P !sh -c 'FPATH=$(printf "%s" %(file)"); printf "$FPATH" | xclip -selection c && echo "File [P]ath copied to clipboard ($FPATH)"'
 
 #bind diff P +sh -c 'FPATH=$(printf "%(diffargs)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
@@ -51,6 +54,7 @@ bind diff P !sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selectio
 bind status T !git add -i --patch '%(file)'
 
 bind status <Esc>n ?git-ignore-locally '%(file)'
+bind status <Esc>i ?git-ignore-locally '%(file)'
 
 # bind status v !sh -c 'nvim %(file)'
 bind generic v !sh -c 'nvim %(file)'
