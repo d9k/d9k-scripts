@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -x
+
+# pip install cron-descriptor
+python -m cron_descriptor "$@"
