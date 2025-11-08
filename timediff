@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+# apt install dateutils
+dateutils.ddiff -f "%H:%M" "$2" "$1"
+# dateutils.ddiff -f "%T" "$2" "$1"
+# dateutils.ddiff -f "time" "$2" "$1"
