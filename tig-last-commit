@@ -1,0 +1,9 @@
+#!/bin/bash
+COMMIT_NUM_FROM_END="$1"
+
+if [[ -z "$COMMIT_NUM_FROM_END" ]]; then
+  COMMIT_NUM_FROM_END=0
+fi
+
+set -x
+tig show HEAD~$COMMIT_NUM_FROM_END
