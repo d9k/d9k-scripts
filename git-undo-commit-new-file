@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# https://stackoverflow.com/questions/12481639/remove-file-from-latest-commit
+
+FILE_PATH="$1"
+
+if [[ -z "$FILE_PATH" ]]; then
+  echo "Error: File path not specified".
+  exit
+fi
+
+git rm --cached "$FILE_PATH"
+git commit --amend
