@@ -2,7 +2,7 @@
 
 function show_help() {
   echo -e "
-Usage:  git-copy-rev-file-to  REV_OR_BRANCH_TO_COPY_FROM  FILE  DEST_BASE_FOLDER
+Usage:  git-rev-file-copy-to  REV_OR_BRANCH_TO_COPY_FROM  FILE  DEST_BASE_FOLDER
 
 "
 }
