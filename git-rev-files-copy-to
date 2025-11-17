@@ -1,0 +1,45 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+function show_help() {
+  echo -e "
+Usage:  git-rev-files-copy-to  REV_OR_BRANCH_TO_COPY_FROM  DEST_BASE_FOLDER
+
+"
+}
+
+if [ "$#" -lt 2 ]; then
+  show_help
+  exit 1
+fi
+
+REV="$1"
+DEST_BASE_FOLDER="$2"
+
+# #FILE_NAME=$(basename "$FILE")
+# DEST_PATH="$DEST_BASE_FOLDER/$FILE"
+#
+# DEST_DIR=$(dirname $DEST_PATH)
+#
+# mkdir -p $DEST_DIR
+#
+# git show ${REV}:${FILE} > ${DEST_PATH}
+#
+# ls -lh $DEST_PATH
+
+mkdir -p "$DEST_BASE_FOLDER"
+
+CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r "$REV")
+
+echo "Changed files:"
+echo -e "$CHANGED_FILES"
+
+set -x
+echo -e "$CHANGED_FILES" | xargs --max-lines=1 -I{} "$SCRIPT_DIR/git-rev-file-copy-to" "$REV" {} "$DEST_BASE_FOLDER" 
+#echo -e "$STAGED_FILES" | xargs --max-lines=1 -I{} echo {} "$DESTINATION"
+#ls -l | xargs -I{} echo {}
+
+echo
+echo Result:
+tree -a "$DEST_BASE_FOLDER"
