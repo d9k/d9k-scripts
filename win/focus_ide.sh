@@ -8,6 +8,7 @@ WINDOW_CLASSES=(
   "jetbrains-webstorm"
   "jetbrains-idea"
   "DBeaver"
+  "NetBeans"
   "code.Code"
 )
 
