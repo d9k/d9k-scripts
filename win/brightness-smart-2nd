@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# Edit Zeuslap monitor brightness. Fails somehow. Only 0 and 100 input values are supported
+#
+# 1 <= 90
+# 2 <= 100=0x64, 1023=0x3ff
+# # ? ? ? ? ?
+# 8 <= 0
+# 9 <= 10
+# 10 <= 20, 1024=0x400
+
 BRIGHT_SCRIPT="$HOME/scripts/bright"
 BACKLIGHT_GET_SCRIPT="$HOME/scripts/win/backlight-get"
-
-# Edit 2nd monitor brightness. Fails somehow. Only 0 and 100 input values are supported
 
 ARG="$1"
 
@@ -25,16 +32,19 @@ ARG_BEGIN="${ARG:0:1}"
 
 if [ "$ARG_BEGIN" = "+" ]; then
   ddccontrol -r 0x10 -W "$ARG" "$DEV"
-  "$BRIGHT_SCRIPT" 1
+  # "$BRIGHT_SCRIPT" 1
 elif [ "$ARG_BEGIN" = "-" ]; then
   BACKLIGHT_VALUE=$("$BACKLIGHT_GET_SCRIPT")
 
   if [ $BACKLIGHT_VALUE -gt 1 ]; then
-    ddccontrol -r 0x10 -W "$ARG" "$DEV"
+    # ddccontrol -r 0x10 -W "$ARG" "$DEV"
+    ddccontrol -f -r 0x10 -W "$ARG" "$DEV"
   else
-    "$BRIGHT_SCRIPT" -
+    # "$BRIGHT_SCRIPT" -
+    :
   fi
 else
-  "$BRIGHT_SCRIPT" 1
-  ddccontrol -r 0x10 -w "$ARG" "$DEV"
+  # "$BRIGHT_SCRIPT" 1
+  # ddccontrol -r 0x10 -w "$ARG" "$DEV"
+  ddccontrol -f -r 0x10 -w "$ARG" "$DEV"
 fi
