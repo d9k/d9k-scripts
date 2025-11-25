@@ -1,6 +1,6 @@
 #!/usr/bin/awk BEGIN{system("deno run --unstable --allow-read --allow-run "ARGV[1]"  "ARGV[2]" "ARGV[3]" "ARGV[4]" "ARGV[5])}
 
-// Ported from https://github.com/rstrobl/sqldump-converter on Python to Deno Typescript with DeepSeek 2025.11.25 
+// Ported from https://github.com/rstrobl/sqldump-converter on Python to Deno Typescript with DeepSeek 2025.11.25
 // Example usage with clipboard content:
 // `xclip -selection clipboard -o | sql2json.ts`
 
@@ -8,14 +8,14 @@ interface RowData {
     [key: string]: string;
 }
 
-function parseSQLDump(dumpfile: string[], prettyPrint: boolean = true): string {
+function parseSQLDump(sqlInsertInputLines: string[], prettyPrint: boolean = true): string {
     // Regex to match INSERT statements
     const regex = /INSERT INTO [`'"]?(\w+)[`'"]? \((.+)\) VALUES[\s]*\((.+)\)/;
     const rows: RowData[] = [];
 
-    for (const line of dumpfile) {
+    for (const line of sqlInsertInputLines) {
         const match = regex.exec(line);
-        
+
         // Non-INSERTs will be ignored
         if (match) {
             const table = match[1];
@@ -37,21 +37,20 @@ function parseSQLDump(dumpfile: string[], prettyPrint: boolean = true): string {
         }
     }
 
-    return JSON.stringify(rows, null, prettyPrint ? '\t' : undefined);
+    return JSON.stringify(rows, null, prettyPrint ? '  ' : undefined);
 }
 
-const dumpfile = [];
+const pipeInputLines = [];
 
 const decoder = new TextDecoder();
 for await (const chunk of Deno.stdin.readable) {
   const text = decoder.decode(chunk);
-  dumpfile.push(text);
-  // do something with the text
+  pipeInputLines.push(text);
 }
 
 // console.log(dumpfile);
 
-const jsonOutput: string = parseSQLDump(dumpfile);
+const jsonOutput: string = parseSQLDump(pipeInputLines);
 console.log(jsonOutput);
 
 
