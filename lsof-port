@@ -8,6 +8,6 @@ fi
 
 set -x
 
-lsof -i :$PORT | grep LISTEN
+sudo lsof -i :$PORT | grep LISTEN
 
 
