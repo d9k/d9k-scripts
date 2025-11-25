@@ -1,4 +1,4 @@
-#!/usr/bin/awk BEGIN{system("deno run --unstable --allow-read --allow-run "ARGV[1]"  "ARGV[2]" "ARGV[3]" "ARGV[4]" "ARGV[5])}
+#!/usr/bin/awk BEGIN{system("deno run "ARGV[1]"  "ARGV[2]" "ARGV[3]" "ARGV[4]" "ARGV[5])}
 
 // Ported from https://github.com/rstrobl/sqldump-converter on Python to Deno Typescript with DeepSeek 2025.11.25
 // Example usage with clipboard content:
