@@ -10,7 +10,7 @@ interface RowData {
 
 function parseSQLDump(dumpfile: string[], prettyPrint: boolean = true): string {
     // Regex to match INSERT statements
-    const regex = /INSERT INTO [`'"](\w+)[`'"] \((.+)\) VALUES[\s]*\((.+)\)/;
+    const regex = /INSERT INTO [`'"]?(\w+)[`'"]? \((.+)\) VALUES[\s]*\((.+)\)/;
     const rows: RowData[] = [];
 
     for (const line of dumpfile) {
@@ -49,7 +49,7 @@ for await (const chunk of Deno.stdin.readable) {
   // do something with the text
 }
 
-console.log(dumpfile);
+// console.log(dumpfile);
 
 const jsonOutput: string = parseSQLDump(dumpfile);
 console.log(jsonOutput);
