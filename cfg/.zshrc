@@ -209,7 +209,7 @@ function prompt_part_jobs {
   let "JOBS_COUNT=JOBS_COUNT-1"
 
   if [[ "$JOBS_COUNT" -gt 0 ]]; then
-    echo " jobs: $JOBS_COUNT"
+    echo $'%F{yellow}'" jobs: $JOBS_COUNT "
   fi
 }
 
