@@ -202,6 +202,17 @@ function prompt_part_git {
   echo "$PROMPT_PART_GIT"
 }
 
+function prompt_part_jobs {
+  JOBS_COUNT=$(jobs | wc -l)
+
+  # -1 for newline character
+  let "JOBS_COUNT=JOBS_COUNT-1"
+
+  if [[ "$JOBS_COUNT" -gt 0 ]]; then
+    echo " jobs: $JOBS_COUNT"
+  fi
+}
+
 function prompt_part_node {
   PROMPT_NODE_PART=
 
@@ -256,8 +267,9 @@ function precmd {
   PROMPT="${PROMPT}${PROMPT_PART_GIT}"
 
   PROMPT_PART_NODE=$(prompt_part_node)
+  PROMPT_PART_JOBS=$(prompt_part_jobs)
 
-  PROMPT="${PROMPT}${PROMPT_PART_NODE}"
+  PROMPT="${PROMPT}${PROMPT_PART_NODE}${PROMPT_PART_JOBS}"
 
   # user and computer name
   _USER=$USER
