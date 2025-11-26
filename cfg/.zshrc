@@ -272,6 +272,7 @@ function precmd {
   if [[ "$OS_NAME" == "Arch Linux" ]]; then
     COMPUTER_NAME_OUTPUT="arch"
     COMPUTER_NAME_COLOR=$'%B'$'%F{cyan}'
+    HISTFILE=~/.zsh_history_arch
   fi
 
   # (%n is $USER)
@@ -319,6 +320,12 @@ ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH=/home/d9k/repos/zsh-syntax-highlighting/zsh-
 if [[ -f "${ZSH_SYNTAX_HIGHLIGHTING_SCRIPT_PATH}" ]]; then
   source /home/d9k/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+#ZSH_HIGHLIGHT_PATTERNS+=('#*' 'fg=yellow,bg=white')
+#ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=magenta'
+
+# default comments are black on blank!
+ZSH_HIGHLIGHT_STYLES[comment]='fg=magenta,dimmed'
 
 # http://zsh.sourceforge.net/Intro/intro_11.html
 # https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script/226062
@@ -524,4 +531,18 @@ if [[ -f "$ZSH_VIM_MODE_PLUGIN_PATH" ]]; then
     fi
   fi # check not VSCode
 fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/d9k/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# Fix Home / End keys on Arch Linux distrobox container
+# https://stackoverflow.com/questions/8638012/fix-key-settings-home-end-insert-delete-in-zshrc-when-running-zsh-in-terminat
+# `od -c` to detect key codes
+function keyboard_fix_home_end_in_zsh {
+  bindkey  "^[[1~"   beginning-of-line
+  bindkey  "^[[4~"   end-of-line
+}
+
+[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
 
