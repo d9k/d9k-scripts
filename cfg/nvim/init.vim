@@ -9,6 +9,9 @@ au VimEnter * setlocal cursorlineopt=line,number
 au BufEnter * setlocal cursorlineopt=line,number
 au BufLeave * setlocal cursorlineopt=number
 
+autocmd TextYankPost * silent! let &statusline = 'Yanked text: ' . getreg('+') 
+autocmd CursorMoved * silent! set statusline=%!v:lua.require('nvchad.stl.default')()
+
 " Copy current file relative path to clipboard
 " https://stackoverflow.com/a/17096082/1760643
 "nmap <A-c> :let @+ = expand("%:p")<CR>
