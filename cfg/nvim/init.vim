@@ -9,6 +9,8 @@ au VimEnter * setlocal cursorlineopt=line,number
 au BufEnter * setlocal cursorlineopt=line,number
 au BufLeave * setlocal cursorlineopt=number
 
+au VimEnter * if &diff | set foldlevel=1 | endif 
+
 autocmd TextYankPost * silent! let &statusline = 'Yanked text: ' . getreg('+') 
 autocmd CursorMoved * silent! set statusline=%!v:lua.require('nvchad.stl.default')()
 
