@@ -22,6 +22,9 @@ map('n', '<leader>D', 'jdd', { desc = 'delete line below'})
 map('n', '<A-m>', '}}{j', { desc = 'next text block'})
 map('n', '<A-n>', '{{j', { desc = 'previous text block'})
 
+-- fix: unbind terminal split
+map('n', '<A-h>', ':wincmd h<CR>', { silent = true })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 map('n', 'sd', 'viwohdw')

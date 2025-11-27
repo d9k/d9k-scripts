@@ -1,5 +1,14 @@
 lua require('config')
 
+set wrap
+au VimEnter * if &diff | execute 'windo set wrap' | endif
+
+set cursorlineopt=line,number
+au VimEnter * execute 'windo set cursorlineopt=number'
+au VimEnter * setlocal cursorlineopt=line,number
+au BufEnter * setlocal cursorlineopt=line,number
+au BufLeave * setlocal cursorlineopt=number
+
 " Copy current file relative path to clipboard
 " https://stackoverflow.com/a/17096082/1760643
 "nmap <A-c> :let @+ = expand("%:p")<CR>
@@ -9,6 +18,11 @@ nmap <A-c> :let @+ = expand("%")<CR>
 noremap c "_c
 noremap ci "_ci
 noremap x "_x
+
+"unmap <m-l>
+"unmap <m-h>
+nmap <silent> <m-l> :wincmd l<CR>
+nmap <silent> <m-h> :wincmd h<CR>
 
 " Yank line
 nnoremap yl "+^y$
