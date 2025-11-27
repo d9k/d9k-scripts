@@ -12,7 +12,12 @@ au BufLeave * setlocal cursorlineopt=number
 au VimEnter * if &diff | set foldlevel=1 | endif 
 
 autocmd TextYankPost * silent! let &statusline = 'Yanked text: ' . getreg('+') 
-autocmd CursorMoved * silent! set statusline=%!v:lua.require('nvchad.stl.default')()
+"autocmd CursorMoved * silent! set statusline=%!v:lua.require('nvchad.stl.default')()
+fun! s:reset_statusline(timer_id)
+    "let &background = (strftime('%H') < 12 ? 'light' : 'dark')
+    set statusline=%!v:lua.require('nvchad.stl.default')()
+endfun
+call timer_start(1000 * 7, function('s:reset_statusline'), {'repeat': -1})
 
 " Copy current file relative path to clipboard
 " https://stackoverflow.com/a/17096082/1760643
