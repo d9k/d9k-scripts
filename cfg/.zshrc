@@ -206,7 +206,7 @@ function prompt_part_jobs {
   JOBS_COUNT=$(jobs | wc -l)
 
   # -1 for newline character
-  let "JOBS_COUNT=JOBS_COUNT-1"
+  # let "JOBS_COUNT=JOBS_COUNT-1"
 
   if [[ "$JOBS_COUNT" -gt 0 ]]; then
     echo $'%F{yellow}'" jobs: $JOBS_COUNT "
