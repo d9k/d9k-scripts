@@ -44,6 +44,10 @@ fi
 for FILE in $(ls -rt *.png); do
     TIMESTAMP=$(stat -c %.Y "$FILE")
     NEW_FILE=$(echo "$TIMESTAMP > $LAST_TIMESTAMP" | bc -l)
+    if [[ ! -f "$FILE" ]]; then
+        echo "Error reading file \"$FILE\""
+        exit 1
+    fi
     if [[ $NEW_FILE == "1" ]]; then
         echo "Processing \"$FILE\""
         bash "$SCRIPT_DIR/compress-screenshot.sh" "$FILE"

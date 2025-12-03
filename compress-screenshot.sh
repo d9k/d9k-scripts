@@ -6,7 +6,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # human-readable conditions by qzb (https://github.com/qzb/is.sh)
 source "$SCRIPT_DIR/is"
 
-MAX_ORIGINAL_ALLOWED_SIZE_KB=500
+MAX_ORIGINAL_ALLOWED_SIZE_KB=459
 QUALITY=94
 
 function echoerr {
