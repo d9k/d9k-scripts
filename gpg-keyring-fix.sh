@@ -3,6 +3,9 @@
 # See also: 
 # pass-gpg-ui-cli.sh
 # pass-gpg-ui-x.sh
+#
+# 2025.12 note:
+# `export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh` for docker
 
 OUT="$HOME/.keyring-fix"
 
@@ -23,7 +26,8 @@ if [[ -n "$SSH_AUTH_SOCK" ]]; then
   # ssh-agent -s -a "$SSH_AUTH_SOCK" > "$OUT"
   SSH_AUTH_SOCK_DIR=$(dirname $SSH_AUTH_SOCK)
   mkdir -p "$SSH_AUTH_SOCK_DIR"
-  chmod go-rwx "$SSH_AUTH_SOCK_DIR"
+  sudo chown $USER:$USER "$SSH_AUTH_SOCK_DIR"
+  sudo chmod go-rwx "$SSH_AUTH_SOCK_DIR"
   ( set -x; ssh-agent -s -a $SSH_AUTH_SOCK > "$OUT" )
 else
   ( set -x; ssh-agent -s > "$OUT" )
