@@ -6,8 +6,8 @@ tmux split-window -v -p 25 'zsh'
 # tmux new-window 'mutt'
 tmux select-pane -t 0
 tmx-window-new -n "sys"
-tmx-window-new
-tmx-window-new
+# tmx-window-new
+# tmx-window-new
 tmux select-window -t 1
 tmux select-pane -t 0
 tmux attach-session -d -t 'general'
