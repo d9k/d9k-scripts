@@ -29,6 +29,7 @@ echo "Found process IDs:"
 echo "${PROCESS_IDS}"
 
 for PROCESS_ID in $(pgrep ^${PROCESS_NAME}$); do 
+  # https://unix.stackexchange.com/a/83008/48167
   CHILD_PROCESSES_IDS=$(pstree -p $PROCESS_ID | grep -o '([0-9]\+)' | grep -o '[0-9]\+')
   echo
   # echo "$CHILD_PROCESSES_IDS"
