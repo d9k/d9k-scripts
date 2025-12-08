@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+ITERATIONS="$1"
+
+if [[ -z "$ITERATIONS" ]]; then
+  ITERATIONS=7
+fi
+
+CURRENT_ITERATION=1
+
+while [ $CURRENT_ITERATION -le $ITERATIONS ]; do
+  "$SCRIPT_DIR/random-date"
+  echo
+  CURRENT_ITERATION=$((CURRENT_ITERATION+1))
+done
