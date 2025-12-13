@@ -15,7 +15,7 @@ cd "$directory"
 if [ ! -f "${file_name}" ]; then
   if [ -d "${file_name}" ]; then
     SOURCE_IS_DIRECTORY=1
-    echo "Source is directory"
+    echo "Source is directory \"${file_name}\""
   else
     echo "file doesn't exist!"
     exit
@@ -52,6 +52,11 @@ fi
 
 cd /
 ls -l "${directory}/${file_name}"
-ls -l "${directory}/${file_name}.bk"
-ls -l "${directory}/${file_name}.bk".* 2>/dev/null
-ls -l "${directory}/${file_name}."*".bk" 2>/dev/null
+if [[ -d "${directory}/${backup_file_name}" ]]; then
+    echo "Target is directory \"${directory}/${backup_file_name}\""
+    ls -l "${directory}/${backup_file_name}" 
+else
+    ls -l "${directory}/${file_name}.bk"
+    ls -l "${directory}/${file_name}.bk".* 2>/dev/null
+    ls -l "${directory}/${file_name}."*".bk" 2>/dev/null
+fi
