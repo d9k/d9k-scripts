@@ -1,0 +1,4 @@
+#/bin/bash
+
+# Then use tmux-new-viewport-attach-window-num
+tmux attach-session -d -t 'general2'

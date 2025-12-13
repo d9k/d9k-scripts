@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WINDOW_NUM="$1"
+
+if [[ -z "$WINDOW_NUM" ]]; then
+  echo "Error: Please provide window number from original session"
+  exit 1
+fi
+
+# https://www.reddit.com/r/tmux/comments/gw46ea/prevent_mirroring_session_when_having_two/
+tmux link-window -s general:$WINDOW_NUM

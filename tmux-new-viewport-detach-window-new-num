@@ -1,0 +1,10 @@
+#!/bin/bash
+
+WINDOW_NEW_NUM="$1"
+
+if [[ -z "$WINDOW_NEW_NUM" ]]; then
+  echo "Error: Please provide window number from new session"
+  exit 1
+fi
+
+tmux unlink-window -t $WINDOW_NEW_NUM
