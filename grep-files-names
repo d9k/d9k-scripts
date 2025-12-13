@@ -8,5 +8,6 @@ if [[ -z "$MAX_DEPTH" ]]; then
   MAX_DEPTH=100
 fi 
 
-
-find -maxdepth $MAX_DEPTH | rg --color=always -i "$GREP_PATTERN"
+# https://unix.stackexchange.com/questions/331696/removing-leading-dots-from-find-command-output-when-used-with-exec-echo-opti
+find -maxdepth $MAX_DEPTH -printf '%P\n' \
+  | rg --color=always -i "$GREP_PATTERN"
