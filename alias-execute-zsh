@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+ALIASES_FILE=/home/d9k/.aliases
+
+if [ -f $ALIASES_FILE ]; then
+    # shopt -s expand_aliases
+    source $ALIASES_FILE
+fi
+
+COMMAND=$(alias "$1" | cut -d "'" -f2)
+
+if [[ -n "$COMMAND" ]]; then
+  shift # ... argument
+  eval "$COMMAND" "$@"
+fi
