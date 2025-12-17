@@ -9,11 +9,14 @@ cd $PASS_STORE_DIR
 RESULTS=$( \
   find -type f -printf '%P\n' -iname "*.gpg" \
     | grep -P -v "^\." \
+    | grep -P -v "^old\/" \
     | sed -E 's/\.gpg$//' \
     | grep -P -v "\.info$" \
     | grep -i "$1" \
     | sort
 )
+
+echo $RESULTS
 
 shift 1
 
