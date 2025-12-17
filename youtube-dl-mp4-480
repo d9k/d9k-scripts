@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# For play on Miyoo Mini Plus
+
 youtube-dl \
   --no-playlist \
   -f 'bestvideo[ext=mp4][container=mp4_dash][height<=480]+bestaudio[ext=m4a]/bestvideo+bestaudio' \
