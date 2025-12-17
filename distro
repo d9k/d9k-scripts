@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+# TODO add -v flag
+# cat /etc/os-release
 cat /etc/lsb-release
 cat /etc/upstream-release/lsb-release
 uname -r
