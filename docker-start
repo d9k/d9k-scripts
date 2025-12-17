@@ -1,0 +1,8 @@
+#!/bin/bash
+set -x
+sudo systemctl start containerd
+sudo systemctl start podman
+sudo systemctl start podman.socket
+sudo systemctl start docker
+sudo systemctl start docker.socket
+

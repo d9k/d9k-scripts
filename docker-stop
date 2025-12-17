@@ -1,0 +1,10 @@
+#!/bin/bash
+# sudo systemctl disable docker.service; sudo systemctl disable docker.socket; sudo systemctl disable podman; sudo systemctl disable podman.socket; sudo systemctl disable containerd
+
+set -x
+
+sudo systemctl stop containerd
+sudo systemctl stop podman
+sudo systemctl stop podman.socket
+sudo systemctl stop docker
+sudo systemctl stop docker.socket
