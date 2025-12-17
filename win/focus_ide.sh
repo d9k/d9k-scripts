@@ -7,9 +7,10 @@
 WINDOW_CLASSES=(
   "jetbrains-webstorm"
   "jetbrains-idea"
-  "DBeaver"
+  # "DBeaver"
   "NetBeans"
   "code.Code"
+  "defold.editor"
 )
 
 for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
