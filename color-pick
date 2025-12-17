@@ -1,0 +1,7 @@
+#!/bin/bash
+
+COLOR=$(set -x; gpick --pick --single --output)
+
+echo "$COLOR" | xclip -selection c
+
+echo "\"$COLOR\" was copied to clipboard"
