@@ -1,7 +1,12 @@
 #!/bin/bash
 
-COLOR=$(set -x; gpick --pick --single --output)
+COLOR=$(set -x; gpick --pick --single --output | tr '[:upper:]' '[:lower:]')
 
-echo "$COLOR" | tr '[:upper:]' '[:lower:]' | xclip -selection c
+if [[ -z "$COLOR" ]]; then
+  echo "Error: color not selected!"
+  exit
+fi
+
+echo "$COLOR" | xclip -selection c
 
 echo "\"$COLOR\" was copied to clipboard"
