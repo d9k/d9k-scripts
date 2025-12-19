@@ -5,39 +5,45 @@
 // `xclip -selection clipboard -o | sql2json.ts`
 
 interface RowData {
-    [key: string]: string;
+  [key: string]: string;
 }
 
-function parseSQLDump(sqlInsertInputLines: string[], prettyPrint: boolean = true): string {
-    // Regex to match INSERT statements
-    const regex = /INSERT INTO [`'"]?(\w+)[`'"]? \((.+)\) VALUES[\s]*\((.+)\)/;
-    const rows: RowData[] = [];
+function parseSQLDump(
+  sqlInsertInputString: string,
+  prettyPrint: boolean = true,
+): string {
+  // Regex to match INSERT statements
+  const regex = /INSERT INTO [`'"]?(\w+)[`'"]? \((.+)\) VALUES[\s]*\((.+)\)/g;
+  const rows: RowData[] = [];
+  // console.log(sqlInsertInputString);
 
-    for (const line of sqlInsertInputLines) {
-        const match = regex.exec(line);
+  const matches = sqlInsertInputString.matchAll(regex);
 
-        // Non-INSERTs will be ignored
-        if (match) {
-            const table = match[1];
-
-            // Split parameters and remove their leading and trailing `-tags and whitespaces
-            const keys = match[2].split(',').map(w => w.trim().replace(/^[ `'"]+|[ `'"]+$/g, ''));
-            const values = match[3].split(',').map(w => w.trim().replace(/^[ `'"]+|[ `'"]+$/g, ''));
-
-            // Convert data to dictionary and append to results
-            const row: RowData = {};
-            keys.forEach((key, index) => {
-                row[key] = values[index];
-            });
-            rows.push(row);
-
-            if (rows.length === 10) {
-                break;
-            }
-        }
+  for (const match of matches) {
+    if (!match.length) {
+      continue;
     }
 
-    return JSON.stringify(rows, null, prettyPrint ? '  ' : undefined);
+    // console.log(match);
+    const table = match[1];
+
+    // Split parameters and remove their leading and trailing `-tags and whitespaces
+    const keys = match[2].split(",").map((w) =>
+      w.trim().replace(/^[ `'"]+|[ `'"]+$/g, "")
+    );
+    const values = match[3].split(",").map((w) =>
+      w.trim().replace(/^[ `'"]+|[ `'"]+$/g, "")
+    );
+
+    // Convert data to dictionary and append to results
+    const row: RowData = {};
+    keys.forEach((key, index) => {
+      row[key] = values[index];
+    });
+    rows.push(row);
+  }
+
+  return JSON.stringify(rows, null, prettyPrint ? "  " : undefined);
 }
 
 const pipeInputLines = [];
@@ -48,9 +54,7 @@ for await (const chunk of Deno.stdin.readable) {
   pipeInputLines.push(text);
 }
 
-// console.log(dumpfile);
+const pipeInputString = pipeInputLines.join("\n");
 
-const jsonOutput: string = parseSQLDump(pipeInputLines);
+const jsonOutput: string = parseSQLDump(pipeInputString);
 console.log(jsonOutput);
-
-
