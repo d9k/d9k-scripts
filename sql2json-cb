@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Process clipboard with sql2json
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+R="$(xclip -selection clipboard -o | $SCRIPT_DIR/sql2json.ts)"
+echo "$R"
+echo "$R" | xclip -selection c
+
