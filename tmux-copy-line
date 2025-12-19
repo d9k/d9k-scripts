@@ -32,9 +32,9 @@ if [[ -z "$LINE" ]]; then
   exit
 fi
 
-printf "$LINE" | xclip -selection c
+printf "%s" "$LINE" | xclip -selection c
 
 # echo "$EXIT_CODE"
 
 # restart to copy another line
-$0 "Copied « $LINE ».   "
+$0 "Copied « $LINE ».    "
