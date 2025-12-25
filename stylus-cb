@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Convert stylus styles in cliboard to CSS
+# https://docs.arbitrum.io/stylus/using-cli
+
+# npm install stylus -g
+( set -x; which stylus )
+
+RESULT="$(xclip -selection clipboard -o | stylus )"
+echo
+echo "# Result:"
+echo
+echo \`\`\`
+echo "$RESULT"
+echo \`\`\`
+echo "$RESULT" | xclip -selection c
+echo 
+echo "- Copied to clipboard"
