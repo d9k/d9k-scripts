@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DIFF_NAME_TIME_PART=`date +%Y-%m-%d"-"%H_%M_%S`
+
+TMP_DIR=$(dirname $(mktemp -u))
+
+DIFF_A_NAME="${DIFF_NAME_TIME_PART}_A"
+DIFF_A_NAME="${DIFF_NAME_TIME_PART}_B"
+
+DIFF_A="${TMP_DIR}/${DIFF_A_NAME}"
+DIFF_B="${TMP_DIR}/${DIFF_B_NAME}"
+
+touch "$DIFF_A"
+touch "$DIFF_B"
+
+( set -x; nvim -d "$DIFF_A" "$DIFF_B" )
