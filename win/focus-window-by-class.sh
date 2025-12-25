@@ -54,10 +54,10 @@ WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
 if [[ -z "$WMCTRL_NUMBER" ]]; then
   if [[ -n "$COMMAND" ]]; then
     eval $COMMAND
+    exit 1
   else
     exit 2
   fi
-  exit
 fi
 
 WMCTRL_NUMBER=$(printf "%d\n" ${WMCTRL_NUMBER})
