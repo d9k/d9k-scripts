@@ -1,0 +1,8 @@
+#!/bin/bash
+
+( 
+  set -x 
+  nvidia-smi -q 
+  nvidia-smi 
+  nvidia-smi --query-gpu=memory.free --format=csv
+)
