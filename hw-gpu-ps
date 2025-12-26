@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Better use nvtop
+
 ( 
   set -x 
   nvidia-smi -q 
