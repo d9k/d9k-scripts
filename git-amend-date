@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit {
+  echoerr "Usage: $SCRIPT_NAME DATE_TIME"
+  echoerr "Where"
+  echoerr "  DATE_TIME examples: 2020-12-30 22:57, 2020-12-30T22:57:00"
+  exit 1
+}
+
+DATE_TIME="$1"
+
+if [[ -z "$DATE_TIME" ]]; then
+  help_exit
+fi
+
+GIT_COMMITTER_DATE="$DATE_TIME" git commit --amend --date="$DATE_TIME"
