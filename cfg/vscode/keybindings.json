@@ -11,7 +11,7 @@
         "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
     },
     {
-    "key": "alt+up",
+    "key": "alt+left",
         "command": "workbench.action.navigateBack"
     },
     {
@@ -19,7 +19,7 @@
         "command": "-workbench.action.navigateBack"
     },
     {
-    "key": "alt+down",
+    "key": "alt+right",
         "command": "workbench.action.navigateForward"
     },
     {
@@ -233,10 +233,6 @@
     "key": "alt+left",
     "command": "-gitlens.key.alt+left",
     "when": "gitlens:key:alt+left"
-  },
-  {
-    "key": "alt+left",
-    "command": "workbench.action.focusLeftGroup"
   },
   {
     "key": "alt+right",
@@ -1272,14 +1268,6 @@
     "when": "commentEditorFocused"
   },
   {
-    "key": "alt+right",
-    "command": "workbench.action.focusNextGroup"
-  },
-  {
-    "key": "alt+left",
-    "command": "workbench.action.focusPreviousGroup"
-  },
-  {
     "key": "ctrl+g",
     "command": "-extension.vim_ctrl+g",
     "when": "editorTextFocus && vim.active && vim.use<C-g> && !inDebugRepl"
@@ -1683,6 +1671,16 @@
   }
   },
   {
+    // Go to next capital letter
+    "key": "alt+i",
+    "command": "vim.remap",
+    // "when": "inputfocus && vim.mode",
+    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+    "args": {
+      "after": ["/", "[", "A", "-", "Z", "А", "-", "Я", "]", "<CR>"]
+    }
+  },
+  {
     // previous text block
     "key": "alt+n",
     "command": "vim.remap",
@@ -1690,5 +1688,32 @@
     "args": {
       "after": ["{", "{", "j"]
     }
+  },
+  {
+    "key": "f12",
+    "command": "-editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus"
+  },
+  {
+    "key": "f12",
+    "command": "-editor.gotoNextSymbolFromResult",
+    "when": "hasSymbols"
+  },
+  {
+    "key": "f12",
+    "command": "-goToNextReference",
+    "when": "inReferenceSearchEditor || referenceSearchVisible"
+  },
+  {
+    "key": "f12",
+    "command": "workbench.action.focusSideBar"
+  },
+  {
+    "key": "ctrl+0",
+    "command": "-workbench.action.focusSideBar"
+  },
+  {
+    "key": "ctrl+0",
+    "command": "workbench.action.focusSideBar"
   },
 ]
