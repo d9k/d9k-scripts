@@ -10,6 +10,10 @@ if [[ -z "$BRANCH" ]]; then
   BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 fi
 
+if [[ -z "$COMPARATOR" ]]; then
+  COMPARATOR="meld"
+fi
+
 TEMP_DIR="$(mktemp -d -t git-compare-XXXXXXXXXX)"
 
 trap 'rm -rf -- "$TEMP_DIR"' EXIT
@@ -31,9 +35,9 @@ fi
 
 if [[ -n "$COMPARING_WITH_PARENT" ]]; then
   echo "Compare with parent mode: target branch is on LEFT"
-  meld ${TEMP_DIR} . &>/dev/null
+  ( set -x; ${COMPARATOR} ${TEMP_DIR} . &>/dev/null )
 else
-  meld . ${TEMP_DIR} &>/dev/null
+  ( set -x ${COMPARATOR} . ${TEMP_DIR} &>/dev/null )
 fi
 
 
