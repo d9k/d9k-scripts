@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# export PAGE="https://metrics.torproject.org/rs.html"
+export TEST_PAGE="https://bridges.torproject.org/bridges?transport=obfs4"
+WINDOW_NAME="Chrome Proxy Wg"
+
+# --proxy-server="http://127.0.0.1:9119" \
+
+# PROXY_WG_PORT=25344
+# PROXY_WG_PORT=2080
+PROXY_WG_PORT=10808
+
+chrome \
+  --private \
+  --window-name="$WINDOW_NAME" \
+  --proxy-server="socks5://127.0.0.1:$PROXY_WG_PORT" \
+  --user-data-dir="$HOME/temp/chrome-data-dir-proxy-wg" \
+  --profile-directory="Default" \
+  "$TEST_PAGE"
+
+
+# NOTE
+# may require you to run
+# `chrome --profile-directory="Default"`
+# after
