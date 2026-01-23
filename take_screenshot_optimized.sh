@@ -8,6 +8,7 @@ export LC_ALL=en_US.UTF-8
 
 # scrot --focused '%Y_%m_%d__%H_%M_%S__$wx$h.png' -e 'mv $f ~/screenshots/'
 scrot \
+    --border \
     --focused '%Y_%m_%d__%H_%M_%S__$wx$h.png' \
     -e 'mv $f ~/screenshots/'
 
