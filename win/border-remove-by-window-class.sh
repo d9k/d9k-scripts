@@ -1,6 +1,11 @@
 #!/bin/bash
 
-WINDOW_CLASS="Zathura"
+WINDOW_CLASS="$1"
+
+if [[ -z "$WINDOW_CLASS" ]]; then
+  echo "Error: window class not defined"
+  exit 1
+fi
 
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 
