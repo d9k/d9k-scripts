@@ -19,4 +19,4 @@ if [[ -z "$DATE_TIME" ]]; then
   help_exit
 fi
 
-GIT_COMMITTER_DATE="$DATE_TIME" git commit --amend --date="$DATE_TIME"
+GIT_COMMITTER_DATE="$DATE_TIME" git commit --amend --date="$DATE_TIME" --no-edit
