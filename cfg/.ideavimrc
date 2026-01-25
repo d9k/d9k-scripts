@@ -17,6 +17,9 @@
 set clipboard=unnamedplus
 set commentary
 
+" vertical padding on the top and booton screen sides for cursor on scrolling
+set scrolloff=5
+
 let mapleader=" "
 
 " Reload this config
