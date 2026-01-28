@@ -1,0 +1,6 @@
+#!/bin/bash
+set -x
+git add -f dist/*.jar 
+git add -f dist/*.jad 
+git add -f deployed/*.jar
+git status
