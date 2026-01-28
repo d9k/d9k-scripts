@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tmux list-windows -F "#{window_name}" | grep --fixed-strings --line-regexp "$@"
