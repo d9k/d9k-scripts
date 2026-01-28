@@ -2,6 +2,7 @@
 set ignore-space = some
 set diff-context = 1
 set wrap-lines = 1
+
 # set refresh-mode = after-command
 
 # see https://github.com/jonas/tig/wiki/Bindings
@@ -26,7 +27,7 @@ set wrap-lines = 1
 # > - Re-open Tig instantly in the last displayed view after executing the command. (only in new versions of tig!)
 #bind status A !?git commit --amend
 
-bind status a !sh -c '$HOME/scripts/git-partial-add-to-commit %(file)'
+bind status a !sh -c '$HOME/scripts/git-add-partial-to-commit %(file)'
 bind status A !amend
 # bind status D !@?sh -c "rm '%(file)'"
 bind status D !@?rm ./%(file)
@@ -34,6 +35,8 @@ bind status B !backup-conf %(file)
 bind status H >tig %(file)
 bind status <Esc>r !sh -c '$HOME/scripts/rename-file %(file)'
 bind status <Esc>d ?sh -c '$HOME/scripts/deprecate %(file)'
+
+bind stage C !git commit 
 
 # TODO fix
 bind status p !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
@@ -57,7 +60,7 @@ bind status <Esc>n ?git-ignore-locally '%(file)'
 bind status <Esc>i ?git-ignore-locally '%(file)'
 
 # bind status v !sh -c 'nvim %(file)'
-bind generic v !sh -c 'nvim %(file)'
+bind generic v !sh -c 'nvim %(file) -c "%(lineno)"'
 bind generic <Esc>v show-version
 bind status V !sh -c 'code %(file)'
 bind status P !push
@@ -98,8 +101,10 @@ bind generic M @silent.sh git-compare-rev-dir-parent %(commit)
 bind generic L @silent.sh git-compare-rev-dir %(commit)
 bind generic <Ctrl-F> !?git checkout %(commit) %(file)
 bind generic <Ctrl-E> move-half-page-up
-bind generic Y +sh -c 'echo "%(text)" | xclip -selection c; echo "Line was [Y]anked to clipboard"'
-bind generic U +sh -c "echo '%(text)' | xclip -selection c; echo 'Line was Yanked alternatively (U) to clipboard'"
+bind generic Y !sh -c 'echo "%(text)" | xclip -selection c; echo "[Y]anked to clipboard line:\\n  %(text)\\n"'
+# bind generic 0 +sh -c 'echo "Line was NOT [Y]anked to clipboard"'
+# bind generic 0 !sh -c 'echo "Line was NOT [Y]anked to clipboard"'
+bind generic U !sh -c "echo '%(text)' | xclip -selection c; echo 'Yanked alternatively (U) to clipboard line:\\n  %(text)\\n'"
 bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --color "$D"'
 
 # ; echo "# $D" ; ls -lh --color $D
@@ -219,7 +224,7 @@ color   tree.directory         221     default
 set main-view	= line-number:no,interval=5 id:no date:custom,format="%Y-%m-%d %H:%M" author:full commit-title:yes,graph,refs,overflow=no
 
 # Shift-X
-# set main-view-id = yes
+set main-view-id = yes
 
 #set main-view-date = date-local
 set main-view-date-display = custom
@@ -229,5 +234,6 @@ set split-view-height = 90%
 # set split-view-width = 60%
 
 # show hex commit hash:
+# :set id = yes
 # :set main-view-id = yes
 # :set main-view-id-width = 20
