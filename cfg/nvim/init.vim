@@ -46,3 +46,6 @@ noremap <leader>ss :w<CR>
 "Next/previous heading
 map <M-j> /^#<CR>
 map <M-k> ?^#<CR>
+
+map <leader>sm :set syntax=markdown<CR>
+map <leader>sj :set syntax=json<CR>
