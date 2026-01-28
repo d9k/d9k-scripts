@@ -38,5 +38,11 @@ nmap <silent> <m-h> :wincmd h<CR>
 nnoremap yl "+^y$
 
 " [g]o last [c]ursor position
-noremap <leader>gc g`"
+noremap <leader>gc g`"zz
 
+" [s]peed [s]ave
+noremap <leader>ss :w<CR>
+
+"Next/previous heading
+map <M-j> /^#<CR>
+map <M-k> ?^#<CR>

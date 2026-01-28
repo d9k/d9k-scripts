@@ -59,6 +59,10 @@ require("lazy").setup({
     config = function()
         require("nvim-surround").setup({
             -- Configuration here, or leave empty to use defaults
+        --     keymaps = {
+        -- -- `S{` - surround with {} with spaces
+        -- -- `S}` - surround with {} without spaces
+        --             visual = "S",
         })
     end
   },
@@ -78,6 +82,7 @@ end)
 
 -- vim.wo.relativenumber = true
 
+-- https://pawelgrzybek.com/highlight-yanked-text-in-neovim/
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     -- vim.highlight.on_yank({ timeout = 200 })
