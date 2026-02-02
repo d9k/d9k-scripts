@@ -100,8 +100,14 @@ noremap <leader>T hhh
 nmap <leader>gs /^<script<CR>
 nmap <leader>gt /^<template<CR>
 nmap <leader>gc /^<style<CR>
+nmap <leader>ge /export default<CR>
+nmap <leader>gE /export default<CR>
 nmap gs /^<script<CR>
 nmap gt /^<template<CR>
 nmap gc /^<style<CR>
+nmap gE /export default<CR>
 
 nmap gu <Action>(FindUsages)
+
+"nnoremap zz z<CR>
+noremap zz z<CR>
