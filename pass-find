@@ -11,12 +11,11 @@ RESULTS=$( \
     | grep -P -v "^\." \
     | grep -P -v "^old\/" \
     | sed -E 's/\.gpg$//' \
-    | grep -P -v "\.info$" \
     | grep -i "$1" \
     | sort
 )
 
-echo $RESULTS
+# echo $RESULTS
 
 shift 1
 
@@ -33,8 +32,12 @@ if [[ -z "$RESULTS" ]]; then
   exit 1
 fi
 
-RESULT=$(echo -n "$RESULTS" | head -n 1)
-REST_RESULTS_TEXT=$(echo -n "$RESULTS" | tail -n +2)
+RESULT=$(echo -n "$RESULTS" | grep -P -v "\.info$" | head -n 1)
+
+REST_RESULTS_TEXT=$(echo -n "$RESULTS")
+if [[ -n "$RESULT" ]]; then
+  REST_RESULTS_TEXT=$(echo -n "$RESULTS" | grep -v "$RESULT" )
+fi
 
 if [[ -n "$REST_RESULTS_TEXT" ]]; then
   echo "## Also found"
@@ -54,13 +57,17 @@ if [[ -f "$RESULT_INFO.gpg" ]]; then
   echo "\`\`\`"
 fi
 
-echo
-echo "## \`$RESULT\`"
-echo
-echo "\`\`\`"
-pass "$RESULT"
-echo "\`\`\`"
+if [[ -n "$RESULT" ]]; then
+  echo
+  echo "## \`$RESULT\`"
+  echo
+  echo "\`\`\`"
 
-echo
-pass -c "$RESULT"
+  pass "$RESULT"
+  echo "\`\`\`"
+
+  echo
+  pass -c "$RESULT"
+fi
+
 
