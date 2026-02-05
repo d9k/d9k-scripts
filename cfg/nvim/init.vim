@@ -49,3 +49,18 @@ map <M-k> ?^#<CR>
 
 map <leader>sm :set syntax=markdown<CR>
 map <leader>sj :set syntax=json<CR>
+
+" (G[x] becomes accord beginning to [G]o somewhere) which is singular in file
+noremap GG G
+
+" GD - [Go] to export [D]efault
+map GD /export default<CR>
+
+" Gc - [G]o Vue [c]ss style
+map Gt /^<template<CR>
+
+" Gc - [G]o Vue [c]ss style
+map Gc /^<style<CR>
+
+" Gc - [G]o Vue [c]ss style
+map Gc /^<style<CR>
