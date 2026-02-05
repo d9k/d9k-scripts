@@ -1,5 +1,9 @@
 lua require('config')
 
+" Vim Regex cheatsheet:
+" \< - word start
+" \> - word end
+
 set wrap
 au VimEnter * if &diff | execute 'windo set wrap' | endif
 
@@ -43,6 +47,9 @@ noremap <leader>gc g`"zz
 " [s]peed [s]ave
 noremap <leader>ss :w<CR>
 
+" [v]im config [r]eload
+noremap <leader>vr :so ~/.config/nvim/init.vim<CR>
+
 "Next/previous heading
 map <M-j> /^#<CR>
 map <M-k> ?^#<CR>
@@ -64,3 +71,11 @@ map Gc /^<style<CR>
 
 " Gc - [G]o Vue [c]ss style
 map Gc /^<style<CR>
+
+" Next/previous sql create [t]able
+map ]t /\<CREATE TABLE<CR><Esc>ww
+map [t ?\<CREATE TABLE<CR>n<Esc>ww
+
+" Next/previous json [n]ame key
+map ]n /["']name["']<CR><Esc>W
+map [n ?["']name["']<CR>n<Esc>W
