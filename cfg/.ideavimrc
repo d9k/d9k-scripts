@@ -96,16 +96,28 @@ noremap [` <Esc>?`<CR>nhvi`
 " temporary binding for testing 
 noremap <leader>T hhh
 
+" (G[x] becomes accord beginning to [G]o somewhere) which is singular in file
+noremap GG G
+
+" GD - [Go] to export [D]efault
+map GD /export default<CR>
+
 " Search in Vue single find component for sections
-nmap <leader>gs /^<script<CR>
-nmap <leader>gt /^<template<CR>
-nmap <leader>gc /^<style<CR>
-nmap <leader>ge /export default<CR>
-nmap <leader>gE /export default<CR>
-nmap gs /^<script<CR>
-nmap gt /^<template<CR>
-nmap gc /^<style<CR>
-nmap gE /export default<CR>
+" Gs - [G]o Vue [s]cript
+map Gs /^<script<CR>
+
+" Gc - [G]o Vue [c]ss style
+map Gt /^<template<CR>
+
+" Gc - [G]o Vue [c]ss style
+map Gc /^<style<CR>
+
+"map <leader>Gs /^<script<CR>
+"map <leader>Gt /^<template<CR>
+"map <leader>Gc /^<style<CR>
+"map <leader>Ge /export default<CR>
+"map <leader>GE /export default<CR>
+
 
 nmap gu <Action>(FindUsages)
 
