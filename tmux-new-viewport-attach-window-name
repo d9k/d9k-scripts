@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SOURCE_SESSION_NAME=general
+WINDOW_NAME="$1"
+
+if [[ -z "$WINDOW_NAME" ]]; then
+  echo "Error: Please provide window number from original session"
+  exit 1
+fi
+
+# https://www.reddit.com/r/tmux/comments/gw46ea/prevent_mirroring_session_when_having_two/
+# tmux link-window -s $SOURCE_SESSION_NAME:$WINDOW_NUM
+
+AWK_SEARCH_PATTERN="/\"$WINDOW_NAME\"/"
+WINDOW_ID=$(tmux list-windows -t $SOURCE_SESSION_NAME -F '#I "#W"' | grep --fixed-strings "\"$WINDOW_NAME\"" | grep --only-matching -E "^[0-9]+")
+
+if [[ -z "$WINDOW_ID" ]]; then
+  echo "Error: can't find window with name \"$WINDOW_NAME\" in session \"$SOURCE_SESSION_NAME\""
+  exit 1
+fi
+
+( set -x; $SCRIPT_DIR/tmux-new-viewport-attach-window-num "$WINDOW_ID" )
+#awk '$2 ~ "$AWK_SEARCH_PATTERN" { print $1 }'
+

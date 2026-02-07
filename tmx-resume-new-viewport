@@ -1,4 +1,12 @@
 #/bin/bash
 
+SESSION_NAME="general2"
+
+HAS_NO_SESSION=$(tmux has-session -t "$SESSION_NAME" 2>&1)
+
+if [ -z "$HAS_NO_SESSION" ]; then
 # Then use tmux-new-viewport-attach-window-num
-tmux attach-session -d -t 'general2'
+  tmux attach-session -d -t "$SESSION_NAME"
+else
+  tmux new-session -d -s "$SESSION_NAME" 'zsh'
+fi
