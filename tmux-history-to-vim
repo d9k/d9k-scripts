@@ -1,0 +1,9 @@
+#!/bin/bash
+
+LINES_COUNT="$1"
+
+if [ -z "$LINES_COUNT" ]; then
+  LINES_COUNT=3000
+fi
+
+tmux capture-pane -p -S -$LINES_COUNT | nvim -c "$" -

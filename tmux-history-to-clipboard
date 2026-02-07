@@ -1,0 +1,2 @@
+#!/bin/bash
+tmux capture-pane -p | xclip -selection c
