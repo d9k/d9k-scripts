@@ -13,8 +13,4 @@ fi
 find \
   -maxdepth $MAX_DEPTH \
   -printf '%P\n' \
-  -not \( -path "./.git" -prune \) \
-  -not \( -path "*/.git/*" -prune \) \
-  -not \( -path "./node_modules" -prune \) \
-  -not \( -path "*/node_modules/*" -prune \) \
   | rg --color=always -i "$GREP_PATTERN"
