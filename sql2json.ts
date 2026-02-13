@@ -31,14 +31,19 @@ function parseSQLDump(
     const keys = match[2].split(",").map((w) =>
       w.trim().replace(/^[ `'"]+|[ `'"]+$/g, "")
     );
-    const values = match[3].split(",").map((w) =>
+    const values = match[3].match(/('[^']*')|("[^"]*")|([^,]+)/g)?.map((w) =>
       w.trim().replace(/^[ `'"]+|[ `'"]+$/g, "")
-    );
+    ) || [];
 
     // Convert data to dictionary and append to results
     const row: RowData = {};
     keys.forEach((key, index) => {
-      row[key] = values[index];
+      let value = values[index];
+      const asInt = parseInt(`${value}`, 10);
+      if (`${asInt}` === `${value}`) {
+        value = asInt;
+      }
+      row[key] = value;
     });
     rows.push(row);
   }
