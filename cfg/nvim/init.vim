@@ -79,3 +79,7 @@ map [t ?\<CREATE TABLE<CR>n<Esc>ww
 " Next/previous json [n]ame key
 map ]n /["']name["']<CR><Esc>W
 map [n ?["']name["']<CR>n<Esc>W
+
+" [r]un [s]ql2json
+vnoremap <leader>rs :'<,'>!$HOME/scripts/sql2json.ts<CR>
+
