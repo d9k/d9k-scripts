@@ -1,5 +1,5 @@
 #/bin/bash
 
-tmux new-window "$@" 'zsh'
+tmux new-window -a "$@" 'zsh'
 tmux split-window -v -p 25 'zsh'
 tmux select-pane -t 0
