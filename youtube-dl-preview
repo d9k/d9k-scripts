@@ -1,0 +1,9 @@
+#!/bin/bash
+
+youtube-dl \
+  --no-playlist \
+  -f 'bestvideo[ext=mp4][container=mp4_dash][height<=1440]+bestaudio[ext=m4a]/bestvideo+bestaudio' \
+  --write-thumbnail \
+  --convert-thumbnails jpg \
+  --skip-download \
+  "$@"
