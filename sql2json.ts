@@ -4,17 +4,18 @@
 // Example usage with clipboard content:
 // `xclip -selection clipboard -o | sql2json.ts`
 
-interface RowData {
+type RowData = {
   [key: string]: string;
 }
 
+type TablesRowsData = {[name: String]: RowData[]};
+
 function parseSQLDump(
   sqlInsertInputString: string,
-  prettyPrint: boolean = true,
-): string {
+): TablesRowsData {
   // Regex to match INSERT statements
   const regex = /INSERT INTO [`'"]?(\w+)[`'"]? \((.+)\) VALUES[\s]*\((.+)\)/g;
-  const rows: RowData[] = [];
+  const tablesData: TablesData = {};
   // console.log(sqlInsertInputString);
 
   const matches = sqlInsertInputString.matchAll(regex);
@@ -26,6 +27,12 @@ function parseSQLDump(
 
     // console.log(match);
     const table = match[1];
+
+    if (!tablesData[table]) {
+      tablesData[table] = [];
+    }
+
+    const tableRowsData: RowData[] = tablesData[table];
 
     // Split parameters and remove their leading and trailing `-tags and whitespaces
     const keys = match[2].split(",").map((w) =>
@@ -45,10 +52,9 @@ function parseSQLDump(
       }
       row[key] = value;
     });
-    rows.push(row);
+    tableRowsData.push(row);
   }
-
-  return JSON.stringify(rows, null, prettyPrint ? "  " : undefined);
+  return tablesData;
 }
 
 const pipeInputLines = [];
@@ -61,5 +67,7 @@ for await (const chunk of Deno.stdin.readable) {
 
 const pipeInputString = pipeInputLines.join("\n");
 
-const jsonOutput: string = parseSQLDump(pipeInputString);
+const tablesData: TablesRowsData = parseSQLDump(pipeInputString);
+const jsonOutput: string = JSON.stringify(tablesData, null, "  ");
+
 console.log(jsonOutput);
