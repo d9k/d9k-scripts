@@ -35,7 +35,7 @@ RIPGREP_URL_PATTERN='[a-z]+://[^)\]\s]+'
 DIRECTIVE_LINK_IGNORE_FILTERING="tabs-to-notes-allow-sublinks"
 
 if [[ -z "$DEBUG_OUTPUT_FIRST_LINES" ]]; then
-  DEBUG_OUTPUT_FIRST_LINES=7
+  DEBUG_OUTPUT_FIRST_LINES=12
 fi
 
 # if [ -n "$INPUT_FILE_PATH" ]; then
@@ -270,24 +270,23 @@ for(( i=0; i<$GROUPS_INFO_LEN; i++ )); do
   GROUP_LINES_FILTERED_LEN=$(echo -e "$GROUP_LINES_FILTERED" | wc -l)
   GROUP_LINES_DELTA=$(expr $GROUP_LINES_RAW_LEN - $GROUP_LINES_FILTERED_LEN)
 
-
-  if [ $GROUP_LINES_DELTA -ne 0 ]; then
-    echo
-    echo "## Rules for existing links to exlude from output (beginning link match)"
-    echo
-    echo -e "$EXISTING_LINK_SORTED_TEXT" | head -n "${DEBUG_OUTPUT_FIRST_LINES}"
-    echo "... (showing first ${DEBUG_OUTPUT_FIRST_LINES} of ${EXISTING_LINKS_LEN})"
-    echo
-    echo "## Lines deleted from output"
-    echo 
-    echo -e "${GROUP_LINES_DELETED}"
-  fi
-
   echo
   echo
   echo "## Lines to add for group \"${GROUP_NAME}\":"
   echo
   echo -e "$GROUP_LINES_FILTERED"
+
+  if [ $GROUP_LINES_DELTA -ne 0 ]; then
+    echo
+    echo "## Lines deleted from output"
+    echo 
+    echo -e "${GROUP_LINES_DELETED}"
+    echo
+    echo "## Rules for existing links to exlude from output (beginning link match)"
+    echo
+    echo -e "$EXISTING_LINK_SORTED_TEXT" | head -n "${DEBUG_OUTPUT_FIRST_LINES}"
+    echo "... (showing first ${DEBUG_OUTPUT_FIRST_LINES} of ${EXISTING_LINKS_LEN})"
+  fi
 
   LINES_NUMBER_ADDITIONAL_TEXT=""
 
