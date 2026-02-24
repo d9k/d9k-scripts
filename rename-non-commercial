@@ -1,0 +1,35 @@
+#!/bin/bash
+
+FILE_NAME_WITH_EXT="$1"
+
+FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+
+function ask_continue { action_name=$1
+  if [[ -z "${action_name}" ]]; then
+    action_name="continue"
+  fi
+
+  # -s	        do not echo input coming from a terminal
+  # -p          prompt	output the string PROMPT without a trailing newline before
+  #       attempting to read
+  # -r  	  	  do not allow backslashes to escape any characters
+  # -n nchars	  return after reading NCHARS characters rather than waiting
+  #    		for a newline,
+  read -n 1 -r -p "(Press \"y\" to ${action_name}): " input
+
+  # new line but with stderr, escaping capture output
+  echo >&2
+
+  if [ "$input" != "Y" ] && [ "$input" != "y" ] && [ "$input" != "д" ] && [ "$input" != "Д" ]; then
+    exit 1
+  fi
+}
+
+FILE_NEW_NAME="$FILE_NAME_NO_EXT [NC].$FILE_EXTENSION"
+
+ask_continue "rename \"$FILE_NAME_WITH_EXT\" to \"$FILE_NEW_NAME\"?"
+
+mv "$FILE_NAME_WITH_EXT" "$FILE_NEW_NAME"
+
+ls -lh "$FILE_NEW_NAME"
