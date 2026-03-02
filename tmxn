@@ -1,13 +1,24 @@
 #/bin/bash
 
+SCRIPTS_PRIVATE_DIR="$HOME/scripts-private"
+NEW_WINDOWS_DEFAULT_SCRIPT="$SCRIPTS_PRIVATE_DIR/tmx-windows-default.sh"
+
 tmux new-session -d -s 'general' 'zsh'
-tmux split-window -v -p 25 'zsh'
+
+if [ -f "$NEW_WINDOWS_DEFAULT_SCRIPT" ]; then
+  bash $NEW_WINDOWS_DEFAULT_SCRIPT
+  tmux select-window -t 1
+  tmux kill-window
+else
+  tmux split-window -v -p 25 'zsh'
 # tmux split-window -h
 # tmux new-window 'mutt'
-tmux select-pane -t 0
-tmx-window-new -n "sys"
+  tmux select-pane -t 0
+  tmx-window-new -n "sys"
 # tmx-window-new
 # tmx-window-new
+fi
+
 tmux select-window -t 1
 tmux select-pane -t 0
 tmux attach-session -d -t 'general'
