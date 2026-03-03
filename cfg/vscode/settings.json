@@ -173,12 +173,14 @@
   "terminal.integrated.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
   // "terminal.integrated.fontSize": 15,
   // # Zoom (mostly for debugger variables font)
-  "window.zoomLevel": 0.33,
+  // "window.zoomLevel": 0.33,
+  "window.zoomLevel": 0.66,
   // "terminal.integrated.fontSize": 14,
-  "editor.fontSize": 13.5,
+  // "editor.fontSize": 13.5,
+  "editor.fontSize": 13.0,
   "editor.fontWeight": "bold",
   "editor.letterSpacing": 0.8,
-  "editor.lineHeight": 2.0,
+  "editor.lineHeight": 2.1,
   // etc
     "git.suggestSmartCommit": false,
     "files.trimTrailingWhitespace": true,
@@ -259,6 +261,7 @@
   // # Outline Map
   //
   // https://marketplace.visualstudio.com/items?itemName=Gerrnperl.outline-map
+  "outline.collapseItems": "alwaysCollapse",
   "outline-map.follow": "cursor",
   "outline-map.expand": "cursor",
   "outline-map.customCSS": ".outline-node, .outline-node > .outline-children { transition: none !important; }",
@@ -309,7 +312,7 @@
 
   // Disable select word under mouse with ctrl+f find
   "editor.find.seedSearchStringFromSelection": "never",
-  "editor.peekWidgetDefaultFocus": "editor",
+  "editor.peekWidgetDefaultFocus": "tree",
   "editor.cursorSurroundingLines": 8,
 
   "diffEditor.hideUnchangedRegions.enabled": true,
@@ -332,6 +335,46 @@
   "git.blame.statusBarItem.enabled": false,
   // "git-graph.commitDetailsView.location": "Docked to Bottom",
   // "git-graph.dialog.deleteBranch.forceDelete": true,
+
+  // disable AI chat hints
+  "github.copilot.chat.welcomeMessage": "never",
+  "workbench.editor.empty.hint": "hidden",
+
+  // Respect respect keyboard remap with `xmodmap` https://github.com/microsoft/vscode/issues/32037
+  //
+  "keyboard.dispatch": "keyCode",
+
+  "terminal.integrated.shellIntegration.enabled": true,
+
+  "chat.mcp.gallery.enabled": true,
+  "gitlens.sortBranchesBy": "name:desc",
+  "gitlens.views.commits.files.layout": "tree",
+  "gitlens.views.formats.commits.label": "${❰ tips ❱➤  }${id} | ${message}",
+
+  // SourceCraft
+  "sourcecraft-code-assist.deniedCommands": [],
+  "sourcecraft-code-assist.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show",
+    "playwright-cli",
+    "cd",
+    "playwright-cli click",
+    "cat",
+    "ls",
+    "git status",
+    "git add"
+  ],
+
+  "files.associations": {
+    "*.render_script": "lua"
+  },
+  "[typescript]": {
+  },
+  "typescript.tsserver.log": "verbose",
 
   // # VSCodeVim
   "vim.leader": "<Space>",
