@@ -1,0 +1,3 @@
+#!/bin/bash
+set -x
+taskset --cpu-list 1 kemulator "$@"
