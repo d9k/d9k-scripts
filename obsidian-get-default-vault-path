@@ -1,0 +1,7 @@
+#!/bin/bash
+
+OBSIDIAN_CLI="obsidian-cli"
+
+# obs is CLI for Obsidian,
+# see https://yakitrak.github.io/obs/
+"$OBSIDIAN_CLI" print-default | grep -Po "path:\s*\K.*"
