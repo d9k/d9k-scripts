@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+set -euo pipefail
+# export PATH=/usr/bin:/usr/sbin
+
+# https://forum.manjaro.org/t/failed-to-run-meld-as-root/33446/17
+
+ADMIN_PROTOCOL_PATHS=()
+
+for ARG in "$@"; do
+	# echo "Merging $ARG"
+  ABS_PATH=$(readlink -f "$ARG")
+  # echo "$ABS_PATH"
+  ADMIN_PROTOCOL_PATH="admin://$ABS_PATH"
+  # echo "$ADMIN_PROTOCOL_PATH"
+  ADMIN_PROTOCOL_PATHS+=("$ADMIN_PROTOCOL_PATH")
+done
+
+set -x
+MELD_ARGS="${ADMIN_PROTOCOL_PATHS[*]}"
+
+/usr/bin/meld $MELD_ARGS
+
+# /usr/bin/meld "admin://$i" "admin://${i/.pacnew/}";
