@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DIFF_NAME_TIME_PART=`date +%Y-%m-%d"-"%H_%M_%S`
+
+TMP_DIR=$(dirname $(mktemp -u))
+
+TEMP_NAME_SUFFIX_RAW="$@"
+
+TEMP_NAME="temp-text-${DIFF_NAME_TIME_PART}"
+
+if [[ -n "$TEMP_NAME_SUFFIX_RAW" ]]; then
+  TEMP_NAME_SUFFIX=$(echo "$TEMP_NAME_SUFFIX_RAW" | sed "s/ /-/g")
+  TEMP_NAME="$TEMP_NAME-$TEMP_NAME_SUFFIX"
+fi
+
+touch "$TEMP_NAME"
+
+( set -x; nvim "$TEMP_NAME" )
