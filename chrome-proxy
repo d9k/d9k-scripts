@@ -3,7 +3,7 @@
 # export PAGE="https://metrics.torproject.org/rs.html"
 
 PAGE="https://youtube.com"
-WINDOW_NAME="Chrome Proxy"
+WINDOW_NAME="Chrome Other Proxy"
 
 
 # --proxy-server="http://127.0.0.1:9119" \

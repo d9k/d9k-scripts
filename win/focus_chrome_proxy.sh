@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-WINDOW_CLASS="Chrome Proxy"
+WINDOW_CLASS="Chrome Other Proxy"
 
 COMMAND="$HOME/scripts/chrome-proxy"
 
