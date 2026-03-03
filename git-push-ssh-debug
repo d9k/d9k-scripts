@@ -1,0 +1,4 @@
+#!/bin/bash
+
+set -x
+GIT_TRACE=1 GIT_SSH_COMMAND="ssh -vvv" git push

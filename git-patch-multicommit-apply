@@ -1,0 +1,15 @@
+#!/bin/bash
+
+PATCH_PATH="$1"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [[ -z "$PATCH_PATH" ]]; then
+  echoerr "No commit path provided"
+  exit
+fi
+
+set -x 
+git am --signoff < "$PATCH_PATH"

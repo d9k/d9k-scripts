@@ -1,0 +1,33 @@
+#!/bin/bash
+
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ "$#" -lt 2 ]; then
+    echo "Error: two revisions names required"
+    exit
+fi
+
+BRANCH_A="$1"
+BRANCH_B="$2"
+
+if [[ -z "$COMPARATOR" ]]; then
+  COMPARATOR="meld"
+fi
+
+function copy_revision_files_to_temp_dir { ARG_BRANCH="$1"
+  LOCAL_TEMP_DIR="$(mktemp -d -t git-compare-XXXXXXXXXX)"
+  git archive "$ARG_BRANCH" | tar --extract --directory "${LOCAL_TEMP_DIR}"
+  echo "$LOCAL_TEMP_DIR"
+}
+
+TEMP_DIR_A="$(copy_revision_files_to_temp_dir "$BRANCH_A")"
+TEMP_DIR_B="$(copy_revision_files_to_temp_dir "$BRANCH_B")"
+
+trap 'rm -rf -- "$TEMP_DIR_A"; rm -rf -- "$TEMP_DIR_B"' EXIT
+
+( 
+  set -x; 
+  ${COMPARATOR} ${TEMP_DIR_A} ${TEMP_DIR_B} &>/dev/null 
+)
+
+

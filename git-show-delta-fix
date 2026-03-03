@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# [Vue SFC syntax highlighting does not work if opening tag is not included in diff | issue #1546 | delta](https://github.com/dandavison/delta/issues/1546)
+
+git show -U99999 "$@" | delta -U10
