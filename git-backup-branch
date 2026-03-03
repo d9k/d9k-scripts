@@ -77,11 +77,14 @@ if [[ -n "$EXISTING_BRANCHES_FOR_COMMIT" ]]; then
   echo -e "\n# Existing backup branches for most recent commit:\n"
   echo -e "$EXISTING_BRANCHES_FOR_COMMIT\n"
 
-  if [[ "$(ask_continue 'delete existing backup branches for most recent commit')" == "1" ]]; then
-    echo "$EXISTING_BRANCHES_FOR_COMMIT" | while read BRANCH_TO_DELETE ; do
-      ( set -x; git branch -d "$BRANCH_TO_DELETE")
-    done
+  if [[ "$(ask_continue 'REPLACE existing backup branches with new one for most recent commit')" != "1" ]]; then
+    echo "Exitting. Skipping backup"
+    exit 1
   fi
+
+  echo "$EXISTING_BRANCHES_FOR_COMMIT" | while read BRANCH_TO_DELETE ; do
+    ( set -x; git branch -d "$BRANCH_TO_DELETE")
+  done
 fi
 
 EXISTING_BRANCHES=$(git branch | grep "$BACKUP_PREFIX" | trim | sort -V)
