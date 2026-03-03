@@ -420,13 +420,8 @@
     "command": "workbench.action.previousEditorInGroup"
   },
   {
-    "key": "capslock",
-    "command": "extension.vim_escape",
-    "when": "editorTextFocus && vim.active && !inDebugRepl"
-  },
-  {
     "key": "escape",
-    "command": "-extension.vim_escape",
+    "command": "extension.vim_escape",
     "when": "editorTextFocus && vim.active && !inDebugRepl"
   },
   {
@@ -750,11 +745,6 @@
     "when": "editorFocus && parameterHintsVisible"
   },
   {
-    "key": "capslock",
-    "command": "closeReferenceSearch",
-    "when": "inReferenceSearchEditor && !config.editor.stablePeek"
-  },
-  {
     "key": "shift+escape",
     "command": "-closeReferenceSearch",
     "when": "inReferenceSearchEditor && !config.editor.stablePeek"
@@ -796,11 +786,6 @@
   },
   {
     "key": "escape",
-    "command": "-closeFindWidget",
-    "when": "editorFocus && findWidgetVisible && !isComposing"
-  },
-  {
-    "key": "escape",
     "command": "-closeMarkersNavigation",
     "when": "editorFocus && markersNavigationVisible"
   },
@@ -811,8 +796,8 @@
   },
   {
     "key": "escape",
-    "command": "-closeReferenceSearch",
-    "when": "inReferenceSearchEditor && !config.editor.stablePeek"
+    "command": "closeReferenceSearch",
+    "when": "(inReferenceSearchEditor || referenceSearchVisible) && !config.editor.stablePeek"
   },
   {
     "key": "escape",
@@ -1287,14 +1272,9 @@
     }
   },
   {
-    "key": "alt+right",
+    "key": "alt+l",
     "command": "togglePeekWidgetFocus",
-    "when": "referenceSearchVisible"
-  },
-  {
-    "key": "alt+left",
-    "command": "togglePeekWidgetFocus",
-    "when": "referenceSearchVisible"
+    "when": "inReferenceSearchEditor || referenceSearchVisible"
   },
   {
     "key": "ctrl+shift+i",
@@ -1716,4 +1696,122 @@
     "key": "ctrl+0",
     "command": "workbench.action.focusSideBar"
   },
+  {
+    "key": "ctrl+i",
+    "command": "-extension.vim_ctrl+i",
+    "when": "editorTextFocus && vim.active && vim.use<C-i> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-emojisense.quickEmoji",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-extension.vim_navigateCtrlL",
+    "when": "editorTextFocus && vim.active && vim.use<C-l> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "workbench.action.chat.startVoiceChat",
+    "when": "0 && chatIsEnabled && hasSpeechProvider && inlineChatFocused && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-workbench.action.chat.startVoiceChat",
+    "when": "chatIsEnabled && hasSpeechProvider && inChatInput && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress || chatIsEnabled && hasSpeechProvider && inlineChatFocused && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "workbench.action.chat.stopListeningAndSubmit",
+    "when": "0 && (inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'view' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'view' || 0 && inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || 0 && inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'inline')"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-workbench.action.chat.stopListeningAndSubmit",
+    "when": "inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'view' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'view'"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-settings.action.toggleAiSearch",
+    "when": "aiSettingResultsAvailable && inSettingsEditor"
+  },
+  {
+    "key": "ctrl+l ctrl+n",
+    "command": "workbench.action.chat.newChat",
+    "when": "1 && chatIsEnabled && inChat && chatLocation == 'panel'"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-workbench.action.chat.newChat",
+    "when": "chatIsEnabled && inChat && chatLocation == 'panel'"
+  },
+  {
+    "key": "ctrl+l ctrl+d",
+    "command": "l13Diff.action.panel.open",
+    "when": "!textInputFocus"
+  },
+  {
+    "key": "ctrl+l ctrl+l",
+    "command": "-l13Diff.action.panel.open",
+    "when": "!textInputFocus"
+  },
+  {
+    "key": "ctrl+l ctrl+i",
+    "command": "inlineChat.start",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-expandLineSelection",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-notebook.centerActiveCell",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-sourcecraft-code-assist.openAgents"
+  },
+  {
+    "key": "ctrl+l ctrl+a",
+    "command": "sourcecraft-code-assist.selectionChatRequestWithKeybinding",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-sourcecraft-code-assist.selectionChatRequestWithKeybinding",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "alt+s",
+    "command": "-gitlens.showQuickRepoStatus",
+    "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
+  },
+  {
+    "key": "alt+s",
+    "command": "sourcecraft-code-assist.selectionRequest",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "-sourcecraft-code-assist.selectionRequest",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+l ctrl+l",
+    "command": "sourcecraft-code-assist.focusInput"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "sourcecraft-code-assist.acceptInput",
+    "when": "!editorFocus && !editorTextFocus && !hasDiffBlock"
+  }
 ]
