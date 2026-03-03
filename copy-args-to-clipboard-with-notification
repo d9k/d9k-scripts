@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Write the script path to the `Meld -> Preferences -> Editor -> External editor -> Editor command` setting.
+# Than you can use `Changes -> Open externally` in file comparison view 
+# and `Open Externally` context menu command in the file tree view.
+
+echo -e "$@" | xclip -selection c
+
+MESSAGE=$(echo -e "\"$@\" copied to cliboard")
+notify-send -u normal "$MESSAGE"
