@@ -13,4 +13,5 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 set -x
 # meld "$PREVIOUS_FILE_VERSION_PATH_REL" "$FILE_PATH_REL"
-nvim -d $($SCRIPT_DIR/with-previous-version "$@")
+# -R: readonly
+nvim -R -d $($SCRIPT_DIR/with-previous-version "$@")
