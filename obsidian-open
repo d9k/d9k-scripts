@@ -1,22 +1,24 @@
 #!/bin/bash
 
 # obs is CLI for Obsidian,
-# see https://yakitrak.github.io/obs/
+# see https://github.com/Yakitrak/obsidian-cli
 
 # GNU coreutils for realpath required
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+VAULT="TX"
+OBSIDIAN_CLI="obsidian-cli"
 
 FILE_REL_PATH="$1"
 
 if [[ -z "$FILE_REL_PATH" ]]; then
   # obsidian
-  obsidian obsidian://open/?vault=tx
+  obsidian obsidian://open/?vault="$VAULT"
   exit
 fi
 
 
-VAULT_ABS_PATH=$("$SCRIPT_DIR/obs-get-default-vault-path")
+VAULT_ABS_PATH=$("$SCRIPT_DIR/obsidian-get-default-vault-path")
 
 FILE_ABS_PATH=$(readlink -f "$FILE_REL_PATH")
 
@@ -24,9 +26,11 @@ FILE_REL_PATH_TO_VAULT=$(realpath --relative-to="$VAULT_ABS_PATH" "$FILE_ABS_PAT
 
 if [[ ! -f "$FILE_ABS_PATH" ]]; then
   if [[ ! -f "$FILE_ABS_PATH.md" ]]; then
-    ( set -x; obs create "$FILE_REL_PATH_TO_VAULT" )
+    # obs is CLI for Obsidian,
+    # see https://yakitrak.github.io/obs/
+    ( set -x; "$OBSIDIAN_CLI" create "$FILE_REL_PATH_TO_VAULT" )
     sleep 1.2
   fi
 fi
 
-( set -x; obs open "$FILE_REL_PATH_TO_VAULT" )
+( set -x; "$OBSIDIAN_CLI" open "$FILE_REL_PATH_TO_VAULT" )
