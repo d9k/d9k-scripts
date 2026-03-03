@@ -1,0 +1,33 @@
+#!/bin/bash
+
+ARCHIVES=$(ls *.gba)
+# echo -e "$ARCHIVES"
+
+# EXTENSIONS=(
+#   "code.Code"
+# )
+#
+# for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
+
+while IFS= read -r FILE_NAME_WITH_EXT; do
+  FILE_EXTENSION=$(echo "$FILE_NAME_WITH_EXT" | rev | cut -f 1 -d '.' | rev)
+  FILE_NAME_NO_EXT=$(echo "$FILE_NAME_WITH_EXT" | sed -e s/\.${FILE_EXTENSION}$//g)
+  # echo "$FILE_NAME_NO_EXT:"
+  DUPLICATES=$(ls "$FILE_NAME_NO_EXT.gba" "$FILE_NAME_NO_EXT.zip" "$FILE_NAME_NO_EXT.7z" 2>/dev/null)
+  DUPLICATES_COUNT=$(echo -e "$DUPLICATES" | wc -l)
+  # echo "$DUPLICATES_COUNT"
+
+  if [[ "$DUPLICATES_COUNT" -ge 2 ]]; then
+     echo "Duplicate detected!:"
+     echo -e "$DUPLICATES"
+     echo "Removing unpacked original"
+     rm "$FILE_NAME_WITH_EXT"
+     echo
+  fi
+
+  # if [[ -f "./$FILE_NAME_NO_EXT.zip" ]]; then
+  #   echo "$FILE_NAME_NO_EXT"
+  #   echo "-- Duplicate! zip archive exists"
+  #   echo
+  # fi 
+done <<< "$ARCHIVES"
