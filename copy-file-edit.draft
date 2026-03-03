@@ -1,0 +1,65 @@
+#!/bin/bash
+
+
+CURRENT_DIR=$(pwd)
+
+STORE_LAST_FILE_PATH=$HOME/.copy_file_last
+
+FILE_PATH="$1"
+NEW_FILE_PATH="$2"
+
+if [[ -z "${FILE_PATH}" ]]; then
+  echo "File path argument not set. Exitting"
+  exit
+fi
+
+if [[ ! -f "${FILE_PATH}" ]] && [[ ! -d "${FILE_PATH}" ]]; then
+  echo "File at ${FILE_PATH} doesn't exists. Exitting"
+  exit
+fi
+
+echo
+if [[ -d "${FILE_PATH}" ]]; then
+  echo "\"${FILE_PATH}\" is a directory"
+  exit
+fi
+
+FILE_PATH=$(readlink -f "$FILE_PATH")
+
+if [[ -n "$NEW_FILE_PATH" ]]; then
+  NEW_FILE_PATH=$(readlink -f "$NEW_FILE_PATH")
+else
+  echo "Copy file to path (press ctrl+c to exit):"
+  read -re -p '> ' -i "${FILE_PATH}" NEW_FILE_PATH
+fi
+set -x ;
+
+# prompt before overwrite
+cp --interactive "$FILE_PATH" "$NEW_FILE_PATH"
+
+{ set +x; } 2>/dev/null
+
+# source it to use $RENAME_LAST_TO variable:
+# at .bashrc
+#
+# alias -- rename-file='source $HOME/scripts/rename-file'
+
+echo "$NEW_FILE_PATH" > $STORE_LAST_FILE_PATH
+
+echo "New file copy path:"
+echo "$NEW_FILE_PATH"
+
+$EDITOR "$NEW_FILE_PATH"
+
+# add this to .bashrc and call rename_file to save last file name to variable
+#
+# function rename_file() {
+#   export RENAME_LAST_TO=
+#   OUTPUT=$($HOME/scripts/rename-file $@ | tee /dev/tty)
+#   BEFORE_LAST=$(echo $OUTPUT | tail -n 2 | head -n 1)
+#   LAST=$(echo $OUTPUT | tail -n 1)
+#   if [[ "$BEFORE_LAST" == "New path:" ]]; then
+#     export RENAME_LAST_TO="$LAST"
+#   fi
+# }
+
