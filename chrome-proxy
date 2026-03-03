@@ -13,8 +13,9 @@ chrome \
   --proxy-server="socks5://127.0.0.1:1080" \
   --window-name="$WINDOW_NAME" \
   --user-data-dir="$HOME/temp/chrome-data-dir-proxy" \
-  --profile-directory="Default" \
-  "$PAGE"
+  --profile-directory="Default" 
+  #\
+  # "$PAGE"
 
 
 # NOTE
