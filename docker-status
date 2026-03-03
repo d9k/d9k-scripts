@@ -1,0 +1,8 @@
+#!/bin/bash
+set -x
+# sudo systemctl status containerd
+# sudo systemctl status podman
+# sudo systemctl status podman.socket
+sudo systemctl status docker
+# sudo systemctl status docker.socket
+
