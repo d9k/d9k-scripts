@@ -17,4 +17,7 @@ find \
   -not \( -path "*/.git/*" -prune \) \
   -not \( -path "./node_modules" -prune \) \
   -not \( -path "*/node_modules/*" -prune \) \
-  | rg --color=always -i "$GREP_PATTERN"
+  | rg  -i "$GREP_PATTERN"
+
+# Commentend out to fix errors with xargs
+# --color=always
