@@ -1,0 +1,24 @@
+#!/bin/bash
+
+PID=$(ps -aux | grep playwright_chromiumdev_profile | grep -v "\btype=" | grep -v "\bgrep\b" | awk -F ' ' '{print $2}')
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [ -z "$PID" ]; then
+  exit
+fi
+
+echoerr "PID=$PID"
+
+LISTEN_CONNECTION_LINE=$(lsof -i -a -P -p "$PID" 2>/dev/null | grep -o -E "TCP localhost:[0-9]+ \(LISTEN\)")
+
+if [ -z "$LISTEN_CONNECTION_LINE" ]; then
+  echoerr "Connections not found for process $PID"
+  exit 1
+fi
+
+echoerr "$LISTEN_CONNECTION_LINE"
+PORT=$(echo -e "$LISTEN_CONNECTION_LINE" | grep -o -E "[0-9]+")
+echo $PORT
