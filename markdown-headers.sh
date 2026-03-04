@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# -n to show lines (passed to grep)
+# -n to show line numbers (passed to grep)
 
 function echoerr {
   printf "%s\n" "$*" >&2;
@@ -44,4 +44,7 @@ if [[ ! -f "$FILE" ]]; then
 fi
 
 # cat "$FILE" | grep -E "^#" | sed 's|^# |\n# |'
-cat "$FILE" | grep $(printf '%s\n' "$*") -E "^#" | sed 's|^# |\n# |'
+cat "$FILE" \
+  | grep $(printf '%s\n' "$*") -E "^#" \
+  | sed 's|^# |\n# |' \
+  | sed -E "s|^([[:digit:]]+):|\1 ..... |"
