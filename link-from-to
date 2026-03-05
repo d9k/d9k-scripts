@@ -1,8 +1,15 @@
 #!/bin/bash
 
-if [ "$#" -lt 2 ]; then
-  echo "Usage: link-from-to SOURCE DEST"
-  exit
+SOURCE="$1"
+TARGET="$2"
+
+if [ -z "$SOURCE" ]; then
+  echo "Usage: link-from-to SOURCE [DEST]"
+  exit 1
 fi
 
-ln -s $(readlink -f "$1") $2
+if [ -z "$TARGET" ]; then
+  TARGET="."
+fi
+
+ln -s $(readlink -f "$SOURCE") "$TARGET"
