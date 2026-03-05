@@ -32,6 +32,29 @@ set -- "${@:1:$#-1}"
 # echo "FILE=$FILE"
 # exit
 
+GREP_ARGS=()
+
+while [[ $# > 0 ]]; do
+    OPTION="$1"
+
+    case "$OPTION" in
+        -n|--line-number)
+            SHOW_LINE_NUMBERS=1
+            GREP_ARGS+=('--line-number')
+            shift # past argument
+        ;;
+        *)
+          if [[ "${OPTION:0:1}" == "-" ]]; then
+            echo -e "Error: unknown option \"$OPTION\" \n"
+            help_exit
+          else
+            break
+          fi
+        ;;
+    esac
+    shift # past argument or value
+done
+
 if [[ ! -f "$FILE" ]]; then
   FILE_PATH_IN_VAULT="$VAULT_PATH/$FILE"
   if [[ -f "$FILE_PATH_IN_VAULT" ]]; then
@@ -43,8 +66,17 @@ if [[ ! -f "$FILE" ]]; then
   fi
 fi
 
+# set -x
+
 # cat "$FILE" | grep -E "^#" | sed 's|^# |\n# |'
 cat "$FILE" \
-  | grep $(printf '%s\n' "$*") -E "^#" \
+  | grep $(printf '%s ' "$GREP_ARGS") -E "^#" \
   | sed 's|^# |\n# |' \
   | sed -E "s|^([[:digit:]]+):|\1 ..... |"
+
+LINES_COUNT=$(cat -n "$FILE" | cut -f1 | wc -l)
+
+if [ -n "$SHOW_LINE_NUMBERS" ]; then
+  # echo "Total lines: $LINES_COUNT"
+  echo "$LINES_COUNT ..... (last line of file)"
+fi
