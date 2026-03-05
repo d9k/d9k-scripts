@@ -1,0 +1,42 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+TEMP_DIR="/tmp/youtube"
+
+mkdir -p "$TEMP_DIR"
+cd "$TEMP_DIR"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+DL_METADATA_OUTPUT=$("$SCRIPT_DIR/youtube-dl-metadata" "$@")
+
+METADATA_FILE_NAME_LINE=$(echo -e "$DL_METADATA_OUTPUT" | grep --fixed-strings "Writing video metadata as JSON to")
+
+# echo "METADATA_FILE_NAME_LINE:"
+
+echo -e "$METADATA_FILE_NAME_LINE"
+METADATA_FILE_NAME=$(echo -e "$METADATA_FILE_NAME_LINE" | sed -e 's|^.*Writing video metadata as JSON to: ||')
+
+# echo "METADATA_FILE_NAME:"
+# echo "$METADATA_FILE_NAME"
+
+if [ -z "$METADATA_FILE_NAME" ]; then
+  echoerr "Error parsing metadata file name"
+  exit 100
+fi
+
+if [ ! -f "$METADATA_FILE_NAME" ]; then
+  echoerr "Error accessing metadata file \"$METADATA_FILE_NAME\""
+  exit 200
+fi
+
+CHANNEL=$(cat "$METADATA_FILE_NAME" | jq --raw-output ".channel")
+UPLOAD_DATE=$(cat "$METADATA_FILE_NAME" | jq --raw-output ".upload_date")
+TITLE=$(cat "$METADATA_FILE_NAME" | jq --raw-output ".title")
+UPLOAD_YEAR=$(echo $UPLOAD_DATE | cut -c 1-4)
+UPLOAD_MONTH=$(echo $UPLOAD_DATE | cut -c 5-6)
+
+echo "$TITLE / $CHANNEL / YT, $UPLOAD_YEAR.$UPLOAD_MONTH"
+
