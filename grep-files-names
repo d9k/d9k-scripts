@@ -10,7 +10,9 @@ fi
 
 # https://unix.stackexchange.com/questions/331696/removing-leading-dots-from-find-command-output-when-used-with-exec-echo-opti
 # https://stackoverflow.com/questions/4210042/how-do-i-exclude-a-directory-when-using-find
+# -L: follow symlinks
 find \
+  -L \
   -maxdepth $MAX_DEPTH \
   -printf '%P\n' \
   -not \( -path "./.git" -prune \) \
