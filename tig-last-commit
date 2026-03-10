@@ -5,5 +5,10 @@ if [[ -z "$COMMIT_NUM_FROM_END" ]]; then
   COMMIT_NUM_FROM_END=0
 fi
 
-set -x
-tig show HEAD~$COMMIT_NUM_FROM_END
+if [[ $COMMIT_NUM_FROM_END == +([0-9]) ]]; then
+  ( set -x; tig show HEAD~$COMMIT_NUM_FROM_END )
+else
+  # not a number
+  ( set -x; tig show $COMMIT_NUM_FROM_END )
+fi
+
