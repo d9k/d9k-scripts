@@ -1,0 +1,25 @@
+#!/bin/bash
+
+GIT_PROJECT_DIR=$(git rev-parse --show-toplevel)
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [ -z "$GIT_PROJECT_DIR" ]; then
+    echoerr "Can't find git directory"
+    exit 1
+fi
+
+GIT_DIR="$GIT_PROJECT_DIR/.git"
+
+EXCLUDE_LOCAL_PATH="$GIT_DIR/info/exclude"
+
+echo ".ai-private" >> "$EXCLUDE_LOCAL_PATH"
+
+echo "$EXCLUDE_LOCAL_PATH:"
+cat "$EXCLUDE_LOCAL_PATH"
+
+
+
+
