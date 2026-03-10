@@ -16,7 +16,7 @@ METADATA_FILE_NAME_LINE=$(echo -e "$DL_METADATA_OUTPUT" | grep --fixed-strings "
 
 # echo "METADATA_FILE_NAME_LINE:"
 
-echo -e "$METADATA_FILE_NAME_LINE"
+echoerr "$METADATA_FILE_NAME_LINE"
 METADATA_FILE_NAME=$(echo -e "$METADATA_FILE_NAME_LINE" | sed -e 's|^.*Writing video metadata as JSON to: ||')
 
 # echo "METADATA_FILE_NAME:"
@@ -41,6 +41,9 @@ TITLE=$(cat "$METADATA_FILE_NAME" | jq --raw-output ".title")
 UPLOAD_YEAR=$(echo $UPLOAD_DATE | cut -c 1-4)
 UPLOAD_MONTH=$(echo $UPLOAD_DATE | cut -c 5-6)
 
-echo "https://youtube.com/watch?v=$YOUTUBE_VIDEO_ID"
-echo "$TITLE / $CHANNEL / YT, $UPLOAD_YEAR.$UPLOAD_MONTH"
+YOUTUBE_VIDEO_SHORT_URL="https://youtube.com/watch?v=$YOUTUBE_VIDEO_ID"
+VIDEO_TITLE="$TITLE / $CHANNEL / YT, $UPLOAD_YEAR.$UPLOAD_MONTH"
 
+echo "$YOUTUBE_VIDEO_SHORT_URL"
+echo "$VIDEO_TITLE"
+echo "- :tv: [$VIDEO_TITLE]($YOUTUBE_VIDEO_SHORT_URL)"
