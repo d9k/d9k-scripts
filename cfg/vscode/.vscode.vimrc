@@ -11,13 +11,20 @@
 " ? unmap next tab
 unmap gt
 
+noremap GG G
 " Search in Vue single find component for sections
-nmap <leader>gs /^<script<CR>
-nmap <leader>gt /^<template<CR>
-nmap <leader>gc /^<style<CR>
-nmap gs /^<script<CR>
-nmap gt /^<template<CR>
-nmap gc /^<style<CR>
+"map <leader>Gs /^<script<CR>
+"map <leader>Gt /^<template<CR>
+"map <leader>Gc /^<style<CR>
+map GS /^<script<CR>
+map GT /^<template<CR>
+map GC /^<style<CR>
+map GE /\bextends\b<CR>w
+map GI gg/^import\b<CR>
 
 " For temporary testing
 map <leader>T iii
+
+unmap <A-n>
+
+
