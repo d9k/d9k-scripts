@@ -1,0 +1,4 @@
+keycode  9 = ISO_Next_Group Caps_Lock ISO_Next_Group Caps_Lock
+keycode   66 = Escape NoSymbol Escape
+
+clear Lock
