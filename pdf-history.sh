@@ -2,7 +2,9 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-ZATHURA_HISTORY_FILE_PATH="$HOME/.local/share/zathura/history"
+# ZATHURA_HISTORY_FILE_PATH="$HOME/.local/share/zathura/history"
+
+ZATHURA_DB_FILE_PATH="$HOME/.local/share/zathura/bookmarks.sqlite"
 
 function echoerr {
   printf "%s\n" "$*" >&2;
@@ -11,10 +13,14 @@ function echoerr {
 SELECTION=
 
 # https://unix.stackexchange.com/questions/467524/open-file-from-history-in-zathura
-if [[ ! -f "$ZATHURA_HISTORY_FILE_PATH" ]]; then
-  echoerr "Error: Zathura history file not found: $ZATHURA_HISTORY_FILE_PATH"
+if [[ ! -f "$ZATHURA_DB_FILE_PATH" ]]; then
+  echoerr "Error: Zathura db file not found: $ZATHURA_DB_FILE_PATH"
 else
-  SELECTION=$(sh -c "cat $ZATHURA_HISTORY_FILE_PATH | grep -Po '\[\K[^\]]*' | grep -v '\=\$' | tac | dmenu -l 40")
+
+  # SELECTION=$(sqlite3 "$ZATHURA_DB_FILE_PATH" "SELECT file FROM fileinfo;" | grep -Po '\[\K[^\]]*' | grep -v '\=\$' | tac | dmenu -l 40)
+  # -l: display lines height
+  # -i: case insensitive
+  SELECTION=$(sqlite3 "$ZATHURA_DB_FILE_PATH" "SELECT file FROM fileinfo ORDER BY time;" | grep -v '\=\$' | tac | dmenu -i -l 40)
 
   if [[ -z "$SELECTION" ]]; then
     echoerr "Nothing selected! Exitting"
