@@ -1,18 +1,53 @@
 #!/bin/bash
 
+MAX_DEPTH="100"
+FIND_ARGS=""
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit {
+  echo "grep-files-name [-l|--symlinks] [-d|--depth MAX_DEPTH]"
+  echo "    -l|--no-symlinks: don't follow symlinks"
+  echo "    -d|--depth: MAX_DEPTH is \$MAX_DEPTH by default"
+  exit 
+}
+
+while [[ $# > 0 ]]; do
+    OPTION="$1"
+
+    case "$OPTION" in
+        -d|--depth)
+            MAX_DEPTH="$2"
+            shift # past argument
+        ;;
+        -l|--symlinks)
+            FIND_ARGS="$FIND_ARGS -L"
+        ;;
+        -h|--help)
+            help_exit
+        ;;
+        *)
+          if [[ "${OPTION:0:1}" == "-" ]]; then
+            echo -e "Error: unknown option \"$OPTION\" \n"
+            help_exit
+          else
+            break
+          fi
+        ;;
+    esac
+    shift # past argument or value
+done
+
 GREP_PATTERN="$1"
-
-MAX_DEPTH="$2"
-
-if [[ -z "$MAX_DEPTH" ]]; then
-  MAX_DEPTH=100
-fi 
 
 # https://unix.stackexchange.com/questions/331696/removing-leading-dots-from-find-command-output-when-used-with-exec-echo-opti
 # https://stackoverflow.com/questions/4210042/how-do-i-exclude-a-directory-when-using-find
 # -L: follow symlinks
+set -x
 find \
-  -L \
+  $FIND_ARGS \
   -maxdepth $MAX_DEPTH \
   -printf '%P\n' \
   -not \( -path "./.git" -prune \) \
