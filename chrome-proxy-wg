@@ -10,6 +10,7 @@ WINDOW_NAME="Chrome Proxy Wg"
 # PROXY_WG_PORT=2080
 PROXY_WG_PORT=10808
 
+__NV_PRIME_RENDER_OFFLOAD=1 \
 chrome \
   --private \
   --window-name="$WINDOW_NAME" \

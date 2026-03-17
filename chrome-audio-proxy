@@ -20,6 +20,7 @@ mkdir -p "$DATA_DIR"
 #
 # --proxy-server="socks5://127.0.0.1:$PROXY_PORT" \
 
+__NV_PRIME_RENDER_OFFLOAD=1 \
 chrome \
   --private \
   --window-name="$WINDOW_NAME" \

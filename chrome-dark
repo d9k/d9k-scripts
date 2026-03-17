@@ -1,5 +1,6 @@
 #   --allow-outdated-plugins \
 
+__NV_PRIME_RENDER_OFFLOAD=1 \
 chrome  \
   --wm-window-animations-disabled \
   --force-dark-mode
