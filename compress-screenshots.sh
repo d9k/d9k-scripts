@@ -41,6 +41,13 @@ if [[ -z "$LAST_TIMESTAMP" ]]; then
   LAST_TIMESTAMP=0
 fi
 
+if ! command -v mozjpeg &> /dev/null ;then
+    ERROR_MESSAGE="mozjpeg command could not be found. Do \"npm install --global mozjpeg\" first"
+    echoerr "$ERROR_MESSAGE"
+    notify-send -u normal "$ERROR_MESSAGE"
+    exit 35
+fi
+
 for FILE in $(ls -rt *.png); do
     TIMESTAMP=$(stat -c %.Y "$FILE")
     NEW_FILE=$(echo "$TIMESTAMP > $LAST_TIMESTAMP" | bc -l)
