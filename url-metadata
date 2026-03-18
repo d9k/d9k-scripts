@@ -1,0 +1,4 @@
+#!/bin/bash
+# npm install -g web-to-markdown
+
+web-to-markdown --frontmatter "$@"
