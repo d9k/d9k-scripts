@@ -1,4 +1,7 @@
 #!/bin/bash
 # npm install -g web-to-markdown
 
-web-to-markdown --frontmatter "$@"
+set -x
+
+# sed '/^$/q' - get before empty line
+web-to-markdown --frontmatter "$@" | sed '/^$/q' 
