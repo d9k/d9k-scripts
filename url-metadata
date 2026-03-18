@@ -1,7 +1,11 @@
 #!/bin/bash
 # npm install -g web-to-markdown
 
-set -x
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# set -x
 
 # sed '/^$/q' - get before empty line
-web-to-markdown --frontmatter "$@" | sed '/^$/q' 
+web-to-markdown --frontmatter "$@" \
+  | sed '/^$/q' \
+  | "$SCRIPT_DIR/html-entities-decode.ts"
