@@ -46,7 +46,7 @@ if [ -z "$WINDOWID" ]; then
   echo
   echo "Available windows:"
   wmctrl -lx
-	exit 1
+	exit 2
 fi
 
 echo "WINDOWID: $WINDOWID"
