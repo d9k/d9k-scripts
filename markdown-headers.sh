@@ -6,12 +6,24 @@ function echoerr {
   printf "%s\n" "$*" >&2;
 }
 
+function help_exit { EXIT_CODE="$1"
+  echo "Usage: markdown-headers.sh [-n] FILE_PATH"
+  echo "  -n: show lines numbers"
+  exit "$EXIT_CODE"
+}
+
+# Arguments count check
+if [ "$#" -lt 1 ]; then
+  help_exit 1
+fi
+
 # echo "$@"
 # echo
 # FILE="$1"
 # argv=( "$@" )
 FILE="${!#}"
 # argv=("${@:0:$#-1}")
+
 
 
 VAULT_PATH="$HOME/tx"
