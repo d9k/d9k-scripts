@@ -45,7 +45,8 @@ config.colors = {
     'maroon',
 
     -- 2
-    'green',
+    -- 'green',
+    '00A040',
 
     -- 3
     -- 'olive',
@@ -53,7 +54,8 @@ config.colors = {
 
     -- 4
     -- 'navy',
-    '#0000B0',
+    -- '#0000B0',
+    '#0040B0',
 
     -- 5
     -- 'purple',
@@ -77,13 +79,15 @@ config.colors = {
 
     -- 2
     -- 'lime',
-    '#A0FF40',
+    -- '#A0FF40',
+    '#99F030',
 
     -- 3
     'yellow',
 
     -- 4
-    'blue',
+    -- 'blue',
+    "#3050FF",
 
     -- 5
     -- 'fuchsia',
