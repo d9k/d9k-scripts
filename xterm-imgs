@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Font families:
+# fc-list | col | sort 
+
+xterm \
+  -ti vt340 \
+  -sh 1.8 \
+  -fa "Terminess Nerd Font:style=Regular:pixelsize=16" \
