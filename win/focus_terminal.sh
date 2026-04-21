@@ -1,7 +1,9 @@
 #!/bin/bash
 
-WINDOW_CLASS=Xfce4-terminal
-COMMAND="xfce4-terminal &"
+# See: wmctrl -lx
+WINDOW_CLASS="org.wezfurlong.wezterm"
+# COMMAND="xfce4-terminal &"
+COMMAND="wezterm &"
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
