@@ -1,6 +1,8 @@
 #!/bin/bash
 
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 
 PASS_PATH="$1"
 VARIABLE_NAME="$2"
@@ -61,7 +63,7 @@ fi
 VARIABLE_LINE=$(echo -e "$BEFORE_EDIT" | grep -v "^#" | grep "^$VARIABLE_NAME=" | tail -n 1)
 
 # echoerr "VARIABLE_LINE: $VARIABLE_LINE"
-EXISTING_VARIABLE_VALUE=$(echo "$VARIABLE_LINE" | cut -d= -f2- | trim)
+EXISTING_VARIABLE_VALUE=$(echo "$VARIABLE_LINE" | cut -d= -f2- | "$SCRIPT_DIR/trim")
 
 MATCH_QUOTED=$(echo "$EXISTING_VARIABLE_VALUE" | trim | grep -E '^".*"$')
 
