@@ -1,0 +1,93 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+PASS_PATH="$1"
+VARIABLE_NAME="$2"
+NEW_VARIABLE_VALUE="$3"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function require_variable { VAR_NAME="$1"
+  VAL="${!VAR_NAME}"
+
+  if [[ -z "$VAL" ]]; then
+    echoerr "Error: please set required variable in password manager file:"
+    echoerr
+    echoerr "$VAR_NAME="
+    exit 1
+  fi
+
+  #echo "$VAL"
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+
+  echoerr "Usage: SCRIPT_NAME VARIABLE_NAME [NEW_VARIABLE_VALUE]"
+  echoerr "Omit NEW_VARIABLE_VALUE for reading"
+  exit "$EXIT_CODE"
+}
+
+if [[ -z "$PASS_PATH" ]]; then
+  help_exit 100
+fi
+
+if [[ -z "$VARIABLE_NAME" ]]; then
+  help_exit 200
+fi
+
+BEFORE_EDIT=$(pass "$PASS_PATH" 2>/dev/null)
+
+PASS_EXISTS=
+if [ $? -eq 0 ]; then
+  PASS_EXISTS=1
+fi
+
+# echoerr "# Before edit"
+# echoerr
+# echoerr "$BEFORE_EDIT"
+# echoerr
+
+# SEARCH_STRING="$VARIABLE_NAME="
+
+# AFTER_EDIT=$(echo -e "$BEFORE_EDIT" | jq ".$VARIABLE_NAME=$VARIABLE_VALUE")
+# echo -e "$AFTER_EDIT" | pass insert -m -f "$PASS_PATH"
+
+VARIABLE_LINE=$(echo -e "$BEFORE_EDIT" | grep -v "^#" | grep "^$VARIABLE_NAME=" | tail -n 1)
+
+# echoerr "VARIABLE_LINE: $VARIABLE_LINE"
+EXISTING_VARIABLE_VALUE=$(echo "$VARIABLE_LINE" | cut -d= -f2- | trim)
+
+MATCH_QUOTED=$(echo "$EXISTING_VARIABLE_VALUE" | trim | grep -E '^".*"$')
+
+if [[ -n "$MATCH_QUOTED" ]]; then
+  EXISTING_VARIABLE_VALUE=$(echo -e "$EXISTING_VARIABLE_VALUE" | tail -c +2 | head -c -2)
+fi
+
+if [[ -n "$NEW_VARIABLE_VALUE" ]]; then
+  echoerr "Existing variable value: $EXISTING_VARIABLE_VALUE"
+  # echoerr "ERROR: SETTING VARIABLES NOT SUPPORTED YET"
+  
+  AFTER_EDIT="${BEFORE_EDIT}\n${VARIABLE_NAME}=\"${NEW_VARIABLE_VALUE}\""
+
+  echo -e "$AFTER_EDIT" | pass insert -m -f "$PASS_PATH"
+
+  exit 300
+else
+  if [[ -z "$PASS_EXISTS" ]]; then
+    echoerr "Can't read variable: file is empty"
+    exit 500
+  fi
+
+  if [[ -z "$EXISTING_VARIABLE_VALUE" ]]; then
+    echoerr "Can't find variable \"$VARIABLE_NAME\""
+    exit 700
+  fi
+  echo "$EXISTING_VARIABLE_VALUE"
+fi
+
