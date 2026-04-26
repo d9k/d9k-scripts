@@ -1,0 +1,64 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+PASS_PATH="$1"
+VARIABLE_NAME="$2"
+VARIABLE_VALUE="$3"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function require_variable { VAR_NAME="$1"
+  VAL="${!VAR_NAME}"
+
+  if [[ -z "$VAL" ]]; then
+    echoerr "Error: please set required variable in password manager file:"
+    echoerr
+    echoerr "$VAR_NAME="
+    exit 1
+  fi
+
+  #echo "$VAL"
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+
+  echoerr "Usage: SCRIPT_NAME VARIABLE_NAME [VARIABLE_VALUE]"
+  echoerr "Omit VARIABLE_VALUE for reading"
+  exit "$EXIT_CODE"
+}
+
+if [[ -z "$PASS_PATH" ]]; then
+  help_exit 100
+fi
+
+if [[ -z "$VARIABLE_NAME" ]]; then
+  help_exit 200
+fi
+
+BEFORE_EDIT=$(pass "$PASS_PATH" 2>/dev/null)
+
+PASS_EXISTS=
+if [ $? -eq 0 ]; then
+  PASS_EXISTS=1
+fi
+
+echoerr "Before edit: $BEFORE_EDIT"
+
+if [[ -z "$VARIABLE_VALUE" ]]; then
+  exit
+fi
+
+if [[ -z "$PASS_EXISTS" ]]; then
+  BEFORE_EDIT="{}"
+  jq -n ".$VARIABLE_NAME=$VARIABLE_VALUE" \
+    | pass insert -m -f "$PASS_PATH"
+fi
+
+AFTER_EDIT=$(echo -e "$BEFORE_EDIT" | jq ".$VARIABLE_NAME=$VARIABLE_VALUE")
+echo -e "$AFTER_EDIT" | pass insert -m -f "$PASS_PATH"
