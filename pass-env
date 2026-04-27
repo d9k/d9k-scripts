@@ -32,6 +32,9 @@ function help_exit { EXIT_CODE="$1";
 
   echoerr "Usage: SCRIPT_NAME VARIABLE_NAME [NEW_VARIABLE_VALUE]"
   echoerr "Omit NEW_VARIABLE_VALUE for reading"
+  echoerr 
+  echoerr "There may be multiple variable values in the file but only the last non-commented value will be used."
+  echoerr "When writing the variable value to the file it will be put as the new line at the end of the file. Previous varibles values will be kept in the file but will be ignored on reading the value."
   exit "$EXIT_CODE"
 }
 
