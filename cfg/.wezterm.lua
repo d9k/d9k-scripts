@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local act = wezterm.action
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -10,6 +11,13 @@ config.font_size = 12
 config.cell_width = 1.01
 config.line_height = 1.6
 -- config.font_antialias = "None"
+
+
+config.keys = {
+    { key = 'LeftArrow', mods = 'SHIFT|CTRL', action = act.DisableDefaultAssignment },
+    { key = 'RightArrow', mods = 'SHIFT|CTRL', action = act.DisableDefaultAssignment },
+}
+
 config.colors = {
   -- The default text color
   foreground = 'silver',
