@@ -1,0 +1,28 @@
+[
+  {
+    "attributes": {
+      "created": "2021-10-18T12:02:39+00:00",
+      "enabled": true,
+      "expires": null,
+      "notBefore": null
+    },
+    "contentType": null,
+    "id": "https://kjkljk./secrets/-/1",
+    "managed": null,
+    "name": "pw1",
+    "tags": {}
+  },
+  {
+    "attributes": {
+      "created": "2021-10-18T12:06:16+00:00",
+      "enabled": true,
+      "expires": null,
+      "notBefore": null
+    },
+    "contentType": "",
+    "id": "https://kjklj./secrets/-/2",
+    "managed": null,
+    "name": "pw2",
+    "tags": {}
+  }
+]
