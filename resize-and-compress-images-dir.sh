@@ -54,10 +54,14 @@ if [[ -f "$FILE_LOCK_COMPRESSION" ]]; then
   exit 400
 fi
 
+BEFORE_SIZE_MB=$(du -m --summarize . | cut -f1)
+echo "Before compression: ${BEFORE_SIZE_MB}M"
+echo
+
 touch "$FILE_LOCK_COMPRESSION"
 trap cleanup_and_exit EXIT INT TERM
 
-IMAGES_FILES=$(find . -type f | grep -i -E '\.(jpg|jpeg)$')
+IMAGES_FILES=$(find . -type f | grep -i -E '\.(jpg|jpeg)$' | sort)
 IMAGES_FILES_COUNT=$(echo "$IMAGES_FILES" | grep -c .)
 
 if [[ -z "$IMAGES_FILES" ]]; then
@@ -71,10 +75,19 @@ echo
 
 echo "Found $IMAGES_FILES_COUNT JPEG file(s) in \"$DIR_ABS_PATH\""
 ask_continue "compress these files?"
+echo
 
 echo "$IMAGES_FILES" | while read -r FILE; do
-  FILE_NAME=$(basename "$FILE")
-  echo "Processing \"$FILE_NAME\""
+  # FILE_NAME=$(basename "$FILE")
+  echo "Processing \"$FILE\""
   bash "$SCRIPT_DIR/resize-and-compress-image.sh" "$FILE"
   echo
 done
+
+AFTER_SIZE_MB=$(du -m --summarize . | cut -f1)
+echo "After compression: ${AFTER_SIZE_MB}M"
+
+PERCENT_DELTA_RAW=$(echo "($BEFORE_SIZE_MB - $AFTER_SIZE_MB) / $BEFORE_SIZE_MB * 100" | bc -l)
+PERCENT_DELTA=$(printf %.0f "$PERCENT_DELTA_RAW")
+echo
+echo "Dir compression result: (-${PERCENT_DELTA}%: ${AFTER_SIZE_MB}M <- ${BEFORE_SIZE_MB}M)"
