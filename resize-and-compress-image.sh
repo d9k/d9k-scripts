@@ -6,7 +6,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # human-readable conditions by qzb (https://github.com/qzb/is.sh)
 source "$SCRIPT_DIR/is"
 
-MAX_ORIGINAL_ALLOWED_SIZE_KB=459
+START_COMPRESSING_IF_SIZE_EXCEEDS_KB=600
+START_COMPRESSING_IF_WIDTH_EXCEEDS_PX=1920
+START_COMPRESSING_IF_HEIGHT_EXCEEDS_PX=1080
+START_COMPRESSING_IF_TOTAL_PIXELS_EXCEED=$((START_COMPRESSING_IF_WIDTH_EXCEEDS_PX * START_COMPRESSING_IF_HEIGHT_EXCEEDS_PX))
 QUALITY=94
 
 function echoerr {
@@ -61,6 +64,11 @@ if ! echo "$FILE_EXTENSION" | grep -qi -E 'jpg|jpeg'; then
   exit 200
 fi
 
+if ! command -v jq &> /dev/null; then
+  echoerr "jq command could not be found. Install jq first"
+  exit 450
+fi
+
 # Exit if compress history contains info about current image file
 if [[ -f "$HISTORY_FILE" ]]; then
   EXISTING_ENTRY=$(jq --arg name "$FILE_NAME_WITH_EXT" '.[] | select(.file_name == $name)' "$HISTORY_FILE" 2>/dev/null)
@@ -72,8 +80,18 @@ fi
 
 FILE_SIZE_KB=$(file_size_kb "$FILE_ABS_PATH")
 
-if [ "$FILE_SIZE_KB" -le "$MAX_ORIGINAL_ALLOWED_SIZE_KB"  ]; then
-  echo "Skipping compression: file size is just ${FILE_SIZE_KB}kb (<= ${MAX_ORIGINAL_ALLOWED_SIZE_KB}kb)"
+# Skip if file size and total pixels are small enough (no need to compress)
+if [ "$FILE_SIZE_KB" -lt "$START_COMPRESSING_IF_SIZE_EXCEEDS_KB" ]; then
+  echo "Skipping compression: file size is just ${FILE_SIZE_KB}kb (< ${START_COMPRESSING_IF_SIZE_EXCEEDS_KB}kb)"
+  exit
+fi
+
+# Get original dimensions and quality for skip check
+read -r WIDTH_BEFORE HEIGHT_BEFORE < <(get_image_dimensions "$FILE_ABS_PATH")
+TOTAL_PIXELS_BEFORE=$((WIDTH_BEFORE * HEIGHT_BEFORE))
+
+if [ "$TOTAL_PIXELS_BEFORE" -lt "$START_COMPRESSING_IF_TOTAL_PIXELS_EXCEED" ]; then
+  echo "Skipping compression: size is just ${WIDTH_BEFORE}x${HEIGHT_BEFORE} px (< ${START_COMPRESSING_IF_WIDTH_EXCEEDS_PX}x${START_COMPRESSING_IF_HEIGHT_EXCEEDS_PX} px)"
   exit
 fi
 
@@ -92,11 +110,6 @@ if ! command -v mediainfo &> /dev/null; then
   exit 400
 fi
 
-if ! command -v jq &> /dev/null; then
-  echoerr "jq command could not be found. Install jq first"
-  exit 450
-fi
-
 if ! command -v sponge &> /dev/null; then
   echoerr "sponge (moreutils) command could not be found. Install moreutils first"
   exit 500
@@ -107,14 +120,11 @@ if ! command -v jhead &> /dev/null; then
   exit 550
 fi
 
-# Get original dimensions and quality
-read -r WIDTH_BEFORE HEIGHT_BEFORE < <(get_image_dimensions "$FILE_ABS_PATH")
 QUALITY_BEFORE=$(get_image_quality "$FILE_ABS_PATH")
 
 RESIZE_PATH="${FILE_DIR_PATH}/${FILE_NAME_NO_EXT}.resize.png"
 
 # Resize image with imagemagick using lanczos3 filter (reduce by 2x)
-# convert "$FILE_ABS_PATH" -filter lanczos3 -resize 50%x50% "$RESIZE_PATH"
 convert "$FILE_ABS_PATH" -filter Lanczos -resize 50%x50% "$RESIZE_PATH"
 
 # Compress with mozjpeg back to original file
@@ -130,7 +140,8 @@ OUTPUT_FILE_SIZE_KB=$(file_size_kb "$FILE_ABS_PATH")
 
 PERCENT_DELTA_RAW=$(echo "($FILE_SIZE_KB-$OUTPUT_FILE_SIZE_KB)/$FILE_SIZE_KB*100" | bc -l)
 PERCENT_DELTA=$(printf %.0f "$PERCENT_DELTA_RAW")
-echo "compression jpg -> jpg: (-${PERCENT_DELTA}%: ${FILE_SIZE_KB}kb -> ${OUTPUT_FILE_SIZE_KB}kb)"
+TOTAL_PIXELS_AFTER=$((WIDTH_AFTER * HEIGHT_AFTER))
+echo "compression file result: (-${PERCENT_DELTA}%: ${OUTPUT_FILE_SIZE_KB}kb <- ${FILE_SIZE_KB}kb, ${WIDTH_AFTER}x${HEIGHT_AFTER} px <- ${WIDTH_BEFORE}x${HEIGHT_BEFORE} px)"
 
 # Get current timestamp in ISO 8601 format
 COMPRESSED_AT=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
