@@ -13,3 +13,12 @@ if [ -z "$TARGET" ]; then
 fi
 
 ln -s $(readlink -f "$SOURCE") "$TARGET"
+
+if [[ $? -eq 0 ]]; then
+  echo "Successfully linked '$(basename "$SOURCE")'"
+  echo "  From: $SOURCE"
+  echo "  To:   $TARGET"
+else
+  echo "Failed to create symlink" >&2
+  exit 100
+fi
