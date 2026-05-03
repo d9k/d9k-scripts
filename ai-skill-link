@@ -1,0 +1,62 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+SKILLS_SOURCE_DIR="$HOME/tx/d9k-ai/skills"
+SKILLS_TARGET_DIR="$(pwd)/.ai-private/skills"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+  echoerr "Usage: $SCRIPT_NAME"
+  exit "$EXIT_CODE"
+}
+
+function show_linked_skills {
+  echo
+  echo "Currently linked skills in $SKILLS_TARGET_DIR:"
+  if [[ -n "$(ls -A "$SKILLS_TARGET_DIR" 2>/dev/null)" ]]; then
+    ls -1 "$SKILLS_TARGET_DIR" | sed 's/^/  /'
+  else
+    echo "  (empty)"
+  fi
+}
+
+trap 'show_linked_skills; exit 130' INT TERM
+
+if [[ ! -d "$SKILLS_SOURCE_DIR" ]]; then
+  echoerr "Skills directory not found: $SKILLS_SOURCE_DIR"
+  echoerr "Creating directory..."
+  mkdir -p "$SKILLS_SOURCE_DIR"
+  echoerr "Directory created. Please add skills to it first."
+  exit 100
+fi
+
+if [[ ! -d "$SKILLS_TARGET_DIR" ]]; then
+  mkdir -p "$SKILLS_TARGET_DIR"
+fi
+
+SKILL_DIR_NAME_TO_LINK=$(
+  find "$SKILLS_SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort | while read -r name; do
+    if [[ ! -e "$SKILLS_TARGET_DIR/$name" ]]; then
+      echo "$name"
+    fi
+  done | tac | fzf --prompt="Select skill to link: ")
+
+if [[ -z "$SKILL_DIR_NAME_TO_LINK" ]]; then
+  echo "No skill selected"
+  show_linked_skills
+  exit 0
+fi
+
+SOURCE_PATH="$SKILLS_SOURCE_DIR/$SKILL_DIR_NAME_TO_LINK"
+TARGET_PATH="$SKILLS_TARGET_DIR/$SKILL_DIR_NAME_TO_LINK"
+
+"$SCRIPT_DIR/link-from-to" "$SOURCE_PATH" "$TARGET_PATH"
+
+show_linked_skills
