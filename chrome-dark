@@ -1,6 +1,6 @@
 #   --allow-outdated-plugins \
 
-notify-send "Starting Chrome"
+notify-send "Starting Chrome..."
 
 __NV_PRIME_RENDER_OFFLOAD=1 \
 chrome  \
