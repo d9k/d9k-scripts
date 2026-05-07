@@ -3,6 +3,8 @@
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
 DECOMPRESSED_FILES=()
+ALL_FILES=()
+DECOMPRESS_IF_GZ_RESULT=""
 
 function echoerr {
   printf "%s\n" "$*" >&2;
@@ -34,9 +36,17 @@ function ask_continue { ACTION_NAME="$1"
   fi
 }
 
+function show_files_ls {
+  printf '%s\n' "${ALL_FILES[@]}" | xargs ls -l
+}
+
 function cleanup_decompressed {
   if [[ ${#DECOMPRESSED_FILES[@]} -gt 0 ]]; then
     echo
+    echo "Before cleanup:"
+    show_files_ls
+    echo
+
     DECOMPRESSED_LIST=""
     for DECOMPRESSED_FILE in "${DECOMPRESSED_FILES[@]}"; do
       DECOMPRESSED_LIST="${DECOMPRESSED_LIST} $DECOMPRESSED_FILE"
@@ -46,6 +56,11 @@ function cleanup_decompressed {
     for DECOMPRESSED_FILE in "${DECOMPRESSED_FILES[@]}"; do
       rm -f "$DECOMPRESSED_FILE"
     done
+
+    echo
+    echo "After cleanup:"
+    show_files_ls 2>/dev/null
+    echo
 
     echo "Decompressed files removed."
   fi
@@ -64,18 +79,22 @@ function get_filename_without_ext { FILE_PATH="$1"
 }
 
 function decompress_if_gz { FILE_PATH="$1"
-  local FILE_EXTENSION
+  DECOMPRESS_IF_GZ_RESULT=""
+  ALL_FILES+=("$FILE_PATH")
   FILE_EXTENSION=$(get_file_extension "$FILE_PATH")
 
   if [[ "$FILE_EXTENSION" == "gz" ]]; then
+    DECOMPRESSED_PATH=$(get_filename_without_ext "$FILE_PATH")
     gunzip -k "$FILE_PATH"
     if [[ $? -ne 0 ]]; then
       echoerr "Error: failed to decompress $FILE_PATH"
       return 1
     fi
-    get_filename_without_ext "$FILE_PATH"
+    ALL_FILES+=("$DECOMPRESSED_PATH")
+    DECOMPRESSED_FILES+=("$DECOMPRESSED_PATH")
+    DECOMPRESS_IF_GZ_RESULT="$DECOMPRESSED_PATH"
   else
-    echo "$FILE_PATH"
+    DECOMPRESS_IF_GZ_RESULT="$FILE_PATH"
   fi
 
   return 0
@@ -98,20 +117,16 @@ if [[ ! -f "$FILE_B_INPUT" ]]; then
   exit 300
 fi
 
-FILE_A_FOR_DIFF=$(decompress_if_gz "$FILE_A_INPUT")
+decompress_if_gz "$FILE_A_INPUT"
 if [[ $? -ne 0 ]]; then
   exit 600
 fi
-if [[ "$FILE_A_FOR_DIFF" != "$FILE_A_INPUT" ]]; then
-  DECOMPRESSED_FILES+=("$FILE_A_FOR_DIFF")
-fi
+FILE_A_FOR_DIFF="$DECOMPRESS_IF_GZ_RESULT"
 
-FILE_B_FOR_DIFF=$(decompress_if_gz "$FILE_B_INPUT")
+decompress_if_gz "$FILE_B_INPUT"
 if [[ $? -ne 0 ]]; then
   exit 700
 fi
-if [[ "$FILE_B_FOR_DIFF" != "$FILE_B_INPUT" ]]; then
-  DECOMPRESSED_FILES+=("$FILE_B_FOR_DIFF")
-fi
+FILE_B_FOR_DIFF="$DECOMPRESS_IF_GZ_RESULT"
 
 nvim -R -d "$FILE_A_FOR_DIFF" "$FILE_B_FOR_DIFF"
