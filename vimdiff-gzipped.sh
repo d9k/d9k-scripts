@@ -51,7 +51,7 @@ function cleanup_decompressed {
     for DECOMPRESSED_FILE in "${DECOMPRESSED_FILES[@]}"; do
       DECOMPRESSED_LIST="${DECOMPRESSED_LIST} $DECOMPRESSED_FILE"
     done
-    ask_continue "DELETE decompressed files:${DECOMPRESSED_LIST}?"
+    ask_continue "DELETE decompressed files: rm ${DECOMPRESSED_LIST}?"
 
     for DECOMPRESSED_FILE in "${DECOMPRESSED_FILES[@]}"; do
       rm -f "$DECOMPRESSED_FILE"
