@@ -16,6 +16,8 @@ config.line_height = 1.6
 config.keys = {
     { key = 'LeftArrow', mods = 'SHIFT|CTRL', action = act.DisableDefaultAssignment },
     { key = 'RightArrow', mods = 'SHIFT|CTRL', action = act.DisableDefaultAssignment },
+    { key = 'Insert', mods = 'CTRL', action = act.CopyTo 'ClipboardAndPrimarySelection' },
+    { key = 'Insert', mods = 'SHIFT', action = act.PasteFrom 'Clipboard' },
 }
 
 config.colors = {
