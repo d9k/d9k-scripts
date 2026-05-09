@@ -142,4 +142,24 @@ config.colors = {
   -- launcher_label_bg = { AnsiColor = 'Black' }, -- (*Since: Nightly Builds Only*)
   -- launcher_label_fg = { Color = '#ffffff' }, -- (*Since: Nightly Builds Only*)
 }
+
+-- Disable select-to-copy
+config.mouse_bindings = {
+  {
+    event = { Up = { streak = 1, button = "Left" } },
+    mods = "NONE",
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+  {
+    event = { Up = { streak = 2, button = "Left" } },
+    mods = "NONE",
+    action = wezterm.action.Nop,
+  },
+  {
+    event = { Up = { streak = 3, button = "Left" } },
+    mods = "NONE",
+    action = wezterm.action.Nop,
+  },
+}
+
 return config
