@@ -10,7 +10,7 @@ NEW_FILE_PATH="$2"
 
 if [[ -z "${FILE_PATH}" ]]; then
   if [[ -f "${STORE_LAST_FILE_PATH}" ]]; then
-    FILE_PATH=$(cat $STORE_LAST_FILE_PATH)
+    FILE_PATH="$(cat $STORE_LAST_FILE_PATH)"
   fi
 fi
 
@@ -31,16 +31,16 @@ fi
 ls -l "${FILE_PATH}"
 echo
 
-FILE_PATH=$(readlink -f "$FILE_PATH")
+FILE_PATH=$(readlink -f -- "$FILE_PATH")
 
 if [[ -n "$NEW_FILE_PATH" ]]; then
-  NEW_FILE_PATH=$(readlink -f "$NEW_FILE_PATH")
+  NEW_FILE_PATH=$(readlink -f -- "$NEW_FILE_PATH")
 else
   echo "New file path (press ctrl+c to exit):"
   read -re -p '> ' -i "${FILE_PATH}" NEW_FILE_PATH
 fi
 set -x ;
-mv -i "$FILE_PATH" "$NEW_FILE_PATH"
+mv -i -- "$FILE_PATH" "$NEW_FILE_PATH"
 
 { set +x; } 2>/dev/null
 
