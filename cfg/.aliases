@@ -26,6 +26,7 @@ function =
 
 alias -- -='cd -'
 alias _=echo
+alias A='git commit --amend'
 alias ali='source $HOME/.aliases'
 alias apti="sudo apt install"
 alias bk='backup-conf'
@@ -56,6 +57,7 @@ function fullpathcopy { FILE_REL="$@"
 
 alias cpath='fullpathcopy'
 alias el='eza -l --git --icons=always -@ --group-directories-first'
+alias ezl='eza -l --git --icons=always -@ --group-directories-first'
 alias ela='eza -l -a --git --icons=always -@ --group-directories-first'
 alias full='readlink -f'
 alias ful='readlink -f'
@@ -69,8 +71,9 @@ alias lsd='ls -ld */ -v1'
 alias lel='_less eza -l --git --color=always --icons=always -@ --group-directories-first'
 alias lela='_less eza -l -a --git --color=always --icons=always -@ --group-directories-first'
 alias md='mkdir -p'
-alias tre='_less eza --tree --color=always --icons=always --group-directories-first'
-alias -- tree-dirs='_less eza --tree --color=always --icons=always --only-dirs'
+alias tre='_less eza --tree --color=always --icons=always --group-directories-first --ignore-glob=node_modules'
+alias -- tree-dirs='_less eza --tree --color=always --icons=always --only-dirs --ignore-glob=node_modules'
+alias tred='tree-dirs'
 alias -- tree-filtered='tre -I "**/node_modules"'
 
 ## FileSystem: archives
