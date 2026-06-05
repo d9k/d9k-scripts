@@ -75,7 +75,10 @@ if [[ ! -f "$VACANCY_RAW_HTML_FILE_PATH" ]]; then
 fi
 
 # Extract the main column container
-cat "$VACANCY_RAW_HTML_FILE_PATH" | htmlq --pretty ".bloko-column_container" > "$VACANCY_EXTRACTED_HTML_FILE_PATH"
+cat "$VACANCY_RAW_HTML_FILE_PATH" \
+  | htmlq --pretty ".bloko-column_container" \
+  | htmlq --pretty -r ".noprint" \
+  > "$VACANCY_EXTRACTED_HTML_FILE_PATH"
 
 if [[ ! -s "$VACANCY_EXTRACTED_HTML_FILE_PATH" ]]; then
   echoerr "Failed to extract content from HTML"
