@@ -100,14 +100,17 @@ if ! kill -0 "$WEB_SERVER_PID" 2>/dev/null; then
   exit 500
 fi
 
+MARKDOWN_BROKEN_FILE_PATH="$VACANCIES_HTML_DIR_PATH/${VACANCY_ID}.broken.md"
 MARKDOWN_FILE_PATH="$VACANCIES_HTML_DIR_PATH/${VACANCY_ID}.md"
 # web-to-markdown "http://127.0.0.1:${TEMPORARY_WEBSERVER_PORT}/${VACANCY_ID}.html" > "$MARKDOWN_FILE_PATH"
-$SCRIPT_DIR/web-to-markdown-mod.sh --allow-local --raw "http://127.0.0.1:${TEMPORARY_WEBSERVER_PORT}/${VACANCY_ID}.html" > "$MARKDOWN_FILE_PATH"
+$SCRIPT_DIR/web-to-markdown-mod.sh --allow-local --raw "http://127.0.0.1:${TEMPORARY_WEBSERVER_PORT}/${VACANCY_ID}.html" > "$MARKDOWN_BROKEN_FILE_PATH"
 
-if [[ ! -s "$MARKDOWN_FILE_PATH" ]]; then
+if [[ ! -s "$MARKDOWN_BROKEN_FILE_PATH" ]]; then
   echoerr "Failed to convert HTML to markdown"
   exit 600
 fi
+
+cat "$MARKDOWN_BROKEN_FILE_PATH" | sed "s|127.0.0.1:$TEMPORARY_WEBSERVER_PORT|hh.ru|g" > "$MARKDOWN_FILE_PATH"
 
 echoerr "Markdown file created: $MARKDOWN_FILE_PATH"
 cat "$MARKDOWN_FILE_PATH"
