@@ -1,0 +1,10 @@
+#!/bin/bash
+
+EXTENSION="$1"
+
+if [ -z "$EXTENSION" ]; then
+  EXTENSION="md"
+fi
+
+set -x
+find . -type f | grep -E "\.$EXTENSION$" | vidir -
