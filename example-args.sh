@@ -2,9 +2,17 @@
 
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
-help_exit() {
-  echo "Help: ${SCRIPT_NAME} [--exclamate] [--greeting GREETING] USER_NAME [ADDITIONAL_MESSAGE]"
-  exit
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+
+  echoerr "Usage: ${SCRIPT_NAME} [--exclamate] [--greeting GREETING] USER_NAME [ADDITIONAL_MESSAGE]"
+  exit "$EXIT_CODE"
 }
 
 GREETING="Hello"
@@ -26,7 +34,7 @@ while [[ $# > 0 ]]; do
         ;;
         *)
           if [[ "${OPTION:0:1}" == "-" ]]; then
-            echo -e "Error: unknown option \"$OPTION\" \n"
+            echoerr "Error: unknown option \"$OPTION\""
             help_exit
           else
             break
@@ -38,8 +46,7 @@ done
 
 # Arguments count check
 if [ "$#" -lt 1 ]; then
-  show_help
-  exit 1
+  help_exit 1
 fi
 
 
