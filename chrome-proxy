@@ -5,12 +5,14 @@
 PAGE="https://youtube.com"
 WINDOW_NAME="Chrome Other Proxy"
 
+# PORT=1080
+PORT=1096
 
 # --proxy-server="http://127.0.0.1:9119" \
 
 chrome \
   --private \
-  --proxy-server="socks5://127.0.0.1:1080" \
+  --proxy-server="socks5://127.0.0.1:$PORT" \
   --window-name="$WINDOW_NAME" \
   --user-data-dir="$HOME/temp/chrome-data-dir-proxy" \
   --profile-directory="Default" 
