@@ -1,0 +1,19 @@
+#!/bin/bash
+# ncal -b -M -3 
+
+# https://stackoverflow.com/q/13168463
+LAST_MONTH=`date +'%m' -d 'last month'`
+NEXT_MONTH=`date +'%m' -d 'next month'`
+THIS_MONTH=`date +'%m' -d 'now'`
+YEAR=`date +'%Y'`
+
+function calendar_month {
+  printf "\n"
+  ncal -b -M "$@" "$YEAR"
+}
+
+printf "\n"
+calendar_month $LAST_MONTH
+calendar_month $THIS_MONTH
+calendar_month $NEXT_MONTH  
+printf "\n"
