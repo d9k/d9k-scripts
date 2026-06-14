@@ -13,7 +13,7 @@ function help_exit { EXIT_CODE="$1";
     EXIT_CODE=1
   fi
 
-  echoerr "Usage: ${SCRIPT_NAME} [--proxy PROXY_URL] [-l|--link] VIDEO_URL"
+  echoerr "Usage: ${SCRIPT_NAME} [--proxy PROXY_URL] [-l|--link] [-c|--copy-to-clipboard] VIDEO_URL"
   exit "$EXIT_CODE"
 }
 
@@ -30,6 +30,9 @@ while [[ $# -gt 0 ]]; do
         ;;
         -l|--link)
             LINK_MODE=1
+        ;;
+        -m|--month)
+            OUTPUT_MONTH=1
         ;;
         -c|--copy-to-clipboard)
             COPY_TO_CLIPBOARD=1
@@ -92,7 +95,11 @@ UPLOAD_YEAR=$(echo $UPLOAD_DATE | cut -c 1-4)
 UPLOAD_MONTH=$(echo $UPLOAD_DATE | cut -c 5-6)
 
 YOUTUBE_VIDEO_SHORT_URL="https://youtube.com/watch?v=$YOUTUBE_VIDEO_ID"
-VIDEO_TITLE="$TITLE / $CHANNEL / YT, $UPLOAD_YEAR.$UPLOAD_MONTH"
+UPLOAD_DATETIME="$UPLOAD_YEAR"
+if [ -n "$OUTPUT_MONTH" ]; then
+  UPLOAD_DATETIME="$UPLOAD_DATETIME.$UPLOAD_MONTH"
+fi
+VIDEO_TITLE="$TITLE / $CHANNEL / YT, $UPLOAD_DATETIME"
 
 if [[ $LINK_MODE -eq 1 ]]; then
   RESULT="- :tv: [$VIDEO_TITLE]($YOUTUBE_VIDEO_SHORT_URL)"
