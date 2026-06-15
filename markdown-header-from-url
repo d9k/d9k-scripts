@@ -48,8 +48,10 @@ fi
 
 URL="$1"
 
-# Create metadata file names from URL (remove #, ? and everything after, then trailing slash)
-URL_BASENAME=$(echo "$URL" | sed 's|^https\?://||' | sed 's|[?#].*||' | sed 's|/$||')
+# Create metadata file names from URL (remove protocol, #, ? and everything after, then trailing slash)
+URL_BASENAME=$(echo "$URL" | sed 's|[?#].*||')
+URL_BASENAME_NO_PROTOCOL=$(echo "$URL_BASENAME" | sed 's|^https\?://||' | sed 's|/$||')
+METADATA_FILE_NAME=$(echo "$URL_BASENAME_NO_PROTOCOL" | sed 's/[^[:alpha:].-]/_/g')
 METADATA_FILE_NAME=$(echo "$URL_BASENAME" | sed 's/[^[:alpha:].-]/_/g')
 METADATA_FILE_NAME_MD="${METADATA_FILE_NAME}.md"
 METADATA_FILE_NAME_JS="${METADATA_FILE_NAME}.js"
@@ -95,7 +97,7 @@ else
 fi
 
 # Build result string
-RESULT="# $TITLE / $AUTHOR / $SITE, $YEAR"
+RESULT="# $TITLE / $AUTHOR / $SITE, $YEAR\n\n$URL_BASENAME"
 
 printf "$RESULT"
 
