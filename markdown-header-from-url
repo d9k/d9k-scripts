@@ -13,9 +13,33 @@ function help_exit { EXIT_CODE="$1";
     EXIT_CODE=1
   fi
 
-  echoerr "Usage: ${SCRIPT_NAME} URL"
+  echoerr "Usage: ${SCRIPT_NAME} [-c|--copy-to-clipboard] URL"
   exit "$EXIT_CODE"
 }
+
+COPY_TO_CLIPBOARD=
+
+while [[ $# -gt 0 ]]; do
+    OPTION="$1"
+
+    case "$OPTION" in
+        -c|--copy-to-clipboard)
+            COPY_TO_CLIPBOARD=1
+        ;;
+        -h|--help)
+            help_exit
+        ;;
+        *)
+          if [[ "${OPTION:0:1}" == "-" ]]; then
+            echoerr "Error: unknown option \"$OPTION\""
+            help_exit
+          else
+            break
+          fi
+        ;;
+    esac
+    shift
+done
 
 # Arguments count check
 if [ "$#" -lt 1 ]; then
@@ -74,3 +98,9 @@ fi
 RESULT="# $TITLE / $AUTHOR / $SITE, $YEAR"
 
 echo "$RESULT"
+
+if [[ -n "$COPY_TO_CLIPBOARD" ]]; then
+  echo "$RESULT" | xclip -selection c
+  echoerr ""
+  echoerr "- copied to clipboard"
+fi
