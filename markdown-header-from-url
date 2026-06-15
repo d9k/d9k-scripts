@@ -97,10 +97,10 @@ fi
 # Build result string
 RESULT="# $TITLE / $AUTHOR / $SITE, $YEAR"
 
-echo "$RESULT"
+printf "$RESULT"
 
 if [[ -n "$COPY_TO_CLIPBOARD" ]]; then
-  echo "$RESULT" | xclip -selection c
+  printf "$RESULT" | xclip -selection c
   echoerr ""
   echoerr "- copied to clipboard"
 fi
