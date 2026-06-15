@@ -1,0 +1,76 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+TEMP_DIR="/tmp/$SCRIPT_NAME"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+
+  echoerr "Usage: ${SCRIPT_NAME} URL"
+  exit "$EXIT_CODE"
+}
+
+# Arguments count check
+if [ "$#" -lt 1 ]; then
+  help_exit 1
+fi
+
+URL="$1"
+
+# Create metadata file names from URL (remove #, ? and everything after, then trailing slash)
+URL_BASENAME=$(echo "$URL" | sed 's|^https\?://||' | sed 's|[?#].*||' | sed 's|/$||')
+METADATA_FILE_NAME=$(echo "$URL_BASENAME" | sed 's/[^[:alpha:].-]/_/g')
+METADATA_FILE_NAME_MD="${METADATA_FILE_NAME}.md"
+METADATA_FILE_NAME_JS="${METADATA_FILE_NAME}.js"
+
+mkdir -p "$TEMP_DIR"
+cd "$TEMP_DIR"
+
+# Check if frontmatter is installed
+if ! command -v frontmatter &> /dev/null; then
+  echoerr "Error: frontmatter is not installed."
+  echoerr "Download from: https://github.com/rythoris/frontmatter"
+  exit 100
+fi
+
+# Fetch metadata using url-metadata
+echoerr "Fetching metadata from: $URL"
+url-metadata "$URL" > "$METADATA_FILE_NAME_MD" 2>/dev/null
+
+if [ $? -ne 0 ] || [ ! -s "$METADATA_FILE_NAME_MD" ]; then
+  echoerr "Error: failed to fetch metadata from URL"
+  exit 200
+fi
+
+# Convert markdown to JSON using frontmatter
+frontmatter "$METADATA_FILE_NAME_MD" > "$METADATA_FILE_NAME_JS" 2>/dev/null
+
+if [ $? -ne 0 ] || [ ! -s "$METADATA_FILE_NAME_JS" ]; then
+  echoerr "Error: failed to convert metadata to JSON"
+  exit 300
+fi
+
+# Extract data from JSON using jq
+TITLE=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.title // empty')
+AUTHOR=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.author // empty')
+SITE=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.site // empty')
+DATE=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.date // empty')
+
+# Extract year from date
+if [ -n "$DATE" ]; then
+  YEAR=$(echo "$DATE" | cut -c 1-4)
+else
+  YEAR=""
+fi
+
+# Build result string
+RESULT="# $TITLE / $AUTHOR / $SITE, $YEAR"
+
+echo "$RESULT"
