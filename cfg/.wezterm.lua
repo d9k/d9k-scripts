@@ -149,18 +149,23 @@ config.colors = {
 config.mouse_bindings = {
   {
     event = { Up = { streak = 1, button = "Left" } },
+    mods = "CTRL",
+    action = act.OpenLinkAtMouseCursor,
+  },
+  {
+    event = { Up = { streak = 1, button = "Left" } },
     mods = "NONE",
-    action = wezterm.action.OpenLinkAtMouseCursor,
+    action = act.Nop,
   },
   {
     event = { Up = { streak = 2, button = "Left" } },
     mods = "NONE",
-    action = wezterm.action.Nop,
+    action = act.Nop,
   },
   {
     event = { Up = { streak = 3, button = "Left" } },
     mods = "NONE",
-    action = wezterm.action.Nop,
+    action = act.Nop,
   },
 }
 
