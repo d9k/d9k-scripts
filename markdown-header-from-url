@@ -5,7 +5,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TEMP_DIR="/tmp/$SCRIPT_NAME"
 
 function echoerr {
-  printf "%s\n" "$*" >&2;
+  # printf "%s\n" "$*" >&2;
+  # %b interprets escape-sequences
+  printf "%b\n" "$*" >&2
 }
 
 function help_exit { EXIT_CODE="$1";
@@ -87,7 +89,7 @@ fi
 
 METADATA_JS=$(cat "$METADATA_FILE_NAME_JS" | jq)
 
-echoerr "$METADATA_JS"
+echoerr "$METADATA_JS\n"
 
 # Extract data from JSON using jq
 TITLE=$(echo -e "$METADATA_JS" | jq --raw-output '.title // empty')
