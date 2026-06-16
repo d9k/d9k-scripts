@@ -13,6 +13,7 @@ function help_exit { EXIT_CODE="$1";
   fi
 
   echoerr "Usage: ${SCRIPT_NAME} [-c|--clipboard]"
+  echoerr "Env variables: YT_PROXY_PORT"
   exit "$EXIT_CODE"
 }
 
@@ -75,15 +76,20 @@ else
   REMAINING_INPUT="$INPUT"
 fi
 
+PROCESSOR_ARGS=()
+
 # Choose processor based on URL
 if echo "$URL" | grep -qE 'youtu\.be|youtube\.com'; then
   PROCESSOR="markdown-header-from-youtube"
+  if [[ -n "$YT_PROXY_PORT" ]]; then
+    PROCESSOR_ARGS=(--proxy "socks5://127.0.0.1:$YT_PROXY_PORT")
+  fi
 else
   PROCESSOR="markdown-header-from-url"
 fi
 
 # Run processor
-RESULT=$("$SCRIPT_DIR/$PROCESSOR" "$URL")
+RESULT=$($SCRIPT_DIR/$PROCESSOR "${PROCESSOR_ARGS[@]}" "$URL")
 
 if [[ $? -ne 0 ]]; then
   echoerr "Error: $PROCESSOR failed"
