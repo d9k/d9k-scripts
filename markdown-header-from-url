@@ -51,6 +51,8 @@ URL="$1"
 # Create metadata file names from URL (remove protocol, #, ? and everything after, then trailing slash)
 URL_BASENAME=$(echo "$URL" | sed 's|[?#].*||')
 URL_BASENAME_NO_PROTOCOL=$(echo "$URL_BASENAME" | sed 's|^https\?://||' | sed 's|/$||')
+# Extract domain from URL
+DOMAIN=$(echo "$URL_BASENAME_NO_PROTOCOL" | sed 's|/.*||')
 METADATA_FILE_NAME=$(echo "$URL_BASENAME_NO_PROTOCOL" | sed 's/[^[:alpha:].-]/_/g')
 METADATA_FILE_NAME=$(echo "$URL_BASENAME" | sed 's/[^[:alpha:].-]/_/g')
 METADATA_FILE_NAME_MD="${METADATA_FILE_NAME}.md"
@@ -83,21 +85,36 @@ if [ $? -ne 0 ] || [ ! -s "$METADATA_FILE_NAME_JS" ]; then
   exit 300
 fi
 
-# Extract data from JSON using jq
-TITLE=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.title // empty')
-AUTHOR=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.author // empty')
-SITE=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.site // empty')
-DATE=$(cat "$METADATA_FILE_NAME_JS" | jq --raw-output '.date // empty')
+METADATA_JS=$(cat "$METADATA_FILE_NAME_JS" | jq)
 
-# Extract year from date
+echoerr "$METADATA_JS"
+
+# Extract data from JSON using jq
+TITLE=$(echo -e "$METADATA_JS" | jq --raw-output '.title // empty')
+AUTHOR=$(echo -e "$METADATA_JS" | jq --raw-output '.author // empty')
+
+SITE=$(echo -e "$METADATA_JS" | jq --raw-output '.site // empty')
+if [[ -z "$SITE" ]]; then
+  SITE="$DOMAIN"
+fi
+
+DATE=$(echo -e "$METADATA_JS" | jq --raw-output '.date // empty')
+
 if [ -n "$DATE" ]; then
   YEAR=$(echo "$DATE" | cut -c 1-4)
 else
   YEAR=""
 fi
 
-# Build result string
-RESULT="# $TITLE / $AUTHOR / $SITE, $YEAR\n\n$URL_BASENAME"
+RESULT="# $TITLE"
+if [[ -n "$AUTHOR" ]]; then
+  RESULT="$RESULT / $AUTHOR"
+fi
+RESULT="$RESULT / $SITE"
+if [[ -n "$YEAR" ]]; then
+  RESULT="$RESULT, $YEAR"
+fi
+RESULT="$RESULT\n\n$URL_BASENAME"
 
 printf "$RESULT"
 
