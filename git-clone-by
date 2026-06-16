@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+function echoerr {
+  printf "%s\n" "$*" >&2
+}
+
+function help_exit {
+  local EXIT_CODE="${1:-1}"
+  echoerr "Usage: $SCRIPT_NAME URL"
+  echoerr "Clone a git repository into a directory named REPO_NAME-by-AUTHOR"
+  echoerr ""
+  echoerr "Example: $SCRIPT_NAME https://github.com/mattpocock/skills"
+  echoerr "  -> clones into 'skills-by-mattpocock'"
+  exit "$EXIT_CODE"
+}
+
+GIT_URL="$1"
+
+if [[ -z "$GIT_URL" ]]; then
+  help_exit 100
+fi
+
+# Parse URL: https://github.com/AUTHOR/REPO_NAME[.git]
+# Remove trailing .git if present
+GIT_URL_CLEAN="${GIT_URL%.git}"
+
+# Extract author and repo name using regex
+if [[ "$GIT_URL_CLEAN" =~ ^https?://[^/]+/([^/]+)/([^/]+)$ ]]; then
+  AUTHOR="${BASH_REMATCH[1]}"
+  REPO_NAME="${BASH_REMATCH[2]}"
+else
+  echoerr "Error: Cannot parse URL. Expected format: https://host/AUTHOR/REPO_NAME"
+  exit 200
+fi
+
+TARGET_DIR="${REPO_NAME}-by-${AUTHOR}"
+
+# Check if target directory already exists
+if [[ -e "$TARGET_DIR" ]]; then
+  echoerr "Error: Directory '$TARGET_DIR' already exists"
+  exit 300
+fi
+
+echo "Cloning $GIT_URL into $TARGET_DIR..."
+git clone "$GIT_URL" "$TARGET_DIR"
