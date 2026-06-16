@@ -15,11 +15,12 @@ function help_exit { EXIT_CODE="$1";
     EXIT_CODE=1
   fi
 
-  echoerr "Usage: ${SCRIPT_NAME} [-c|--copy-to-clipboard] URL"
+  echoerr "Usage: ${SCRIPT_NAME} [-c|--copy-to-clipboard] [--link] URL"
   exit "$EXIT_CODE"
 }
 
 COPY_TO_CLIPBOARD=
+LINK_MODE=
 
 while [[ $# -gt 0 ]]; do
     OPTION="$1"
@@ -27,6 +28,9 @@ while [[ $# -gt 0 ]]; do
     case "$OPTION" in
         -c|--copy-to-clipboard)
             COPY_TO_CLIPBOARD=1
+        ;;
+        --link)
+            LINK_MODE=1
         ;;
         -h|--help)
             help_exit
@@ -108,20 +112,28 @@ else
   YEAR=""
 fi
 
-RESULT="# $TITLE"
-if [[ -n "$AUTHOR" ]]; then
-  RESULT="$RESULT / $AUTHOR"
-fi
-RESULT="$RESULT / $SITE"
+YEAR_TEXT=""
 if [[ -n "$YEAR" ]]; then
-  RESULT="$RESULT, $YEAR"
+  YEAR_TEXT=", $YEAR"
 fi
-RESULT="$RESULT\n\n$URL_BASENAME"
 
-printf "$RESULT"
+LINK_TITLE="$TITLE"
+if [[ -n "$AUTHOR" ]]; then
+  LINK_TITLE="$LINK_TITLE / $AUTHOR"
+fi
+LINK_TITLE="$LINK_TITLE / $SITE"
+
+if [[ -n $LINK_MODE ]]; then
+  RESULT="- [${LINK_TITLE}](${URL_BASENAME})${YEAR_TEXT}"
+else
+  RESULT="# ${LINK_TITLE}${YEAR_TEXT}\n\n${URL_BASENAME}"
+fi
+
+# printf '%s' -- "$RESULT"
+echo -n -e "$RESULT"
 
 if [[ -n "$COPY_TO_CLIPBOARD" ]]; then
-  printf "$RESULT" | xclip -selection c
+  echo -n -e "$RESULT" | xclip -selection c
   echoerr ""
   echoerr "- copied to clipboard"
 fi
