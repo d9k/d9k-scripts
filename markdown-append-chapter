@@ -3,6 +3,8 @@
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 LAST_LINES_TO_SHOW=20
+MARKDOWN_EDIT_LAST_FILES_PATH="$HOME/.markdown-edit-last-files"
+MAX_HISTORY_LINES=10
 
 function echoerr {
   printf "%s\n" "$*" >&2;
@@ -13,7 +15,7 @@ function help_exit { EXIT_CODE="$1";
     EXIT_CODE=1
   fi
 
-  echoerr "Usage: ${SCRIPT_NAME} [-c|--clipboard] TARGET_FILENAME"
+  echoerr "Usage: ${SCRIPT_NAME} [-c|--clipboard] [TARGET_FILENAME]"
   exit "$EXIT_CODE"
 }
 
@@ -30,6 +32,63 @@ function ask_continue {
     exit
   fi
   echo 1
+}
+
+# Function to select file via fzf
+function select_file_via_fzf {
+  local TX_DIR="$HOME/tx"
+  cd "$TX_DIR" || {
+    echoerr "Error: directory $TX_DIR not found"
+    exit 100
+  }
+
+  # Get all .md and .txt files
+  local ALL_FILES=$(find . -type f \( -name "*.md" -o -name "*.txt" \) | sort)
+
+  # Reorder files based on history
+  local REORDERED_FILES="$ALL_FILES"
+  if [[ -f "$MARKDOWN_EDIT_LAST_FILES_PATH" ]]; then
+    while read HISTORY_LINE; do
+      if [[ -n "$HISTORY_LINE" ]]; then
+        local MATCHING=$(echo "$REORDERED_FILES" | grep -F "$HISTORY_LINE")
+        local NON_MATCHING=$(echo "$REORDERED_FILES" | grep -vF "$HISTORY_LINE")
+        if [[ -n "$MATCHING" ]]; then
+          REORDERED_FILES=$(printf "%s\n%s" "$MATCHING" "$NON_MATCHING")
+        fi
+      fi
+    done < "$MARKDOWN_EDIT_LAST_FILES_PATH"
+  fi
+
+  # Show fzf prompt
+  local SELECTED=$(echo "$REORDERED_FILES" | fzf --prompt="Select markdown/txt file to append fragment into: ")
+
+  if [[ -z "$SELECTED" ]]; then
+    echoerr "No file selected"
+    exit 200
+  fi
+
+  # Return relative path (remove leading ./)
+  echo "${SELECTED#./}"
+}
+
+# Function to add selected file to history
+function add_to_history {
+  local FILEPATH="$1"
+
+  # Create history file if it doesn't exist
+  if [[ ! -f "$MARKDOWN_EDIT_LAST_FILES_PATH" ]]; then
+    touch "$MARKDOWN_EDIT_LAST_FILES_PATH"
+  fi
+
+  # Read current contents, keep only last MAX_LINES-1
+  local CURRENT_CONTENTS=$(cat "$MARKDOWN_EDIT_LAST_FILES_PATH" | tail -n $((MAX_HISTORY_LINES - 1)))
+
+  # Remove the filepath if it already exists (to avoid duplicates)
+  CURRENT_CONTENTS=$(echo "$CURRENT_CONTENTS" | grep -vF "$FILEPATH")
+
+  # Write back and append new filepath
+  echo "$CURRENT_CONTENTS" > "$MARKDOWN_EDIT_LAST_FILES_PATH"
+  echo "$FILEPATH" >> "$MARKDOWN_EDIT_LAST_FILES_PATH"
 }
 
 CLIPBOARD_MODE=
@@ -57,17 +116,27 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-# Remaining argument is TARGET_FILENAME
-if [[ $# -ne 1 ]]; then
-  help_exit 1
-fi
-
+# Get TARGET_FILENAME from argument or fzf
 TARGET_FILENAME="$1"
+
+if [[ -z "$TARGET_FILENAME" ]]; then
+  # cd to TX_DIR for fzf selection (relative paths)
+  TX_DIR="$HOME/tx"
+  cd "$TX_DIR" || {
+    echoerr "Error: directory $TX_DIR not found"
+    exit 300
+  }
+
+  TARGET_FILENAME=$(select_file_via_fzf)
+  if [[ -z "$TARGET_FILENAME" ]]; then
+    exit 0
+  fi
+fi
 
 # Check if file exists
 if [[ ! -f "$TARGET_FILENAME" ]]; then
   echoerr "Error: file \"$TARGET_FILENAME\" does not exist"
-  exit 300
+  exit 400
 fi
 
 # Read input fragment
@@ -94,7 +163,8 @@ if [[ "${FRAGMENT:0:1}" != "#" ]]; then
   echo "$FRAGMENT" | xclip -selection c
 
   # Pass through markdown-fix-header
-  FRAGMENT_FIXED_HEADER=$($SCRIPT_DIR/markdown-fix-header -c <<< "$FRAGMENT")
+  # FRAGMENT_FIXED_HEADER=$($SCRIPT_DIR/markdown-fix-header -c <<< "$FRAGMENT")
+  FRAGMENT_FIXED_HEADER=$(echo -n -e "$FRAGMENT" | $SCRIPT_DIR/markdown-fix-header)
 
   if [[ $? -ne 0 ]]; then
     echoerr "Warning: markdown-fix-header failed"
@@ -129,6 +199,9 @@ else
 fi
 
 echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
+
+# Add selected file to history
+add_to_history "$TARGET_FILENAME"
 
 echo -e "\n=== Last $LAST_LINES_TO_SHOW: lines of \"$TARGET_FILE\" after fragment add: ==="
 tail -n "$LAST_LINES_TO_SHOW" "$TARGET_FILENAME"
