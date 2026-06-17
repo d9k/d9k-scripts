@@ -1,0 +1,136 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+LAST_LINES_TO_SHOW=20
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+
+  echoerr "Usage: ${SCRIPT_NAME} [-c|--clipboard] TARGET_FILENAME"
+  exit "$EXIT_CODE"
+}
+
+function ask_continue {
+  local ACTION_NAME=$1
+  if [[ -z "${ACTION_NAME}" ]]; then
+    ACTION_NAME="continue"
+  fi
+
+  read -n 1 -r -p "Press \"y\" to ${ACTION_NAME}: " input
+  echo >&2
+
+  if [ "$input" != "Y" ] && [ "$input" != "y" ] && [ "$input" != "д" ] && [ "$input" != "Д" ]; then
+    exit
+  fi
+  echo 1
+}
+
+CLIPBOARD_MODE=
+TARGET_FILENAME=
+
+while [[ $# -gt 0 ]]; do
+    OPTION="$1"
+
+    case "$OPTION" in
+        -c|--clipboard)
+            CLIPBOARD_MODE=1
+        ;;
+        -h|--help)
+            help_exit
+        ;;
+        *)
+          if [[ "${OPTION:0:1}" == "-" ]]; then
+            echoerr "Error: unknown option \"$OPTION\""
+            help_exit
+          else
+            break
+          fi
+        ;;
+    esac
+    shift
+done
+
+# Remaining argument is TARGET_FILENAME
+if [[ $# -ne 1 ]]; then
+  help_exit 1
+fi
+
+TARGET_FILENAME="$1"
+
+# Check if file exists
+if [[ ! -f "$TARGET_FILENAME" ]]; then
+  echoerr "Error: file \"$TARGET_FILENAME\" does not exist"
+  exit 300
+fi
+
+# Read input fragment
+if [[ "$CLIPBOARD_MODE" -eq 1 ]]; then
+  FRAGMENT=$(xclip -selection c -o)
+else
+  if [ ! -t 0 ]; then
+    FRAGMENT=$(< /dev/stdin)
+  else
+    echoerr "Error: pipe input is empty. Use --clipboard flag if you want to get fragment from clipboard"
+    help_exit 1
+  fi
+fi
+
+# Remove empty lines at the beginning and end
+FRAGMENT=$(echo "$FRAGMENT" | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}')
+
+# Find FIRST_URL in the fragment
+FIRST_URL=$(echo "$FRAGMENT" | grep -oE 'https?://[^ ]+' | head -n 1)
+
+# If fragment doesn't start with '#', process it through markdown-fix-header
+if [[ "${FRAGMENT:0:1}" != "#" ]]; then
+  # Save to clipboard
+  echo "$FRAGMENT" | xclip -selection c
+
+  # Pass through markdown-fix-header
+  FRAGMENT_FIXED_HEADER=$($SCRIPT_DIR/markdown-fix-header -c <<< "$FRAGMENT")
+
+  if [[ $? -ne 0 ]]; then
+    echoerr "Warning: markdown-fix-header failed"
+    # exit 200
+  else
+    FRAGMENT="$FRAGMENT_FIXED_HEADER"
+  fi
+
+  # Re-read from clipboard after markdown-fix-header processing
+  # FRAGMENT=$(xclip -selection c -o)
+
+  # Find FIRST_URL again after processing
+  FIRST_URL=$(echo "$FRAGMENT" | grep -oE 'https?://[^ ]+' | head -n 1)
+fi
+
+# Check if FIRST_URL already exists in target file
+if [[ -n "$FIRST_URL" ]]; then
+  if grep -qF "$FIRST_URL" "$TARGET_FILENAME"; then
+    ask_continue "add existing $FIRST_URL" > /dev/null
+  fi
+fi
+
+# Append fragment to file
+# Check if file ends with empty line
+LAST_LINE=$(tail -n 1 "$TARGET_FILENAME")
+if [[ -z "$LAST_LINE" ]]; then
+  # File already ends with empty line, just append fragment
+  :
+else
+  # Add empty line then fragment
+  echo -e "\n" >> "$TARGET_FILENAME"
+fi
+
+echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
+
+echo -e "\n=== Last $LAST_LINES_TO_SHOW: lines of \"$TARGET_FILE\" after fragment add: ==="
+tail -n "$LAST_LINES_TO_SHOW" "$TARGET_FILENAME"
+
+"$SCRIPT_DIR/obsidian-open" "$TARGET_FILENAME"
