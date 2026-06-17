@@ -183,7 +183,7 @@ fi
 # Check if FIRST_URL already exists in target file
 if [[ -n "$FIRST_URL" ]]; then
   if grep -qF "$FIRST_URL" "$TARGET_FILENAME"; then
-    ask_continue "add existing $FIRST_URL" > /dev/null
+    ask_continue "add fragment with existing URL \"$FIRST_URL\"" > /dev/null
   fi
 fi
 
