@@ -51,14 +51,23 @@ else
   fi
 fi
 
+# Regex patterns for URL matching
+REGEX_PROTOCOL='https?://'
+REGEX_HOSTNAME='[a-zA-Z0-9][-a-zA-Z0-9]*'
+REGEX_DOMAIN='\.[a-zA-Z]{2,}'
+REGEX_PATH='[^[:space:]]*'
+REGEX_URL="(${REGEX_PROTOCOL})?${REGEX_HOSTNAME}${REGEX_DOMAIN}${REGEX_PATH}"
+
 # Find URL in first two lines using for loop
 URL=
 URL_LINE_NUM=
 
 for LINE_NUM in 1 2; do
   LINE=$(echo "$INPUT" | sed -n "${LINE_NUM}p")
-  if echo "$LINE" | grep -qE 'https?://'; then
-    URL="$LINE"
+  # Extract URL from line (with or without protocol)
+  EXTRACTED_URL=$(echo "$LINE" | grep -oE "$REGEX_URL" | head -1)
+  if [[ -n "$EXTRACTED_URL" ]]; then
+    URL="$EXTRACTED_URL"
     URL_LINE_NUM=$LINE_NUM
     break
   fi
