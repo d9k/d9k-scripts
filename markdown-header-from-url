@@ -103,6 +103,7 @@ SITE=$(echo -e "$METADATA_JS" | jq --raw-output '.site // empty')
 if [[ -z "$SITE" ]]; then
   SITE="$DOMAIN"
 fi
+SITE=$(printf "%s" "$SITE" | sed 's|www.||')
 
 DATE=$(echo -e "$METADATA_JS" | jq --raw-output '.date // empty')
 
