@@ -23,16 +23,20 @@ if [[ -z "$GIT_URL" ]]; then
   help_exit 100
 fi
 
-# Parse URL: https://github.com/AUTHOR/REPO_NAME[.git]
 # Remove trailing .git if present
 GIT_URL_CLEAN="${GIT_URL%.git}"
 
-# Extract author and repo name using regex
+# Extract author and repo name using regex for both HTTPS and SSH URLs
+# Parse URLs like https://HOST/AUTHOR/REPO_NAME[.git]
 if [[ "$GIT_URL_CLEAN" =~ ^https?://[^/]+/([^/]+)/([^/]+)$ ]]; then
   AUTHOR="${BASH_REMATCH[1]}"
   REPO_NAME="${BASH_REMATCH[2]}"
+# Parse URLs like git@HOST:AUTHOR/REPO_NAME[.git]
+elif [[ "$GIT_URL_CLEAN" =~ ^[a-zA-Z0-9_-]+@[^:]+:([^/]+)/([^/]+)$ ]]; then
+  AUTHOR="${BASH_REMATCH[1]}"
+  REPO_NAME="${BASH_REMATCH[2]}"
 else
-  echoerr "Error: Cannot parse URL. Expected format: https://host/AUTHOR/REPO_NAME"
+  echoerr "Error: Cannot parse URL. Expected format: https://host/AUTHOR/REPO_NAME or git@host:AUTHOR/REPO_NAME"
   exit 200
 fi
 
