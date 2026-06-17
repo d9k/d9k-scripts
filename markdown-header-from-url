@@ -54,6 +54,11 @@ fi
 
 URL="$1"
 
+# Add https:// prefix if URL doesn't start with a protocol
+if [[ ! "$URL" =~ ^[a-zA-Z]+:// ]]; then
+  URL="https://$URL"
+fi
+
 # Create metadata file names from URL (remove protocol, #, ? and everything after, then trailing slash)
 URL_BASENAME=$(echo "$URL" | sed 's|[?#].*||')
 URL_BASENAME_NO_PROTOCOL=$(echo "$URL_BASENAME" | sed 's|^https\?://||' | sed 's|/$||')
