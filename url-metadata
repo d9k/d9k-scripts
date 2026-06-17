@@ -2,10 +2,13 @@
 # npm install -g web-to-markdown
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+TIMEOUT_MS=7500
 
 # set -x
 
 # sed '/^$/q' - get before empty line
-web-to-markdown --frontmatter "$@" \
-  | sed '/^$/q' \
-  | "$SCRIPT_DIR/html-entities-decode.ts"
+web-to-markdown \
+  --timeout $TIMEOUT_MS \
+  --frontmatter "$@" \
+    | sed '/^$/q' \
+    | "$SCRIPT_DIR/html-entities-decode.ts"
