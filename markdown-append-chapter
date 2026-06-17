@@ -3,6 +3,7 @@
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 LAST_LINES_TO_SHOW=20
+LAST_HEADERS_LINES_TO_SHOW=7
 MARKDOWN_EDIT_LAST_FILES_PATH="$HOME/.markdown-edit-last-files"
 MAX_HISTORY_LINES=10
 
@@ -129,8 +130,10 @@ if [[ -z "$TARGET_FILENAME" ]]; then
 
   TARGET_FILENAME=$(select_file_via_fzf)
   if [[ -z "$TARGET_FILENAME" ]]; then
-    exit 0
+    echoerr "Error: no file selected. Exitting"
+    exit 350
   fi
+  echo "You selected \"$TARGET_FILENAME\""
 fi
 
 # Check if file exists
@@ -203,7 +206,15 @@ echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
 # Add selected file to history
 add_to_history "$TARGET_FILENAME"
 
+
+echo -e "\n=== Last $LAST_HEADERS_LINES_TO_SHOW: lines of \"$TARGET_FILE\" after fragment add: ==="
+echo ". . . . ."
+
+"$SCRIPT_DIR/markdown-headers.sh" -n "$TARGET_FILENAME" \
+  | tail -n "$LAST_HEADERS_LINES_TO_SHOW"
+
 echo -e "\n=== Last $LAST_LINES_TO_SHOW: lines of \"$TARGET_FILE\" after fragment add: ==="
+echo ". . . . ."
 tail -n "$LAST_LINES_TO_SHOW" "$TARGET_FILENAME"
 
 "$SCRIPT_DIR/obsidian-open" "$TARGET_FILENAME"
