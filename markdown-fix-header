@@ -89,9 +89,15 @@ done
 if [[ -z "$URL" ]]; then
   if [[ -n "$FORCE_MODE" ]]; then
     echoerr "Warning: no URL found in first two lines. Forcing the header"
-    # Add '# ' prefix to first line and output
-    OUTPUT="# ${INPUT}"
-    echo -n -e "\n$OUTPUT"
+    # Capitalize first letter and add '# ' prefix to first line only
+    FIRST_LINE=$(echo "$INPUT" | sed -n '1p')
+    FIRST_CHAR=$(echo "$FIRST_LINE" | head -c 1 | tr '[:lower:]' '[:upper:]')
+    REST_OF_FIRST_LINE=$(echo "$FIRST_LINE" | cut -c 2-)
+    NEW_FIRST_LINE="# ${FIRST_CHAR}${REST_OF_FIRST_LINE}"
+    # Output modified first line and rest of input
+    echo "$NEW_FIRST_LINE"
+    echo "$INPUT" | tail -n +2
+    OUTPUT=$(printf "%s\n%s" "$NEW_FIRST_LINE" "$(echo "$INPUT" | tail -n +2)")
     output_to_clipboard "$OUTPUT"
     exit
   else
