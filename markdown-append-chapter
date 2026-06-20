@@ -35,7 +35,6 @@ function ask_continue {
   echo 1
 }
 
-# Function to select file via fzf
 function select_file_via_fzf {
   local TX_DIR="$HOME/tx"
   cd "$TX_DIR" || {
@@ -72,8 +71,7 @@ function select_file_via_fzf {
   echo "${SELECTED#./}"
 }
 
-# Function to add selected file to history
-function add_to_history {
+function add_modified_file_to_history {
   local FILEPATH="$1"
 
   # Create history file if it doesn't exist
@@ -206,9 +204,7 @@ done
 echo -e "\n" >> "$TARGET_FILENAME"
 echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
 
-# Add selected file to history
-add_to_history "$TARGET_FILENAME"
-
+add_modified_file_to_history "$TARGET_FILENAME"
 
 echo -e "\n=== Last $LAST_HEADERS_LINES_TO_SHOW: lines of \"$TARGET_FILENAME\" after fragment add: ==="
 echo ". . . . ."
