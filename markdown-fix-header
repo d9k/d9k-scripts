@@ -91,9 +91,9 @@ if [[ -z "$URL" ]]; then
     echoerr "Warning: no URL found in first two lines. Forcing the header"
     # Capitalize first letter and add '# ' prefix to first line only
     FIRST_LINE=$(echo "$INPUT" | sed -n '1p')
-    FIRST_CHAR=$(echo "$FIRST_LINE" | head -c 1 | tr '[:lower:]' '[:upper:]')
-    REST_OF_FIRST_LINE=$(echo "$FIRST_LINE" | cut -c 2-)
-    NEW_FIRST_LINE="# ${FIRST_CHAR}${REST_OF_FIRST_LINE}"
+    # Use sed to capitalize first character (works with UTF-8)
+    NEW_FIRST_LINE=$(echo "$FIRST_LINE" | sed 's/^\(.\)/\U\1/')
+    NEW_FIRST_LINE="# ${NEW_FIRST_LINE}"
     # Output modified first line and rest of input
     echo "$NEW_FIRST_LINE"
     echo "$INPUT" | tail -n +2
