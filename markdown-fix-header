@@ -12,12 +12,22 @@ function help_exit { EXIT_CODE="$1";
     EXIT_CODE=1
   fi
 
-  echoerr "Usage: ${SCRIPT_NAME} [-c|--clipboard]"
+  echoerr "Usage: ${SCRIPT_NAME} [-c|--clipboard] [-f|--force]"
   echoerr "Env variables: YT_PROXY_PORT"
   exit "$EXIT_CODE"
 }
 
+function output_to_clipboard {
+  local CONTENT="$1"
+  if [[ "$CLIPBOARD_MODE" -eq 1 ]]; then
+    echo "$CONTENT" | xclip -selection c
+    echoerr ""
+    echoerr "- copied to clipboard"
+  fi
+}
+
 CLIPBOARD_MODE=
+FORCE_MODE=
 
 while [[ $# -gt 0 ]]; do
     OPTION="$1"
@@ -25,6 +35,9 @@ while [[ $# -gt 0 ]]; do
     case "$OPTION" in
         -c|--clipboard)
             CLIPBOARD_MODE=1
+        ;;
+        -f|--force)
+            FORCE_MODE=1
         ;;
         -h|--help)
             help_exit
@@ -74,8 +87,17 @@ for LINE_NUM in 1 2; do
 done
 
 if [[ -z "$URL" ]]; then
-  echoerr "Error: no URL found in first two lines"
-  exit 100
+  if [[ -n "$FORCE_MODE" ]]; then
+    echoerr "Warning: no URL found in first two lines. Forcing the header"
+    # Add '# ' prefix to first line and output
+    OUTPUT="# ${INPUT}"
+    echo -n -e "\n$OUTPUT"
+    output_to_clipboard "$OUTPUT"
+    exit
+  else
+    echoerr "Error: no URL found in first two lines"
+    exit 100
+  fi
 fi
 
 # If URL is on second line, remove first line
@@ -114,10 +136,5 @@ fi
 # Replace original URL with result using ripgrep
 FINAL_OUTPUT=$(echo -e "$REMAINING_INPUT" | rg --fixed-strings --no-line-number --passthru --replace "$RESULT" "$URL")
 
-echo "$FINAL_OUTPUT"
-
-if [[ "$CLIPBOARD_MODE" -eq 1 ]]; then
-  echo "$FINAL_OUTPUT" | xclip -selection c
-  echoerr ""
-  echoerr "- copied to clipboard"
-fi
+echo "\n$FINAL_OUTPUT"
+output_to_clipboard "$FINAL_OUTPUT"
