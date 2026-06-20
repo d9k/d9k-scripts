@@ -191,17 +191,19 @@ if [[ -n "$FIRST_URL" ]]; then
   fi
 fi
 
-# Append fragment to file
-# Check if file ends with empty line
-LAST_LINE=$(tail -n 1 "$TARGET_FILENAME")
-if [[ -z "$LAST_LINE" ]]; then
-  # File already ends with empty line, just append fragment
-  :
-else
-  # Add empty line then fragment
-  echo "" >> "$TARGET_FILENAME"
-fi
+# Write fragment to file
+# Remove trailing empty lines using for loop (1 to 10 iterations)
+for TRAILING_CHAR_NUM in $(seq 1 10); do
+  FILE_LAST_SYMBOL=$(tail -c 1 "$TARGET_FILENAME")
+  if [[ "$FILE_LAST_SYMBOL" != "" ]]; then
+    break
+  fi
+  # Remove last character (empty line)
+  truncate -s -1 "$TARGET_FILENAME"
+done
 
+# Add new line and fragment
+echo -e "\n" >> "$TARGET_FILENAME"
 echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
 
 # Add selected file to history
