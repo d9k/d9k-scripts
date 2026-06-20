@@ -81,14 +81,14 @@ function add_to_history {
     touch "$MARKDOWN_EDIT_LAST_FILES_PATH"
   fi
 
-  # Read current contents, keep only last MAX_LINES-1
-  local CURRENT_CONTENTS=$(cat "$MARKDOWN_EDIT_LAST_FILES_PATH" | tail -n $((MAX_HISTORY_LINES - 1)))
-
   # Remove the filepath if it already exists (to avoid duplicates)
-  CURRENT_CONTENTS=$(echo "$CURRENT_CONTENTS" | grep -vF "$FILEPATH")
+  CURRENT_HISTORY_CONTENTS=$(echo "$CURRENT_HISTORY_CONTENTS" | grep -vF "$FILEPATH")
+
+  # Read current contents, keep only last MAX_LINES-1
+  local CURRENT_HISTORY_CONTENTS=$(cat "$MARKDOWN_EDIT_LAST_FILES_PATH" | tail -n $((MAX_HISTORY_LINES - 1)))
 
   # Write back and append new filepath
-  echo "$CURRENT_CONTENTS" > "$MARKDOWN_EDIT_LAST_FILES_PATH"
+  echo "$CURRENT_HISTORY_CONTENTS" > "$MARKDOWN_EDIT_LAST_FILES_PATH"
   echo "$FILEPATH" >> "$MARKDOWN_EDIT_LAST_FILES_PATH"
 }
 
@@ -120,6 +120,19 @@ done
 # Get TARGET_FILENAME from argument or fzf
 TARGET_FILENAME="$1"
 
+# Read input fragment
+if [[ "$CLIPBOARD_MODE" -eq 1 ]]; then
+  FRAGMENT=$(xclip -selection c -o)
+else
+  if [ ! -t 0 ]; then
+    FRAGMENT=$(< /dev/stdin)
+  else
+    echoerr "Error: pipe input is empty. Use --clipboard flag if you want to get fragment from clipboard"
+    help_exit 1
+  fi
+fi
+
+
 if [[ -z "$TARGET_FILENAME" ]]; then
   # cd to TX_DIR for fzf selection (relative paths)
   TX_DIR="$HOME/tx"
@@ -142,18 +155,6 @@ if [[ ! -f "$TARGET_FILENAME" ]]; then
   exit 400
 fi
 
-# Read input fragment
-if [[ "$CLIPBOARD_MODE" -eq 1 ]]; then
-  FRAGMENT=$(xclip -selection c -o)
-else
-  if [ ! -t 0 ]; then
-    FRAGMENT=$(< /dev/stdin)
-  else
-    echoerr "Error: pipe input is empty. Use --clipboard flag if you want to get fragment from clipboard"
-    help_exit 1
-  fi
-fi
-
 # Remove empty lines at the beginning and end
 FRAGMENT=$(echo "$FRAGMENT" | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}')
 
@@ -167,7 +168,7 @@ if [[ "${FRAGMENT:0:1}" != "#" ]]; then
 
   # Pass through markdown-fix-header
   # FRAGMENT_FIXED_HEADER=$($SCRIPT_DIR/markdown-fix-header -c <<< "$FRAGMENT")
-  FRAGMENT_FIXED_HEADER=$(echo -n -e "$FRAGMENT" | $SCRIPT_DIR/markdown-fix-header)
+  FRAGMENT_FIXED_HEADER=$(echo -n -e "$FRAGMENT" | $SCRIPT_DIR/markdown-fix-header --force)
 
   if [[ $? -ne 0 ]]; then
     echoerr "Warning: markdown-fix-header failed"
@@ -198,7 +199,7 @@ if [[ -z "$LAST_LINE" ]]; then
   :
 else
   # Add empty line then fragment
-  echo -e "\n" >> "$TARGET_FILENAME"
+  echo "" >> "$TARGET_FILENAME"
 fi
 
 echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
@@ -207,13 +208,13 @@ echo -n "$FRAGMENT" >> "$TARGET_FILENAME"
 add_to_history "$TARGET_FILENAME"
 
 
-echo -e "\n=== Last $LAST_HEADERS_LINES_TO_SHOW: lines of \"$TARGET_FILE\" after fragment add: ==="
+echo -e "\n=== Last $LAST_HEADERS_LINES_TO_SHOW: lines of \"$TARGET_FILENAME\" after fragment add: ==="
 echo ". . . . ."
 
 "$SCRIPT_DIR/markdown-headers.sh" -n "$TARGET_FILENAME" \
   | tail -n "$LAST_HEADERS_LINES_TO_SHOW"
 
-echo -e "\n=== Last $LAST_LINES_TO_SHOW: lines of \"$TARGET_FILE\" after fragment add: ==="
+echo -e "\n=== Last $LAST_LINES_TO_SHOW: lines of \"$TARGET_FILENAME\" after fragment add: ==="
 echo ". . . . ."
 tail -n "$LAST_LINES_TO_SHOW" "$TARGET_FILENAME"
 
