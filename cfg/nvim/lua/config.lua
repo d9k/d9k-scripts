@@ -1,5 +1,34 @@
+local g             = vim.g
+
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
+
+-- Clipboard related things causing major issues, like Neovim not starting up properly or long startup time.
+-- g.clipboard = {                     -- Trying to resolve issues using this. (Enable System-clipboard functionality.)
+--     name = "xsel",
+--     copy = {
+--         ["+"] = "xsel --nodetach -ib",
+--         ["*"] = "xsel --nodetach -ip"
+--     },
+--     paste = {
+--         ["+"] = "xsel -ob",
+--         ["*"] = "xsel -op"
+--     },
+--     cache_enabled = true,
+-- }
+vim.g.clipboard = {
+  name = 'xclip',
+  copy = {
+    ['+'] = {'xclip', '-selection', 'clipboard'},
+    ['*'] = {'xclip', '-selection', 'primary'},
+  },
+  paste = {
+    ['+'] = {'xclip', '-selection', 'clipboard', '-o'},
+    ['*'] = {'xclip', '-selection', 'primary', '-o'},
+  },
+  cache_enabled = 1,
+}
+vim.cmd([[set clipboard+=unnamedplus]])  -- Enable System-clipboard functionality. (This might be working well with the above thing.)
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"

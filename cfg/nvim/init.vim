@@ -56,6 +56,7 @@ map <M-k> ?^#<CR>
 
 map <leader>sm :set syntax=markdown<CR>
 map <leader>sj :set syntax=json<CR>
+map <leader>sJ :set syntax=js<CR>
 
 " (G[x] becomes accord beginning to [G]o somewhere) which is singular in file
 noremap GG G
