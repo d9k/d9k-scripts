@@ -2,7 +2,6 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
-S="$HOME/scripts"
 
 FILE_NAME="$1"
 
@@ -10,12 +9,29 @@ function echoerr {
   printf "%s\n" "$*" >&2;
 }
 
-if [[ -z "$FILE_NAME" ]]; then
-  echoerr "Usage: markdown-commit FILE_NAME"
-  exit 100
-fi
+# Get list of changed files (exclude deleted files)
+function get_changed_files {
+  git status --porcelain | grep -v "^ D" | sed 's/^...//'
+}
 
-cd "$REPO_ROOT"
+# If no file specified, select from changed files using fzf
+if [[ -z "$FILE_NAME" ]]; then
+  cd "$REPO_ROOT"
+
+  CHANGED_FILES=$(get_changed_files)
+
+  if [[ -z "$CHANGED_FILES" ]]; then
+    echoerr "No changed files found"
+    exit 100
+  fi
+
+  FILE_NAME=$(echo "$CHANGED_FILES" | fzf --prompt="Select file to commit: ")
+
+  if [[ -z "$FILE_NAME" ]]; then
+    echoerr "No file selected"
+    exit 150
+  fi
+fi
 
 # Get file name without path and extension
 FILE_NAME_SHORT=$(basename "$FILE_NAME" | sed 's/\.[^.]*$//')
