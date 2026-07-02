@@ -142,5 +142,7 @@ fi
 # Replace original URL with result using ripgrep
 FINAL_OUTPUT=$(echo -e "$REMAINING_INPUT" | rg --fixed-strings --no-line-number --passthru --replace "$RESULT" "$URL")
 
-echo "\n$FINAL_OUTPUT"
+echoerr "=== Fix header result: ==="
+echoerr
+echo "$FINAL_OUTPUT"
 output_to_clipboard "$FINAL_OUTPUT"
