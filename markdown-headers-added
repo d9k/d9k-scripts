@@ -30,7 +30,11 @@ function format_short_header {
 function process_file {
   local FILE_ARG="$1"
   local DIFF_OUTPUT
-  DIFF_OUTPUT=$(git --no-pager diff -- "$FILE_ARG" | grep "^+#" | sed 's/^+//')
+  git reset >/dev/null
+  git add "$FILE_ARG"
+  # DIFF_OUTPUT=$(git --no-pager diff -- "$FILE_ARG" | grep "^+#" | sed 's/^+//')
+  DIFF_OUTPUT=$(git --no-pager diff --cached | grep "^+#" | sed 's/^+//')
+  git reset >/dev/null
 
   if [[ -z "$DIFF_OUTPUT" ]]; then
     return
