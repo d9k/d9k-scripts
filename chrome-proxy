@@ -2,7 +2,7 @@
 
 # export PAGE="https://metrics.torproject.org/rs.html"
 
-PAGE="https://youtube.com"
+PAGE="https://www.youtube.com/feed/history"
 WINDOW_NAME="Chrome Other Proxy"
 
 # PORT=1080
