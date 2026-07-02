@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# For play on Miyoo Mini Plus
+
+youtube-dl \
+  --no-playlist \
+  -f 'bestvideo[ext=mp4][container=mp4_dash][height<=720]+bestaudio[ext=m4a]/bestvideo+bestaudio' \
+  -S res,codec:avc1 \
+  --merge-output-format mp4 \
+  --write-thumbnail \
+  --write-auto-subs \
+  --embed-subs \
+  --write-info-json \
+  --convert-thumbnails jpg \
+  --sub-format srt \
+  --convert-subtitles srt \
+  --ignore-errors \
+  "$@"
