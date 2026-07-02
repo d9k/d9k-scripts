@@ -49,9 +49,11 @@ if [[ -z "$FILE_NAME" ]]; then
   help_exit 200
 fi
 
+# Remove leading '+' from git diff output
 DIFF_OUTPUT=$(git --no-pager diff -- "$FILE_NAME" | grep "^+#" | sed 's/^+//')
 
 if [[ -n $SHORT_MODE ]]; then
+  # Remove leading '#' characters and spaces, remove '/' and everything after, trim whitespace
   RESULT=$(echo "$DIFF_OUTPUT" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/^ *//' | sed 's/ *$//')
 else
   RESULT=$(echo "$DIFF_OUTPUT")
