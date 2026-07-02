@@ -9,13 +9,14 @@ function echoerr {
   printf "%s\n" "$*" >&2;
 }
 
-# Get list of changed files (exclude deleted files)
+# Get list of changed files (exclude deleted files, remove status and quotes)
 function get_changed_files {
-  git status --porcelain | grep -v "^ D" | sed 's/^...//'
+  git status --porcelain | grep -v "^ D" | sed 's/^...//' | sed 's/"//g'
 }
 
 # If no file specified, select from changed files using fzf
 if [[ -z "$FILE_NAME" ]]; then
+  echoerr "Changing directory to \"$REPO_ROOT\""
   cd "$REPO_ROOT"
 
   CHANGED_FILES=$(get_changed_files)
