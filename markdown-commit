@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+S="$HOME/scripts"
+
+FILE_NAME="$1"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+if [[ -z "$FILE_NAME" ]]; then
+  echoerr "Usage: markdown-commit FILE_NAME"
+  exit 100
+fi
+
+cd "$REPO_ROOT"
+
+# Get file name without path and extension
+FILE_NAME_SHORT=$(basename "$FILE_NAME" | sed 's/\.[^.]*$//')
+
+# Get headers from markdown-headers-added script
+HEADERS=$("$SCRIPT_DIR/markdown-headers-added" --short "$FILE_NAME")
+
+if [[ -z "$HEADERS" ]]; then
+  echoerr "No added headers found in $FILE_NAME"
+  exit 200
+fi
+
+# Convert newlines to ", " to create comma-separated list
+HEADERS_ONELINE=$(echo "$HEADERS" | paste -sd ',' | sed 's/,/, /g')
+
+# Create commit message
+COMMIT_MSG="${FILE_NAME_SHORT}: ${HEADERS_ONELINE}"
+
+# Stage and commit
+git add "$FILE_NAME"
+git commit -m "$COMMIT_MSG"
