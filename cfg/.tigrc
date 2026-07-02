@@ -28,7 +28,11 @@ set wrap-lines = 1
 #bind status A !?git commit --amend
 
 bind status a !sh -c '$HOME/scripts/git-add-partial-to-commit %(file)'
+
 bind status A !amend
+bind generic A !amend
+
+
 # bind status D !@?sh -c "rm '%(file)'"
 bind status D !@?rm ./%(file)
 bind status B !backup-conf %(file)
@@ -47,6 +51,10 @@ bind generic 0 !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -
 bind generic <Esc>p !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
 # bind stage p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
 
+bind diff A !amend
+bind log A !amend
+bind pager A !amend
+
 # %(file) is empty:
 # https://github.com/jonas/tig/issues/1387:
 bind diff P !sh -c 'FPATH=$(printf "%s" %(file)"); printf "$FPATH" | xclip -selection c && echo "File [P]ath copied to clipboard ($FPATH)"'
@@ -60,7 +68,7 @@ bind status <Esc>n ?git-ignore-locally '%(file)'
 bind status <Esc>i ?git-ignore-locally '%(file)'
 
 # bind status v !sh -c 'nvim %(file)'
-bind generic v !sh -c 'nvim %(file) -c "%(lineno)"'
+bind generic v !sh -c 'nvim "%(file)" -c "%(lineno)"'
 bind generic <Esc>v show-version
 bind status V !sh -c 'code %(file)'
 bind status P !push
@@ -72,7 +80,7 @@ bind main & ?git commit --fixup=%(commit)
 bind main * ?git commit --fixup=%(commit)
 bind main P !push
 
-bind diff A +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
+# bind diff A +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
 # bind diff P +sh -c 'echo Opening in PhpStorm: %(file); silent.sh pstorm %(file)'
 bind diff T +sh -c 'echo Opening in TextAdept: %(file); silent.sh textadept %(file)'
 bind diff <Up> move-up
@@ -237,3 +245,7 @@ set split-view-height = 90%
 # :set id = yes
 # :set main-view-id = yes
 # :set main-view-id-width = 20
+
+set main-view-date = custom
+# set main-view-date-format = "'%y.%m.%d %Hh %a"
+set main-view-date-format = "%a '%y.%m.%d %Hh"
