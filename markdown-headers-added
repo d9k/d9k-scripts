@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+S="$HOME/scripts"
+
+SHORT_MODE=
+FILE_NAME=""
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
+
+  echoerr "Usage: $SCRIPT_NAME [-s|--short] [FILE_NAME]"
+  exit $EXIT_CODE
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -s|--short)
+      SHORT_MODE=1
+      shift
+      ;;
+    -h|--help)
+      help_exit 0
+      ;;
+    -*)
+      echoerr "Unknown option: $1"
+      help_exit 100
+      ;;
+    *)
+      if [[ -z "$FILE_NAME" ]]; then
+        FILE_NAME="$1"
+      else
+        echoerr "Too many arguments"
+        help_exit 110
+      fi
+      shift
+      ;;
+  esac
+done
+
+if [[ -z "$FILE_NAME" ]]; then
+  help_exit 200
+fi
+
+DIFF_OUTPUT=$(git --no-pager diff -- "$FILE_NAME" | grep "^+#" | sed 's/^+//')
+
+if [[ -n $SHORT_MODE ]]; then
+  RESULT=$(echo "$DIFF_OUTPUT" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/^ *//' | sed 's/ *$//')
+else
+  RESULT=$(echo "$DIFF_OUTPUT")
+fi
+
+echo $RESULT
