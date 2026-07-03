@@ -23,7 +23,7 @@ function help_exit { EXIT_CODE="$1";
 
 # Format header: remove leading '#', '/', trim whitespace
 function format_short_header {
-  echo "$1" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/^ *//' | sed 's/ *$//'
+  echo "$1" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/, *[0-9]\{4\}.*$//' | sed 's/^ *//' | sed 's/ *$//'
 }
 
 # Process added headers for a single file
