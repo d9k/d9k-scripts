@@ -46,7 +46,7 @@ if [[ -z "$HEADERS" ]]; then
 fi
 
 # Convert newlines to ", " to create comma-separated list
-HEADERS_ONELINE=$(echo "$HEADERS" | paste -sd ',' | sed 's/,/, /g')
+HEADERS_ONELINE=$(echo "$HEADERS" | paste -sd ';' | sed 's/;/; /g')
 
 # Create commit message
 COMMIT_MSG="${FILE_NAME_SHORT}: ${HEADERS_ONELINE}"
