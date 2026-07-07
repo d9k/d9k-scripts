@@ -2,8 +2,13 @@
 
 # Constants
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
-SRT_FIX_DIR_PATH="$HOME/repos/_dl/srt_fix"
-SRT_FIXER_CLI_PATH="$SRT_FIX_DIR_PATH/srt_fixer_cli.py"
+
+if [[ -z "$SRT_FIXER_CLI_PATH" ]]; then
+  SRT_FIX_DIR_PATH="$HOME/repos/_dl/srt_fix"
+  SRT_FIXER_CLI_PATH="$SRT_FIX_DIR_PATH/srt_fixer_cli.py"
+fi
+
+SRT_FIXER_DOWNLOAD_URL='https://github.com/bindestriche/srt_fix'
 
 # Intermediate variables
 SUBTITLE_INPUT_PATH="$1"
@@ -19,6 +24,8 @@ function help_exit { EXIT_CODE="$1";
   fi
 
   echoerr "Usage: ${SCRIPT_NAME} SUBTITLE_INPUT_PATH"
+  echoerr "ENV variables:"
+  echoerr "  SRT_FIXER_CLI_PATH: path to srt_fixer_cli.py from $SRT_FIXER_DOWNLOAD_URL"
   exit "$EXIT_CODE"
 }
 
@@ -28,7 +35,7 @@ if [ "$#" -lt 1 ]; then
 fi
 
 if [[ ! -f "$SRT_FIXER_CLI_PATH" ]]; then
-  echoerr "Error: executable not found at: $SRT_FIXER_CLI_PATH"
+  echoerr "Error: executable not found at: $SRT_FIXER_CLI_PATH. You can download it from $SRT_FIXER_DOWNLOAD_URL"
   exit 200
 fi
 
