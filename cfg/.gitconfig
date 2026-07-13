@@ -78,6 +78,14 @@ date=format:%Y.%m.%d %H:%M
 [merge]
 	tool = meld
 
+[mergetool "vimdiff"]
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  layout = "LOCAL,MERGED,REMOTE"
+
+[mergetool "nvimdiff"]
+#  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  layout = "LOCAL,MERGED,REMOTE"
+
 [includeIf "gitdir:~/cr/wb/"]
   path = ~/cr/wb/.gitconfig
 
@@ -85,3 +93,8 @@ date=format:%Y.%m.%d %H:%M
     side-by-side = true
     syntax-theme = Dracula
     paging = always
+
+    ; https://github.com/dandavison/delta/issues/1278
+    ; https://docs.rs/chrono/latest/chrono/format/strftime/index.html
+    ; blame-timestamp-output-format = %c
+    blame-timestamp-output-format = '%y.%m.%d
