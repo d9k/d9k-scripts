@@ -114,6 +114,7 @@ bind generic Y !sh -c 'echo "%(text)" | xclip -selection c; echo "[Y]anked to cl
 # bind generic 0 !sh -c 'echo "Line was NOT [Y]anked to clipboard"'
 bind generic U !sh -c "echo '%(text)' | xclip -selection c; echo 'Yanked alternatively (U) to clipboard line:\\n  %(text)\\n'"
 bind generic <Ctrl-L> !sh -c 'D=$(dirname %(file)); echo "/$D:"; echo; ls -l --color "$D"'
+bind generic <Esc>m !markdown-commit '%(file)'
 
 # ; echo "# $D" ; ls -lh --color $D
 #bind main T ?git checkout %(commit)
