@@ -28,7 +28,7 @@ git submodule update --init --recursive
 
 ## Markdown Scripts
 
-- [markdown-append-chapter](./markdown-append-chapter) `[-c|--clipboard] [TARGET_FILENAME]` — Append text fragment from stdin or clipboard to markdown/txt file with fzf selection
+- [markdown-append-chapter](./markdown-append-chapter) `[-c|--clipboard] [TARGET_FILENAME]` — Append text fragment from stdin or clipboard to markdown/txt file using target file selection in `fzf` and adding header from first URL found in text fragment
 - [markdown-commit](./markdown-commit) `[FILE_NAME]` — Commit changed markdown file with auto-generated message from added headers
 - [markdown-fix-header](./markdown-fix-header) `[-c|--clipboard] [-f|--force]` — Fix markdown header by detecting URL and generating title via youtube/url processor
 - [markdown-from-hh-vacancy.sh](./markdown-from-hh-vacancy.sh) `VACANCY_URL` — Convert hh.ru vacancy page to markdown file
