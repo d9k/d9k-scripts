@@ -3,21 +3,12 @@
 TUNNEL_ID="tun-hotspot-prx"
 TABLE_ID=199
 # TUNNEL_SUBNET="10.199.0.0"
-TUNNEL_SUBNET="10.199.0.1"
+TUNNEL_SUBNET="10.199.0.0"
 TUNNEL_IP="10.199.0.1"
 HOTSPOT_SUBNET="10.42.0.0"
 PROXY_PORT=10808
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
-
-sudo ip tuntap add mode tun dev $TUNNEL_ID
-sudo ip addr add $TUNNEL_SUBNET/24 dev "$TUNNEL_ID"
-sudo ip link set dev "$TUNNEL_ID" up
-
-sudo ip route add default via $TUNNEL_IP dev "$TUNNEL_ID" table $TABLE_ID
-sudo ip rule add from $HOTSPOT_SUBNET/24 table $TABLE_ID
-
-# TODO в remove
-sudo ip route add /24 dev wlx503eaa78b4d2 table $TABLE_ID
+WI_FI_DEV="wlx503eaa78b4d2"
 
 TUN_PATH=$(which tun2socks)
 
@@ -29,5 +20,24 @@ function cleanup_and_exit {
 }
 
 trap cleanup_and_exit EXIT INT TERM
+
+sudo ip tuntap add mode tun dev $TUNNEL_ID
+sudo ip addr add $TUNNEL_IP/24 dev "$TUNNEL_ID"
+sudo ip link set dev "$TUNNEL_ID" up
+
+sudo ip route add default via $TUNNEL_IP dev "$TUNNEL_ID" table $TABLE_ID
+sudo ip route add $HOTSPOT_SUBNET/24 dev "$WI_FI_DEV" table $TABLE_ID
+sudo ip route add $TUNNEL_SUBNET/24 dev $TUNNEL_ID table $TABLE_ID
+
+sudo ip rule add from $HOTSPOT_SUBNET/24 table $TABLE_ID
+
+# Маркировка форвард-пакетов от хотспота
+sudo nft add rule ip filter FORWARD iifname "$WI_FI_DEV" mark set 1
+
+# Правило для маркированных пакетов
+sudo ip rule add fwmark 1 table $TABLE_ID
+
+# Удалить старое правило from (если есть)
+sudo ip rule del from $HOTSPOT_SUBNET/24 table $TABLE_ID 2>/dev/null
 
 sudo "$TUN_PATH" -device "$TUNNEL_ID" -proxy socks5://127.0.0.1:$PROXY_PORT
