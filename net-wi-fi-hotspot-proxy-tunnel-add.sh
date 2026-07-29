@@ -37,6 +37,9 @@ sudo nft add rule ip filter FORWARD iifname "$WI_FI_DEV" mark set 1
 # Правило для маркированных пакетов
 sudo ip rule add fwmark 1 table $TABLE_ID
 
+# Проблема в том, что мы добавили mark set 1 в FORWARD, но до того, как пакет принимается в FORWARD, он должен пройти цепочку nm-sh-fw-wlx503eaa78b4d2, где разрешены только пакеты ct state related,established и от 10.42.0.0/24
+sudo nft insert rule ip filter FORWARD mark 1 accept
+
 # Удалить старое правило from (если есть)
 sudo ip rule del from $HOTSPOT_SUBNET/24 table $TABLE_ID 2>/dev/null
 
