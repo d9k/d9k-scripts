@@ -40,15 +40,17 @@ sudo ip route add $TUNNEL_SUBNET dev $TUNNEL_ID table $TABLE_ID
 # sudo nft add rule ip filter FORWARD iifname "$WI_FI_DEV" ip saddr $HOTSPOT_SUBNET mark set 1 accept
 
 #  временно уберём ip saddr
-sudo nft insert rule ip filter FORWARD ip saddr $HOTSPOT_SUBNET mark set 1 accept
+# sudo nft insert rule ip filter FORWARD ip saddr $HOTSPOT_SUBNET mark set 1 accept
 # sudo nft insert rule ip filter FORWARD iifname "$WI_FI_DEV" mark set 1 accept
 
 # sudo nft insert rule ip filter FORWARD iifname "$WI_FI_DEV" ip saddr $HOTSPOT_SUBNET accept
 
 # Правило для маркированных пакетов
-sudo ip rule add fwmark 1 table $TABLE_ID
+# sudo ip rule add fwmark 1 table $TABLE_ID
 
 # Проблема в том, что мы добавили mark set 1 в FORWARD, но до того, как пакет принимается в FORWARD, он должен пройти цепочку nm-sh-fw-wlx503eaa78b4d2, где разрешены только пакеты ct state related,established и от 10.42.0.0/24
 # sudo nft insert rule ip filter FORWARD mark 1 accept
+sudo ip rule add iif "$WI_FI_DEV" table "$TABLE_ID"
+sudo nft insert rule ip filter FORWARD iifname "$WI_FI_DEV" ip saddr $HOTSPOT_SUBNET accept
 
 sudo "$TUN_PATH" -device "$TUNNEL_ID" -proxy socks5://127.0.0.1:$PROXY_PORT
