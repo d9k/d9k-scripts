@@ -7,6 +7,7 @@ S="$HOME/scripts"
 
 SHORT_MODE=
 FILE_NAME=""
+FILTER_HEADERS=("Комментарии" "Comments")
 
 function echoerr {
   printf "%s\n" "$*" >&2;
@@ -21,9 +22,18 @@ function help_exit { EXIT_CODE="$1";
   exit $EXIT_CODE
 }
 
-# Format header: remove leading '#', '/', trim whitespace
+# Format header: remove leading '#', '/', trim whitespace, filter excluded headers
 function format_short_header {
-  echo "$1" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/, *[0-9]\{4\}.*$//' | sed 's/^ *//' | sed 's/ *$//'
+  local FILTER_PATTERN=""
+  for FILTER in "${FILTER_HEADERS[@]}"; do
+    if [[ -z "$FILTER_PATTERN" ]]; then
+      FILTER_PATTERN="^${FILTER}$"
+    else
+      FILTER_PATTERN="${FILTER_PATTERN}|^${FILTER}$"
+    fi
+  done
+
+  echo "$1" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/, *[0-9]\{4\}.*$//' | sed 's/^ *//' | sed 's/ *$//' | grep -Ev "$FILTER_PATTERN"
 }
 
 # Process added headers for a single file
