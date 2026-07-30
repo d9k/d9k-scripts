@@ -24,15 +24,7 @@ function help_exit { EXIT_CODE="$1";
 
 # Format header: remove leading '#', '/', trim whitespace, filter excluded headers
 function format_short_header {
-  local FILTER_PATTERN=""
-  for FILTER in "${FILTER_HEADERS[@]}"; do
-    if [[ -z "$FILTER_PATTERN" ]]; then
-      FILTER_PATTERN="^${FILTER}$"
-    else
-      FILTER_PATTERN="${FILTER_PATTERN}|^${FILTER}$"
-    fi
-  done
-
+  local FILTER_PATTERN=$(printf '^%s$\n' "${FILTER_HEADERS[@]}" | paste -sd'|')
   echo "$1" | sed 's/^#* *//' | sed 's/ *\/.*$//' | sed 's/, *[0-9]\{4\}.*$//' | sed 's/^ *//' | sed 's/ *$//' | grep -Ev "$FILTER_PATTERN"
 }
 
