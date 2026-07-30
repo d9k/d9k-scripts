@@ -53,4 +53,4 @@ sudo ip route add $TUNNEL_SUBNET dev $TUNNEL_ID table $TABLE_ID
 sudo ip rule add iif "$WI_FI_DEV" table "$TABLE_ID"
 sudo nft insert rule ip filter FORWARD iifname "$WI_FI_DEV" ip saddr $HOTSPOT_SUBNET accept
 
-sudo "$TUN_PATH" -device "$TUNNEL_ID" -proxy socks5://127.0.0.1:$PROXY_PORT
+sudo "$TUN_PATH" --loglevel debug --device "$TUNNEL_ID" --proxy socks5://127.0.0.1:$PROXY_PORT
