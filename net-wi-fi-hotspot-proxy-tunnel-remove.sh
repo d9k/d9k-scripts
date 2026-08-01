@@ -8,18 +8,11 @@ HOTSPOT_SUBNET="10.42.0.0/24"
 set -x
 
 sudo nft -a list chain ip filter FORWARD
-# sudo nft delete rule ip filter FORWARD handle НОМЕР
-# sudo nft delete rule ip filter FORWARD iifname "$WI_FI_DEV" ip saddr $HOTSPOT_SUBNET/24 accept
-# sudo nft delete rule ip filter FORWARD iifname "$WI_FI_DEV" mark set 1 
-# sudo ip rule del fwmark 1 table $TABLE_ID
 sudo ip rule del iif "$WI_FI_DEV" table $TABLE_ID 2>/dev/null
-# sudo nft delete rule ip filter FORWARD iifname "$WI_FI_DEV" ip saddr $HOTSPOT_SUBNET mark set 1 accept
 HANDLE=$(sudo nft -a list chain ip filter FORWARD 2>/dev/null | grep -oP 'mark set 0x00000001.*# handle \K\d+')
 if [ -n "$HANDLE" ]; then
     sudo nft delete rule ip filter FORWARD handle "$HANDLE"
 fi
-# Нельзя удалять
-# sudo nft delete chain ip filter FORWARD
 sudo nft -a list chain ip filter FORWARD
 
 ip rule show table "$TABLE_ID"
