@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# TODO: proxify DNS requests!
+
+# DeepSeek explanation: 
+# The problem is that simply redirecting traffic via REDIRECT doesn't work for SOCKS5, as SOCKS5 is a protocol, not a transparent proxy. REDIRECT in iptables only works for transparent proxies (usually HTTP), not for SOCKS5, which requires special handling.
+# To solve this problem, you'll need an intermediate tool that can accept transparently redirected traffic and convert it to SOCKS5. The most popular option is redsocks.
+# Or you can use tun2socks, which creates a virtual interface and routes traffic through it:
+# https://github.com/xjasonlyu/tun2socks
+# `go install github.com/xjasonlyu/tun2socks/v2@latest`
+
 TUNNEL_ID="tun-hotspot-prx"
 TABLE_ID=199
 TUNNEL_SUBNET="10.199.0.0/24"
