@@ -48,7 +48,7 @@ if ! command -v mozjpeg &> /dev/null ;then
     exit 35
 fi
 
-for FILE in $(ls -rt *.png); do
+for FILE in *.png; do
     TIMESTAMP=$(stat -c %.Y "$FILE")
     NEW_FILE=$(echo "$TIMESTAMP > $LAST_TIMESTAMP" | bc -l)
     if [[ ! -f "$FILE" ]]; then
