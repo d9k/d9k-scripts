@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+# scripts-count — находит все файлы в текущей директории и выводит их число вместе со списком (FILES).
+
+# set -euo pipefail
+
+FILES=$( \
+  find . -type f -not -path '*/.*' \
+    -not -name '*.amgp' \
+    -not -name '*.code-snippets' \
+    -not -name '*.bk' \
+    -not -name '*.conf' \
+    -not -name '*.css' \
+    -not -name '*.deprecated' \
+    -not -name '*.draft' \
+    -not -name '*.dump' \
+    -not -name '*.html' \
+    -not -name '*.icls' \
+    -not -name '*.iml' \
+    -not -name '*.ini' \
+    -not -name '*.json' \
+    -not -name '*.khotkeys' \
+    -not -name '*.markdown' \
+    -not -name '*.md' \
+    -not -name '*.org' \
+    -not -name '*.png' \
+    -not -name '*.rasi' \
+    -not -name '*.scm' \
+    -not -name '*.sublime-settings' \
+    -not -name '*.template' \
+    -not -name '*.tiff' \
+    -not -name '*.txt' \
+    -not -name '*.vim' \
+    -not -name '*.vue' \
+    -not -name '*.Xmodmap' \
+    -not -name '*.xml' \
+  | sort
+)
+
+printf '%s\n' "$FILES"
+printf '%s\n' "$FILES" | wc -l
