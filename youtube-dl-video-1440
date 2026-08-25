@@ -1,3 +1,15 @@
 #!/bin/bash
 
-youtube-dl --no-playlist -f 'bestvideo[height<=1440]+bestaudio' "$@"
+youtube-dl \
+  --no-playlist \
+  -f 'bestvideo[height<=1440]+bestaudio' \
+  --write-thumbnail \
+  --write-auto-subs \
+  --write-info-json \
+  --convert-thumbnails jpg \
+  --convert-subtitles srt \
+  --ignore-errors \
+  "$@"
+
+
+  # --sub-format srt \
