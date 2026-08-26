@@ -1,0 +1,17 @@
+#!/bin/bash
+
+BRANCH="$1"
+
+if [[ -z "$BRANCH" ]]; then
+  echo "BRANCH required"
+  exit
+fi
+
+REVISIONS=$(git rev-list --reverse origin/$BRANCH..$BRANCH)
+
+echo "Revisions to push:"
+echo "$REVISIONS"
+
+for REV in $REVISIONS; do
+  ( set -x; git push origin "$REV:$BRANCH" )
+done
