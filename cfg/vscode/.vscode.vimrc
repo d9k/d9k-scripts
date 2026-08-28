@@ -21,6 +21,7 @@ map GT /^<template<CR>
 map GC /^<style<CR>
 map GE /\bextends\b<CR>w
 map GI gg/^import\b<CR>
+map GD /export default<CR>W
 
 " For temporary testing
 map <leader>T iii
