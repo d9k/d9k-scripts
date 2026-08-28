@@ -1813,5 +1813,47 @@
     "key": "ctrl+y",
     "command": "sourcecraft-code-assist.acceptInput",
     "when": "!editorFocus && !editorTextFocus && !hasDiffBlock"
+  },
+	{
+    "key": "ctrl+shift+alt+j",
+    "command": "java.view.package.copyRelativeFilePath",
+    "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
+  },
+  {
+    "key": "ctrl+shift+alt+c",
+    "command": "-java.view.package.copyRelativeFilePath",
+    "when": "focusedView == 'javaProjectExplorer' && java:serverMode == 'Standard'"
+  },
+  {
+    "key": "ctrl+shift+alt+c",
+    "command": "copy.absolutePath"
+  },
+	{
+    "key": "ctrl+k ctrl+a",
+    "command": "-roo-cline.addToContext",
+    "when": "editorHasSelection && editorTextFocus"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "zoo-code.acceptInput"
+	},
+	{
+		"key": "ctrl+l ctrl+l",
+		"command": "zoo-code.focusInput"
+	},
+	{
+		"key": "ctrl+y",
+		"command": "-extension.vim_ctrl+y",
+		"when": "editorTextFocus && vim.active && vim.use<C-y> && !inDebugRepl"
+	},
+	{
+		"key": "ctrl+l ctrl+a",
+		"command": "zoo-code.addToContext",
+		"when": "editorHasSelection && editorTextFocus"
+	},
+	{
+		"key": "ctrl+k ctrl+a",
+		"command": "-zoo-code.addToContext",
+		"when": "editorHasSelection && editorTextFocus"
   }
 ]
