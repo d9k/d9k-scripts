@@ -1642,12 +1642,22 @@
   },
   {
     // next text block
-    "key": "alt+m",
+    "key": "Shift-]",
     "command": "vim.remap",
     // "when": "inputfocus && vim.mode",
     "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
     "args": {
       "after": ["}", "}", "{", "j"]
+    }
+  },
+  {
+    // next empty block
+    "key": "alt+m",
+    "command": "vim.remap",
+    // "when": "inputfocus && vim.mode",
+    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+    "args": {
+      "after": ["}"]
   }
   },
   {
@@ -1662,11 +1672,20 @@
   },
   {
     // previous text block
-    "key": "alt+n",
+    "key": "Shift+[",
     "command": "vim.remap",
     "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
     "args": {
       "after": ["{", "{", "j"]
+    }
+  },
+  {
+    "key": "alt+n",
+    // previous empty block
+    "command": "vim.remap",
+    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+    "args": {
+      "after": ["{"]
     }
   },
   {
