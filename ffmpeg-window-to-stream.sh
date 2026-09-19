@@ -20,13 +20,16 @@ echo -e "In OBS Studio add \"Media Source\", uncheck \"Local File\", copy \"$STR
 
 set -x
 
+  # -framerate 16 \
+  # -vcodec libx264 \
+  # -crf 28 \ 
+  # -re \ # DeepSeek: Флаг -re заставляет ffmpeg читать вход в реальном времени. Но x11grab и так захватывает в реальном времени! В сочетании с -re ffmpeg искусственно тормозит захват, и всё упирается в 1x speed. Для live-захвата окна -re не нужен, его надо убрать.
+  # -f dshow \
 ffmpeg \
-  -re \
   -f x11grab \
   -framerate 30 \
   -window_id "$WINDOW_ID" \
   -i :0.0 \
-  -f dshow \
   -vcodec libx264 \
   -pix_fmt yuv420p \
   -tune zerolatency \
