@@ -6,6 +6,7 @@
 # (Чем выше, тем приоритетнее)
 WINDOW_CLASSES=(
   "gimp.Gimp"
+  "org.inkscape"
 )
 
 for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
