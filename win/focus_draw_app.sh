@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Посмотреть список классов открытых окон:
 # wmctrl -lx
@@ -11,24 +12,32 @@ WINDOW_CLASSES=(
 
 for (( ix=0 ; ix<${#WINDOW_CLASSES[@]} ; ix++ )); do
   WINDOW_CLASS="${WINDOW_CLASSES[ix]}"
-	echo "checking \"${WINDOW_CLASS}\":"
-  WINDOW_NUMBER=1
+ 
+  echo "checking \"${WINDOW_CLASS}\":"
 
-  # wmctrl: -x: output WIN CLASS too
-  WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n ${WINDOW_NUMBER}p)
+ ${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS"
 
-  echo $WMCTRL_SEARCH_OUTPUT
-
-  WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
-
-  if [[ -n "$WMCTRL_NUMBER" ]]; then
-    echo "Focusing ${WMCTRL_NUMBER}"
-
-    # wmctrl:
-    # -a: activate
-    # -i: int value, not caption text
-    # -v: verbose
-    ( set -x; wmctrl -v -i -a  ${WMCTRL_NUMBER} )
-    exit
+  if [ "$?" -eq "0" ]; then
+    echo "Window found. Exitting"
+    exit;
   fi
+  # WINDOW_NUMBER=1
+
+  # # wmctrl: -x: output WIN CLASS too
+  # WMCTRL_SEARCH_OUTPUT=$(wmctrl -lx | grep ${WINDOW_CLASS} | sed -n ${WINDOW_NUMBER}p)
+  #
+  # echo $WMCTRL_SEARCH_OUTPUT
+  #
+  # WMCTRL_NUMBER=$(echo "$WMCTRL_SEARCH_OUTPUT" | awk '{print $1;}')
+
+  # if [[ -n "$WMCTRL_NUMBER" ]]; then
+  #   echo "Focusing ${WMCTRL_NUMBER}"
+  #
+  #   # wmctrl:
+  #   # -a: activate
+  #   # -i: int value, not caption text
+  #   # -v: verbose
+  #   ( set -x; wmctrl -v -i -a  ${WMCTRL_NUMBER} )
+    # exit
+  # fi
 done
