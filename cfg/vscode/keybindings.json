@@ -1874,5 +1874,10 @@
 		"key": "ctrl+k ctrl+a",
 		"command": "-zoo-code.addToContext",
 		"when": "editorHasSelection && editorTextFocus"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "-extension.vim_ctrl+c",
+    "when": "editorTextFocus && vim.active && vim.overrideCtrlC && vim.use<C-c> && !inDebugRepl"
   }
 ]
