@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# See https://github.com/be5invis/vscode-custom-css 
+
+
+set -x
+sudo chown -R $(whoami) "$(which code)"
+sudo chown -R $(whoami) /usr/share/code
