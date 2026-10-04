@@ -1,9 +1,23 @@
 {
+  /** https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css */
+  "vscode_custom_css.imports": [
+    "file://${userHome}/.config/Code/User/customStyles/custom-main.css"
+    ],
+  //  "custom-ui-style.external.imports": [
+  //   "file:///home/d9k/.config/Code/User/customStyles/settings.css",
+  // ],
+  // "custom-ui-style.stylesheet": {
+  //   "body": {
+  //     "--vscode-font-size": "18px",
+  //   }
+  // },
+
   "deno.path": "/home/d9k/.deno/bin/deno",
   "telemetry.telemetryLevel": "off",
   "scm.workingSets.enabled": true,
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
+  // "workbench.editor.enablePreview": false,
   "workbench.list.horizontalScrolling": true,
   "workbench.hover.delay": 100,
   "workbench.iconTheme": "a-file-icon-vscode",
@@ -30,8 +44,17 @@
       "editor.background": "#1b150c"
     },
     "[Palenight Italic]": {
-      "editor.background": "#100518",
-      "sideBar.background": "#090013cb",
+      // "editor.background": "#100518",
+      // "editor.background": "#08000f",
+      // "editor.background": "#0d000e",
+      // "editor.background": "#0c000d",
+      "editor.background": "#0d0007",
+      /** markdown: */
+      // "editor.foreground": "#d8d8d8",
+      "editor.foreground": "#e5e5e5",
+      // "sideBar.background": "#090013cb",
+      // "sideBar.background": "#090013cb",
+      "sideBar.background": "#0d0013",
       "sideBar.foreground": "#8aafc9",
       "tab.inactiveForeground": "#b4bae2",
       "tab.inactiveBackground": "#2b2342",
@@ -150,12 +173,13 @@
   "editor.scrollbar.vertical": "visible",
   "remote.SSH.showLoginTerminal": true,
   "remote.SSH.useLocalServer": false,
-  "remote.SSH.remotePlatform": {
-      "109.71.8.230": "linux"
-  },
   "php.suggest.basic": false,
+
+  /** Needed to have devicePixelRatio=1! Required if anti-alising disabled! */
+  "window.zoomLevel": 0,
+
   // == saxMono font ==
-  "editor.fontFamily": "'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  // "editor.fontFamily": "'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
   // "editor.fontSize": 13.5,
   // "editor.fontSize": 14,
   // "editor.fontWeight": "bold",
@@ -170,17 +194,37 @@
   // "window.zoomLevel": 0.33,
   // =======================
   // "terminal.integrated.fontFamily": "monospace",
-  "terminal.integrated.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
-  // "terminal.integrated.fontSize": 15,
-  // # Zoom (mostly for debugger variables font)
-  // "window.zoomLevel": 0.33,
-  "window.zoomLevel": 0.66,
-  // "terminal.integrated.fontSize": 14,
+
+  // "editor.fontFamily": "'Terminess Nerd Font', 'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace'", // 13.5
+  // "editor.fontFamily": "'Consoleet Terninus', 'Terminess Nerd Font', 'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace'", // 14
+
+  // "editor.fontFamily": "'Ubuntu Mono', 'Consoleet Terninus', 'Terminess Nerd Font', 'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace'", // 14
+  // "editor.fontFamily": "'Spleen 12x24', 'Ubuntu Mono', 'Consoleet Terninus', 'Terminess Nerd Font', 'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace'", //
+  // "editor.fontFamily": "Spleen 16x32", //
+  // "editor.fontFamily": "'Terminess Nerd Font', 'saxMono', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace'", // 13.5
+  // "editor.fontFamily": "'Droid Sans Mono', 'monospace'",
+  // "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', 'monospace'",
+  // "editor.fontFamily": "'monospace'",
+  "editor.fontFamily": "Consoleet Terminus-16",
+  // "editor.fontSize": 14.2,
+  // "editor.fontSize": 16.0,
+  // "editor.fontSize": 14.0,
   // "editor.fontSize": 13.5,
-  "editor.fontSize": 13.0,
-  "editor.fontWeight": "bold",
-  "editor.letterSpacing": 0.8,
-  "editor.lineHeight": 2.1,
+  // "editor.fontSize": 13.8,
+  "editor.fontSize": 16,
+  // "editor.fontWeight": "bold",
+  // "editor.fontWeight": "600",
+  // "editor.fontWeight": "300",
+  // "editor.letterSpacing": 0.5,
+  // "editor.letterSpacing": 0.8,
+  "editor.letterSpacing": 1.0,
+  // "editor.letterSpacing": 1.2,
+  // "editor.letterSpacing": 1.5,
+  "editor.lineHeight": 2.3,
+
+  "terminal.integrated.fontFamily": "''Terminess Nerd Font', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  // "terminal.integrated.fontSize": 14,
+
   // etc
     "git.suggestSmartCommit": false,
     "files.trimTrailingWhitespace": true,
@@ -244,8 +288,10 @@
     "import vue file": "/home/d9k/scripts/import-vue ${file} ${lineNumber}"
   },
   "editor.unicodeHighlight.nonBasicASCII": false,
+
   "javascript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+
   "workbench.sideBar.location": "right",
   "workbench.editor.labelFormat": "short",
   // "workbench.editor.customLabels.patterns": {
@@ -362,7 +408,6 @@
     "git show",
     "playwright-cli",
     "cd",
-    "playwright-cli click",
     "cat",
     "ls",
     "git status",
@@ -372,9 +417,48 @@
   "files.associations": {
     "*.render_script": "lua"
   },
-  "[typescript]": {
-  },
+
   "typescript.tsserver.log": "verbose",
+
+  // # AI
+  "chat.disableAIFeatures": true,
+  "zoo-code.debug": false,
+  "zoo-code.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show",
+    "markdown-from-hh-vacancy.sh",
+    "cat ~/tx/d9k-docs/resume.txt",
+    "cat $HOME/tx/d9k-docs/resume.txt",
+    "cat /home/d9k/tx/d9k-docs/resume.txt",
+    "cat \"$HOME/tx/d9k-docs/resume.txt\"",
+    "npx tsc --noEmit 2>&1"
+  ],
+  "zoo-code.deniedCommands": [],
+
+  "roo-cline.debug": false,
+  "roo-cline.allowedCommands": [
+    "git log",
+    "git show",
+    "grep",
+    "git status",
+    "git --no-pager diff",
+    "git add",
+    "git status --porcelain",
+    "markdown-headers.sh -n",
+    "head",
+    "markdown-header-from-youtube --proxy=\"socks5://127.0.0.1:1080\" ",
+    "wc",
+    "url-metadata",
+    "tail",
+    "echo",
+    "git --no-pager log",
+    "grep-files-names -l ",
+    "web-to-markdown",
+    "markdown-from-hh-vacancy.sh",
+    "markdown-header-from-youtube"
+  ],
+  "roo-cline.deniedCommands": [],
 
   // # VSCodeVim
   "vim.leader": "<Space>",

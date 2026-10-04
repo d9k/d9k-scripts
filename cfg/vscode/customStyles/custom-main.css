@@ -1,0 +1,20 @@
+/** https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css&ssr=false#overview */
+body {
+  /* Doesn't work! */
+  --vscode-font-size: 16px;
+  /* font-size: 16px !important; */
+}
+
+/* html { */
+/*   --vscode-font-size: 18px; */
+/* } */
+/**/
+/* :root { */
+/*   --vscode-font-size: 18px; */
+/* } */
+
+/* tabs text */
+.monaco-workbench .part.editor > .content .editor-group-container > .title .title-label a,
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a {
+	font-size: 16px;
+}
