@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Increase File Explorer tree item height in the installed VS Code (desktop) bundle.
+# Tested with VSCode version 1.134.0
 #
 # Patches ExplorerDelegate.ITEM_HEIGHT inside the single minified ESM bundle:
 #   /usr/share/code/resources/app/out/vs/workbench/workbench.desktop.main.js
