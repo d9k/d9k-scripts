@@ -50,6 +50,7 @@ bind generic 0 !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -
 # Alt-p
 bind generic <Esc>p !sh -c 'FPATH=$(printf "%s" "%(file)"); printf "$FPATH" | xclip -selection c && echo "[0]: File path copied to clipboard ($FPATH)"'
 # bind stage p +sh -c 'FPATH=$(printf "%(file)"); printf "$FPATH" | xclip -selection c && echo "File [p]ath copied to clipboard ($FPATH)"'
+bind generic <Esc>h !tig %(file)
 
 bind diff A !amend
 bind log A !amend
