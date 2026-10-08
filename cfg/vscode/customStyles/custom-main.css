@@ -53,6 +53,48 @@ body {
   background-size: 22px;  
 }
 
+/**
+ * === Search results tree ===
+ */
+
+/**
+ * Search results item size increase,
+ * JS patch required! (the same script also patches SearchDelegate.ITEM_HEIGHT)
+ * https://github.com/d9k/d9k-scripts/blob/master/vscode-patch-file-explorer-increase-item.sh
+ *
+ * Keep 32px in sync with the patched ITEM_HEIGHT.
+ * Stock rules (searchview.css) use `line-height: 22px; height: 100%` for
+ * .foldermatch / .filematch / .textsearchresult / .linematch.
+ */
+.search-view .foldermatch,
+.search-view .filematch,
+.search-view .textsearchresult,
+.search-view .linematch {
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 16px !important;
+    font-family: var(--vscode-editor-font-family);
+}
+
+.search-view .foldermatch .monaco-icon-label,
+.search-view .filematch .monaco-icon-label,
+.search-view .textsearchresult .monaco-icon-label {
+    line-height: 32px !important;
+}
+
+
+.search-view .foldermatch .monaco-icon-label:before,
+.search-view .filematch .monaco-icon-label:before,
+.search-view .textsearchresult .monaco-icon-label:before {
+  height: 32px;
+  width: 24px;
+  background-size: 22px;
+}
+
+.search-view .linematch .matchLineNum {
+    line-height: 32px !important;
+}
+
 /* * { */
 /*   color: red !important;  */
 /* } */
