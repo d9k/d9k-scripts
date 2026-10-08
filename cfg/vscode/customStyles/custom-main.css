@@ -5,6 +5,14 @@ body {
   /* font-size: 16px !important; */
 }
 
+/* Doesn't work inside markdown iframe*/
+/* "markdown.preview.fontSize" etc is configutable, */
+/* Add to /usr/share/code/resources/app/extensions/markdown-language-features/media/markdown.css, rebuild */
+.markdown-body {
+  letter-spacing: 1px;
+}
+
+
 /* html { */
 /*   --vscode-font-size: 18px; */
 /* } */
