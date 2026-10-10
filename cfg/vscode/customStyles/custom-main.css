@@ -27,7 +27,27 @@ body {
 
 .monaco-workbench .part.editor > .content .editor-group-container > .title .title-label a,
 .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label a {
-	font-size: 16px;
+	font-size: var(--vscode-font-size);
+}
+
+/* 
+ * === Breadcrumbs ===
+ */
+.monaco-breadcrumbs,
+.breadcrumbs-control {
+	font-size: var(--vscode-font-size);
+  height: 30px !important;
+}
+
+.monaco-workbench .part.editor > .content .editor-group-container > .title .breadcrumbs-below-tabs .breadcrumbs-control .monaco-icon-label::before {
+  height: 26px !important;
+  background-size: 26px;
+  width: 26px;
+}
+
+.monaco-breadcrumbs .monaco-breadcrumb-item .codicon-breadcrumb-separator {
+  color: inherit;
+  width: 26px;
 }
 
 /** 
@@ -93,6 +113,29 @@ body {
 
 .search-view .linematch .matchLineNum {
     line-height: 32px !important;
+}
+
+/** Increase status bar */
+
+.monaco-workbench .part.statusbar {
+  font-size: 18px;
+}
+
+.split-view-view:has(footer.statusbar) {
+  height: 28px !important;
+  transform: translateY(-4px);
+}
+
+.split-view-view footer.statusbar {
+  height: 28px !important;
+}
+
+.split-view-view:has(.monaco-grid-branch-node) {
+  transform: translateY(-4px);
+}
+
+.split-view-view .sidebar {
+  border-top: 3px solid rgb(40, 44, 61);
 }
 
 /* * { */
