@@ -1879,5 +1879,14 @@
     "key": "ctrl+c",
     "command": "-extension.vim_ctrl+c",
     "when": "editorTextFocus && vim.active && vim.overrideCtrlC && vim.use<C-c> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+l ctrl+e",
+    "command": "zoo-code.popoutButtonClicked"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "-extension.vim_ctrl+f",
+    "when": "editorTextFocus && vim.active && vim.use<C-f> && !inDebugRepl && vim.mode != 'Insert'"
   }
 ]
