@@ -8,11 +8,11 @@
 #   w3m -T text/html -dump | less
 
 # sudo apt-get install stardict sdcv
-sdcv "$@" | \
-  grep -v "\-\->" | \
-  sed 's|<t>|[|g' | \
-  sed 's|</t>|]|g' | \
-  sed 's|<br>|\n\n|g' | \
-  less
+  sdcv "$@" \
+    | grep -v "\-\->" \
+    | sed 's|<t>|[|g' \
+    | sed 's|</t>|]|g' \
+    | sed 's|<br>|\n\n|g' \
+    | less
 
 # w3m -T text/html -dump | \
