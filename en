@@ -12,6 +12,8 @@ MAX_LINES_PREVIEW=12
 # sudo apt-get install stardict sdcv
 RESULT=$(\
   sdcv "$@" \
+    | grep -v "Found 1 items, similar" \
+    | sed '/^$/d' `# remove trailing empty lines` \
     | grep -v "\-\->" \
     | sed 's|<t>|[|g' \
     | sed 's|</t>|]|g' \
