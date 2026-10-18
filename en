@@ -18,7 +18,10 @@ RESULT=$(\
     | sed 's|<t>|[|g' \
     | sed 's|</t>|]|g' \
     | sed 's|<br>|\n\n|g' \
+    | rg --passthru --multiline --replace '$2                    $1' '^(.*)\n(\[.*)$' \
 ) 
+
+# | rg --passthru --multiline --replace ' $1' '\n(\[.*)$' \
 
 LINES_COUNT=$(echo -e "$RESULT" | wc -l)
 
