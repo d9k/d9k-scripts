@@ -7,12 +7,28 @@
 # sdcv "$@" | \
 #   w3m -T text/html -dump | less
 
+MAX_LINES_PREVIEW=16
+
+
 # sudo apt-get install stardict sdcv
-  sdcv "$@" \
+RESULT=$(sdcv "$@" \
     | grep -v "\-\->" \
     | sed 's|<t>|[|g' \
     | sed 's|</t>|]|g' \
-    | sed 's|<br>|\n\n|g' \
-    | less
+    | sed 's|<br>|\n\n|g')
+
+LINES_COUNT=$(echo -e "$RESULT_HEAD | wc -l")
+
+if [ $LINES_COUNT -lt $MAX_LINES_PREVIEW ]; then
+  echo -e "$RESULT"
+else
+  RESULT_HEAD=$(echo -e "$RESULT" | head -n $MAX_LINES_PREVIEW)
+  echo -e "$RESULT_HEAD"
+  # echo ". . . . . . . . . ."
+  # echo ". . . . ."
+  echo -e ". . . . ."
+  echo -e "$RESULT" | less --quit-if-one-screen
+fi
+
 
 # w3m -T text/html -dump | \
