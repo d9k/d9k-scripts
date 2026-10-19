@@ -1,0 +1,5 @@
+id;name;email;age;city
+1;Alice;alice@example.com;17;Moscow
+2;Bob;bob@example.com;23;Berlin
+3;Carol;carol@example.com;18;London
+4;Dave;dave@example.com;42;Paris
