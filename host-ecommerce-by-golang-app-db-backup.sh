@@ -5,7 +5,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source "$SCRIPT_DIR/inc/source_once.inc.sh"
 source_once "$SCRIPT_DIR/inc/echoerr.inc.sh"
 
-PROJECT_DIR=$HOME/repos/_e-commerce/ecommerce-by-golang-app
+if [[ -z "$ECOMMERCE_BY_GOLANG_APP_DIR" ]]; then
+  ECOMMERCE_BY_GOLANG_APP_DIR="$HOME/repos/_e-commerce/ecommerce-by-golang-app"
+fi
 
 DB_HOST="127.0.0.1"
 DB_USER="ecommerce_by_golang_app"

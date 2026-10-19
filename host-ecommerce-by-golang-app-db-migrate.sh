@@ -5,7 +5,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source "$SCRIPT_DIR/inc/source_once.inc.sh"
 source_once "$SCRIPT_DIR/inc/echoerr.inc.sh"
 
-PROJECT_DIR=$HOME/repos/_e-commerce/ecommerce-by-golang-app
+if [[ -z "$ECOMMERCE_BY_GOLANG_APP_DIR" ]]; then
+  ECOMMERCE_BY_GOLANG_APP_DIR="$HOME/repos/_e-commerce/ecommerce-by-golang-app"
+fi
 
 SQL_USER=ecommerce_by_golang_app
 SQL_PASSWORD=$(pass servers/d9k_lap/psql/ecommerce_by_golang_app)
@@ -18,7 +20,7 @@ if [[ -z "$SQL_PASSWORD" ]]; then
   exit 100
 fi
 
-cd "$PROJECT_DIR"
+cd "$ECOMMERCE_BY_GOLANG_APP_DIR"
 
 # Проверка наличия утилиты migrate
 if ! command -v migrate &> /dev/null; then

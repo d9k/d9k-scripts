@@ -1,43 +1,56 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+COMMANDS_PREFIX="${SCRIPT_NAME%.sh}-"
+DEFAULT_COMMAND="run"
 
 source "$SCRIPT_DIR/inc/source_once.inc.sh"
 source_once "$SCRIPT_DIR/inc/echoerr.inc.sh"
 
-PROJECT_DIR=$HOME/repos/_e-commerce/ecommerce-by-golang-app
-BACKEND_DIR="$PROJECT_DIR/backend"
-BUILD_DIR="$PROJECT_DIR/build/backend"
+function list_commands {
+  local SCRIPT_PATH COMMAND_NAME
+  for SCRIPT_PATH in "$SCRIPT_DIR/${COMMANDS_PREFIX}"*.sh; do
+    [[ -e "$SCRIPT_PATH" ]] || continue
+    COMMAND_NAME="$(basename "$SCRIPT_PATH" .sh | sed "s|^${COMMANDS_PREFIX}||")"
+    echoerr "  $COMMAND_NAME"
+  done
+}
 
-# Database configuration
-export POSTGRES_HOST=localhost
-export POSTGRES_PORT=5437
-export POSTGRES_USER=ecommerce_by_golang_app
-export POSTGRES_DB=ecommerce_by_golang_app
-export POSTGRES_PASSWORD=$(pass servers/d9k_lap/psql/ecommerce_by_golang_app)
+function help_exit { EXIT_CODE="$1";
+  if [[ -z "$EXIT_CODE" ]]; then
+    EXIT_CODE=1
+  fi
 
-# Application configuration
-export UPLOADS_DIR="$BACKEND_DIR/data/uploads"
-export BASE_URL=http://localhost:8080
+  echoerr "Usage: $SCRIPT_NAME [COMMAND] [ARGS...]"
+  echoerr
+  echoerr "Runs adjacent script \"$SCRIPT_DIR/${COMMANDS_PREFIX}COMMAND.sh\""
+  echoerr "passing the remaining ARGS to it."
+  echoerr "Default COMMAND is \"$DEFAULT_COMMAND\"."
+  echoerr
+  echoerr "Available COMMANDs:"
+  list_commands
 
-# OpenTelemetry: disable exporter since no collector is running locally
-export OTEL_EXPORTER_OTLP_ENDPOINT=""
+  exit $EXIT_CODE
+}
 
-if [[ -z "$POSTGRES_PASSWORD" ]]; then
-  echoerr "Error: POSTGRES_PASSWORD not defined"
-  exit 100
+if [[ $# -eq 0 ]]; then
+  COMMAND="$DEFAULT_COMMAND"
+else
+  COMMAND="$1"
+  shift
 fi
 
-cd "$BACKEND_DIR"
-
-echo "Building backend from $BACKEND_DIR..."
-mkdir -p "$BUILD_DIR"
-( set -x; go build -o "$BUILD_DIR/web" ./cmd/web )
-
-if [[ $? -ne 0 ]]; then
-  echoerr "Build failed"
-  exit 100
+if [[ "$COMMAND" == "help" || "$COMMAND" == "list" || "$COMMAND" == "-h" || "$COMMAND" == "--help" ]]; then
+  help_exit 0
 fi
 
-echo "Running backend..."
-( set -x; "$BUILD_DIR/web" )
+TARGET_SCRIPT_PATH="$SCRIPT_DIR/${COMMANDS_PREFIX}${COMMAND}.sh"
+
+if [[ ! -f "$TARGET_SCRIPT_PATH" ]]; then
+  echoerr "Error: unknown command \"$COMMAND\", no script \"$TARGET_SCRIPT_PATH\""
+  echoerr
+  help_exit 100
+fi
+
+exec "$TARGET_SCRIPT_PATH" "$@"

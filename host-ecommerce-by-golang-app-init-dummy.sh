@@ -5,8 +5,11 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source "$SCRIPT_DIR/inc/source_once.inc.sh"
 source_once "$SCRIPT_DIR/inc/echoerr.inc.sh"
 
-PROJECT_DIR=$HOME/repos/_e-commerce/ecommerce-by-golang-app
-BACKEND_DIR="$PROJECT_DIR/backend"
+if [[ -z "$ECOMMERCE_BY_GOLANG_APP_DIR" ]]; then
+  ECOMMERCE_BY_GOLANG_APP_DIR="$HOME/repos/_e-commerce/ecommerce-by-golang-app"
+fi
+
+BACKEND_DIR="$ECOMMERCE_BY_GOLANG_APP_DIR/backend"
 
 # Database configuration
 export POSTGRES_PORT=$(pass-env servers/d9k_lap/psql/info DB_PORT)
