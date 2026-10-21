@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FILE_MOUSE_EVENT_COUNT_PATH="$HOME/.hw-mouse-events-count"
+
+MOUSE_EVENTS_COUNT=$(cat $FILE_MOUSE_EVENT_COUNT_PATH 2>/dev/null)
+rm $FILE_MOUSE_EVENT_COUNT_PATH
