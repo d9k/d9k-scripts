@@ -84,3 +84,9 @@ map [n ?["']name["']<CR>n<Esc>W
 " [r]un [s]ql2json
 vnoremap <leader>rs :'<,'>!$HOME/scripts/sql2json.ts<CR>
 
+" } / {  - select block of text instead of space between blocks
+noremap <A-m> }
+noremap <A-n> {
+
+noremap } }}{j
+noremap { {{j
