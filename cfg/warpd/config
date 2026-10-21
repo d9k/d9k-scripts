@@ -1,0 +1,13 @@
+# See https://github.com/rvaiya/warpd
+#
+# windows key mapped instead of [M]eta!
+# https://github.com/rvaiya/warpd/issues/254
+
+hint_oneshot_key: M-o
+hint2_oneshot_key: M-O
+hint_chars: abcdefghijklmnopqrstuvwxyz23456789
+hint_size: 18
+#hint_fgcolor: #55eeff
+#hint_fgcolor: #ffff99
+hint_fgcolor: #00ff00
+hint_bgcolor: #000000
