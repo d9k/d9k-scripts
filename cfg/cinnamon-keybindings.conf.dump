@@ -1,12 +1,7 @@
 [/]
-custom-list=['custom84', 'custom82', 'custom81', 'custom80', 'custom78', 'custom76', 'custom68', 'custom5', 'custom65', 'custom64', 'custom62', 'custom56', 'custom55', 'custom54', 'custom7', 'custom50', 'custom48', 'custom44', 'custom43', 'custom42', 'custom41', 'custom36', 'custom35', 'custom34', 'custom33', 'custom32', 'custom31', 'custom30', 'custom29', 'custom19', 'custom24', 'custom23', 'custom22', 'custom18', 'custom28', 'custom27', 'custom26', 'custom25', 'custom21', 'custom20', 'custom17', 'custom16', 'custom15', 'custom14', 'custom13', 'custom11', 'custom10', 'custom9', 'custom8', 'custom6', 'custom4', 'custom3', 'custom2', 'custom1', 'custom0', 'custom37', 'custom38', 'custom39', 'custom40', 'custom46', 'custom45', 'custom47', 'custom49', 'custom51', 'custom52', 'custom53', 'custom57', 'custom58', 'custom59', 'custom60', 'custom61', 'custom63', 'custom12', 'custom66', 'custom67', 'custom69', 'custom70', 'custom71', 'custom72', 'custom73', 'custom74', 'custom75', 'custom77', 'custom79', 'custom83']
+custom-list=['custom99', 'custom91', 'custom90', 'custom87', 'custom85', 'custom84', 'custom82', 'custom81', 'custom80', 'custom78', 'custom76', 'custom68', 'custom65', 'custom64', 'custom62', 'custom56', 'custom55', 'custom54', 'custom7', 'custom48', 'custom44', 'custom43', 'custom42', 'custom36', 'custom35', 'custom34', 'custom33', 'custom32', 'custom31', 'custom30', 'custom29', 'custom18', 'custom28', 'custom27', 'custom26', 'custom25', 'custom21', 'custom20', 'custom17', 'custom16', 'custom15', 'custom14', 'custom13', 'custom11', 'custom10', 'custom9', 'custom8', 'custom6', 'custom4', 'custom3', 'custom1', 'custom37', 'custom38', 'custom40', 'custom46', 'custom45', 'custom47', 'custom49', 'custom53', 'custom57', 'custom58', 'custom59', 'custom60', 'custom61', 'custom63', 'custom12', 'custom66', 'custom67', 'custom69', 'custom70', 'custom71', 'custom72', 'custom73', 'custom75', 'custom77', 'custom79', 'custom83', 'custom86', 'custom88', 'custom89', 'custom92', 'custom93', 'custom94', 'custom95', 'custom96', 'custom97', 'custom98']
 looking-glass-keybinding=@as []
 show-desklets=@as []
-
-[custom-keybindings/custom0]
-binding=@as []
-command='/home/d9k/scripts/win/focus_emacs.sh'
-name='emacs'
 
 [custom-keybindings/custom1]
 binding=['<Primary><Alt>Delete']
@@ -44,7 +39,7 @@ command='/home/d9k/scripts/win/focus_telegram.sh'
 name='Telegram'
 
 [custom-keybindings/custom16]
-binding=['<Super>q']
+binding=['<Shift><Super>q']
 command='/home/d9k/scripts/win/focus-db-client.sh'
 name='db client'
 
@@ -54,19 +49,9 @@ command='/home/d9k/scripts/win/focus_ide.sh'
 name='focus_ide'
 
 [custom-keybindings/custom18]
-binding=['<Super>y', '<Shift><Super>q', '<Super>w']
+binding=['<Super>y', '<Super>t']
 command='/home/d9k/scripts/win/say-selection-rhvoice.sh'
 name='say-selection-rhvoice'
-
-[custom-keybindings/custom19]
-binding=@as []
-command='/home/d9k/scripts/win/focus_rocketchat.sh'
-name='rocketchat'
-
-[custom-keybindings/custom2]
-binding=@as []
-command='/home/d9k/scripts/win/focus_tortoisehg.sh'
-name='thg'
 
 [custom-keybindings/custom20]
 binding=['<Super>Page_Down']
@@ -77,21 +62,6 @@ name='border-remove'
 binding=['<Super>Page_Up']
 command='/home/d9k/scripts/win/border-add.sh'
 name='border-add'
-
-[custom-keybindings/custom22]
-binding=@as []
-command='/home/d9k/scripts/win/focus_webstorm_first.sh'
-name='focus_webstorm_first'
-
-[custom-keybindings/custom23]
-binding=@as []
-command='/home/d9k/scripts/win/focus_webstorm_second.sh'
-name='focus_webstorm_second'
-
-[custom-keybindings/custom24]
-binding=['<Super>4']
-command='/home/d9k/scripts/win/focus_webstorm_third.sh'
-name='focus_webstorm_third'
 
 [custom-keybindings/custom25]
 binding=['<Primary><Alt>Insert']
@@ -159,7 +129,7 @@ command='/home/d9k/scripts/win/set-opacity.sh -3'
 name='opacity -3'
 
 [custom-keybindings/custom37]
-binding=['<Super>0']
+binding=['<Shift><Super>underscore', '<Shift><Super>plus']
 command='/home/d9k/scripts/win/set-opacity.sh 70'
 name='opacity 70'
 
@@ -167,11 +137,6 @@ name='opacity 70'
 binding=['<Super>BackSpace']
 command='/home/d9k/scripts/win/set-opacity.sh 100'
 name='opacity 100'
-
-[custom-keybindings/custom39]
-binding=@as []
-command='/home/d9k/scripts/win/focus-vscode-diary.sh'
-name='diary'
 
 [custom-keybindings/custom4]
 binding=['<Primary><Shift>Print']
@@ -182,11 +147,6 @@ name='gnome-screenshot'
 binding=@as []
 command='/home/d9k/scripts/win/focus-vscode-textbook.sh'
 name='textbook'
-
-[custom-keybindings/custom41]
-binding=@as []
-command='/home/d9k/scripts/win/focus-vscode-scripts.sh'
-name='vscode-scripts'
 
 [custom-keybindings/custom42]
 binding=['<Super>F3']
@@ -214,7 +174,7 @@ command='/home/d9k/scripts/win/brightness-smart +1'
 name='bright-smart +'
 
 [custom-keybindings/custom47]
-binding=['<Super>s', '<Shift><Super>y']
+binding=['<Shift><Super>y', '<Super>s']
 command='/home/d9k/scripts/win/focus-obsidian.sh'
 name='obsidian'
 
@@ -224,29 +184,9 @@ command='/home/d9k/scripts/win/run-selection-in-terminal.sh'
 name='run-selection-in-terminal'
 
 [custom-keybindings/custom49]
-binding=['<Super>n']
-command='/home/d9k/scripts/win/chrome-devtools-copy-token.sh'
-name='chrome-devtools-copy-token'
-
-[custom-keybindings/custom5]
-binding=@as []
-command='/home/d9k/scripts/win/focus_book.sh'
-name='focus book'
-
-[custom-keybindings/custom50]
 binding=@as []
 command='/home/d9k/scripts/win/chrome-devtools-copy-token.sh'
 name='chrome-devtools-copy-token'
-
-[custom-keybindings/custom51]
-binding=@as []
-command='/home/d9k/scripts/win/chrome-devtools-copy-curl-mod.sh'
-name='chrome-devtools-copy-curl'
-
-[custom-keybindings/custom52]
-binding=['<Super>t']
-command='/home/d9k/scripts/win/selection-curl-args-transform.sh'
-name='selection-curl-args-transform'
 
 [custom-keybindings/custom53]
 binding=['Print']
@@ -254,8 +194,8 @@ command='/home/d9k/scripts/win/focus_shutter.sh'
 name='shutter'
 
 [custom-keybindings/custom54]
-binding=['<Alt><Super>z', '<Shift><Super>z', '<Alt><Super>z']
-command='/home/d9k/scripts/win/focus_discord.sh'
+binding=['<Alt><Super>z']
+command='/home/d9k/scripts/win/focus_discord_proxy.sh'
 name='discord'
 
 [custom-keybindings/custom55]
@@ -269,17 +209,17 @@ command='/home/d9k/scripts/win/focus_firefox.sh'
 name='focus_firefox'
 
 [custom-keybindings/custom57]
-binding=['<Super>k']
+binding=['<Super>i']
 command='/home/d9k/scripts/win/mouse-up.sh'
 name='mouse up'
 
 [custom-keybindings/custom58]
-binding=['<Super>j']
+binding=['<Super>k']
 command='/home/d9k/scripts/win/mouse-down.sh'
 name='mouse down'
 
 [custom-keybindings/custom59]
-binding=['<Super>h']
+binding=['<Super>j']
 command='/home/d9k/scripts/win/mouse-left.sh'
 name='mouse left'
 
@@ -294,12 +234,12 @@ command='/home/d9k/scripts/win/mouse-right.sh'
 name='mouse right'
 
 [custom-keybindings/custom61]
-binding=['<Super>u']
+binding=['<Super>8']
 command='/home/d9k/scripts/win/mouse-click-left.sh'
 name='mouse click left'
 
 [custom-keybindings/custom62]
-binding=['<Super>o']
+binding=['<Super>9']
 command='/home/d9k/scripts/win/mouse-click-right.sh'
 name='mouse click right'
 
@@ -309,7 +249,7 @@ command='/home/d9k/scripts/win/emulate-menu-key.sh'
 name='Context menu key'
 
 [custom-keybindings/custom64]
-binding=['<Super>c']
+binding=['<Shift><Super>c']
 command='/home/d9k/scripts/win/commands-menu-with-log.sh'
 name='Commands menu'
 
@@ -319,7 +259,7 @@ command='/home/d9k/scripts/win/focus_firefox_dev.sh'
 name='focus_firefox_dev'
 
 [custom-keybindings/custom66]
-binding=@as []
+binding=['<Shift><Super>z']
 command='/home/d9k/scripts/win/focus_discord_proxy.sh'
 name='discord-proxy'
 
@@ -363,18 +303,13 @@ binding=@as []
 command='/home/d9k/scripts/win/arrow-right.sh 3'
 name='arrow right turbo'
 
-[custom-keybindings/custom74]
-binding=@as []
-command='/home/d9k/scripts/win/arrow-left.sh 3'
-name='arrow left turbo'
-
 [custom-keybindings/custom75]
-binding=['<Super>z']
+binding=['<Super>q']
 command='/home/d9k/scripts/hw-keyboard-repeat-rate-boost.sh'
 name='keyboard repeat speed boost'
 
 [custom-keybindings/custom76]
-binding=['<Shift><Super>a']
+binding=@as []
 command='/home/d9k/scripts/win/focus_ai.sh'
 name='Focus AI'
 
@@ -409,24 +344,99 @@ command='/home/d9k/scripts/win/focus_equalizer.sh'
 name='equalizer'
 
 [custom-keybindings/custom82]
-binding=['<Shift><Super>s']
+binding=@as []
 command='/home/d9k/scripts/win/focus_sound.sh'
 name='sound settings'
 
 [custom-keybindings/custom83]
-binding=['<Super>a']
+binding=['<Shift><Super>a']
 command='/home/d9k/scripts/win/focus_chrome_audio.sh'
 name='chrome audio'
 
 [custom-keybindings/custom84]
-binding=['<Super>v']
+binding=@as []
 command='/home/d9k/scripts/win/focus_chrome_proxy.sh'
 name='chrome proxy'
+
+[custom-keybindings/custom85]
+binding=['<Super>n', '<Shift><Super>v']
+command='/home/d9k/scripts/win/focus_vnyan.sh'
+name='VNyan'
+
+[custom-keybindings/custom86]
+binding=['<Shift><Super>o']
+command='/home/d9k/scripts/win/focus_obs.sh'
+name='obs'
+
+[custom-keybindings/custom87]
+binding=['<Super>g']
+command='/home/d9k/scripts/win/focus_draw_app.sh'
+name='focus draw app'
+
+[custom-keybindings/custom88]
+binding=['<Shift><Super>x', '<Alt><Super>x']
+command='/home/d9k/scripts/win/minimize-distracting-windows.sh'
+name='minimize-distracting-windows'
+
+[custom-keybindings/custom89]
+binding=['<Shift><Super>r']
+command='/home/d9k/scripts/win/focus_audio_editor.sh'
+name='focus audio editor'
 
 [custom-keybindings/custom9]
 binding=['Forward']
 command='/home/d9k/scripts/win/backlight +2'
 name='bright +'
+
+[custom-keybindings/custom90]
+binding=['<Primary><Shift>asciitilde', '<Shift><Super>asciitilde']
+command='/home/d9k/scripts/win/focus_terminal_second.sh'
+name='focus_terminal_second'
+
+[custom-keybindings/custom91]
+binding=['<Shift><Super>p', '<Primary><Super>p', '<Alt><Super>p']
+command='/home/d9k/scripts/color-pick'
+name='color pick'
+
+[custom-keybindings/custom92]
+binding=['<Shift><Super>f']
+command='/home/d9k/scripts/win/focus_chrome_proxy_wg.sh'
+name='chrome proxy wg'
+
+[custom-keybindings/custom93]
+binding=['<Shift><Super>s']
+command='/home/d9k/scripts/hw-audio-change-output.sh'
+name='switch audio output device'
+
+[custom-keybindings/custom94]
+binding=['<Super>semicolon', '<Super>Cyrillic_zhe', '<Shift><Super>k']
+command='/home/d9k/scripts/win/mouse-switch-display.sh'
+name='mouse switch display'
+
+[custom-keybindings/custom95]
+binding=['<Super>v', '<Super>o', '<Super>h']
+command='/home/d9k/scripts/win/mouse-warp-point.sh'
+name='mouse warp to point'
+
+[custom-keybindings/custom96]
+binding=['<Super>u']
+command='/home/d9k/scripts/win/mouse-warpd.sh'
+name='mouse warpd'
+
+[custom-keybindings/custom97]
+binding=['<Super>a']
+command='/home/d9k/scripts/hw-keyboard-repeat-rate-normal.sh'
+name='keyboard repeat rate normal'
+
+[custom-keybindings/custom98]
+binding=['<Super>7']
+command='/home/d9k/scripts/win/mouse-click-double.sh'
+name='mouse click double'
+
+[custom-keybindings/custom99]
+binding=['<Super>0']
+command='/home/d9k/scripts/win/mouse-click-middle.sh'
+name='mouse click middle'
 
 [media-keys]
 area-screenshot-clip=@as []
@@ -454,13 +464,13 @@ begin-move=['<Alt><Super>space', '<Primary><Alt><Super>space']
 begin-resize=['<Alt>F8', '<Super>space', '<Primary><Super>space']
 decrease-opacity=['<Alt>minus']
 increase-opacity=['<Alt>equal']
-maximize-horizontally=['<Alt><Super>Left']
-maximize-vertically=['<Alt><Super>Right']
+maximize-horizontally=@as []
+maximize-vertically=@as []
 minimize=['<Super>Down']
 move-to-center=@as []
 move-to-monitor-down=@as []
-move-to-monitor-left=@as []
-move-to-monitor-right=@as []
+move-to-monitor-left=['<Alt><Super>Left']
+move-to-monitor-right=['<Alt><Super>Right']
 move-to-monitor-up=@as []
 move-to-side-e=['<Super>Right']
 move-to-side-n=['<Alt><Super>Up']
