@@ -19,8 +19,10 @@ map('n', '<leader>d', 'kdd', { desc = 'delete line above'})
 -- map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
 map('n', '<leader>D', 'jdd', { desc = 'delete line below'})
 
-map('n', '<A-m>', '}}{j', { desc = 'next text block'})
-map('n', '<A-n>', '{{j', { desc = 'previous text block'})
+-- map('n', '<A-m>', '}}{j', { desc = 'next text block'})
+-- map('n', '<A-n>', '{{j', { desc = 'previous text block'})
+-- map('n', '<A-m>', '}', { desc = 'next space between blocks'})
+-- map('n', '<A-n>', '{', { desc = 'previous space between blocks'})
 
 -- fix: unbind terminal split
 map('n', '<A-h>', ':wincmd h<CR>', { silent = true })
