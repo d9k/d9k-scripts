@@ -7,5 +7,4 @@ if [[ -f "$FILE_KEYBOARD_SPEED_BOST_PATH" ]]; then
   exit
 fi
 
-echo 25
-
+echo 22
