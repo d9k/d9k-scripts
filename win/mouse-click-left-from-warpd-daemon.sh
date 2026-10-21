@@ -2,7 +2,7 @@
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 MINIMAL_DISTANCE_PX=50
 MAX_WAIT_MS=8000
-DELAY_PER_CYCLE_RUN_MS=50
+DELAY_PER_CYCLE_RUN_MS=100
 
 # Did an ugly hack: send keystrokes to the warpd daemon, detect mouse movement, then click. See:
 # [Slow --oneshot start from CLI | issue #346 | warpd](https://github.com/rvaiya/warpd/issues/346), 2026.10.22
@@ -37,10 +37,13 @@ set +x
 LAST_MOUSE_X=$($SCRIPT_DIR/get-mouse-x.sh)
 LAST_MOUSE_Y=$($SCRIPT_DIR/get-mouse-y.sh)
 
-xdotool keyup Shift
-xdotool keyup Super
-# xdotool key --clearmodifiers Super+o &
-xdotool key Super+o &
+# xdotool keyup Shift
+# xdotool keyup Super
+# xdotool key Super+h &
+
+# send keystrokes to the warpd daemon
+sleep 0.1
+xdotool key --clearmodifiers super+h
 
 TOTAL_WAIT_MS=0
 
@@ -56,13 +59,13 @@ while [ $TOTAL_WAIT_MS -lt $MAX_WAIT_MS ]; do
     MOUSE_DELTA_Y_ABS=$(awk_decimal_abs $MOUSE_DELTA_Y)
     MOUSE_DISTANCE_PX=$(awk_calc_decimal "sqrt($MOUSE_DELTA_X_ABS^2+$MOUSE_DELTA_Y_ABS^2)")
     echo "$MOUSE_DELTA_X $MOUSE_DELTA_Y $MOUSE_DELTA_X_ABS $MOUSE_DELTA_Y_ABS $MOUSE_DISTANCE_PX"
+    LAST_MOUSE_X=$NEW_MOUSE_X
+    LAST_MOUSE_Y=$NEW_MOUSE_Y
 
     if [[ $MOUSE_DISTANCE_PX -ge $MINIMAL_DISTANCE_PX ]]; then
       echo "Done! Mouse traveled $MOUSE_DISTANCE_PX px"
       $SCRIPT_DIR/mouse-click-left.sh
-      exit
+      # xdotool --clearmodifiers click 1
+      break
     fi
-
-    LAST_MOUSE_X=$NEW_MOUSE_X
-    LAST_MOUSE_Y=$NEW_MOUSE_Y
 done
