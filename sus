@@ -1,9 +1,0 @@
-#!/bin/bash
-
-yandex-disk stop
-
-sleep 2
-
-#pm-suspend
-
-systemctl suspend
