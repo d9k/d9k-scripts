@@ -76,8 +76,6 @@ while [ $TOTAL_WAIT_MS -lt $MAX_WAIT_MS ]; do
 
     if [[ $MOUSE_DISTANCE_PX -ge $MINIMAL_DISTANCE_PX ]]; then
       echo "Done! Mouse traveled $MOUSE_DISTANCE_PX px"
-      # sleep 0.2
-      $SCRIPT_DIR/mouse-click-left.sh
       # xdotool --clearmodifiers click 1
       exit 100
     fi
