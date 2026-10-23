@@ -3,7 +3,7 @@ SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 
 # $SCRIPT_DIR/mouse-switch-display.sh
 # $SCRIPT_DIR/mouse-warp-point.sh
-notify-send -t 2000 "Choose end of selection with warpd"
+notify-send -t 5000 "Choose end of selection with warpd"
 
 $SCRIPT_DIR/mouse-hold-left-button.sh
 
