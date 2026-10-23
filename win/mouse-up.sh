@@ -17,7 +17,11 @@ MOUSE_EVENT_COUNT=$($SCRIPT_DIR/mouse-events-count-inc.sh)
 
 echo "$MOUSE_EVENT_COUNT"
 
-xdotool mousemove_relative -- 0 -$MOUSE_SPEED_PX
+# xdotool mousemove_relative -- 0 -$MOUSE_SPEED_PX
+
+# xte slightly faster than xdotool
+# `sudo apt install xautomation` required for xte!
+xte "mousermove 0 -$MOUSE_SPEED_PX"
 
 sleep "$MOUSE_EVENTS_COUNT_INC_TIMEOUT_S"
 NEW_MOUSE_EVENTS_COUNT=$($SCRIPT_DIR/mouse-events-count-dec.sh)

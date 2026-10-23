@@ -1,4 +1,5 @@
 #!/bin/bash
+
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 MINIMAL_DISTANCE_PX=50
 MAX_WAIT_MS=8000
@@ -28,14 +29,9 @@ awk_decimal_abs() {
 # echo $(awk_decimal_abs -4)
 # echo $(awk_decimal_abs 5)
 
-DELAY_PER_CYCLE_RUN_S=$(awk_calc_float $DELAY_PER_CYCLE_RUN_MS/1000)
-
-set -x
-echo $DELAY_PER_CYCLE_RUN_MS
-set +x
-
-LAST_MOUSE_X=$($SCRIPT_DIR/get-mouse-x.sh)
-LAST_MOUSE_Y=$($SCRIPT_DIR/get-mouse-y.sh)
+# set -x
+# echo $DELAY_PER_CYCLE_RUN_MS
+# set +x
 
 # xdotool keyup Shift
 # xdotool keyup Super
@@ -43,7 +39,23 @@ LAST_MOUSE_Y=$($SCRIPT_DIR/get-mouse-y.sh)
 
 # send keystrokes to the warpd daemon
 sleep 0.1
-xdotool key --clearmodifiers super+h
+
+# breaks cinnamon keyboard layout!
+# setxkbmap us
+
+# doesn't work on non-english keyboard layout!
+# xdotool key --clearmodifiers super+h
+
+xte 'keyup Super_L'
+
+# In my case warpd  `hint_oneshot_key` is bound to Win+L
+# `sudo apt install xautomation` required for xte!
+xte 'keydown Super_L' 'key h' 'keyup Super_L'
+
+DELAY_PER_CYCLE_RUN_S=$(awk_calc_float $DELAY_PER_CYCLE_RUN_MS/1000)
+
+LAST_MOUSE_X=$($SCRIPT_DIR/get-mouse-x.sh)
+LAST_MOUSE_Y=$($SCRIPT_DIR/get-mouse-y.sh)
 
 TOTAL_WAIT_MS=0
 
@@ -64,6 +76,7 @@ while [ $TOTAL_WAIT_MS -lt $MAX_WAIT_MS ]; do
 
     if [[ $MOUSE_DISTANCE_PX -ge $MINIMAL_DISTANCE_PX ]]; then
       echo "Done! Mouse traveled $MOUSE_DISTANCE_PX px"
+      # sleep 0.2
       $SCRIPT_DIR/mouse-click-left.sh
       # xdotool --clearmodifiers click 1
       break
