@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PROCESS_INFO=$(ps aux | grep dbeaver | grep java | grep -v grep)
+PROCESS_ID=$(echo -e "$PROCESS_INFO" | awk 'END {print $2}')
+
+if [ -z "$PROCESS_ID" ]; then
+  echo "DBeaver process ID was not found"
+  exit 1
+fi
+
+echo "Process info:"
+echo "$PROCESS_INFO"
+echo
+
+echo "Killing process with id=$PROCESS_ID"
+kill -9 "$PROCESS_ID"
