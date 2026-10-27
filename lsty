@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# lst - Yank one of LaST modified files names
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+DIR="$1"
+
+if [[ -z "$DIR" ]]; then
+  DIR="$(pwd)"
+fi
+
+# ls --reverse -t --directory -1 "$DIR"/*
+cd "$DIR"
+
+# set -x
+# ls --reverse -t --directory -1 
+# ls --reverse -t -1 
+# exit
+
+# CHOICES=$(ls --reverse -t --directory -1 *)
+CHOICES=$(ls --reverse -t -1)
+
+# echo -e "$CHOICES"
+
+SELECTED=$( \
+  echo -e "$CHOICES" \
+  | tac \
+  | fzf \
+    --info-command='echo "${INFO_PREFIX}[Ctrl-C] to exit"'  \
+)
+
+SELECTED="$DIR/$SELECTED"
+
+# echo "$SELECTED"
+
+if [[ -z "$SELECTED" ]]; then
+  exit
+fi
+
+printf "%s" "$SELECTED" | xclip -selection c
+
+echo "Copied « $SELECTED ».    "
