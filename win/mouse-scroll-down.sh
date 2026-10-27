@@ -5,9 +5,11 @@
 #sleep 0.1
 
 FILE_KEYBOARD_SPEED_BOST_PATH="$HOME/.hw-keyboard-boost"
+FILE_KEYBOARD_SPEED_SLOWDOWN_PATH="$HOME/.hw-keyboard-slowdown"
 
 SCROLL_COUNT=$1
 SCROLL_COUNT_BOOSTED=$2
+SCROLL_COUNT_SLOWED=$3
 
 if [ -z "$SCROLL_COUNT" ]; then
   SCROLL_COUNT=1
@@ -15,6 +17,10 @@ fi
 
 if [ -z "$SCROLL_COUNT_BOOSTED" ]; then
   SCROLL_COUNT_BOOSTED=$(( $SCROLL_COUNT * 2 ))
+fi
+
+if [ -z "$SCROLL_COUNT_SLOWED" ]; then
+  SCROLL_COUNT_SLOWED=$SCROLL_COUNT
 fi
 
 # echo $SCROLL_COUNT_BOOSTED
@@ -25,12 +31,16 @@ if test -f "$FILE_KEYBOARD_SPEED_BOST_PATH"; then
   SCROLL_COUNT_ACTUAL="$SCROLL_COUNT_BOOSTED"
 fi 
 
+if test -f "$FILE_KEYBOARD_SPEED_SLOWDOWN_PATH"; then
+  SCROLL_COUNT_ACTUAL="$SCROLL_COUNT_SLOWED"
+fi 
+
 # https://unix.stackexchange.com/questions/505833/how-do-ranges-in-dash-work
 i=1
 while [ "$i" -le $SCROLL_COUNT_ACTUAL ]; do
   xdotool click 5
   sleep 0.05
-  echo "scroll down $i" >> /tmp/t
+  # echo "scroll down $i" >> /tmp/t
   i=$(( i + 1 )) 
 done
 

@@ -1,7 +1,12 @@
 [/]
-custom-list=['custom99', 'custom91', 'custom90', 'custom87', 'custom85', 'custom84', 'custom82', 'custom81', 'custom80', 'custom78', 'custom76', 'custom68', 'custom65', 'custom64', 'custom62', 'custom56', 'custom55', 'custom54', 'custom7', 'custom48', 'custom44', 'custom43', 'custom42', 'custom36', 'custom35', 'custom34', 'custom33', 'custom32', 'custom31', 'custom30', 'custom29', 'custom18', 'custom28', 'custom27', 'custom26', 'custom25', 'custom21', 'custom20', 'custom17', 'custom16', 'custom15', 'custom14', 'custom13', 'custom11', 'custom10', 'custom9', 'custom8', 'custom6', 'custom4', 'custom3', 'custom1', 'custom37', 'custom38', 'custom40', 'custom46', 'custom45', 'custom47', 'custom49', 'custom53', 'custom57', 'custom58', 'custom59', 'custom60', 'custom61', 'custom63', 'custom12', 'custom66', 'custom67', 'custom69', 'custom70', 'custom71', 'custom72', 'custom73', 'custom75', 'custom77', 'custom79', 'custom83', 'custom86', 'custom88', 'custom89', 'custom92', 'custom93', 'custom94', 'custom95', 'custom96', 'custom97', 'custom98']
+custom-list=['custom49', 'custom23', 'custom22', 'custom19', 'custom99', 'custom91', 'custom90', 'custom87', 'custom85', 'custom84', 'custom82', 'custom81', 'custom80', 'custom78', 'custom76', 'custom68', 'custom65', 'custom64', 'custom62', 'custom56', 'custom55', 'custom54', 'custom7', 'custom48', 'custom44', 'custom43', 'custom42', 'custom36', 'custom35', 'custom34', 'custom33', 'custom32', 'custom31', 'custom30', 'custom29', 'custom18', 'custom28', 'custom27', 'custom26', 'custom25', 'custom21', 'custom20', 'custom17', 'custom16', 'custom15', 'custom14', 'custom13', 'custom11', 'custom10', 'custom9', 'custom8', 'custom6', 'custom4', 'custom3', 'custom1', 'custom37', 'custom38', 'custom40', 'custom46', 'custom45', 'custom47', 'custom53', 'custom57', 'custom58', 'custom59', 'custom60', 'custom61', 'custom63', 'custom12', 'custom66', 'custom67', 'custom69', 'custom70', 'custom71', 'custom72', 'custom73', 'custom75', 'custom77', 'custom79', 'custom83', 'custom86', 'custom88', 'custom89', 'custom92', 'custom93', 'custom94', 'custom95', 'custom96', 'custom97', 'custom98', 'custom0', 'custom2', 'custom5', 'custom24', 'custom39', 'custom41']
 looking-glass-keybinding=@as []
 show-desklets=@as []
+
+[custom-keybindings/custom0]
+binding=['<Shift><Super>o', '<Shift><Super>o']
+command='/home/d9k/scripts/win/mouse-click-left-from-warpd.sh'
+name='mouse click from warpd'
 
 [custom-keybindings/custom1]
 binding=['<Primary><Alt>Delete']
@@ -53,6 +58,16 @@ binding=['<Super>y', '<Super>t']
 command='/home/d9k/scripts/win/say-selection-rhvoice.sh'
 name='say-selection-rhvoice'
 
+[custom-keybindings/custom19]
+binding=['<Shift><Super>m', '<Super>p']
+command='/home/d9k/scripts/win/mouse-select-from-warpd-daemon.sh'
+name='mouse select from warpd'
+
+[custom-keybindings/custom2]
+binding=['<Shift><Super>parenleft', '<Shift><Super>ampersand']
+command='/home/d9k/scripts/win/mouse-click-right-from-warpd.sh'
+name='mouse click right from warpd'
+
 [custom-keybindings/custom20]
 binding=['<Super>Page_Down']
 command='/home/d9k/scripts/win/border-remove.sh'
@@ -62,6 +77,21 @@ name='border-remove'
 binding=['<Super>Page_Up']
 command='/home/d9k/scripts/win/border-add.sh'
 name='border-add'
+
+[custom-keybindings/custom22]
+binding=['<Shift><Super>asterisk', '<Super>Cyrillic_shcha', '<Super>o']
+command='/home/d9k/scripts/win/mouse-click-left-from-warpd-daemon.sh'
+name='mouse click from warpd daemon'
+
+[custom-keybindings/custom23]
+binding=['<Super>u']
+command='/home/d9k/scripts/win/mouse-click-right-from-warpd-daemon.sh'
+name='mouse right click from warpd daemon'
+
+[custom-keybindings/custom24]
+binding=['<Alt><Super>l', '<Shift><Super>l']
+command='/home/d9k/scripts/win/emulate-right-arrow-key.sh'
+name='right arrow key'
 
 [custom-keybindings/custom25]
 binding=['<Primary><Alt>Insert']
@@ -89,7 +119,7 @@ command='/home/d9k/scripts/win/shift-f12.sh'
 name='shift-F12'
 
 [custom-keybindings/custom3]
-binding=['<Primary><Super>k']
+binding=@as []
 command='/home/d9k/scripts/win/focus_keepassx.sh'
 name='keepassx'
 
@@ -138,6 +168,11 @@ binding=['<Super>BackSpace']
 command='/home/d9k/scripts/win/set-opacity.sh 100'
 name='opacity 100'
 
+[custom-keybindings/custom39]
+binding=['<Shift><Super>i', '<Alt><Super>i']
+command='/home/d9k/scripts/win/emulate-up-arrow-key.sh'
+name='up arrow key'
+
 [custom-keybindings/custom4]
 binding=['<Primary><Shift>Print']
 command='gnome-screenshot -a --interactive'
@@ -147,6 +182,11 @@ name='gnome-screenshot'
 binding=@as []
 command='/home/d9k/scripts/win/focus-vscode-textbook.sh'
 name='textbook'
+
+[custom-keybindings/custom41]
+binding=['<Primary><Super>k', '<Shift><Super>k']
+command='/home/d9k/scripts/win/emulate-down-arrow-key.sh'
+name='down arrow key'
 
 [custom-keybindings/custom42]
 binding=['<Super>F3']
@@ -184,9 +224,14 @@ command='/home/d9k/scripts/win/run-selection-in-terminal.sh'
 name='run-selection-in-terminal'
 
 [custom-keybindings/custom49]
-binding=@as []
-command='/home/d9k/scripts/win/chrome-devtools-copy-token.sh'
-name='chrome-devtools-copy-token'
+binding=['<Super>z']
+command='/home/d9k/scripts/hw-keyboard-repeat-rate-slowdown.sh'
+name='keyboard repeat speed slowdown'
+
+[custom-keybindings/custom5]
+binding=['<Shift><Super>j', '<Alt><Super>j']
+command='/home/d9k/scripts/win/emulate-left-arrow-key.sh'
+name='left arrow key'
 
 [custom-keybindings/custom53]
 binding=['Print']
@@ -234,18 +279,18 @@ command='/home/d9k/scripts/win/mouse-right.sh'
 name='mouse right'
 
 [custom-keybindings/custom61]
-binding=['<Super>8']
+binding=['<Super>9']
 command='/home/d9k/scripts/win/mouse-click-left.sh'
 name='mouse click left'
 
 [custom-keybindings/custom62]
-binding=['<Super>9']
+binding=['<Super>0', '<Super>0']
 command='/home/d9k/scripts/win/mouse-click-right.sh'
 name='mouse click right'
 
 [custom-keybindings/custom63]
-binding=['<Super>p']
-command='/home/d9k/scripts/win/emulate-menu-key.sh'
+binding=['<Super>apostrophe']
+command='/home/d9k/scripts/win/emulate-context-menu-key.sh'
 name='Context menu key'
 
 [custom-keybindings/custom64]
@@ -270,12 +315,12 @@ name='wmctrl-list-first-ids-add'
 
 [custom-keybindings/custom68]
 binding=['<Super>bracketright', '<Super>d']
-command='/home/d9k/scripts/win/mouse-scroll-down.sh 2 5'
+command='/home/d9k/scripts/win/mouse-scroll-down.sh 2 5 1'
 name='mouse scroll down'
 
 [custom-keybindings/custom69]
 binding=['<Super>bracketleft', '<Super>e']
-command='/home/d9k/scripts/win/mouse-scroll-up.sh 1 3'
+command='/home/d9k/scripts/win/mouse-scroll-up.sh 2 3 1'
 name='mouse scroll up'
 
 [custom-keybindings/custom7]
@@ -364,7 +409,7 @@ command='/home/d9k/scripts/win/focus_vnyan.sh'
 name='VNyan'
 
 [custom-keybindings/custom86]
-binding=['<Shift><Super>o']
+binding=@as []
 command='/home/d9k/scripts/win/focus_obs.sh'
 name='obs'
 
@@ -409,17 +454,17 @@ command='/home/d9k/scripts/hw-audio-change-output.sh'
 name='switch audio output device'
 
 [custom-keybindings/custom94]
-binding=['<Super>semicolon', '<Super>Cyrillic_zhe', '<Shift><Super>k']
+binding=['<Super>semicolon', '<Super>Cyrillic_zhe']
 command='/home/d9k/scripts/win/mouse-switch-display.sh'
 name='mouse switch display'
 
 [custom-keybindings/custom95]
-binding=['<Super>v', '<Super>o', '<Super>h']
-command='/home/d9k/scripts/win/mouse-warp-point.sh'
+binding=@as []
+command='/home/d9k/scripts/win/mouse-warp-to-point.sh'
 name='mouse warp to point'
 
 [custom-keybindings/custom96]
-binding=['<Super>u']
+binding=@as []
 command='/home/d9k/scripts/win/mouse-warpd.sh'
 name='mouse warpd'
 
@@ -434,7 +479,7 @@ command='/home/d9k/scripts/win/mouse-click-double.sh'
 name='mouse click double'
 
 [custom-keybindings/custom99]
-binding=['<Super>0']
+binding=['<Super>8']
 command='/home/d9k/scripts/win/mouse-click-middle.sh'
 name='mouse click middle'
 
@@ -449,7 +494,7 @@ previous=@as []
 screen-brightness-down=['XF86MonBrightnessDown']
 screen-brightness-up=['XF86MonBrightnessUp']
 screenreader=@as []
-screensaver=['<Alt><Super>l', '<Primary><Shift><Alt>l', '<Shift><Super>l']
+screensaver=['<Primary><Shift><Alt>l', '<Primary><Shift><Super>l', '<Shift><Alt><Super>l']
 screenshot=@as []
 search=['XF86Search', '<Primary><Alt>End']
 shutdown=['<Primary><Alt>Multi_key', 'XF86PowerOff']
