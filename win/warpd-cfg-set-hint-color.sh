@@ -4,6 +4,7 @@ SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 CONFIG_ABS_PATH="$HOME/.config/warpd/config"
 BACKUP_ABS_PATH="${CONFIG_ABS_PATH}.bk"
 HINT_FGCOLOR_KEY="hint_fgcolor"
+DEFAULT_COLOR="#00FF00"
 
 function echoerr {
   printf "%s\n" "$*" >&2;
@@ -18,11 +19,15 @@ function help_exit { EXIT_CODE="$1";
   exit "$EXIT_CODE"
 }
 
-if [ "$#" -ne 1 ]; then
-  help_exit 100
-fi
+# if [ "$#" -ne 1 ]; then
+#   help_exit 100
+# fi
 
 HINT_FGCOLOR="$1"
+
+if [ -z "$HINT_FGCOLOR" ]; then
+  HINT_FGCOLOR="$DEFAULT_COLOR"
+fi
 
 if [ ! -f "$CONFIG_ABS_PATH" ]; then
   echoerr "Error: config file \"$CONFIG_ABS_PATH\" not found"

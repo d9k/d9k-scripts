@@ -19,3 +19,4 @@ $SCRIPT_DIR/mouse-move-from-warpd-daemon.sh
 
 EXIT_CODE=$?
 $SCRIPT_DIR/mouse-release-left-button.sh
+$SCRIPT_DIR/warpd-cfg-set-hint-color.sh

@@ -5,9 +5,9 @@
 
 hint_oneshot_key: M-h
 # hint2_oneshot_key: M-O
-hint_chars: abcdefghijklmnopqrstuvwxyz-[]'23456789
+hint_chars: abcdefghijkmnopqrstuvwxyz-[]',/23456789
 hint_size: 16
 #hint_fgcolor: #55eeff
 #hint_fgcolor: #ffff99
-hint_fgcolor: #00ff00
+hint_fgcolor: #00FF00
 hint_bgcolor: #000000
