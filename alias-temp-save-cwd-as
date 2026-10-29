@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ALIAS="$1"
+FILE="$2"
 
 DIR="$(pwd)"
 
@@ -9,7 +10,11 @@ OUTPUT="$HOME/.aliases-temp"
 export $ALIAS="$DIR"
 
 if [[ -n "$ALIAS" ]]; then
-  echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
+  if [[ -n "$FILE" ]]; then
+    echo "export $ALIAS=\"$DIR/$FILE\"" >> "$OUTPUT"
+  else  
+    echo "export $ALIAS=\"$DIR\"" >> "$OUTPUT"
+  fi
 fi
 
 echo "..."
