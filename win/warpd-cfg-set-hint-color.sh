@@ -1,7 +1,10 @@
 #!/bin/bash
 
 SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+# To speed up warpd config reload replace `get_next_xev(100)` to `get_next_xev(8)` in warpd source, `do make; sudo make install``.
 CONFIG_ABS_PATH="$HOME/.config/warpd/config"
+
 BACKUP_ABS_PATH="${CONFIG_ABS_PATH}.bk"
 HINT_FGCOLOR_KEY="hint_fgcolor"
 DEFAULT_COLOR="#00FF00"
