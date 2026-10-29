@@ -2,6 +2,8 @@
 
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 
+$SCRIPT_DIR/warpd-cfg-set-hint-color.sh "#FFA000"
+
 $SCRIPT_DIR/mouse-move-from-warpd-daemon.sh
 EXIT_CODE=$?
 echo $EXIT_CODE

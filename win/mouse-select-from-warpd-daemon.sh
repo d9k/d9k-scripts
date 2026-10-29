@@ -13,7 +13,8 @@ xte 'keyup Shift_L'
 $SCRIPT_DIR/mouse-hold-left-button.sh
 
 # warpd --screen --hint2 --oneshot
-#
+
+$SCRIPT_DIR/warpd-cfg-set-hint-color.sh "#00E5FF"
 $SCRIPT_DIR/mouse-move-from-warpd-daemon.sh
 
 EXIT_CODE=$?
