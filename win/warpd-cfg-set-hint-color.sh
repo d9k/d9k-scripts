@@ -29,6 +29,13 @@ if [ ! -f "$CONFIG_ABS_PATH" ]; then
   exit 200
 fi
 
+HINT_FGCOLOR_LINE="${HINT_FGCOLOR_KEY}: ${HINT_FGCOLOR}"
+
+if [ "$(grep --fixed-strings "$HINT_FGCOLOR_LINE" "$CONFIG_ABS_PATH")" = "$HINT_FGCOLOR_LINE" ]; then
+  echo "${HINT_FGCOLOR_KEY} is already \"${HINT_FGCOLOR}\" in $CONFIG_ABS_PATH"
+  exit 0
+fi
+
 cp "$CONFIG_ABS_PATH" "$BACKUP_ABS_PATH"
 
 if grep --quiet "^${HINT_FGCOLOR_KEY}:" "$CONFIG_ABS_PATH"; then
