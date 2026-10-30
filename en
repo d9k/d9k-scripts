@@ -9,8 +9,10 @@
 
 MAX_LINES_PREVIEW=12
 
+SEARCH_TERM="$@"
+
 # sudo apt-get install stardict sdcv
-RESULT=$(sdcv --non-interactive "$@")  
+RESULT=$(sdcv --non-interactive "$SEARCH_TERM")  
 
 if [[ "$RESULT" == "" ]]; then
   echo "No matches"
