@@ -8,7 +8,7 @@ youtube-dl \
   --write-info-json \
   --convert-thumbnails jpg \
   --sub-format srt \
-  --sub-langs en,ru-orig,ru \
+  --sub-langs en,en-orig,ru-orig,ru \
   --convert-subtitles srt \
   --ignore-errors \
   "$@"
