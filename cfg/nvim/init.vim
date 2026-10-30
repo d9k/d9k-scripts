@@ -26,7 +26,8 @@ call timer_start(1000 * 7, function('s:reset_statusline'), {'repeat': -1})
 " Copy current file relative path to clipboard
 " https://stackoverflow.com/a/17096082/1760643
 "nmap <A-c> :let @+ = expand("%:p")<CR>
-nmap <A-c> :let @+ = expand("%")<CR>
+nmap <M-c> :let @+ = expand("%")<CR>
+nmap <M-C> :let @+ = expand("%:p")<CR>
 
 " Don't overwrite clipboard for "c ..." and "x" commands
 noremap c "_c
