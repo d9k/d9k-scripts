@@ -24,11 +24,17 @@ DIR_ABS_PATH=$(readlink -f "$DIR_REL_PATH")
 
 cd "$DIR_ABS_PATH"
 
+if ! command -v mozjpeg &> /dev/null ;then
+    ERROR_MESSAGE="mozjpeg command could not be found!!! Do \"npm install --global mozjpeg\" first!"
+    echoerr "$ERROR_MESSAGE"
+    notify-send -t 10000 -u normal "$ERROR_MESSAGE"
+    exit 35
+fi
 
 if [[ -f "$FILE_LOCK_COMPRESSION" ]]; then
-  ERR="Can't compress screenshots folder! Remove \"$FILE_LOCK_COMPRESSION\" from the directory"
+  ERR="Can't compress screenshots folder! Remove \"$FILE_LOCK_COMPRESSION\" from the directory \"$1\""
   echo $ERR;
-  notify-send -u normal "$ERR"
+  notify-send -t 2500 -u normal "$ERR"
 
   exit
 fi
@@ -39,13 +45,6 @@ LAST_TIMESTAMP=$(cat "$FILE_LAST_TIMESTAMP")
 
 if [[ -z "$LAST_TIMESTAMP" ]]; then
   LAST_TIMESTAMP=0
-fi
-
-if ! command -v mozjpeg &> /dev/null ;then
-    ERROR_MESSAGE="mozjpeg command could not be found. Do \"npm install --global mozjpeg\" first"
-    echoerr "$ERROR_MESSAGE"
-    notify-send -u normal "$ERROR_MESSAGE"
-    exit 35
 fi
 
 for FILE in *.png; do
