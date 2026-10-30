@@ -1,5 +1,9 @@
 #!/bin/bash
 
+killall warpd
+
+sleep 1
+
 killall cinnamon
 
 # TODO all `cinnamon --replace` processes must be kllled or lock screen wouldn't work!

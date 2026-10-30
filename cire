@@ -1,1 +1,8 @@
+#!/bin/bash
+
+# Minimal cinnamon replace
 cinnamon --replace
+sleep 1
+killall warpd
+sleep 1
+warpd
