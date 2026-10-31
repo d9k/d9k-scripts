@@ -51,10 +51,6 @@ noremap <leader>ss :w<CR>
 " [v]im config [r]eload
 noremap <leader>vr :so ~/.config/nvim/init.vim<CR>
 
-"Next/previous heading
-map <M-j> /^#<CR>
-map <M-k> ?^#<CR>
-
 map <leader>sm :set syntax=markdown<CR>
 map <leader>sj :set syntax=json<CR>
 map <leader>sJ :set syntax=js<CR>
@@ -91,3 +87,14 @@ noremap <A-n> {
 
 noremap } }}{j
 noremap { {{j
+
+" vertical inverce: k <-> j
+noremap j k
+noremap k j
+
+noremap K J
+noremap J kJ
+
+"Next/previous heading
+map <M-k> /^#<CR>
+map <M-j> ?^#<CR>
