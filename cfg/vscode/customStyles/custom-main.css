@@ -1,4 +1,8 @@
-/** https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css&ssr=false#overview */
+/** 
+ * Run command "Enable Custom CSS and JS" after any edit!
+ *
+ * https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css&ssr=false#overview
+ **/
 body {
   /* Doesn't work! */
   --vscode-font-size: 16px;
@@ -138,6 +142,13 @@ body {
   border-top: 3px solid rgb(40, 44, 61);
 }
 
+/** Hover documentation: don't cut! */
+.monaco-editor .monaco-resizable-hover {
+/* .monaco-hover-content { */
+  max-width: 850px !important;
+}
+
+/** For debug purpose: */
 /* * { */
 /*   color: red !important;  */
 /* } */
