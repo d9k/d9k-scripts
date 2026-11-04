@@ -277,10 +277,6 @@
     "when": "editorTextFocus && vim.active && vim.use<C-x> && !inDebugRepl"
   },
   {
-    "key": "shift+alt+n",
-    "command": "workbench.action.files.newUntitledFile"
-  },
-  {
     "key": "f8",
     "command": "-editor.action.marker.nextInFiles",
     "when": "editorFocus"
@@ -1640,16 +1636,17 @@
     "key": "shift+alt+n",
     "command": "vscode-copy-fqn.copy-fqn"
   },
-  {
-    // next text block
-    "key": "Shift-]",
-    "command": "vim.remap",
-    // "when": "inputfocus && vim.mode",
-    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
-    "args": {
-      "after": ["}", "}", "{", "j"]
-    }
-  },
+  // {
+  //   // next text block
+  //   "key": "Shift-]",
+  //   "command": "vim.remap",
+  //   // "when": "inputfocus && vim.mode",
+  //   // "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+  //   "when": "false",
+  //   "args": {
+  //     "after": ["}", "}", "{", "j"]
+  //   }
+  // },
   {
     // next empty block
     "key": "alt+m",
@@ -1670,15 +1667,15 @@
       "after": ["/", "[", "A", "-", "Z", "А", "-", "Я", "]", "<CR>"]
     }
   },
-  {
-    // previous text block
-    "key": "Shift+[",
-    "command": "vim.remap",
-    "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
-    "args": {
-      "after": ["{", "{", "j"]
-    }
-  },
+  // {
+  //   // previous text block
+  //   "key": "Shift+[",
+  //   "command": "vim.remap",
+  //   "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
+  //   "args": {
+  //     "after": ["{", "{", "j"]
+  //   }
+  // },
   {
     "key": "alt+n",
     // previous empty block

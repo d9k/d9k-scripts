@@ -28,4 +28,12 @@ map <leader>T iii
 
 unmap <A-n>
 
+" inverse vertical direction
+noremap j k
+noremap k j
 
+noremap K J
+noremap J kJ
+
+noremap } }}{j
+noremap { {{j
