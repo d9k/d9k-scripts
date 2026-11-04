@@ -1637,7 +1637,7 @@
     "command": "workbench.action.reloadWindow"
   },
   {
-    "key": "shift+alt+m",
+    "key": "shift+alt+n",
     "command": "vscode-copy-fqn.copy-fqn"
   },
   {
@@ -1888,5 +1888,10 @@
     "key": "ctrl+f",
     "command": "-extension.vim_ctrl+f",
     "when": "editorTextFocus && vim.active && vim.use<C-f> && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "shift+insert",
+    "command": "extension.vim_ctrl+v",
+    "when": "editorTextFocus && vim.active && (vim.mode == 'CommandlineInProgress' || vim.mode == 'SearchInProgressMode') && !inDebugRepl"
   }
 ]
