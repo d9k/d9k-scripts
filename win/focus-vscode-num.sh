@@ -5,7 +5,8 @@ SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 WINDOW_NUMBER="$1"
 
 # WINDOW_CLASS="code\.Code"
-WINDOW_CLASS="code\.code"
+# WINDOW_CLASS="code\.code"
+WINDOW_CLASS="\.VSCode"
 
 if [[ -z "$WINDOW_NUMBER" ]]; then
   WINDOW_NUMBER=1
