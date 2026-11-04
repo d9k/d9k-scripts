@@ -72,7 +72,8 @@ fi
 
 # Backup the pristine file once.
 if [[ -e "$BACKUP" ]]; then
-	echo "Backup already exists, keeping it: $BACKUP"
+	echo "Error: Backup already exists, delete it to proceed: $BACKUP"
+  exit
 else
 	cp -p "$TARGET" "$BACKUP"
 	echo "Backup created: $BACKUP"
