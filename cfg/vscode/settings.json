@@ -12,14 +12,21 @@
   //   }
   // },
 
+  /** VSCode updated itself on "manual"? */
+  "update.mode": "none",
   "deno.path": "/home/d9k/.deno/bin/deno",
   "telemetry.telemetryLevel": "off",
   "scm.workingSets.enabled": true,
+
+  /** DON'T open these settings in modal */
+  "workbench.editor.useModal": "off",
+
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
   // "workbench.editor.enablePreview": false,
   "workbench.list.horizontalScrolling": true,
   "workbench.hover.delay": 100,
+  "editor.hover.sticky": true,
   "workbench.iconTheme": "a-file-icon-vscode",
   "editor.wordWrap": "on",
   "gitlens.currentLine.enabled": false,
@@ -48,13 +55,18 @@
       // "editor.background": "#08000f",
       // "editor.background": "#0d000e",
       // "editor.background": "#0c000d",
-      "editor.background": "#0d0007",
+      // "editor.background": "#0d0007",
+      // "editor.background": "#102026",
+      "editor.background": "#000500",
+      // "editor.background": "#001210",
       /** markdown: */
       // "editor.foreground": "#d8d8d8",
-      "editor.foreground": "#e5e5e5",
+      // "editor.foreground": "#e5e5e5",
+      "editor.foreground": "#e0e0e0",
       // "sideBar.background": "#090013cb",
       // "sideBar.background": "#090013cb",
-      "sideBar.background": "#0d0013",
+      // "sideBar.background": "#0d0013",
+      "sideBar.background": "#020009",
       "sideBar.foreground": "#8aafc9",
       "tab.inactiveForeground": "#b4bae2",
       "tab.inactiveBackground": "#2b2342",
@@ -89,7 +101,7 @@
       "editor.wordHighlightStrongBorder": "#81bf94",
       "editor.wordHighlightTextBorder": "#81bf94",
       "editor.symbolHighlightBorder":"#81bf94",
-      "editor.findMatchHighlightBorder": "#d9d024"
+      "editor.findMatchHighlightBorder": "#d9d024",
       // Выделение линии, на которой найденое слово
       // "editor.rangeHighlightBorder": "#81bf94",
 
@@ -105,6 +117,10 @@
       // "editor.highligh"
       // "highlight"
       // "editorOverviewRuler.se": "#00000000",
+      "textPreformat.foreground": "#00BB00",
+      "textPreformat.background": "#111",
+      /* TODO не работает */
+      "textPreformat.border": "#0B0",
     },
     "[Slime]": {
       // "editor.background": "#131c24",
@@ -205,13 +221,16 @@
   // "editor.fontFamily": "'Droid Sans Mono', 'monospace'",
   // "editor.fontFamily": "'Terminus (TTF)', 'Droid Sans Mono', 'monospace'",
   // "editor.fontFamily": "'monospace'",
-  "editor.fontFamily": "Consoleet Terminus-16",
+  "editor.fontFamily": "Consoleet Terminus-18",
+
+  // "editor.fontFamily": "Ubuntu Mono - Bront",
   // "editor.fontSize": 14.2,
   // "editor.fontSize": 16.0,
   // "editor.fontSize": 14.0,
   // "editor.fontSize": 13.5,
   // "editor.fontSize": 13.8,
-  "editor.fontSize": 16,
+  "editor.fontSize": 18,
+  // "editor.fontSize": 15,
   // "editor.fontWeight": "bold",
   // "editor.fontWeight": "600",
   // "editor.fontWeight": "300",
@@ -220,10 +239,20 @@
   "editor.letterSpacing": 1.0,
   // "editor.letterSpacing": 1.2,
   // "editor.letterSpacing": 1.5,
-  "editor.lineHeight": 2.3,
+  "editor.lineHeight": 1.85,
 
-  "terminal.integrated.fontFamily": "''Terminess Nerd Font', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
-  // "terminal.integrated.fontSize": 14,
+  // "terminal.integrated.fontFamily": "''Terminess Nerd Font', 'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  // "terminal.integrated.fontFamily": "'Monofoki Nerd Font', 'Terminus (TTF)', 'Droid Sans Mono', 'monospace', monospace",
+  // "terminal.integrated.fontFamily": "Terminess Nerd Font Mono",
+  "terminal.integrated.fontFamily": "Consoleet Terminus-18",
+  "terminal.integrated.fontSize": 18,
+  "terminal.integrated.lineHeight": 1.75,
+  "terminal.integrated.letterSpacing": 1,
+
+  "markdown.preview.fontSize": 18,
+  "markdown.preview.fontFamily": "Consoleet Terminus-18",
+  "markdown.preview.lineHeight": 2,
+  "markdown.preview.letterSpacing": 1,
 
   // etc
     "git.suggestSmartCommit": false,
@@ -242,7 +271,6 @@
   "vscode-openai.azureDeployment": "gpt-35-turbo",
   "vscode-openai.embeddingsDeployment": "text-embedding-ada-002",
   "vscode-openai.azureApiVersion": "2023-05-15",
-  "update.mode": "manual",
   "editor.unicodeHighlight.invisibleCharacters": false,
   //
   // Default formatter disabled: better configure it in project .vscode/settings.json, example:
@@ -288,11 +316,6 @@
     "import vue file": "/home/d9k/scripts/import-vue ${file} ${lineNumber}"
   },
   "editor.unicodeHighlight.nonBasicASCII": false,
-
-  "javascript.preferences.importModuleSpecifier": "non-relative",
-  "js/ts.preferences.importModuleSpecifier": "non-relative",
-
-  "workbench.sideBar.location": "right",
   "workbench.editor.labelFormat": "short",
   // "workbench.editor.customLabels.patterns": {
   //   // "**/index.vue": "${filename} - <${dirname}> (${extname})"
@@ -317,7 +340,6 @@
   // ## disable animations
   // https://github.com/Gerrnperl/outline-map/issues/71
   "workbench.editor.editorActionsLocation": "titleBar",
-  "javascript.updateImportsOnFileMove.enabled": "always",
   // "editor.multiCursorModifier": "ctrlCmd",
   "gotoNextPreviousMember.symbolKinds": [
     "class",
@@ -418,7 +440,23 @@
     "*.render_script": "lua"
   },
 
+  "workbench.startupEditor": "none",
+
+  // # PHP
+  "intelephense.format.braces": "k&r",
+
+  // # JS/TS
+
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.tsserver.log": "verbose",
+  "js/ts.tsserver.log": "verbose",
+
+  // # GoLang
+  "gopls": {
+    "ui.navigation.importShortcut": "Definition"
+  },
 
   // # AI
   "chat.disableAIFeatures": true,
@@ -432,7 +470,9 @@
     "cat $HOME/tx/d9k-docs/resume.txt",
     "cat /home/d9k/tx/d9k-docs/resume.txt",
     "cat \"$HOME/tx/d9k-docs/resume.txt\"",
-    "npx tsc --noEmit 2>&1"
+    "npx tsc --noEmit 2>&1",
+    "url-markdown",
+    "ls"
   ],
   "zoo-code.deniedCommands": [],
 
@@ -627,11 +667,11 @@
     {
     // Go to Next/Previous Member extension:
     // https://marketplace.visualstudio.com/items?itemName=mishkinf.goto-next-previous-member
-      "before": ["<c-j>"],
+      "before": ["<c-k>"],
       "commands": ["gotoNextPreviousMember.nextMember"]
     },
     {
-      "before": ["<c-k>"],
+      "before": ["<c-j>"],
       "commands": ["gotoNextPreviousMember.previousMember"]
     },
     {
@@ -727,4 +767,12 @@
       "commands": ["editor.action.outdentLines"]
     }
   ],
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  //"window.openWithoutArgumentsInNewWindow": "off",
 }
