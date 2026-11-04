@@ -18,6 +18,7 @@ echo "Upgrading foundry host install in $PROJECT_DIR..."
 echo
 
 echo "Step 1/4: Go modules (go.mod/go.sum may have changed after pull)..."
+# If go.mod changed
 ( set -x; go mod download )
 if [[ $? -ne 0 ]]; then
   echoerr "go mod download failed"
@@ -26,6 +27,7 @@ fi
 
 echo
 echo "Step 2/4: regenerating plugin imports (internal/generated/plugins_gen.go)..."
+# See Makefile: plugins-sync target; serve prerequisite
 ( set -x; go run ./cmd/plugin-sync )
 if [[ $? -ne 0 ]]; then
   echoerr "plugin-sync failed"
@@ -34,11 +36,13 @@ fi
 
 echo
 echo "Step 3/4: checking migrations..."
+# See README.md: legacy "fields:" in site.yaml needs migrating
 if grep -qE '^fields:' content/config/site.yaml; then
   echo "Legacy 'fields:' schema found in content/config/site.yaml."
   echo "Foundry 1.4.x expects field contracts in the theme manifest."
   read -r -p "Run 'foundry theme migrate field-contracts' now? [y/N] " ANSWER
   if [[ $ANSWER =~ ^[Yy] ]]; then
+    # README.md, internal/commands/theme/migrate.go
     ( set -x; go run ./cmd/foundry theme migrate field-contracts )
     if [[ $? -ne 0 ]]; then
       echoerr "theme migrate field-contracts failed"
@@ -49,11 +53,12 @@ if grep -qE '^fields:' content/config/site.yaml; then
     echo "  go run ./cmd/foundry theme migrate field-contracts"
   fi
 else
-  echo "No legacy 'fields:' schema in content/config/site.yaml - nothing to migrate."
+  echo "Skip: No legacy 'fields:' schema in content/config/site.yaml - nothing to migrate."
 fi
 
 echo
 echo "Step 4/4: version check..."
+echo "git current commit date: $(git log -1 --format='%ci (%H)')"
 ( set -x; go run ./cmd/foundry version )
 if [[ $? -ne 0 ]]; then
   echoerr "Version check failed"
