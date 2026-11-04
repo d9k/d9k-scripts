@@ -240,11 +240,11 @@
     "when": "gitlens:key:alt+right"
   },
   {
-    "key": "alt+r",
+    "key": "alt+j",
     "command": "workbench.action.previousEditorInGroup"
   },
   {
-    "key": "alt+f",
+    "key": "alt+k",
     "command": "workbench.action.nextEditorInGroup"
   },
   {
@@ -1329,11 +1329,11 @@
     "command": "workbench.action.focusPreviousGroup"
   },
   {
-    "key": "alt+j",
+    "key": "alt+f",
     "command": "gotoNextPreviousMember.nextMember"
   },
   {
-    "key": "alt+k",
+    "key": "alt+r",
     "command": "gotoNextPreviousMember.previousMember"
   },
   {
