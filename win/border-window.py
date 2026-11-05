@@ -3,6 +3,7 @@ import argparse
 import sys
 import threading
 import time
+import os
 from Xlib import X, display
 from Xlib.ext import shape
 
@@ -93,6 +94,8 @@ def main():
                 d.flush()
             except Exception:
                 pass
+            finally:
+                os._exit(0)
         threading.Thread(target=close_later, daemon=True).start()
 
     # --- event loop (keep window alive) ---
