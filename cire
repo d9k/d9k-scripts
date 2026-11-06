@@ -1,8 +1,10 @@
 #!/bin/bash
 
+set -x
 # Minimal cinnamon replace
-cinnamon --replace
+cinnamon --replace &
 sleep 1
 killall warpd
 sleep 1
 warpd
+$HOME/scripts/hw-keyboard-tune.sh
