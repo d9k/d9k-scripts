@@ -6,3 +6,4 @@ xdotool keyup Super
 xdotool mousedown 1 
 # sleep 0.1 
 # xdotool mouseup 2
+$SCRIPT_DIR/mouse-positions-history-push.sh

@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 
@@ -14,5 +15,7 @@ if [ $EXIT_CODE == 100 ]; then
   # xte 'keyup Shift_L'
   sleep 0.1
   # $SCRIPT_DIR/mouse-click-left.sh
-      xdotool click --clearmodifiers 1
+  xdotool click --clearmodifiers 1
+  $SCRIPT_DIR/mouse-positions-history-push.sh
 fi
+

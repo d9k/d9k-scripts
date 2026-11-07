@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 
@@ -13,6 +14,7 @@ if [ $EXIT_CODE == 100 ]; then
    # `sudo apt install xautomation` required for xte!
    xte 'keyup Super_L'
    $SCRIPT_DIR/mouse-click-right.sh
+  $SCRIPT_DIR/mouse-positions-history-push.sh
 fi
 
 $SCRIPT_DIR/warpd-cfg-set-hint-color.sh

@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Require to unassign Start Menu from Win key to work without "keyup Super"!
 #xdotool keyup Super
@@ -43,4 +44,6 @@ while [ "$i" -le $SCROLL_COUNT_ACTUAL ]; do
   # echo "scroll up $i" >> /tmp/t
   i=$(( i + 1 ))
 done
+
+$SCRIPT_DIR/mouse-positions-history-push.sh
 

@@ -17,3 +17,4 @@ sleep 0.1
 xte "mouseclick 1"
 
 $SCRIPT_DIR/mouse-events-count-reset.sh
+$SCRIPT_DIR/mouse-positions-history-push.sh
