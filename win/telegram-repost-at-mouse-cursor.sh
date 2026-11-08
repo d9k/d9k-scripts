@@ -7,5 +7,5 @@ xdotool sleep 0.05 key Up
 xdotool sleep 0.05 key Up
 xdotool sleep 0.05 key Up
 xdotool sleep 0.05 key Return
-sleep 0.1
+sleep 0.16
 xdotool sleep 0.05 type '/'
