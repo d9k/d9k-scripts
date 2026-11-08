@@ -45,5 +45,5 @@ while [ "$i" -le $SCROLL_COUNT_ACTUAL ]; do
   i=$(( i + 1 ))
 done
 
-$SCRIPT_DIR/mouse-positions-history-push.sh
+$SCRIPT_DIR/mouse-positions-history.sh push
 

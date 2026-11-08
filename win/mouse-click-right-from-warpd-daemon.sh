@@ -14,7 +14,7 @@ if [ $EXIT_CODE == 100 ]; then
    # `sudo apt install xautomation` required for xte!
    xte 'keyup Super_L'
    $SCRIPT_DIR/mouse-click-right.sh
-  $SCRIPT_DIR/mouse-positions-history-push.sh
+  $SCRIPT_DIR/mouse-positions-history.sh push
 fi
 
 $SCRIPT_DIR/warpd-cfg-set-hint-color.sh

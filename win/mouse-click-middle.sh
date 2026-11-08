@@ -13,4 +13,4 @@ xte 'keyup Super_L'
 xte "mouseclick 2"
 
 $SCRIPT_DIR/mouse-events-count-reset.sh
-$SCRIPT_DIR/mouse-positions-history-push.sh
+$SCRIPT_DIR/mouse-positions-history.sh push

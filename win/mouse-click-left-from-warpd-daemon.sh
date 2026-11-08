@@ -16,6 +16,6 @@ if [ $EXIT_CODE == 100 ]; then
   sleep 0.1
   # $SCRIPT_DIR/mouse-click-left.sh
   xdotool click --clearmodifiers 1
-  $SCRIPT_DIR/mouse-positions-history-push.sh
+  $SCRIPT_DIR/mouse-positions-history.sh push
 fi
 
