@@ -12,7 +12,14 @@ function echoerr {
 }
 
 # "[[ -s FILE ]]" is true when the file exists and is not empty (size greater than zero)
-while [[ -s "$MOUSE_POS_LOG_PATH" ]]; do
+MAX_POP_STEPS=0
+if [[ -s "$MOUSE_POS_LOG_PATH" ]]; then
+  MAX_POP_STEPS="$(wc --lines < "$MOUSE_POS_LOG_PATH")"
+fi
+
+# every deleted line rotates back to the top of the log, so the file never shrinks;
+# iterate only over the initial number of lines to not loop forever when all records equal the current mouse position
+for ((POP_STEP=1; POP_STEP<=MAX_POP_STEPS; POP_STEP++)); do
   LAST_RECORD="$("$SCRIPT_DIR/mouse-positions-history-last.sh")"
 
   SAVED_X="$(printf "%s" "$LAST_RECORD" | jq --raw-output '.x')"
@@ -22,8 +29,12 @@ while [[ -s "$MOUSE_POS_LOG_PATH" ]]; do
   CURRENT_X="$X"
   CURRENT_Y="$Y"
 
-  # sed '$d' deletes the last line: "$" is the address of the last line, "d" is the delete command;
-  sed --in-place '$d' "$MOUSE_POS_LOG_PATH"
+  # "1i TEXT" inserts TEXT before the first line, "$d" deletes the last line ("$" is the address of the last line, "d" is the delete command);
+  # "1i" must be before "$d", because "$d" restarts the sed cycle and skips expressions after it
+  sed --in-place \
+    --expression "1i $LAST_RECORD" \
+    --expression '$d' \
+    "$MOUSE_POS_LOG_PATH"
 
   if [[ "$SAVED_X" != "$CURRENT_X" || "$SAVED_Y" != "$CURRENT_Y" ]]; then
     xdotool mousemove "$SAVED_X" "$SAVED_Y"
