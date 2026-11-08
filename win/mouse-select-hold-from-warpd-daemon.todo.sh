@@ -4,14 +4,14 @@ SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 FILE_SELECTING_PATH="$HOME/.mouse-selecting-with-keyboard"
 RELEASE_TIMEOUT_S=8
 
-# border-window-current-display.sh configuration
+# overlay-window-border-current-display.sh configuration
 export BORDER_COLOR="0x0090A0"
 export BORDER_TIMEOUT_MS=$(( $RELEASE_TIMEOUT_S * 1000))
 
 function mouse_button_release_with_message {
   rm "$FILE_SELECTING_PATH"
   $SCRIPT_DIR/mouse-release-left-button.sh
-  pkill -f "border-window.py"
+  pkill -f "overlay-window-border.py"
   if [ -n "$1" ]; then
     notify-send -t 3000 "$@"
   fi
@@ -50,7 +50,7 @@ fi
 $SCRIPT_DIR/warpd-cfg-set-hint-color.sh
 
 notify-send -t 3000 "Run again to release mouse button or it will be release after ${RELEASE_TIMEOUT_S} seconds."
-# $SCRIPT_DIR/border-window-current-display.sh
+# $SCRIPT_DIR/overlay-window-border-current-display.sh
 
 sleep $RELEASE_TIMEOUT_S
 

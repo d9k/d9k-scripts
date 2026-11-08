@@ -20,4 +20,4 @@ case "$MOUSE_DISPLAY_NUM" in
 esac
 
 
-$SCRIPT_DIR/border-window-current-display.sh
+$SCRIPT_DIR/overlay-window-border-current-display.sh

@@ -17,9 +17,9 @@ if [[ -z "$BORDER_TIMEOUT_MS" ]]; then
 fi
 
 function show_border_window_coords {
-  pkill -f "border-window.py"
+  pkill -f "overlay-window-border.py"
 
-  $SCRIPT_DIR/border-window.py \
+  $SCRIPT_DIR/overlay-window-border.py \
     $BORDER_COLOR \
     --border-width $BORDER_WIDTH \
     --timeout $BORDER_TIMEOUT_MS \

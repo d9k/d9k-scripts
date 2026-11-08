@@ -105,7 +105,7 @@ function pop_history {
   if [[ -z "$POPPED_RECORD_WAS_FOUND" ]]; then
     echoerr "Error: history is empty"
 
-    BORDER_COLOR="$BORDER_DARK_RED_COLOR" BORDER_TIMEOUT_MS="$BORDER_SHOW_MS" "$SCRIPT_DIR/border-window-current-display.sh" &
+    BORDER_COLOR="$BORDER_DARK_RED_COLOR" BORDER_TIMEOUT_MS="$BORDER_SHOW_MS" "$SCRIPT_DIR/overlay-window-border-current-display.sh" &
 
     notify-send --expire-time "$NOTIFY_TIMEOUT_MS" "Mouse position history is empty"
 
