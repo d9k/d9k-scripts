@@ -10,9 +10,9 @@ from Xlib.ext import shape
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Draw a click-through frame on X11.",
-        usage="%(prog)s COLOR X1 Y1 X2 Y2 [--timeout MS] [--border-width PX]",
-                formatter_class=argparse.RawDescriptionHelpFormatter,   
-        epilog=(                                                 
+        usage="%(prog)s [--help] COLOR X1 Y1 X2 Y2 [--timeout MS] [--border-width PX]",
+                formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=(
             "examples:\n"
             "  %(prog)s 0xFF0000 600 600 1400 1200\n"
             "  %(prog)s 0x00FF00 100 100 500 400 --border-width 2 --timeout 3000\n"
@@ -28,13 +28,14 @@ def parse_args():
                         help="auto-close after N milliseconds (0 = stay forever)")
     parser.add_argument("--border-width", type=int, default=4,
                         help="frame thickness in pixels (default 4)")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+
     return parser.parse_args()
 
 def main():
-    if len(sys.argv) == 1:
-        parse_args()  # prints help and exits
-        return
-
     args = parse_args()
 
     # normalize coordinates so x1<x2, y1<y2
