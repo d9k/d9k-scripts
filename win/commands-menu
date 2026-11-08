@@ -33,7 +33,7 @@ COMMAND_TELEGRAM_REPOST_AT_MOUSE_CURSOR="${SCRIPTS}/win/telegram-repost-at-mouse
 COMMAND_TELEGRAM_REPOST_AT_MOUSE_CURSOR_TITLE="Telegram: repost at mouse cursor"
 
 COMMAND_TELEGRAM_DELETE_AT_MOUSE_CURSOR="${SCRIPTS}/win/telegram-delete-at-mouse-cursor.sh"
-COMMAND_TELEGRAM_DELETE_AT_MOUSE_CURSOR_TITLE="Telegram: DELETE at mouse cursor"
+COMMAND_TELEGRAM_DELETE_AT_MOUSE_CURSOR_TITLE="Telegram: /!\ DELETE at mouse cursor"
 
 COMMAND_TELEGRAM_EDIT_AT_MOUSE_CURSOR="${SCRIPTS}/win/telegram-edit-at-mouse-cursor.sh"
 COMMAND_TELEGRAM_EDIT_AT_MOUSE_CURSOR_TITLE="Telegram: edit at mouse cursor"
