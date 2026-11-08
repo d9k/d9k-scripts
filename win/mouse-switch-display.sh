@@ -1,20 +1,23 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-MOUSE_X=$($SCRIPT_DIR/get-mouse-x.sh)
-echo $MOUSE_X
 
 source "$SCRIPT_DIR/displays.inc.sh"
 
-BORDER_COLOR="0x0004000"
+MOUSE_DISPLAY_NUM="$(get_mouse_display_num)"
+
+BORDER_COLOR="0x0005010"
 BORDER_WIDTH="8"
 BORDER_TIMEOUT_MS=700
 
-if [ $MOUSE_X -le $DISPLAY2_X ]; then
-  xdotool mousemove $DISPLAY2_MX $DISPLAY2_MY
-else
-  xdotool mousemove $DISPLAY1_MX $DISPLAY1_MY
-fi
+case "$MOUSE_DISPLAY_NUM" in
+  1)
+    xdotool mousemove $DISPLAY2_MX $DISPLAY2_MY
+    ;;
+  2)
+    xdotool mousemove $DISPLAY1_MX $DISPLAY1_MY
+    ;;
+esac
 
 
 $SCRIPT_DIR/border-window-current-display.sh

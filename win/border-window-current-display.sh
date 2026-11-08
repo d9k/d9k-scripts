@@ -14,7 +14,7 @@ fi
 
 if [[ -z "$BORDER_TIMEOUT_MS" ]]; then
   BORDER_TIMEOUT_MS=700
-fi  
+fi
 
 function show_border_window_coords {
   pkill -f "border-window.py"
@@ -26,14 +26,17 @@ function show_border_window_coords {
     "$@"
 }
 
-MOUSE_X=$($SCRIPT_DIR/get-mouse-x.sh)
+MOUSE_DISPLAY_NUM="$(get_mouse_display_num)"
 
-if [ $MOUSE_X -le $DISPLAY2_X ]; then
-  show_border_window_coords \
-    $DISPLAY1_X $DISPLAY1_Y \
-    $DISPLAY1_X2 $DISPLAY1_Y2 
-else
-  show_border_window_coords \
-    $DISPLAY2_X $DISPLAY2_Y \
-    $DISPLAY2_X2 $DISPLAY2_Y2
-fi
+case "$MOUSE_DISPLAY_NUM" in
+  1)
+    show_border_window_coords \
+      $DISPLAY1_X $DISPLAY1_Y \
+      $DISPLAY1_X2 $DISPLAY1_Y2
+    ;;
+  2)
+    show_border_window_coords \
+      $DISPLAY2_X $DISPLAY2_Y \
+      $DISPLAY2_X2 $DISPLAY2_Y2
+    ;;
+esac

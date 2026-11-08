@@ -18,3 +18,13 @@ DISPLAY1_MY=$(( ($DISPLAY1_Y + $DISPLAY1_Y2) / 2))
 
 DISPLAY2_MX=$(( ($DISPLAY2_X + $DISPLAY2_X2) / 2))
 DISPLAY2_MY=$(( ($DISPLAY2_Y + $DISPLAY2_Y2) / 2))
+
+function get_mouse_display_num {
+  MOUSE_X=$($SCRIPT_DIR/get-mouse-x.sh)
+
+  if [ $MOUSE_X -le $DISPLAY2_X ]; then
+    echo 1
+  else
+    echo 2
+  fi
+}
