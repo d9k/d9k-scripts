@@ -17,8 +17,9 @@ fi
 
 eval "$(xdotool getmouselocation --shell)"
 
+# yad --question pre-selects the No button, so Enter would cancel the move;
+# explicit buttons make the Enter key activate the first declared one, therefore Yes comes first
 yad \
-  --question \
   --no-markup \
   --on-top \
   --justify=center \
@@ -27,7 +28,9 @@ yad \
   --wrap \
   --mouse \
   --title="Did it copy correct?" \
-  --text="Check the fragment:\n\n$FRAGMENT"
+  --text="Check the fragment:\n\n$FRAGMENT" \
+  --button="gtk-yes:0" \
+  --button="gtk-no:1"
 ANSWER_CODE=$?
 
 if [ $ANSWER_CODE -ne 0 ]; then
