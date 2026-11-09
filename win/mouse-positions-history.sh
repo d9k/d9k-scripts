@@ -14,6 +14,8 @@ BORDER_DARK_RED_COLOR="0x502020"
 BORDER_SHOW_MS=500
 DOTS_SHOW_MS=3000
 DOTS_GREEN_COLOR="0x00FF00"
+DOTS_OUTLINE_COLOR="0x000000"
+DOTS_OUTLINE_WIDTH=2
 POPPED_RECORD_WAS_FOUND=
 
 function echoerr {
@@ -120,7 +122,11 @@ function pop_history {
 
   JSON_POINTS="$(jq --compact-output --slurp '.' "$MOUSE_POS_LOG_PATH")"
 
-  "$SCRIPT_DIR/overlay-window-dots.py" "$JSON_POINTS" --color "$DOTS_GREEN_COLOR" --timeout "$DOTS_SHOW_MS" &
+  "$SCRIPT_DIR/overlay-window-dots.py" "$JSON_POINTS" \
+    --color "$DOTS_GREEN_COLOR" \
+    --outline-color "$DOTS_OUTLINE_COLOR" \
+    --outline-width "$DOTS_OUTLINE_WIDTH" \
+    --timeout "$DOTS_SHOW_MS" &
 
   sleep 0.2
   printf "%s" "$OLD_WINDOWS_DOTS_PIDS" | xargs --no-run-if-empty kill -9

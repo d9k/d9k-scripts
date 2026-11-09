@@ -11,7 +11,7 @@ from Xlib.ext import shape
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Draw dots overlay on X11.",
-        usage="%(prog)s [--help] JSON_POINTS [--radius PX] [--color HEX] [--timeout MS]",
+        usage="%(prog)s [--help] JSON_POINTS [--radius PX] [--color HEX] [--outline-color HEX] [--outline-width PX] [--timeout MS]",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "examples:\n"
@@ -26,6 +26,10 @@ def parse_args():
                         help="dot radius in pixels (default 5)")
     parser.add_argument("--color", type=lambda s: int(s, 0), default=0xFF0000,
                         help="dot color (hex or decimal), e.g. 0xFF0000")
+    parser.add_argument("--outline-color", type=lambda s: int(s, 0), default=0x000000,
+                        help="outline color (hex or decimal), e.g. 0x000000")
+    parser.add_argument("--outline-width", type=int, default=0,
+                        help="outline width in pixels (default 0 = no outline)")
     parser.add_argument("--timeout", type=int, default=0,
                         help="auto-close after N milliseconds (0 = stay forever)")
 
@@ -65,15 +69,17 @@ def main():
     for point in points:
         x, y = int(point["x"]), int(point["y"])
         r = args.radius
-        size = 2 * r
+        t = args.outline_width
+        size = 2 * (r + t)
 
+        # the window background is the outline color, the dot circle is painted over it after map() (see below)
         win = root.create_window(
-            x - r, y - r, size, size, 0,
+            x - (r + t), y - (r + t), size, size, 0,
             screen.root_depth,
             X.InputOutput,
             X.CopyFromParent,
             override_redirect=True,
-            background_pixel=args.color,
+            background_pixel=args.outline_color if t > 0 else args.color,
         )
 
         # --- bounding shape: visible circle only, so square corners stay transparent ---
@@ -92,6 +98,13 @@ def main():
         win.shape_mask(shape.SO.Set, shape.SK.Input, 0, 0, input_pm)
 
         win.map()
+
+        # map() fills the window with background_pixel, so the dot must be painted only after it;
+        # the override_redirect window stays above everything else, nothing ever covers it, no redraw needed
+        if t > 0:
+            dot_gc = win.create_gc(foreground=args.color)
+            win.poly_fill_arc(dot_gc, [(t, t, 2 * r, 2 * r, 0, 360 * 64)])
+
         wins.append(win)
 
     d.flush()
