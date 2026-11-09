@@ -2,7 +2,7 @@
 //
 // @name         YT hotkeys
 // @namespace    http://tampermonkey.net/
-// @version      2026-11-03
+// @version      2026-11-09
 // @description  try to take over the world!
 // @author       You
 // @match        *://*.youtube.com/*
@@ -31,7 +31,7 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        var subtitlesSwitchLanguage = async (language) => {
+        var subtitlesSwitchLanguage = async (languageCandidates) => {
             try {
                 var player = document.querySelector('.html5-video-player');
                 if (!player) {
@@ -48,11 +48,20 @@
 
                 await sleepMs(200);
 
-                var xpathButtonSubtitles = document.evaluate(
-                    '//div[@class="ytp-menuitem"][contains(., "Субтитры")]',
-                    document, null, XPathResult.ANY_TYPE, null
-                );
-                var buttonSubtitles = xpathButtonSubtitles.iterateNext();
+                var subtitlesButtonLabels = ['Субтитры', 'Subtitles'];
+
+                var buttonSubtitles = null;
+
+                for (var label of subtitlesButtonLabels) {
+                    var xpathButtonSubtitles = document.evaluate(
+                        `//div[@class="ytp-menuitem"][contains(., "${label}")]`,
+                        document, null, XPathResult.ANY_TYPE, null
+                    );
+                    buttonSubtitles = xpathButtonSubtitles.iterateNext();
+                    if (buttonSubtitles) {
+                        break;
+                    }
+                }
 
                 if (!buttonSubtitles) {
                     throw new Error('No subtitles button!');
@@ -74,16 +83,21 @@
 
                 var menuItemsRaw = [...document.querySelectorAll('.ytp-menuitem')];
 
-                var menuEnglishLanguageMatches = menuItemsRaw
-                .filter(el => el.textContent.includes(language));
+                var menuLanguage = null;
 
-                var menuEnglishLanguage = menuEnglishLanguageMatches[0];
+                for (var candidate of languageCandidates) {
+                    var matches = menuItemsRaw.filter(el => el.textContent.includes(candidate));
+                    if (matches.length > 0) {
+                        menuLanguage = matches[0];
+                        break;
+                    }
+                }
 
-                if (!menuEnglishLanguage) {
+                if (!menuLanguage) {
                     throw new Error('No language menu item!');
                 }
 
-                menuEnglishLanguage.click();
+                menuLanguage.click();
 
                 await sleepMs(400);
 
@@ -99,12 +113,12 @@
 
           hotkeys('ctrl+alt+e', (e) => {
               e.preventDefault();
-              subtitlesSwitchLanguage('Английский');
+              subtitlesSwitchLanguage(['Английский', 'English']);
           });
 
           hotkeys('ctrl+alt+r', (e) => {
               e.preventDefault();
-              subtitlesSwitchLanguage('Русский');
+              subtitlesSwitchLanguage(['Русский', 'Russian']);
           });
 
           console.log(logPrefix, 'after hotkeys');
