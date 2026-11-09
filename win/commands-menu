@@ -42,7 +42,7 @@ COMMAND_TELEGRAM_COPY_AT_MOUSE_CURSOR="${SCRIPTS}/win/telegram-copy-at-mouse-cur
 COMMAND_TELEGRAM_COPY_AT_MOUSE_CURSOR_TITLE="Telegram: copy at mouse cursor"
 
 COMMAND_TELEGRAM_MOVE_TO_TOP_AT_MOUSE_CURSOR="${SCRIPTS}/win/telegram-move-to-top-at-mouse-cursor.sh"
-COMMAND_TELEGRAM_MOVE_TO_TOP_AT_MOUSE_CURSOR_TITLE="Telegram: /!\ move to top at mouse cursor"
+COMMAND_TELEGRAM_MOVE_TO_TOP_AT_MOUSE_CURSOR_TITLE="Telegram: move to top at mouse cursor"
 
 # sleep 1
 # $COMMAND_RUN_SELECTION_IN_TERMINAL
