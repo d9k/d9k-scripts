@@ -35,5 +35,17 @@ noremap k j
 noremap K J
 noremap J kJ
 
+" Next/previous block of text
 noremap } }}{j
 noremap { {{j
+
+" Unable to map to alt:
+" See: https://github.com/VSCodeVim/Vim/issues/2713
+" Try: https://github.com/VSCodeVim/Vim/issues/7436
+"noremap <A-m> }
+"noremap <A-n> {
+
+" Mapped then to Alt-{N,M} in keybdindings.json of VSCode
+noremap 0 }
+noremap 9 {
+

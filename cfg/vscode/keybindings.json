@@ -1654,7 +1654,7 @@
     // "when": "inputfocus && vim.mode",
     "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
     "args": {
-      "after": ["}"]
+      "after": ["0"]
   }
   },
   {
@@ -1682,7 +1682,7 @@
     "command": "vim.remap",
     "when": "editorFocus && (vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine')",
     "args": {
-      "after": ["{"]
+      "after": ["9"]
     }
   },
   {
@@ -1890,5 +1890,10 @@
     "key": "shift+insert",
     "command": "extension.vim_ctrl+v",
     "when": "editorTextFocus && vim.active && (vim.mode == 'CommandlineInProgress' || vim.mode == 'SearchInProgressMode') && !inDebugRepl"
+  },
+  {
+    "key": "alt+n",
+    "command": "-workbench.action.chat.nextQuestion",
+    "when": "chatHasQuestionCarousel && inChat && inChatQuestionCarousel"
   }
 ]
