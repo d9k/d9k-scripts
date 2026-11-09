@@ -8,10 +8,12 @@ source "$SCRIPT_DIR/displays.inc.sh"
 
 DISPLAY_NUM="$(get_mouse_display_num)"
 MOUSE_POS_LOG_PATH="$HOME/.mouse-pos-history-display${DISPLAY_NUM}.json.log"
-MAX_HISTORY_STEPS=6
+MAX_HISTORY_STEPS=5
 NOTIFY_TIMEOUT_MS=3000
 BORDER_DARK_RED_COLOR="0x502020"
 BORDER_SHOW_MS=500
+DOTS_SHOW_MS=3000
+DOTS_GREEN_COLOR="0x00FF00"
 POPPED_RECORD_WAS_FOUND=
 
 function echoerr {
@@ -111,6 +113,17 @@ function pop_history {
 
     exit 100
   fi
+
+  # take the PIDs of the previously shown dots windows BEFORE drawing the new one,
+  # and kill them only after the new window is up, so there is no flicker between repeated pop presses
+  OLD_WINDOWS_DOTS_PIDS="$(pgrep --full "overlay-window-dots.py")"
+
+  JSON_POINTS="$(jq --compact-output --slurp '.' "$MOUSE_POS_LOG_PATH")"
+
+  "$SCRIPT_DIR/overlay-window-dots.py" "$JSON_POINTS" --color "$DOTS_GREEN_COLOR" --timeout "$DOTS_SHOW_MS" &
+
+  sleep 0.2
+  printf "%s" "$OLD_WINDOWS_DOTS_PIDS" | xargs --no-run-if-empty kill -9
 }
 
 case "$ARGS_COMMAND" in
