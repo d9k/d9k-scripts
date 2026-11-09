@@ -9,6 +9,7 @@ source "$SCRIPT_DIR/displays.inc.sh"
 DISPLAY_NUM="$(get_mouse_display_num)"
 MOUSE_POS_LOG_PATH="$HOME/.mouse-pos-history-display${DISPLAY_NUM}.json.log"
 MAX_HISTORY_STEPS=5
+MIN_EXISTING_DOT_DISTANCE=16
 NOTIFY_TIMEOUT_MS=3000
 BORDER_DARK_RED_COLOR="0x502020"
 BORDER_SHOW_MS=500
@@ -59,6 +60,36 @@ function push_history {
     if [[ "$LAST_X" == "$CURRENT_X" && "$LAST_Y" == "$CURRENT_Y" ]]; then
       return
     fi
+  fi
+
+  # scan the whole log from the bottom up to find the record closest to the new point and delete it,
+  # so the history keeps only visibly distinct positions;
+  # MOST_NARROW_DOT_DISTANCE starts at MIN_EXISTING_DOT_DISTANCE, which is both the initial best value and the
+  # deletion threshold, so a record is only ever replaced by a strictly closer one and ties resolve to the lower
+  # line, because the lower line is met first
+  MOST_NARROW_DOT_DISTANCE=$(($MIN_EXISTING_DOT_DISTANCE + 1))
+  MOST_NARROW_DOT_NUMBER=
+
+  if [[ -s "$MOUSE_POS_LOG_PATH" ]]; then
+    TOTAL_LINES="$(wc --lines < "$MOUSE_POS_LOG_PATH")"
+
+    for ((LINE=TOTAL_LINES; LINE>=1; LINE--)); do
+      OLD_RECORD="$(sed --quiet --expression "${LINE}p" "$MOUSE_POS_LOG_PATH")"
+      OLD_X="$(printf "%s" "$OLD_RECORD" | jq --raw-output '.x')"
+      OLD_Y="$(printf "%s" "$OLD_RECORD" | jq --raw-output '.y')"
+
+      # gawk does not know the "--begin" option and prints its usage instead, so the program is passed as a standard "BEGIN { ... }" block
+      DISTANCE="$(awk "BEGIN { printf \"%d\", sqrt((${CURRENT_X} - ${OLD_X})^2 + (${CURRENT_Y} - ${OLD_Y})^2) }")"
+
+      if [ $DISTANCE -lt $MOST_NARROW_DOT_DISTANCE ]; then
+        MOST_NARROW_DOT_DISTANCE="$DISTANCE"
+        MOST_NARROW_DOT_NUMBER="$LINE"
+      fi
+    done
+  fi
+
+  if [[ -n "$MOST_NARROW_DOT_NUMBER" ]]; then
+    sed --in-place "${MOST_NARROW_DOT_NUMBER}d" "$MOUSE_POS_LOG_PATH"
   fi
 
   jq --compact-output --null-input \
