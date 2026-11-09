@@ -1,4 +1,5 @@
 // ==UserScript==
+//
 // @name         YT hotkeys
 // @namespace    http://tampermonkey.net/
 // @version      2026-11-03
@@ -8,6 +9,111 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
 // ==/UserScript==
+
+/** ========================== */
+/** === USER SCRIPT BEGINS === */
+/** ========================== */
+
+(function() {
+    'use strict';
+
+    /** hotkeys-js v3.13.7 required! */
+
+    var logPrefix = 'YT hotkeys userscript:';
+
+    console.log(logPrefix, 'main function');
+
+    // Waiting for deps to load
+    setTimeout(() => {
+        console.log(logPrefix, 'after initial setTimeout to wait for deps to load');
+
+        function sleepMs(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        var subtitlesSwitchLanguage = async (language) => {
+            try {
+                var player = document.querySelector('.html5-video-player');
+                if (!player) {
+                    throw new Error('No player');
+                }
+
+                player.classList.remove('ytp-autohide');
+
+                var buttonSettings = document.querySelector('.ytp-settings-button');
+                if (!buttonSettings) {
+                    throw new Error('No settings button!');
+                }
+                buttonSettings.click();
+
+                await sleepMs(200);
+
+                var xpathButtonSubtitles = document.evaluate(
+                    '//div[@class="ytp-menuitem"][contains(., "Субтитры")]',
+                    document, null, XPathResult.ANY_TYPE, null
+                );
+                var buttonSubtitles = xpathButtonSubtitles.iterateNext();
+
+                if (!buttonSubtitles) {
+                    throw new Error('No subtitles button!');
+                }
+
+                buttonSubtitles.click();
+
+                await sleepMs(400);
+
+                // TODO Why not working?
+
+                //var xpathMenuEnglishLanguage = document.evaluate('//div[@class="ytp-menuitem"][contains(., "Английский (создано автоматически)")]', document, null, XPathResult.ANY_TYPE, null );
+                //var xpathMenuEnglishLanguage = document.evaluate(
+                //    '//div[@class="ytp-menuitem"][contains(., "Английский")]',
+                //    document, null, XPathResult.ANY_TYPE, null
+                //);
+
+                // var menuEnglishLanguage = xpathMenuEnglishLanguage.iterateNext();
+
+                var menuItemsRaw = [...document.querySelectorAll('.ytp-menuitem')];
+
+                var menuEnglishLanguageMatches = menuItemsRaw
+                .filter(el => el.textContent.includes(language));
+
+                var menuEnglishLanguage = menuEnglishLanguageMatches[0];
+
+                if (!menuEnglishLanguage) {
+                    throw new Error('No language menu item!');
+                }
+
+                menuEnglishLanguage.click();
+
+                await sleepMs(400);
+
+                buttonSubtitles.click();
+
+            } catch (e) {
+                console.error(logPrefix, e);
+                throw e;
+            }
+          }
+
+          console.log(logPrefix, 'before hotkeys');
+
+          hotkeys('ctrl+alt+e', (e) => {
+              e.preventDefault();
+              subtitlesSwitchLanguage('Английский');
+          });
+
+          hotkeys('ctrl+alt+r', (e) => {
+              e.preventDefault();
+              subtitlesSwitchLanguage('Русский');
+          });
+
+          console.log(logPrefix, 'after hotkeys');
+    }, 0);
+})();
+
+/** ========================== */
+/** === DEPENDENCIES BEGIN === */
+/** ========================== */
 
 /**!
  * hotkeys-js v3.13.7
@@ -692,95 +798,3 @@
   return hotkeys;
 
 }));
-
-/** ========================== */
-/** === USER SCRIPT BEGINS === */
-/** ========================== */
-
-(function() {
-    'use strict';
-
-    /** hotkeys-js v3.13.7 required! */
-
-    function sleepMs(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    var logPrefix = 'YT hotkeys userscript:';
-
-    var subtitlesSwitchLanguage = async (language) => {
-
-		var player = document.querySelector('.html5-video-player');
-		if (!player) {
-			throw new Error('No player');
-		}
-
-		player.classList.remove('ytp-autohide');
-
-		var buttonSettings = document.querySelector('.ytp-settings-button');
-		if (!buttonSettings) {
-			throw new Error('No settings button!');
-		}
-		buttonSettings.click();
-
-        await sleepMs(200);
-
-		var xpathButtonSubtitles = document.evaluate(
-            '//div[@class="ytp-menuitem"][contains(., "Субтитры")]',
-            document, null, XPathResult.ANY_TYPE, null
-        );
-		var buttonSubtitles = xpathButtonSubtitles.iterateNext();
-
-		if (!buttonSettings) {
-			throw new Error('No subtitles button!');
-		}
-
-		buttonSubtitles.click();
-
-        // console.log(logPrefix, '__TEST__ 250');
-
-        await sleepMs(400);
-
-        // TODO Why not working?
-
-		//var xpathMenuEnglishLanguage = document.evaluate('//div[@class="ytp-menuitem"][contains(., "Английский (создано автоматически)")]', document, null, XPathResult.ANY_TYPE, null );
-		//var xpathMenuEnglishLanguage = document.evaluate(
-        //    '//div[@class="ytp-menuitem"][contains(., "Английский")]',
-        //    document, null, XPathResult.ANY_TYPE, null
-        //);
-
-        // var menuEnglishLanguage = xpathMenuEnglishLanguage.iterateNext();
-
-        var menuItemsRaw = [...document.querySelectorAll('.ytp-menuitem')];
-
-        var menuEnglishLanguageMatches = menuItemsRaw
-            .filter(el => el.textContent.includes(language));
-
-        var menuEnglishLanguage = menuEnglishLanguageMatches[0];
-
-		if (!menuEnglishLanguage) {
-			throw new Error('No language menu item!');
-		}
-
-        menuEnglishLanguage.click();
-
-        await sleepMs(400);
-
-        buttonSubtitles.click();
-	}
-
-    console.log(logPrefix, 'before hotkeys');
-
-    hotkeys('ctrl+alt+e', (e) => {
-        e.preventDefault();
-        subtitlesSwitchLanguage('Английский');
-    });
-
-    hotkeys('ctrl+alt+r', (e) => {
-        e.preventDefault();
-        subtitlesSwitchLanguage('Русский');
-    });
-
-
-    console.log(logPrefix, 'after hotkeys');
-})();
