@@ -21,11 +21,11 @@ yad \
   --question \
   --no-markup \
   --on-top \
-  --center \
   --justify=center \
   --align=center \
   --margins=20 \
   --wrap \
+  --mouse \
   --title="Did it copy correct?" \
   --text="Check the fragment:\n\n$FRAGMENT"
 ANSWER_CODE=$?
