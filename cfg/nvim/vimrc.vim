@@ -1,4 +1,4 @@
-lua require('config')
+"lua require('config')
 
 " Vim Regex cheatsheet:
 " \< - word start
