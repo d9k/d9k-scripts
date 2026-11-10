@@ -31,18 +31,29 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
+        function elementMouseHoverForce(element) {
+            var hoverEvents = ['pointerover', 'pointerenter', 'mouseover', 'mouseenter', 'mousemove'];
+            for (var eventName of hoverEvents) {
+                element.dispatchEvent(new MouseEvent(eventName, { bubbles: true, cancelable: true, view: window }));
+            }
+        }
+
         var clickMusicAddButton = async () => {
             try {
                 var activeRow = document.querySelector('[data-testid="MusicTrackRow_isActive"]');
+
+                // Paused track has no isActive row; fallback to row containing the progress slider
+                if (!activeRow) {
+                    activeRow = [...document.querySelectorAll('[data-testid="MusicTrackRow"]')]
+                        .find(row => row.querySelector('[data-testid="slider_input"]'));
+                }
+
                 if (!activeRow) {
                     throw new Error('No activeRow!');
                 }
 
                 // Lazy rendering: MenuButton is created only on hover
-                var hoverEvents = ['pointerover', 'pointerenter', 'mouseover', 'mouseenter', 'mousemove'];
-                for (var eventName of hoverEvents) {
-                    activeRow.dispatchEvent(new MouseEvent(eventName, { bubbles: true, cancelable: true, view: window }));
-                }
+                elementMouseHoverForce(activeRow);
 
                 await sleepMs(400);
 
@@ -54,7 +65,29 @@
 
                 trackMenuButton.click();
 
-                // TODO
+                await sleepMs(1200);
+
+                var actionSheet = document.querySelector('[data-testid="MusicTrackRow_ActionSheet"]');
+                if (!actionSheet) {
+                    throw new Error('No actionSheet!');
+                }
+
+                // Unpredictable appearance: poll for a few seconds
+                var showAllSpan = null;
+
+                for (var i = 0; i < 50; i++) {
+                    showAllSpan = [...actionSheet.querySelectorAll('span')].find(el => el.textContent.includes('Показать все'));
+                    if (showAllSpan) {
+                        break;
+                    }
+                    await sleepMs(100);
+                }
+
+                if (!showAllSpan) {
+                    throw new Error('No showAllSpan!');
+                }
+
+                showAllSpan.click();
 
             } catch (e) {
                 console.error(logPrefix, e);
