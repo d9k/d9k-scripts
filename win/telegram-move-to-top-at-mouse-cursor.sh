@@ -8,10 +8,14 @@ sleep 0.2
 $SCRIPT_DIR/telegram-copy-at-mouse-cursor.sh
 
 # CLIPBOARD="$(xclip -selection clipboard -o | tr '\n' ' ')"
+FRAGMENT_MAX_CHARS=120
+
 CLIPBOARD="$(xclip -selection clipboard -o)"
-CLIPBOARD_BYTES="$(printf "%s" "$CLIPBOARD" | wc -c)"
-FRAGMENT="$(printf "%s" "$CLIPBOARD" | head -c 320)"
-if [ "$CLIPBOARD_BYTES" -gt 120 ]; then
+CLIPBOARD_CHARS="$(printf "%s" "$CLIPBOARD" | wc -m)"
+# perl substr cuts by UTF-8 chars; head -c cuts bytes and breaks multibyte chars, yad rejects invalid UTF-8
+# With `head -c` there was an error: `Unable to parse command line: Invalid byte sequence in conversion input`
+FRAGMENT="$(printf "%s" "$CLIPBOARD" | perl -CSD -e 'local $/; $_ = <STDIN>; print substr($_, 0, $ARGV[0])' "$FRAGMENT_MAX_CHARS")"
+if [ "$CLIPBOARD_CHARS" -gt "$FRAGMENT_MAX_CHARS" ]; then
   FRAGMENT="$FRAGMENT..."
 fi
 
