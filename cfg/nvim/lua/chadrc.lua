@@ -21,7 +21,8 @@ M.base46 = {
       },
 			base_16 = {
         -- back
-				base00 = "#000000",
+            -- base00 = "#000000",
+            base00 = "#00120B",
         -- keys, vars
          base08 = "#c38a8c",
         -- numeric
@@ -35,7 +36,8 @@ M.base46 = {
 				-- base02 = "#000000",
 			},
 }
-
+     }
+}
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {
 --       tabufline = {
