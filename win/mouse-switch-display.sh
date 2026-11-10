@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/displays.inc.sh"
 MOUSE_DISPLAY_NUM="$(get_mouse_display_num)"
 MOUSE_POSITION_PATH="$HOME/.mouse-position-switch-display${MOUSE_DISPLAY_NUM}.json"
 
-export BORDER_COLOR="0x0004710"
+export BORDER_COLOR="0x0005020"
 export BORDER_WIDTH="8"
 export BORDER_TIMEOUT_MS=700
 
