@@ -2,7 +2,7 @@
 //
 // @name         VK hotkeys d9k
 // @namespace    http://tampermonkey.net/
-// @version      2026-11-10
+// @version      2026-11-12
 // @description  try to take over the world!
 // @author       You
 // @match        *://*.vk.ru/*
@@ -19,7 +19,7 @@
 
     /** hotkeys-js v3.13.7 required! */
 
-    var logPrefix = 'VK hotkeys userscript:';
+    var logPrefix = 'VK hotkeys d9k userscript:';
 
     console.log(logPrefix, 'main function');
 
@@ -94,6 +94,61 @@
             }
           }
 
+        var clickMoreActionsButton = () => {
+            // There are many such buttons; we need the one in the block under the real cursor
+            var moreButton = document.querySelector('.ConvoHistory__messageBlock:hover [data-testid="vkme_messages_actions_button_more"]');
+            if (!moreButton) {
+                throw new Error('No moreButton!');
+            }
+
+            moreButton.click();
+          }
+
+        var clickReactionLike = async () => {
+            try {
+                clickMoreActionsButton();
+
+                await sleepMs(800);
+
+                var likeButton = document.querySelector('.MessageReactionPickerExtended__item img[alt="Большой палец вверх"]');
+                if (!likeButton) {
+                    throw new Error('No likeButton!');
+                }
+
+                likeButton.click();
+
+            } catch (e) {
+                console.error(logPrefix, e);
+            }
+          }
+
+        var clickReactionMindBlown = async () => {
+            try {
+                clickMoreActionsButton();
+
+                await sleepMs(800);
+
+                var extendedMoreButton = document.querySelector('.MessageReactionPickerExtended__more');
+                if (!extendedMoreButton) {
+                    throw new Error('No extendedMoreButton!');
+                }
+
+                extendedMoreButton.click();
+
+                await sleepMs(300);
+
+                var mindBlownImg = document.querySelector('img[alt="Взрыв мозга"]');
+                if (!mindBlownImg) {
+                    throw new Error('No mindBlownImg!');
+                }
+
+                mindBlownImg.click();
+
+            } catch (e) {
+                console.error(logPrefix, e);
+            }
+          }
+
         var clickMusicShareButton = () => {
             try {
                 var shareButton = document.querySelector('[data-testid="MusicAudio_Share"]');
@@ -120,7 +175,17 @@
               clickMusicAddButton();
           });
 
-          console.log(logPrefix, 'after hotkeys');
+          hotkeys('ctrl+alt+l', (e) => {
+              e.preventDefault();
+              clickReactionLike();
+          });
+
+          hotkeys('ctrl+alt+e', (e) => {
+              e.preventDefault();
+              clickReactionMindBlown();
+          });
+
+          console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
     }, 0);
 })();
 
