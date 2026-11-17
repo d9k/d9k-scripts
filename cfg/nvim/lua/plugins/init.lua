@@ -13,7 +13,7 @@ return {
     end,
   },
 
-  -- test new blink
+  -- Autocomplete plugin
   -- { import = "nvchad.blink.lazyspec" },
 
   -- {

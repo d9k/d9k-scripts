@@ -9,10 +9,17 @@ M.base46 = {
 	-- theme = "onedark",
   theme = "chadtain",
 
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+	hl_add = {
+	-- Comment = { italic = true },
+	-- ["@comment"] = { italic = true },
+  --
+     -- See ~/.config/nvim/lua/autocmds.lua
+	   YankHighlight = {
+	     bg = "#a8e0c0", -- Цвет фона вспышки (например, нежно-зеленый)
+	     -- fg = "#1e1e2e", -- Цвет текста во время вспышки
+	     fg = "#000000", -- Цвет текста во время вспышки
+	   },
+	},
 
     changed_themes = {
         ["chadtain"] = {
