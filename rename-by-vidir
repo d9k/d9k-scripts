@@ -1,0 +1,40 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+FILES=("$@")
+
+ERRORS_FOUND=
+
+if [[ ${#FILES[@]} -gt 0 ]]; then
+  for ARG_PATH in "${FILES[@]}"; do
+    if [[ ! -e "$ARG_PATH" ]]; then
+      echoerr "Error: path does not exist: $ARG_PATH"
+      ERRORS_FOUND=1
+    fi
+  done
+fi
+
+if [[ $ERRORS_FOUND -eq 1 ]]; then
+  exit 100
+fi
+
+if [[ ${#FILES[@]} -gt 0 ]]; then
+  if [[ ${#FILES[@]} -eq 1 && -d "${FILES[0]}" ]]; then
+    "$SCRIPT_DIR/rename-file" "${FILES[0]}"
+  else
+    vidir -v "${FILES[@]}"
+  fi
+else
+  find . -maxdepth 1 -type f | \
+    xargs readlink -f | \
+    sort | \
+    vidir -v -
+
+    # tac | \
+    # sponge | \
+fi
