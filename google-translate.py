@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import argparse
 import asyncio
+import httpx
 
 from googletrans import Translator
+from httpx_curl_cffi import AsyncCurlTransport
 
 # Till https://github.com/ssut/py-googletrans/issues/447 fixed
 # `pip install -U googletrans` required
@@ -25,7 +27,29 @@ async def main():
     )
     parser.add_argument("-c", "--detect", action="store_true", default=False, help="")
     args = parser.parse_args()
-    translator = Translator()
+    # https://github.com/ssut/py-googletrans/issues/457#issuecomment-5486047879
+    translator = Translator(raise_exception=True)
+
+    # https://github.com/ssut/py-googletrans/issues/457#issuecomment-5809692261
+    transport = AsyncCurlTransport(
+        impersonate="chrome",
+        default_headers=True,
+    )
+
+    translator.client = httpx.AsyncClient(
+        transport=transport,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/140.0.0.0 Safari/537.36"
+            ),
+        },
+    )
+
+    # googletrans' TokenAcquirer was created with the original
+    # client, so point it at the replacement client as well.
+    translator.token_acquirer.client = translator.client
 
     if args.detect:
         result = translator.detect(args.text)
