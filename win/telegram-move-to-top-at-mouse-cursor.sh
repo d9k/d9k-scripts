@@ -32,7 +32,7 @@ yad \
   --wrap \
   --mouse \
   --title="Did it copy correct?" \
-  --text="Check the fragment:\n\n$FRAGMENT" \
+  --text="Close search if it's open.\nAnd check the fragment:\n\n$FRAGMENT" \
   --button="gtk-yes:0" \
   --button="gtk-no:1"
 ANSWER_CODE=$?
