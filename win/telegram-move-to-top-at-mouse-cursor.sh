@@ -50,4 +50,5 @@ sleep 0.3
 xdotool sleep 0.5 key "Control_L+v"
 sleep 0.2
 xdotool sleep 0.5 key "Return"
+# xdotool sleep 0.5 key "Up"
 

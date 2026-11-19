@@ -26,7 +26,7 @@ SCRIPT_DIR=$( dirname "${BASH_SOURCE[0]}" )
 
 $SCRIPT_DIR/telegram-select-at-mouse-cursor.sh
 
-sleep 0.5
+sleep 0.3
 
 $SCRIPT_DIR/mouse-click-right.sh
 

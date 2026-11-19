@@ -22,7 +22,7 @@ xdotool sleep 0.05 key Return
 sleep 0.2
 xdotool sleep 0.05 key Return
 
-sleep 1.5
+# sleep 1.5
 
 # $SCRIPT_DIR/telegram-copy-at-mouse-cursor.sh
 
@@ -46,7 +46,7 @@ YAD_ANSWER_CODE=$?
 # Return to previous dialog
 # emulate-escape.sh temporarily un-swaps Escape/Caps_Lock (swap-caps-lock-esc.Xmodmap)
 # so that the real Escape keysym is pressed and the keyboard layout is not switched
-sleep 0.2
+# sleep 0.2
 $SCRIPT_DIR/emulate-escape-key.sh
 
 if [ $YAD_ANSWER_CODE -ne 0 ]; then
@@ -55,6 +55,6 @@ fi
 
 xdotool mousemove $X $Y
 
-sleep 0.3
+sleep 1
 $SCRIPT_DIR/telegram-delete-at-mouse-cursor.sh
 
