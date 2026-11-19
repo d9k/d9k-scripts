@@ -4,6 +4,9 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 $SCRIPT_DIR/mouse-click-right.sh
 
+eval "$(xdotool getmouselocation --shell)"
+
+# Repost
 xdotool sleep 0.05 key Up
 xdotool sleep 0.05 key Up
 xdotool sleep 0.05 key Up
@@ -21,10 +24,7 @@ xdotool sleep 0.05 key Return
 
 sleep 1.5
 
-xdotool sleep 0.2 key Escape
 # $SCRIPT_DIR/telegram-copy-at-mouse-cursor.sh
-
-eval "$(xdotool getmouselocation --shell)"
 
 # yad --question pre-selects the No button, so Enter would cancel the move;
 # explicit buttons make the Enter key activate the first declared one, therefore Yes comes first
@@ -42,6 +42,12 @@ yad \
   --button="gtk-no:1"
 
 YAD_ANSWER_CODE=$?
+
+# Return to previous dialog
+# emulate-escape.sh temporarily un-swaps Escape/Caps_Lock (swap-caps-lock-esc.Xmodmap)
+# so that the real Escape keysym is pressed and the keyboard layout is not switched
+sleep 0.2
+$SCRIPT_DIR/emulate-escape-key.sh
 
 if [ $YAD_ANSWER_CODE -ne 0 ]; then
   exit 100
