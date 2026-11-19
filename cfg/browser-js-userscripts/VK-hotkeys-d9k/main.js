@@ -2,7 +2,7 @@
 //
 // @name         VK hotkeys d9k
 // @namespace    http://tampermonkey.net/
-// @version      2026-11-12
+// @version      2026-11-19
 // @description  try to take over the world!
 // @author       You
 // @match        *://*.vk.ru/*
@@ -90,7 +90,60 @@
                 showAllSpan.click();
 
             } catch (e) {
-                console.error(logPrefix, e);
+                console.error(logPrefix, 'clickMusicAddButton crashed:', e);
+                throw e;
+            }
+          }
+
+        // Backup variant: no data-testid; hover the playing track's composite row
+        var clickMusicAddButton2 = async () => {
+            try {
+                // Playing track's row is the one containing a button with exact aria-label "Поставить на\u00A0паузу"
+                var compositeRow = [...document.querySelectorAll('[class*="AudioCellCompositeRowsLayout__root"]')]
+                    .find(row => row.querySelector('[aria-label="Поставить на\u00A0паузу"]'));
+
+                if (!compositeRow) {
+                    throw new Error('No compositeRow!');
+                }
+
+                // Action buttons are revealed only on hover of the composite row
+                elementMouseHoverForce(compositeRow);
+
+                await sleepMs(200);
+
+                // Open the popup menu ("Открыть меню"); the add button appears inside it
+                var menuButton = [...compositeRow.querySelectorAll('button')]
+                    .find(b => b.textContent.includes('Открыть меню'));
+
+                if (!menuButton) {
+                    throw new Error('No menuButton!');
+                }
+
+                menuButton.click();
+
+                await sleepMs(300);
+
+                // Unpredictable appearance: poll for a few seconds
+                var showAllButton = null;
+
+                for (var i = 0; i < 50; i++) {
+                    // Popup menu renders into a portal: div[role="dialog"] (there may be several)
+                    showAllButton = [...document.querySelectorAll('[role="dialog"] div[role="button"]')]
+                        .find(el => el.textContent.includes('Показать все'));
+                    if (showAllButton) {
+                        break;
+                    }
+                    await sleepMs(100);
+                }
+
+                if (!showAllButton) {
+                    throw new Error('No showAllButton!');
+                }
+
+                showAllButton.click();
+
+            } catch (e) {
+                console.error(logPrefix, 'clickMusicAddButton2:', e);
             }
           }
 
@@ -165,21 +218,28 @@
 
           console.log(logPrefix, 'before hotkeys');
 
+          /** [R]epost */
           hotkeys('ctrl+alt+r', (e) => {
               e.preventDefault();
               clickMusicShareButton();
           });
 
+          /** [A]dd to playlist */
           hotkeys('ctrl+alt+a', (e) => {
               e.preventDefault();
-              clickMusicAddButton();
+              clickMusicAddButton().catch(() => {
+                  console.error(logPrefix, 'running clickMusicAddButton2 after crash');
+                  clickMusicAddButton2();
+              });
           });
 
+          /** [L]ike */
           hotkeys('ctrl+alt+l', (e) => {
               e.preventDefault();
               clickReactionLike();
           });
 
+          /** [E]xploding head reaction */
           hotkeys('ctrl+alt+e', (e) => {
               e.preventDefault();
               clickReactionMindBlown();
