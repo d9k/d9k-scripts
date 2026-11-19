@@ -20,8 +20,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SWAP_FILE="$SCRIPT_DIR/../cfg/keyboard/swap-caps-lock-esc.Xmodmap"
 REVERT_FILE="$SCRIPT_DIR/../cfg/keyboard/swap-caps-lock-esc-revert.Xmodmap"
 
-# keycode 66 is the physical Escape key; it shows the Escape keysym only
-# while the swap mapping is active
+# keycode 9 is the physical Escape key
 if ! xmodmap -pke | grep -E '^keycode + 9' | grep -q 'Caps_Lock'; then
   xdotool key Escape
   exit 0
