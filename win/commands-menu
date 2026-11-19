@@ -81,7 +81,12 @@ echo "M2: $MENU_ITEMS"
 
 # remove empty lines
 MENU_ITEMS=$(echo -e "$MENU_ITEMS" | awk 'NF')
-RESULT=$(echo -e "$MENU_ITEMS" | rofi -dmenu)
+
+# ACTUAL MENU DISPLAY
+RESULT=$(\
+  echo -e "$MENU_ITEMS" | \
+  rofi -dmenu -i \
+)
 
 sleep 0.1
 
