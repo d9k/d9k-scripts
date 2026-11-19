@@ -202,6 +202,22 @@
             }
           }
 
+        var clickSaveButton = () => {
+            try {
+                var saveContentSpan = [...document.querySelectorAll('.vkuiButton__content')]
+                    .find(el => el.textContent.includes('Сохранить'));
+
+                if (!saveContentSpan) {
+                    throw new Error('No saveContentSpan!');
+                }
+
+                saveContentSpan.closest('button').click();
+
+            } catch (e) {
+                console.error(logPrefix, e);
+            }
+          }
+
         var clickMusicShareButton = () => {
             try {
                 var shareButton = document.querySelector('[data-testid="MusicAudio_Share"]');
@@ -243,6 +259,12 @@
           hotkeys('ctrl+alt+e', (e) => {
               e.preventDefault();
               clickReactionMindBlown();
+          });
+
+          /** [Y]es / save */
+          hotkeys('ctrl+alt+y', (e) => {
+              e.preventDefault();
+              clickSaveButton();
           });
 
           console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
