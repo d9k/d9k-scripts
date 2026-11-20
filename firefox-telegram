@@ -2,6 +2,9 @@
 
 PAGE="https://web.telegram.org/"
 DATA_DIR="$HOME/temp/firefox-profile-telegram"
+ICON_SRC_ABS_PATH="/home/d9k/soft/_icons/telegram_logo_icon_168692.png"
+ICON_SMALL_ABS_PATH="/tmp/firefox-telegram-icon-128.png"
+WINDOW_MATCH="Telegram Web"
 
 # PROXY_PORT=2080
 
@@ -16,6 +19,35 @@ mkdir -p "$DATA_DIR"
 firefox \
   --profile "$DATA_DIR" \
   --no-remote \
-  "$PAGE"
+  "$PAGE" &
+FIREFOX_PID=$!
+
+SLEEP_BEFORE_RETRY_S=0.5
+RETRY_NUMBER=0
+MAX_RETRIES=20
+
+while [[ "$RETRY_NUMBER" -lt "$MAX_RETRIES" ]]; do
+  WINDOW_ID="$(wmctrl -lp | grep --fixed-strings "$WINDOW_MATCH" | head -1 | cut -d' ' -f1)"
+  if [[ -n "$WINDOW_ID" ]]; then
+    # Desktop environment would force icon from /usr/share/applications/firefox.desktop by WM_CLASS
+    # so need to change WM_CLASS
+    xdotool set_window --class "Firefox-Telegram" "$WINDOW_ID"
+
+    # xseticon sends raw pixels one X client request; the default 256 KiB request
+    # limit silently fails for images larger than 128x128, so downscale first
+    magick "$ICON_SRC_ABS_PATH" -resize 128x128 "$ICON_SMALL_ABS_PATH"
+    xseticon -id "$WINDOW_ID" "$ICON_SMALL_ABS_PATH"
+    sleep 1
+    ICON_BYTES=$(xprop -id $WINDOW_ID _NET_WM_ICON | wc -c)
+    echo "ICON_BYTES=${ICON_BYTES}";
+    break
+  fi
+
+  ((RETRY_NUMBER+=1))
+  sleep "$SLEEP_BEFORE_RETRY_S"
+done
+
+# wait $FIREFOX_PID
+
 
 # --private-window \
