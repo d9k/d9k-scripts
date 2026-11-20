@@ -1,0 +1,21 @@
+#!/bin/bash
+
+PAGE="https://web.telegram.org/"
+DATA_DIR="$HOME/temp/firefox-profile-telegram"
+
+# PROXY_PORT=2080
+
+set -x
+
+mkdir -p "$DATA_DIR"
+
+# Firefox `--profile` points directly to the profile directory itself,
+# so there is no Chrome-like second-level `--profile-directory="Default"`
+# `--no-remote`: do not forward the request to an already running Firefox
+# instance; force a separate process bound to the given profile
+firefox \
+  --profile "$DATA_DIR" \
+  --no-remote \
+  "$PAGE"
+
+# --private-window \
