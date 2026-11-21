@@ -64,33 +64,59 @@
           throw new Error('No message context menu!');
       }
 
+      function contextMenuFindItem(contextMenu, label) {
+          var itemText = [...contextMenu.querySelectorAll('.btn-menu-item .btn-menu-item-text')]
+              .find(el => el.textContent.includes(label));
+
+          if (!itemText) {
+              throw new Error(`No "${label}" message context menu item!`);
+          }
+
+          return itemText.closest('.btn-menu-item');
+      }
+
+      async function messageContextMenuAction(label) {
+          // The bubble under the real cursor
+          var bubble = document.querySelector('.bubble:hover');
+          if (!bubble) {
+              throw new Error('No hovered message bubble!');
+          }
+
+          elementMouseRightClick(bubble);
+
+          var contextMenu = await waitForMessageContextMenu();
+
+          var menuItem = contextMenuFindItem(contextMenu, label);
+
+          // Focus the item (role="menuitem" tabindex="0") and hold it before clicking
+          menuItem.focus();
+
+          await sleepMs(600);
+
+          menuItem.click();
+      }
+
       const messageCopy = async () => {
           try {
-              // The bubble under the real cursor
-              var bubble = document.querySelector('.bubble:hover');
-              if (!bubble) {
-                  throw new Error('No hovered message bubble!');
-              }
+              await messageContextMenuAction('Copy');
 
-              elementMouseRightClick(bubble);
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
 
-              var contextMenu = await waitForMessageContextMenu();
+      const messageEdit = async () => {
+          try {
+              await messageContextMenuAction('Edit');
 
-              var copyItemText = [...contextMenu.querySelectorAll('.btn-menu-item .btn-menu-item-text')]
-                  .find(el => el.textContent.includes('Copy'));
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
 
-              if (!copyItemText) {
-                  throw new Error('No Copy message context menu item!');
-              }
-
-              // Focus the item (role="menuitem" tabindex="0") and hold it before clicking
-              var copyItem = copyItemText.closest('.btn-menu-item');
-
-              copyItem.focus();
-
-              await sleepMs(600);
-
-              copyItem.click();
+      const messageForward = async () => {
+          try {
+              await messageContextMenuAction('Forward');
 
           } catch (e) {
               console.error(logPrefix, e);
@@ -101,6 +127,14 @@
           { name: 'Message: copy under mouse cursor', action: async () => {
             sleepMs(100);
             messageCopy() }
+          },
+          { name: 'Message: edit under mouse cursor', action: async () => {
+            sleepMs(100);
+            messageEdit() }
+          },
+          { name: 'Message: forward under mouse cursor', action: async () => {
+            sleepMs(100);
+            messageForward() }
           },
           // { name: 'Print', action: () => window.print() },
           // { name: 'Alert', action: () => alert('Executed Command 2') }
