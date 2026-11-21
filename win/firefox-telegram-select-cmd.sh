@@ -24,10 +24,20 @@ fi
 
 $SCRIPT_DIR/firefox-telegram-open-cmd-palette.sh
 
+# xdotool type is very slow with the russian layout active (switches layout per symbol); paste from clipboard instead
+ORIGINAL_CLIPBOARD="$(xclip -selection clipboard -o 2>/dev/null)"
+printf "%s" "$COMMAND_NAME" | xclip -selection clipboard
+
 sleep 0.5
-xdotool sleep 0.05 type --clearmodifiers "$COMMAND_NAME"
+xdotool sleep 0.05 key "Control_L+v"
+
+# Restore original clipboard content
+if [ -n "$ORIGINAL_CLIPBOARD" ]; then
+  printf "%s" "$ORIGINAL_CLIPBOARD" | xclip -selection clipboard
+fi
 
 sleep 0.2
 xdotool sleep 0.05 key Down
 sleep 0.1
 xdotool sleep 0.05 key Return
+
