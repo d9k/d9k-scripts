@@ -18,7 +18,7 @@
 
 (function() {
     /** hotkeys-js v3.13.7 required! */
-    /** light-cmd-palette-userscripts 0.1.4 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
+    /** light-cmd-palette-userscripts 0.1.5 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
 
     var logPrefix = 'Telegram hotkeys d9k userscript:';
 
@@ -181,12 +181,21 @@
 
       // initializeCommandPalette() waits for DOMContentLoaded, hence @run-at document-start
       // [P]alette: Ctrl+Alt+P (Ctrl+Shift+H is taken by Firefox history)
-      LightCmdPalette.initializeCommandPalette(delayedCommands, {
+      LightCmdPalette.initializeCommandPalette(delayedCommands, [
+        {
           shortcutKey: 'P',
           ctrlKey: true,
           shiftKey: false,
           altKey: true
-      });
+        },
+        {
+          /** Russian keyboard layout */
+          shortcutKey: 'З',
+          ctrlKey: true,
+          shiftKey: false,
+          altKey: true
+        }
+      ]);
 
       console.log(logPrefix, 'After commands menu init. Ctrl+Alt+P to run commands');
       // console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
@@ -1214,7 +1223,6 @@
 /** ========================== */
 /** === COMMAND PALETTE ====== */
 /** ========================== */
-
 var LightCmdPalette = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1250,7 +1258,8 @@ var LightCmdPalette = (() => {
       altKey: false
       // Do not use Alt key by default
     };
-    const config = { ...defaultOptions, ...options };
+    const configs = (Array.isArray(options) ? options : [options]).map((option) => ({ ...defaultOptions, ...option }));
+    const matchesConfig = (event, config) => config.ctrlKey === event.ctrlKey && config.shiftKey === event.shiftKey && config.altKey === event.altKey && event.key.toUpperCase() === config.shortcutKey.toUpperCase();
     document.addEventListener("DOMContentLoaded", () => {
       const dialog = document.createElement("dialog");
       dialog.id = "command-palette";
@@ -1325,7 +1334,7 @@ var LightCmdPalette = (() => {
         }
       }, { capture: true });
       document.addEventListener("keydown", (event) => {
-        if (config.ctrlKey === event.ctrlKey && config.shiftKey === event.shiftKey && config.altKey === event.altKey && event.key.toUpperCase() === config.shortcutKey.toUpperCase()) {
+        if (configs.some((config) => matchesConfig(event, config))) {
           event.preventDefault();
           event.stopImmediatePropagation();
           if (dialog.open) {
@@ -1339,4 +1348,4 @@ var LightCmdPalette = (() => {
     });
   }
   return __toCommonJS(commandPalette_exports);
-})();/** Command Palette bundle (IIFE) copied from light-cmd-palette/examples */
+})();
