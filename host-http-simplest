@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PORT=8080
+
+echo "Go check http://127.0.0.1:$PORT"
+
+set -x
+busybox httpd -p "$PORT" -f -h .
