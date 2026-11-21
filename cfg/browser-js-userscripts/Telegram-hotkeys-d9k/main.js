@@ -2,7 +2,7 @@
 //
 // @name         Telegram hotkeys d9k
 // @namespace    http://tampermonkey.net/
-// @version      2026-11-21
+// @version      2026-11-22
 // @description  try to take over the world!
 // @author       You
 // @match        *://web.telegram.org/*
@@ -127,13 +127,79 @@
           }
       }
 
-      const messageForward = async () => {
+      const messageRepostDialogOpen = async () => {
           try {
               await messageContextMenuAction('Forward');
 
           } catch (e) {
               console.error(logPrefix, e);
           }
+      }
+
+      function pressEnterKey(element) {
+          if (!element) {
+            element = document;
+          }
+          for (var eventName of ['keydown', 'keyup']) {
+              element.dispatchEvent(new KeyboardEvent(eventName, {
+                  bubbles: true, cancelable: true, composed: true,
+                  key: 'Enter', code: 'Enter', keyCode: 13, which: 13
+              }));
+          }
+      }
+
+      function inputNativeValue(input, value) {
+          // React overwrites the input .value set directly, so use the native HTMLInputElement setter
+          var nativeValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+          nativeValueSetter.call(input, value);
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+
+      async function waitForRepostDialogSearchInput() {
+          // Unpredictable appearance: poll for a few seconds
+          for (var i = 0; i < 20; i++) {
+              var searchInput = document.querySelector('input.selector-search-input');
+              if (searchInput) {
+                  return searchInput;
+              }
+              await sleepMs(100);
+          }
+
+          throw new Error('No repost dialog search input!');
+      }
+
+      async function waitForRepostDialogRow(chatName) {
+          // Unpredictable appearance: poll for a few seconds
+          for (var i = 0; i < 50; i++) {
+              var listContainer = document.querySelector('.popup-body .selector-height-container');
+              if (listContainer) {
+                  // Exact chat title text match, e.g. "/save/"
+                  var row = [...listContainer.querySelectorAll('a.row')]
+                      .find(el => {
+                          var peerTitle = el.querySelector('.peer-title');
+                          return peerTitle && peerTitle.textContent.trim() === chatName;
+                      });
+                  if (row) {
+                      return row;
+                  }
+              }
+              await sleepMs(100);
+          }
+
+          throw new Error(`No "${chatName}" row in the repost dialog!`);
+      }
+
+      async function waitForMessageSendButton() {
+          // Unpredictable appearance: poll for a few seconds
+          for (var i = 0; i < 50; i++) {
+              var sendButton = document.querySelector('.new-message-wrapper button[aria-label="Send"]');
+              if (sendButton) {
+                  return sendButton;
+              }
+              await sleepMs(100);
+          }
+
+          throw new Error('No message send button!');
       }
 
       const messageDelete = async () => {
@@ -158,10 +224,37 @@
           }
       }
 
+      const messageAskChatNameToRepost = async (chatName) => {
+          try {
+              if (!chatName) {
+                  chatName = window.prompt('Chat name to move the message to');
+                  if (!chatName) { throw new Error('No chat name!'); }
+              }
+
+              await messageRepostDialogOpen();
+
+              var searchInput = await waitForRepostDialogSearchInput();
+              searchInput.focus();
+              inputNativeValue(searchInput, chatName);
+              pressEnterKey(searchInput);
+              await sleepMs(1200);
+
+              var chatRow = await waitForRepostDialogRow(chatName);
+              chatRow.click();
+              await sleepMs(1500);
+              (await waitForMessageSendButton()).click();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const commands = [
           { name: 'Message: copy under mouse cursor', action: messageCopy },
           { name: 'Message: edit under mouse cursor', action: messageEdit },
-          { name: 'Message: forward under mouse cursor', action: messageForward },
+          { name: 'Message: repost under mouse cursor', action: messageRepostDialogOpen },
+          { name: 'Message: ask chat name to repost', action: () => messageAskChatNameToRepost() },
+          // { name: 'Message: move to /save/ under mouse cursor', action: () => messageMoveToChatAtMouseCursor('/save/') },
           { name: 'Message: /!\\ DELETE under mouse cursor', action: messageDelete },
           { name: 'Message: safer delete under mouse cursor', action: messageSaferDelete },
           // { name: 'Print', action: () => window.print() },
