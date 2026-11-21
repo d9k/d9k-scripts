@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-# xkb-switch lives next to this script: PATH is minimal when run from commands-menu hotkeys
+# Using absolute path to script because PATH often messed up
 XKB_SWITCH="$SCRIPT_DIR/xkb-switch"
 MAX_SWITCH_STEPS=10
 LAYOUT_EN="en"
