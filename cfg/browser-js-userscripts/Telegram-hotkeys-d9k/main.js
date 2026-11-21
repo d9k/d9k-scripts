@@ -18,7 +18,7 @@
 
 (function() {
     /** hotkeys-js v3.13.7 required! */
-    /** light-cmd-palette-userscripts 0.1.3 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
+    /** light-cmd-palette-userscripts 0.1.4 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
 
     var logPrefix = 'Telegram hotkeys d9k userscript:';
 
@@ -36,9 +36,74 @@
 
       injectStyle(commandPaletteCss);
 
+      function sleepMs(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function elementMouseRightClick(element) {
+          var rect = element.getBoundingClientRect();
+          var rightClickEvents = ['pointerdown', 'mousedown', 'contextmenu', 'mouseup'];
+          for (var eventName of rightClickEvents) {
+              element.dispatchEvent(new MouseEvent(eventName, {
+                  bubbles: true, cancelable: true, view: window, button: 2,
+                  clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2
+              }));
+          }
+      }
+
+      async function waitForMessageContextMenu() {
+          // Unpredictable appearance: poll for a few seconds
+          for (var i = 0; i < 20; i++) {
+              var contextMenu = document.getElementById('bubble-contextmenu');
+              if (contextMenu) {
+                  return contextMenu;
+              }
+              await sleepMs(100);
+          }
+
+          throw new Error('No message context menu!');
+      }
+
+      const messageCopy = async () => {
+          try {
+              // The bubble under the real cursor
+              var bubble = document.querySelector('.bubble:hover');
+              if (!bubble) {
+                  throw new Error('No hovered message bubble!');
+              }
+
+              elementMouseRightClick(bubble);
+
+              var contextMenu = await waitForMessageContextMenu();
+
+              var copyItemText = [...contextMenu.querySelectorAll('.btn-menu-item .btn-menu-item-text')]
+                  .find(el => el.textContent.includes('Copy'));
+
+              if (!copyItemText) {
+                  throw new Error('No Copy message context menu item!');
+              }
+
+              // Focus the item (role="menuitem" tabindex="0") and hold it before clicking
+              var copyItem = copyItemText.closest('.btn-menu-item');
+
+              copyItem.focus();
+
+              await sleepMs(600);
+
+              copyItem.click();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const commands = [
-          { name: 'Print', action: () => window.print() },
-          { name: 'Alert', action: () => alert('Executed Command 2') }
+          { name: 'Message: copy under mouse cursor', action: async () => {
+            sleepMs(100);
+            messageCopy() }
+          },
+          // { name: 'Print', action: () => window.print() },
+          // { name: 'Alert', action: () => alert('Executed Command 2') }
           // Add more commands here
       ];
 
@@ -109,6 +174,7 @@
       padding-inline: 10px;
       color: #999;
       border-top: 1px solid #444;
+      cursor: pointer;
   }
 
   .command-palette kbd {
@@ -1079,7 +1145,6 @@
 /** === COMMAND PALETTE ====== */
 /** ========================== */
 
-/** Command Palette bundle (IIFE) copied from light-cmd-palette/examples */
 var LightCmdPalette = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1123,13 +1188,16 @@ var LightCmdPalette = (() => {
       dialog.innerHTML = `
             <input type="text" id="command-input" class="command-input" placeholder="Type a command...">
             <ul id="command-list" class="command-list"></ul>
-            <footer>
+            <footer title="Click to close">
                 <p>Press <kbd>\u21B5</kbd> to select, <kbd>\u2191</kbd> <kbd>\u2193</kbd> to navigate, <kbd>Esc</kbd> to exit</p>
             </footer>
         `;
       document.body.appendChild(dialog);
       const commandInput = document.getElementById("command-input");
       const commandList = document.getElementById("command-list");
+      dialog.querySelector("footer").addEventListener("click", () => {
+        closeCommandPalette();
+      });
       let currentIndex = -1;
       function openCommandPalette() {
         document.getElementById("command-palette").open = true;
@@ -1159,35 +1227,46 @@ var LightCmdPalette = (() => {
       }
       commandInput.addEventListener("input", (e) => updateCommandList(e.target.value));
       document.addEventListener("keydown", (event) => {
+        if (!dialog.open) return;
         const items = commandList.getElementsByTagName("li");
         if (event.key === "ArrowDown") {
           event.preventDefault();
+          event.stopImmediatePropagation();
           currentIndex = (currentIndex + 1) % items.length;
           updateCommandList(commandInput.value);
+          return false;
         } else if (event.key === "ArrowUp") {
           event.preventDefault();
+          event.stopImmediatePropagation();
           if (currentIndex <= 0) currentIndex = items.length;
           currentIndex = (currentIndex - 1) % items.length;
           updateCommandList(commandInput.value);
+          return false;
         } else if (event.key === "Enter" && currentIndex >= 0) {
           event.preventDefault();
+          event.stopImmediatePropagation();
           items[currentIndex].click();
+          return false;
         } else if (event.key === "Escape") {
           event.preventDefault();
+          event.stopImmediatePropagation();
           closeCommandPalette();
+          return false;
         }
-      });
+      }, { capture: true });
       document.addEventListener("keydown", (event) => {
         if (config.ctrlKey === event.ctrlKey && config.shiftKey === event.shiftKey && config.altKey === event.altKey && event.key.toUpperCase() === config.shortcutKey.toUpperCase()) {
           event.preventDefault();
+          event.stopImmediatePropagation();
           if (dialog.open) {
             closeCommandPalette();
           } else {
             openCommandPalette();
           }
+          return false;
         }
-      });
+      }, { capture: true });
     });
   }
   return __toCommonJS(commandPalette_exports);
-})();
+})();/** Command Palette bundle (IIFE) copied from light-cmd-palette/examples */
