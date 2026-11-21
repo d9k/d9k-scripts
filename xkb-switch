@@ -1,0 +1,9 @@
+#!/bin/bash
+
+APP_DIR=/home/d9k/repos/_system-ui/xkb-switch/build
+
+cd $APP_DIR
+
+# https://www.linux.org.ru/forum/desktop/14859144?cid=14863872
+# to fix "xkb-switch: error while loading shared libraries: libxkbswitch.so.2"
+LD_LIBRARY_PATH=. ./xkb-switch "$@"
