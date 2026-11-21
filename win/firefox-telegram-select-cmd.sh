@@ -27,7 +27,7 @@ $SCRIPT_DIR/firefox-telegram-open-cmd-palette.sh
 sleep 0.5
 xdotool sleep 0.05 type --clearmodifiers "$COMMAND_NAME"
 
-sleep 0.1
+sleep 0.2
 xdotool sleep 0.05 key Down
 sleep 0.1
 xdotool sleep 0.05 key Return
