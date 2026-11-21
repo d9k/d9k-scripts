@@ -75,6 +75,19 @@
           return itemText.closest('.btn-menu-item');
       }
 
+      async function clickDeleteConfirmationButton() {
+          // Delete confirmation dialog appears after a while; poll for its button
+          var confirmButton = null;
+          for (var i = 0; i < 50; i++) {
+              confirmButton = [...document.querySelectorAll('button')]
+                  .find(b => b.offsetParent && b.textContent.trim() === 'Delete');
+              if (confirmButton) { break; }
+              await sleepMs(100);
+          }
+          if (!confirmButton) { throw new Error('No delete confirmation button!'); }
+          confirmButton.click();
+      }
+
       async function messageContextMenuAction(label) {
           // The bubble under the real cursor
           var bubble = document.querySelector('.bubble:hover');
@@ -123,29 +136,52 @@
           }
       }
 
+      const messageDelete = async () => {
+          try {
+              await messageContextMenuAction('Delete');
+              await clickDeleteConfirmationButton();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
+      const messageSaferDelete = async () => {
+          try {
+              // Copy before delete, so the text can be pasted back
+              await messageCopy();
+              await sleepMs(300);
+              await messageDelete();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const commands = [
-          { name: 'Message: copy under mouse cursor', action: async () => {
-            sleepMs(100);
-            messageCopy() }
-          },
-          { name: 'Message: edit under mouse cursor', action: async () => {
-            sleepMs(100);
-            messageEdit() }
-          },
-          { name: 'Message: forward under mouse cursor', action: async () => {
-            sleepMs(100);
-            messageForward() }
-          },
+          { name: 'Message: copy under mouse cursor', action: messageCopy },
+          { name: 'Message: edit under mouse cursor', action: messageEdit },
+          { name: 'Message: forward under mouse cursor', action: messageForward },
+          { name: 'Message: /!\\ DELETE under mouse cursor', action: messageDelete },
+          { name: 'Message: safer delete under mouse cursor', action: messageSaferDelete },
           // { name: 'Print', action: () => window.print() },
           // { name: 'Alert', action: () => alert('Executed Command 2') }
           // Add more commands here
       ];
 
+      // Delay actions: let the palette close before the page state changes
+      const delayedCommands = commands.map(cmd => ({
+          name: cmd.name,
+          action: async () => {
+            await sleepMs(100);
+            await cmd.action() }
+      }));
+
       console.log(logPrefix, 'Before commands menu init');
 
       // initializeCommandPalette() waits for DOMContentLoaded, hence @run-at document-start
       // [P]alette: Ctrl+Alt+P (Ctrl+Shift+H is taken by Firefox history)
-      LightCmdPalette.initializeCommandPalette(commands, {
+      LightCmdPalette.initializeCommandPalette(delayedCommands, {
           shortcutKey: 'P',
           ctrlKey: true,
           shiftKey: false,
