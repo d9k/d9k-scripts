@@ -18,11 +18,13 @@
 
 (function() {
     /** hotkeys-js v3.13.7 required! */
-    /**  required! */
+    /** light-cmd-palette-userscripts 0.1.3 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
+
+    var logPrefix = 'Telegram hotkeys d9k userscript:';
 
     var commandPaletteCss = '/** (Declared further below) */';
 
-    // Waiting for deps to load
+    // Timeout to wait for deps to load
     setTimeout(() => {
       'use strict';
 
@@ -40,6 +42,8 @@
           // Add more commands here
       ];
 
+      console.log(logPrefix, 'Before commands menu init');
+
       // initializeCommandPalette() waits for DOMContentLoaded, hence @run-at document-start
       // [P]alette: Ctrl+Alt+P (Ctrl+Shift+H is taken by Firefox history)
       LightCmdPalette.initializeCommandPalette(commands, {
@@ -48,6 +52,9 @@
           shiftKey: false,
           altKey: true
       });
+
+      console.log(logPrefix, 'After commands menu init. Ctrl+Alt+P to run commands');
+      // console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
   }, 0);
 
   // commandPalette.css is inlined: a userscript cannot link a local stylesheet
@@ -57,9 +64,9 @@
       position: fixed;
       top: 25%;
       z-index: 1000;
-      background: #fff;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: #111;
+      border: 1px solid #444;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.8);
       max-width: 600px;
       padding: 0px;
       border-radius: 8px;
@@ -72,7 +79,7 @@
       width: 100%;
       padding: 10px;
       border: none;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #444;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       margin-bottom: 10px;
@@ -94,23 +101,23 @@
   }
 
   .command-list li:hover, .command-list li.selected {
-      background-color: #f0f0f0;
+      background-color: #333;
   }
 
   .command-palette footer {
       font-size: 12px;
       padding-inline: 10px;
       color: #999;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid #444;
   }
 
   .command-palette kbd {
-      background-color: #f7f7f7;
-      border: 1px solid #ccc;
-      border-bottom: 2px solid #bbb;
+      background-color: #333;
+      border: 1px solid #222;
+      border-bottom: 2px solid #000;
       border-radius: 3px;
       box-shadow: 0 1px 0 #ccc, 0 0 0 2px #fff inset;
-      color: #333;
+      color: #fff;
       display: inline-block;
       font-family: 'Courier New', Courier, monospace;
       font-size: 11px;
@@ -1154,21 +1161,30 @@ var LightCmdPalette = (() => {
       document.addEventListener("keydown", (event) => {
         const items = commandList.getElementsByTagName("li");
         if (event.key === "ArrowDown") {
+          event.preventDefault();
           currentIndex = (currentIndex + 1) % items.length;
           updateCommandList(commandInput.value);
         } else if (event.key === "ArrowUp") {
+          event.preventDefault();
           if (currentIndex <= 0) currentIndex = items.length;
           currentIndex = (currentIndex - 1) % items.length;
           updateCommandList(commandInput.value);
         } else if (event.key === "Enter" && currentIndex >= 0) {
+          event.preventDefault();
           items[currentIndex].click();
         } else if (event.key === "Escape") {
+          event.preventDefault();
           closeCommandPalette();
         }
       });
       document.addEventListener("keydown", (event) => {
         if (config.ctrlKey === event.ctrlKey && config.shiftKey === event.shiftKey && config.altKey === event.altKey && event.key.toUpperCase() === config.shortcutKey.toUpperCase()) {
-          openCommandPalette();
+          event.preventDefault();
+          if (dialog.open) {
+            closeCommandPalette();
+          } else {
+            openCommandPalette();
+          }
         }
       });
     });
