@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Pretty-print HTML from clipboard, pipe, or file argument
+# Clipboard is read/written only when stdin is a TTY and no file argument is given
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+INPUT_PATH="$1"
+
+if [ ! -t 0 ]; then
+  "$SCRIPT_DIR/pretty-print-html"
+elif [[ -n "$INPUT_PATH" ]]; then
+  "$SCRIPT_DIR/pretty-print-html" "$INPUT_PATH"
+else
+  RESULT="$(xclip -selection clipboard -o | "$SCRIPT_DIR/pretty-print-html")"
+  echo "Result:"
+  echo "$RESULT"
+  echo "$RESULT" | xclip -selection c
+  echo
+  echo "- Copied to clipboard"
+fi
