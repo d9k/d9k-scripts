@@ -46,6 +46,28 @@ for SRT_FILE in "${SRT_FILES[@]}"; do
   cp -- "$SRT_FILE" "$SRT_FILE.txt"
 done
 
-CURRENT_DIR=$(pwd)
+CURRENT_DIR="$(pwd)"
 
-ls -1 $CURRENT_DIR/*"$YOUTUBE_VIDEO_ID"*.srt.txt
+CHOICES="$(ls --literal -1 *"$YOUTUBE_VIDEO_ID"*.srt.txt)"
+
+echo
+echo "New subtitles:"
+printf '%s\n' "$CHOICES"
+
+SELECTED=$( \
+  printf '%s\n' "$CHOICES" \
+  | tac \
+  | fzf \
+    --info-command='echo "[Enter] - copy file path to clipboard. [Ctrl-C] - exit"'  \
+)
+
+if [[ -z "$SELECTED" ]]; then
+  exit
+fi
+
+SELECTED="$CURRENT_DIR/$SELECTED"
+
+printf "%s" "$SELECTED" | xclip -selection c
+
+echo
+echo "Copied to clipboard: \"$SELECTED\""
