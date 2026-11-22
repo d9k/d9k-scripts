@@ -35,4 +35,11 @@ trap restore_swap EXIT
 
 xmodmap "$REVERT_FILE"
 
+# The X server applies the new keymap asynchronously: without a small pause,
+# xdotool may still resolve the Escape keysym against the OLD map
+# Note: notify-send worked here for the same reason: spawning the process and
+# talking over D-Bus provided that delay. An explicit sleep is more reliable.
+# notify-send -t 3000 "Pressing Escape key"
+sleep 0.3
+
 xdotool key Escape
