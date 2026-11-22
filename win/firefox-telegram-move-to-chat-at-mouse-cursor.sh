@@ -63,5 +63,5 @@ fi
 
 xdotool mousemove $X $Y
 
-sleep 1
+sleep 1.5
 $SCRIPT_DIR/firefox-telegram-message-delete.sh

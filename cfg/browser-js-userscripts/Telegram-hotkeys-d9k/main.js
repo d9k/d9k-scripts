@@ -69,7 +69,7 @@
               .find(el => el.textContent.includes(label));
 
           if (!itemText) {
-              throw new Error(`No "${label}" message context menu item!`);
+              return null;
           }
 
           return itemText.closest('.btn-menu-item');
@@ -88,18 +88,35 @@
           confirmButton.click();
       }
 
-      async function messageContextMenuAction(label) {
-          // The bubble under the real cursor
-          var bubble = document.querySelector('.bubble:hover');
-          if (!bubble) {
+      async function messageContextMenuAction(labels) {
+          // A link inside the hovered bubble has its own context menu: right-click it instead of the bubble
+          var targetElement = document.querySelector('.bubble .anchor-url:hover');
+          if (!targetElement) {
+              targetElement = document.querySelector('.bubble:hover');
+          }
+          if (!targetElement) {
               throw new Error('No hovered message bubble!');
           }
 
-          elementMouseRightClick(bubble);
+          // Interface versions differ in item labels: accept synonyms to try in a row
+          if (!Array.isArray(labels)) {
+              labels = [labels];
+          }
+
+          elementMouseRightClick(targetElement);
 
           var contextMenu = await waitForMessageContextMenu();
 
-          var menuItem = contextMenuFindItem(contextMenu, label);
+          var menuItem = null;
+          for (var label of labels) {
+              menuItem = contextMenuFindItem(contextMenu, label);
+              if (menuItem) {
+                break;
+              }
+          }
+          if (!menuItem) {
+              throw new Error(`No "${labels.join('" or "')}" message context menu item!`);
+          }
 
           // Focus the item (role="menuitem" tabindex="0") and hold it before clicking
           menuItem.focus();
@@ -112,6 +129,18 @@
       const messageCopy = async () => {
           try {
               await messageContextMenuAction('Copy');
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
+      const messageCopyLink = async () => {
+          try {
+              await messageContextMenuAction([
+                'Copy Link',
+                // 'Copy Message Link'
+              ]);
 
           } catch (e) {
               console.error(logPrefix, e);
@@ -251,9 +280,10 @@
 
       const commands = [
           { name: 'Message: copy under mouse cursor', action: messageCopy },
+          { name: 'Message: copy link under mouse cursor', action: messageCopyLink },
           { name: 'Message: edit under mouse cursor', action: messageEdit },
           { name: 'Message: repost under mouse cursor', action: messageRepostDialogOpen },
-          { name: 'Message: ask chat name to repost', action: () => messageAskChatNameToRepost() },
+          { name: 'Message: ask chat name to repost', action: messageAskChatNameToRepost },
           // { name: 'Message: move to /save/ under mouse cursor', action: () => messageMoveToChatAtMouseCursor('/save/') },
           { name: 'Message: /!\\ DELETE under mouse cursor', action: messageDelete },
           { name: 'Message: safer delete under mouse cursor', action: messageSaferDelete },
