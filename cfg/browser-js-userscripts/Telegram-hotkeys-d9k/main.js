@@ -395,6 +395,30 @@
           messageEdit();
       });
 
+      /** [S]elect the message under mouse cursor */
+      hotkeys('ctrl+alt+s', (e) => {
+          e.preventDefault();
+          messageSelect();
+      });
+
+      /** [R]epost (forward) the message under mouse cursor */
+      hotkeys('ctrl+alt+r', (e) => {
+          e.preventDefault();
+          messageRepostDialogOpen();
+      });
+
+      /**
+       * [D]elete: safer delete (copy first, then delete) the message under mouse cursor
+       *
+       * NOTE: hotkeys-js accepts multiple shortcuts as ONE comma-separated string.
+       * Passing an array silently registers nothing: getKeys() replaces any
+       * non-string key with '' (see the bundled library), so the handler never runs
+       */
+      hotkeys('alt+delete, ctrl+delete', (e) => {
+          e.preventDefault();
+          messageSaferDelete();
+      });
+
       console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
   }, 0);
 
