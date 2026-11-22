@@ -371,7 +371,31 @@
       ]);
 
       console.log(logPrefix, 'After commands menu init. Ctrl+Alt+P to run commands');
-      // console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
+
+      /**
+       * The bundled hotkeys-js silently drops every shortcut when the event target
+       * is a form field or a contenteditable node:
+       * see  https://github.com/jaywcjlove/hotkeys-js#filter
+       *
+       * On web.telegram.org the message compose box is a contenteditable div that is
+       * focused almost all the time, so no hotkey ever reached its handler.
+       * Allow shortcuts everywhere except inside our own command palette
+       */
+      hotkeys.filter = (event) => {
+          var target = event.target || event.srcElement;
+          if (target.closest && target.closest('.command-palette')) {
+              return false;
+          }
+          return true;
+      };
+
+      /** [E]dit the message under mouse cursor */
+      hotkeys('ctrl+alt+e', (e) => {
+          e.preventDefault();
+          messageEdit();
+      });
+
+      console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
   }, 0);
 
   // commandPalette.css is inlined: a userscript cannot link a local stylesheet
