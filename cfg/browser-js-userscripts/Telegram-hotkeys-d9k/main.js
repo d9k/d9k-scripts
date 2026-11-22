@@ -2,7 +2,7 @@
 //
 // @name         Telegram hotkeys d9k
 // @namespace    http://tampermonkey.net/
-// @version      2026-11-22
+// @version      2026-11-23
 // @description  try to take over the world!
 // @author       You
 // @match        *://web.telegram.org/*
@@ -187,6 +187,15 @@
           }
       }
 
+      const messageSelect = async () => {
+          try {
+              await messageContextMenuAction([ 'Select', ]);
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const messageEdit = async () => {
           try {
               await messageContextMenuAction('Edit');
@@ -322,6 +331,7 @@
           { name: 'Message: copy under mouse cursor', action: messageCopy },
           { name: 'Message: copy link under mouse cursor', action: messageCopyLink },
           { name: 'Message: edit under mouse cursor', action: messageEdit },
+          { name: 'Message: select under mouse cursor', action: messageSelect },
           { name: 'Message: repost under mouse cursor', action: messageRepostDialogOpen },
           { name: 'Message: ask chat name to repost', action: messageAskChatNameToRepost },
           // { name: 'Message: move to /save/ under mouse cursor', action: () => messageMoveToChatAtMouseCursor('/save/') },
