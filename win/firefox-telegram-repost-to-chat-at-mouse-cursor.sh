@@ -35,14 +35,7 @@ $SCRIPT_DIR/input-fill-with-clipboard-paste.sh "$CHAT_NAME"
 sleep 0.2
 xdotool key Return
 
-# sleep 1.5
-# sleep 3.0
-# sleep 10.0
-sleep 7.0
+sleep 4.5
 
 # Escape closes the leftover repost dialog and returns back to the previous chat.
 $SCRIPT_DIR/emulate-escape-key.sh
-# sleep 0.2
-# $SCRIPT_DIR/emulate-escape-key.sh
-
-# $SCRIPT_DIR/emulate-escape-key.sh
