@@ -121,7 +121,8 @@
           // Focus the item (role="menuitem" tabindex="0") and hold it before clicking
           menuItem.focus();
 
-          await sleepMs(600);
+          // await sleepMs(600);
+          await sleepMs(500);
 
           menuItem.click();
       }
@@ -135,7 +136,46 @@
           }
       }
 
+      function copyTextToClipboard(text) {
+          // web.telegram.org is a secure context: use the async Clipboard API
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+              return navigator.clipboard.writeText(text);
+          }
+
+          throw new Error('Clipboard API unavailable!');
+
+          // Fallback to a hidden textarea + execCommand, commented out on purpose
+          // return new Promise((resolve, reject) => {
+          //     var textarea = document.createElement('textarea');
+          //     textarea.value = text;
+          //     textarea.style.position = 'fixed';
+          //     textarea.style.opacity = '0';
+          //     document.body.appendChild(textarea);
+          //     textarea.select();
+          //     try {
+          //         document.execCommand('copy') ? resolve() : reject(new Error('execCommand copy failed!'));
+          //     } catch (e) {
+          //         reject(e);
+          //     } finally {
+          //         document.body.removeChild(textarea);
+          //     }
+          // });
+      }
+
       const messageCopyLink = async () => {
+          // If hovering a link inside the message bubble, just take its href and copy it
+          try {
+              var targetElement = document.querySelector('.bubble .anchor-url:hover');
+              var href = targetElement && (targetElement.href || targetElement.getAttribute('href'));
+
+              if (href) {
+                  await copyTextToClipboard(href);
+                  return;
+              }
+          } catch (e) {
+              console.warn(logPrefix, 'Direct link href copy failed, falling back to the context menu:', e);
+          }
+
           try {
               await messageContextMenuAction([
                 'Copy Link',
