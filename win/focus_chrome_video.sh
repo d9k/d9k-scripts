@@ -2,8 +2,8 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-WINDOW_CLASS="Chrome Other Proxy"
+WINDOW_CLASS="Chrome Video"
 
-COMMAND="$HOME/scripts/chrome-proxy"
+COMMAND="$HOME/scripts/chrome-video"
 
 ${SCRIPT_DIR}/focus-window-by-class.sh "$WINDOW_CLASS" "$COMMAND"

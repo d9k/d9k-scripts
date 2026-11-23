@@ -3,10 +3,12 @@
 # export PAGE="https://metrics.torproject.org/rs.html"
 
 PAGE="https://www.youtube.com/feed/history"
-WINDOW_NAME="Chrome Other Proxy"
+WINDOW_NAME="Chrome Video"
 
 # PORT=1080
-PORT=1096
+# PORT=1096
+# PORT=987
+PORT=10808
 
 # --proxy-server="http://127.0.0.1:9119" \
 
@@ -15,10 +17,12 @@ chrome \
   --proxy-server="socks5://127.0.0.1:$PORT" \
   --window-name="$WINDOW_NAME" \
   --user-data-dir="$HOME/temp/chrome-data-dir-proxy" \
-  --profile-directory="Default" 
+  --enable-features=AcceleratedVideoDecodeLinux,AcceleratedVideoEncoder \
+  --profile-directory="Default"
   #\
   # "$PAGE"
 
+# --ozone-platform=auto \
 
 # NOTE
 # may require you to run
