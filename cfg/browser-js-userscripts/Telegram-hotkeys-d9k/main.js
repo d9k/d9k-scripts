@@ -389,6 +389,12 @@
           return true;
       };
 
+      /** [C]opy the message under mouse cursor */
+      hotkeys('ctrl+alt+c', (e) => {
+          e.preventDefault();
+          messageCopy();
+      });
+
       /** [E]dit the message under mouse cursor */
       hotkeys('ctrl+alt+e', (e) => {
           e.preventDefault();

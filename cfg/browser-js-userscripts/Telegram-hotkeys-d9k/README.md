@@ -22,6 +22,7 @@ No Tampermonkey `@grant` is required.
 | Keys                | Action                                                            |
 | ------------------- | ----------------------------------------------------------------- |
 | `Ctrl` + `Alt` + `P` | Open the command palette (same as `Ctrl` + `Alt` + `З` on the Russian layout) |
+| `Ctrl` + `Alt` + `C` | **C**opy the message under the cursor                             |
 | `Ctrl` + `Alt` + `E` | **E**dit the message under the cursor                             |
 | `Ctrl` + `Alt` + `S` | **S**elect the message under the cursor                           |
 | `Ctrl` + `Alt` + `R` | **R**epost (open the Forward dialog) for the message under the cursor |
