@@ -327,6 +327,25 @@
           }
       }
 
+      const focusInChatSearch = async () => {
+          try {
+              const input = document.querySelector('.topbar-search-input-container .input-field-input');
+              if (!input) {
+                  // Clicking the topbar search button opens the field and focuses it automatically
+                  const searchButton = document.querySelector('.topbar button[aria-label="Search"]');
+                  if (!searchButton) {
+                      throw new Error('In-chat search button not found!');
+                  }
+                  searchButton.click();
+                  return;
+              }
+              input.focus();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const commands = [
           { name: 'Message: copy under mouse cursor', action: messageCopy },
           { name: 'Message: copy link under mouse cursor', action: messageCopyLink },
@@ -337,6 +356,7 @@
           // { name: 'Message: move to /save/ under mouse cursor', action: () => messageMoveToChatAtMouseCursor('/save/') },
           { name: 'Message: /!\\ DELETE under mouse cursor', action: messageDelete },
           { name: 'Message: safer delete under mouse cursor', action: messageSaferDelete },
+          { name: 'Focus in-chat search', action: focusInChatSearch },
           // { name: 'Print', action: () => window.print() },
           // { name: 'Alert', action: () => alert('Executed Command 2') }
           // Add more commands here
@@ -388,6 +408,19 @@
           }
           return true;
       };
+
+      /**
+       * [F]ocus in-chat search
+       *
+       * web.telegram.org handles Ctrl+F itself (global search) and ignores the Alt
+       * modifier, so plain bubbling listeners race and lose. Registering with
+       * capture:true and returning false makes hotkeys-js call stopPropagation()
+       * in the capture phase, before Telegram's own handler sees the event.
+       */
+      hotkeys('ctrl+alt+f', { capture: true }, (e) => {
+          focusInChatSearch();
+          return false;
+      });
 
       /** [C]opy the message under mouse cursor */
       hotkeys('ctrl+alt+c', (e) => {

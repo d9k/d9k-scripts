@@ -27,11 +27,13 @@ No Tampermonkey `@grant` is required.
 | `Ctrl` + `Alt` + `S` | **S**elect the message under the cursor                           |
 | `Ctrl` + `Alt` + `R` | **R**epost (open the Forward dialog) for the message under the cursor |
 | `Alt` + `Delete`<br>`Ctrl` + `Delete` | **D**elete the message **safely**: copy it first, then delete |
+| `Ctrl` + `Alt` + `F` | **F**ocus in-chat search                                          |
 
 ## Command palette
 
 `Ctrl` + `Alt` + `P` opens a searchable menu with these commands:
 
+- Focus in-chat search
 - Message: copy under mouse cursor
 - Message: copy link under mouse cursor
 - Message: edit under mouse cursor
