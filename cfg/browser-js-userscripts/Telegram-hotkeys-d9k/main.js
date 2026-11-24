@@ -428,6 +428,12 @@
           messageCopy();
       });
 
+      /** Copy [L]ink of the message under mouse cursor */
+      hotkeys('ctrl+alt+l', (e) => {
+          e.preventDefault();
+          messageCopyLink();
+      });
+
       /** [E]dit the message under mouse cursor */
       hotkeys('ctrl+alt+e', (e) => {
           e.preventDefault();
