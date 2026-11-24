@@ -1,0 +1,56 @@
+#!/bin/bash
+
+SCRIPT_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+if [[ -z "$HW_GPU_PRESERVE_VRAM_DESIRED_DETECT_BY_WINDOW" ]]; then
+  HW_GPU_PRESERVE_VRAM_DESIRED_DETECT_BY_WINDOW=1
+fi
+
+PRESERVE_VRAM_FORCE_CONFIG="$HOME/.hw-gpu-preserve-vram-force"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+function help_exit {
+  echoerr "Help: ${0}"
+  echoerr "Outputs 1 if __NV_PRIME_RENDER_OFFLOAD=1 is desired, 0 otherwise"
+  echoerr "Overrides:"
+  echoerr "  HW_GPU_PRESERVE_VRAM_DESIRED_DETECT_BY_WINDOW=1 - detect LM Studio by its window (default)"
+  echoerr "  HW_GPU_PRESERVE_VRAM_DESIRED_DETECT_BY_WINDOW=0 - detect LM Studio by its process"
+  echoerr "  $PRESERVE_VRAM_FORCE_CONFIG containing 1 forces output 1"
+  exit 1
+}
+
+function show_preserve_vram_warning {
+  notify-send -t 3000 "This app will be offloaded from GPU to preserve video memory (NVIDIA Prime, $SCRIPT_NAME)"
+}
+
+case "$1" in
+  --help|-h)
+    help_exit
+    ;;
+esac
+
+# Manual override
+if grep -qF "1" "$PRESERVE_VRAM_FORCE_CONFIG" 2>/dev/null; then
+  show_preserve_vram_warning
+  echo 1
+  exit
+fi
+
+if [[ "$HW_GPU_PRESERVE_VRAM_DESIRED_DETECT_BY_WINDOW" == "1" ]]; then
+  # Example matching line:
+  #   0x02a00004  0 lm studio.LM Studio   d9k-lap LM Studio
+  LM_STUDIO_RUNNING=$(wmctrl -lx 2>/dev/null | grep -iF "lm studio")
+else
+  LM_STUDIO_RUNNING=$(ps aux | grep lm-studio | grep -v grep)
+fi
+
+if [[ -n "$LM_STUDIO_RUNNING" ]]; then
+  show_preserve_vram_warning
+  echo 1
+  exit
+fi
+
+echo 0

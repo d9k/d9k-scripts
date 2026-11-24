@@ -1,8 +1,12 @@
 #   --allow-outdated-plugins \
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+GPU_PRESERVE_VRAM_DESIRED=$("$SCRIPT_DIR/hw-gpu-get-preserve-vram-desired")
+
 notify-send "Starting Chrome..."
 
-__NV_PRIME_RENDER_OFFLOAD=1 \
+__NV_PRIME_RENDER_OFFLOAD=$GPU_PRESERVE_VRAM_DESIRED \
 chrome  \
   --wm-window-animations-disabled \
   --force-dark-mode

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 # export PAGE="https://metrics.torproject.org/rs.html"
 TEST_PAGE="https://mynoise.net/"
 DATA_DIR="$HOME/temp/chrome-data-dir-audio-proxy"
@@ -14,13 +16,15 @@ set -x
 mkdir -p "$DATA_DIR"
 
 
-# Routing inside Chrome with 
+# Routing inside Chrome with
 # "Proxy Switcher and Manager" extension
 # https://chromewebstore.google.com/detail/proxy-switcher-and-manage/onnfghpihccifgojkpnnncpagjcdbjod
 #
 # --proxy-server="socks5://127.0.0.1:$PROXY_PORT" \
 
-__NV_PRIME_RENDER_OFFLOAD=1 \
+GPU_PRESERVE_VRAM_DESIRED=$("$SCRIPT_DIR/hw-gpu-get-preserve-vram-desired")
+
+__NV_PRIME_RENDER_OFFLOAD=$GPU_PRESERVE_VRAM_DESIRED \
 chrome \
   --private \
   --window-name="$WINDOW_NAME" \

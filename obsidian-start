@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+VAULT="tx"
+
+GPU_PRESERVE_VRAM_DESIRED=$("$SCRIPT_DIR/hw-gpu-get-preserve-vram-desired")
+
+__NV_PRIME_RENDER_OFFLOAD=$GPU_PRESERVE_VRAM_DESIRED \
+  obsidian obsidian://open/?vault="$VAULT"
