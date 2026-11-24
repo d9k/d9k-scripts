@@ -1,0 +1,25 @@
+#!/bin/bash
+
+TEXTS_DIR="$HOME/tx"
+
+function echoerr {
+  printf "%s\n" "$*" >&2;
+}
+
+cd "$TEXTS_DIR";
+SEARCH_TERM="$@"
+# echo "$SEARCH_TERM"
+
+function find_files {
+  rg -i -L -N -B2 -A6 --max-columns 400 --max-columns-preview -n "$SEARCH_TERM"
+}
+
+RESULT=$(find_files)
+
+if [[ -z "$RESULT" ]]; then
+  echoerr "No matches in \"$TEXTS_DIR\" of \"$SEARCH_TERM\"!"
+  exit 100
+fi
+
+# printf "%s" "$RESULT"
+find_files
