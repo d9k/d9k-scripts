@@ -18,7 +18,7 @@
 
 (function() {
     /** hotkeys-js v3.13.7 required! */
-    /** light-cmd-palette-userscripts 0.1.5 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
+    /** light-cmd-palette-userscripts 0.1.6 required! (https://github.com/d9k/light-cmd-palette-userscripts/blob/main/dist/commandPalette.iife.js) */
 
     var logPrefix = 'Telegram hotkeys d9k userscript:';
 
@@ -1544,16 +1544,32 @@ var LightCmdPalette = (() => {
         closeCommandPalette();
       });
       let currentIndex = -1;
+      let closeOnInputUnfocus = true;
       function openCommandPalette() {
-        document.getElementById("command-palette").open = true;
+        if (dialog.open) return;
+        if (typeof dialog.showModal === "function") {
+          dialog.showModal();
+        } else {
+          dialog.open = true;
+        }
         commandInput.focus();
         updateCommandList("");
       }
       function closeCommandPalette() {
-        document.getElementById("command-palette").open = false;
+        if (!dialog.open) return;
+        if (typeof dialog.close === "function") {
+          dialog.close();
+        } else {
+          dialog.open = false;
+          commandInput.value = "";
+          currentIndex = -1;
+        }
+      }
+      dialog.addEventListener("close", () => {
+        closeOnInputUnfocus = true;
         commandInput.value = "";
         currentIndex = -1;
-      }
+      });
       function updateCommandList(input) {
         commandList.innerHTML = "";
         const filteredCommands = input ? commands.filter((cmd) => cmd.name.toLowerCase().includes(input.toLowerCase())) : commands;
@@ -1561,6 +1577,7 @@ var LightCmdPalette = (() => {
           const li = document.createElement("li");
           li.textContent = cmd.name;
           li.onclick = () => {
+            closeOnInputUnfocus = true;
             cmd.action();
             closeCommandPalette();
           };
@@ -1571,6 +1588,21 @@ var LightCmdPalette = (() => {
         });
       }
       commandInput.addEventListener("input", (e) => updateCommandList(e.target.value));
+      commandInput.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          closeCommandPalette();
+        }
+      });
+      commandInput.addEventListener("focusout", (event) => {
+        if (!dialog.open || !closeOnInputUnfocus) return;
+        if (dialog.contains(event.relatedTarget)) return;
+        closeCommandPalette();
+      });
+      commandList.addEventListener("mousedown", () => {
+        closeOnInputUnfocus = false;
+      });
       document.addEventListener("keydown", (event) => {
         if (!dialog.open) return;
         const items = commandList.getElementsByTagName("li");
