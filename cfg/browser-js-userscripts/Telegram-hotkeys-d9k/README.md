@@ -28,6 +28,9 @@ No Tampermonkey `@grant` is required.
 | `Ctrl` + `Alt` + `R` | **R**epost (open the Forward dialog) for the message under the cursor |
 | `Alt` + `Delete`<br>`Ctrl` + `Delete` | **D**elete the message **safely**: copy it first, then delete |
 | `Ctrl` + `Alt` + `F` | **F**ocus in-chat search                                          |
+| `Alt` + `PageUp`     | Search results: previous                                        |
+| `Alt` + `PageDown`   | Search results: next                                            |
+| `Alt` + `End`        | Search reset: close results                                   |
 
 ## Command palette
 

@@ -559,16 +559,22 @@
           messageSaferDelete();
       });
 
-      /** Search result: previous */
+      /** Search results: previous */
       hotkeys('alt+pageup', (e) => {
           e.preventDefault();
           clickSearchResultButton('Previous search result');
       });
 
-      /** Search result: next */
+      /** Search results: next */
       hotkeys('alt+pagedown', (e) => {
           e.preventDefault();
           clickSearchResultButton('Next search result');
+      });
+
+      /** Search results: close */
+      hotkeys('alt+end', (e) => {
+          e.preventDefault();
+          clickSearchResultButton('Clear');
       });
 
       console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
