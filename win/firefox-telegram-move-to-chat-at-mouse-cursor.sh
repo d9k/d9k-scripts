@@ -54,6 +54,8 @@ yad \
 
 YAD_ANSWER_CODE=$?
 
+sleep 0.2
+
 # Close the leftover repost dialog
 $SCRIPT_DIR/emulate-escape-key.sh
 
@@ -63,5 +65,6 @@ fi
 
 xdotool mousemove $X $Y
 
+# Wait switch to previous chat
 sleep 1.5
 $SCRIPT_DIR/firefox-telegram-message-delete.sh
