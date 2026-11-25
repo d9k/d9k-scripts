@@ -73,7 +73,7 @@ Both are already inlined into `main.js` in its `DEPENDENCIES` section:
 The `win/` X11 scripts drive Firefox+Telegram through these hotkeys and
 the palette, using `xdotool` and `yad`:
 
-- [`win/firefox-telegram-select-cmd.sh`](../../../win/firefox-telegram-select-cmd.sh) — opens the palette and picks a command by name
+- [`win/firefox-telegram-run-command.sh`](../../../win/firefox-telegram-run-command.sh) — opens the palette and picks a command by name
 - [`win/firefox-telegram-message-*.sh`](../../../win/) — copy / copy link / open link / edit / select / repost / delete / safer delete at mouse cursor
 - [`win/firefox-telegram-move-to-*-at-mouse-cursor.sh`](../../../win/) — repost + delete the original ("move") into `/save/`, `/later/`, top
 - [`win/firefox-telegram-repost-to-*-at-mouse-cursor.sh`](../../../win/) — repost only (no delete), into `/2do/` or any chat

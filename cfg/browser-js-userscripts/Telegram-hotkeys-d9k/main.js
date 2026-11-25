@@ -357,45 +357,56 @@
           throw new Error('No chats container in the search results!');
       }
 
-      async function waitForChatRow(chatsContainer, chatName) {
-          // Rows render after the search request: poll for a few seconds
-          var peerTitle = null;
-          for (var i = 0; i < 50; i++) {
-              peerTitle = [...chatsContainer.querySelectorAll('.peer-title')]
-                  .find(el => el.textContent.includes(chatName));
-              if (peerTitle) { break; }
-              await sleepMs(100);
+      function getChatRow(chatsContainer, chatName) {
+          if (!chatsContainer) {
+              return null;
           }
+
+          var peerTitle = [...chatsContainer.querySelectorAll('.peer-title')]
+              .find(el => el.textContent.includes(chatName));
           if (!peerTitle) {
-              throw new Error(`No "${chatName}" chat in the search results!`);
+              return null;
           }
 
           // Clicking the title text does nothing: the whole row is the clickable element
-          var chatRow = peerTitle.closest('.row-clickable');
-          if (!chatRow) {
-              throw new Error(`No clickable row of the "${chatName}" chat!`);
-          }
-
-          return chatRow;
+          return peerTitle.closest('.row-clickable');
       }
 
-      const askChatNameToSwitch = async (chatName) => {
+      async function waitForChatRow(chatsContainer, chatName) {
+          // Rows render after the search request: poll for a few seconds
+          for (var i = 0; i < 50; i++) {
+              var chatRow = getChatRow(chatsContainer, chatName);
+              if (chatRow) {
+                  return chatRow;
+              }
+              await sleepMs(100);
+          }
+
+          throw new Error(`No "${chatName}" chat row in the search results!`);
+      }
+
+      const askChatNameAndSwitch = async (chatName) => {
           try {
               if (!chatName) {
                   chatName = window.prompt('Chat name to switch to');
                   if (!chatName) { throw new Error('No chat name!'); }
               }
 
-              var searchInput = document.querySelector('.main-search-sidebar-header input[aria-label="Search"]');
-              if (!searchInput) {
-                  throw new Error('No chat list search input!');
-              }
-              searchInput.focus();
-              inputNativeValue(searchInput, chatName);
-              pressEnterKey(searchInput);
+              // The chat may already be visible in the chat list: no search needed then
+              var chatRow = getChatRow(document.querySelector('.chatlist-top'), chatName);
+              if (!chatRow) {
+                  var searchInput = document.querySelector('.main-search-sidebar-header input[aria-label="Search"]');
+                  if (!searchInput) {
+                      throw new Error('No chat list search input!');
+                  }
+                  searchInput.focus();
+                  inputNativeValue(searchInput, chatName);
+                  pressEnterKey(searchInput);
 
-              var chatsContainer = await waitForChatsContainer();
-              var chatRow = await waitForChatRow(chatsContainer, chatName);
+                  var chatsContainer = await waitForChatsContainer();
+                  chatRow = await waitForChatRow(chatsContainer, chatName);
+              }
+
               elementMouseLeftClick(chatRow);
           } catch (e) {
               console.error(logPrefix, e);
@@ -441,7 +452,7 @@
           { name: 'Message: select under mouse cursor', action: messageSelect },
           { name: 'Message: repost under mouse cursor', action: messageRepostDialogOpen },
           { name: 'Message: ask chat name to repost', action: messageAskChatNameToRepost },
-          { name: 'Ask chat name to switch', action: askChatNameToSwitch },
+          { name: 'Ask chat name and switch', action: askChatNameAndSwitch },
           // { name: 'Message: move to /save/ under mouse cursor', action: () => messageMoveToChatAtMouseCursor('/save/') },
           { name: 'Message: /!\\ DELETE under mouse cursor', action: messageDelete },
           { name: 'Message: safer delete under mouse cursor', action: messageSaferDelete },
@@ -535,10 +546,10 @@
           messageSelect();
       });
 
-      /** [A]sk chat name to switch */
+      /** [A]sk chat name and switch */
       hotkeys('ctrl+alt+a', (e) => {
           e.preventDefault();
-          askChatNameToSwitch();
+          askChatNameAndSwitch();
       });
 
       /** [R]epost (forward) the message under mouse cursor */
