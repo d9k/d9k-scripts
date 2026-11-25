@@ -426,6 +426,19 @@
           }
       }
 
+      const goToLatestMessage = () => {
+          try {
+              var button = document.querySelector('button[aria-label="Go to latest message"]');
+              if (!button) {
+                  throw new Error('No "Go to latest message" button!');
+              }
+              button.click();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const focusInChatSearch = async () => {
           try {
               const input = document.querySelector('.topbar-search-input-container .input-field-input');
@@ -583,9 +596,15 @@
       });
 
       /** Search results: close */
-      hotkeys('alt+end', (e) => {
+      hotkeys('alt+home', (e) => {
           e.preventDefault();
           clickSearchResultButton('Clear');
+      });
+
+      /** Go to the latest message: jump to [End] of the chat */
+      hotkeys('alt+end', (e) => {
+          e.preventDefault();
+          goToLatestMessage();
       });
 
       console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');

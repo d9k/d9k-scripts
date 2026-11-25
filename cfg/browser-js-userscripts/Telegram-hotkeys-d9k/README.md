@@ -30,7 +30,8 @@ No Tampermonkey `@grant` is required.
 | `Ctrl` + `Alt` + `F` | **F**ocus in-chat search                                          |
 | `Alt` + `PageUp`     | Search results: previous                                        |
 | `Alt` + `PageDown`   | Search results: next                                            |
-| `Alt` + `End`        | Search reset: close results                                   |
+| `Alt` + `Home`       | Search reset: close results                                   |
+| `Alt` + `End`        | jump to [End] of the chat                                 |
 
 ## Command palette
 
