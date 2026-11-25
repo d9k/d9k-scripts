@@ -51,6 +51,20 @@
           }
       }
 
+      function elementMouseLeftClick(element) {
+          // element.click() dispatches only "click": React handlers listening to pointer/mouse
+          // events never fire, so the whole press sequence is simulated at the element center
+          var rect = element.getBoundingClientRect();
+          var leftClickEvents = ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'];
+          for (var eventName of leftClickEvents) {
+              var eventClass = eventName.startsWith('pointer') ? PointerEvent : MouseEvent;
+              element.dispatchEvent(new eventClass(eventName, {
+                  bubbles: true, cancelable: true, view: window, button: 0, buttons: 1,
+                  clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2
+              }));
+          }
+      }
+
       async function waitForMessageContextMenu() {
           // Unpredictable appearance: poll for a few seconds
           for (var i = 0; i < 20; i++) {
@@ -248,7 +262,7 @@
 
       async function waitForRepostDialogRow(chatName) {
           // Unpredictable appearance: poll for a few seconds
-          for (var i = 0; i < 50; i++) {
+          for (var i = 0; i < 70; i++) {
               var listContainer = document.querySelector('.popup-body .selector-height-container');
               if (listContainer) {
                   // Exact chat title text match, e.g. "/save/"
@@ -327,6 +341,67 @@
           }
       }
 
+      async function waitForChatsContainer() {
+          // Search results appear unpredictably: poll for a few seconds
+          for (var i = 0; i < 50; i++) {
+              var sectionName = [...document.querySelectorAll('#search-container .sidebar-left-section-name')]
+                  .find(el => el.textContent.includes('Chats'));
+              // The chat rows are rendered next to the "Chats" section name
+              var chatsContainer = sectionName && sectionName.parentElement;
+              if (chatsContainer) {
+                  return chatsContainer;
+              }
+              await sleepMs(100);
+          }
+
+          throw new Error('No chats container in the search results!');
+      }
+
+      async function waitForChatRow(chatsContainer, chatName) {
+          // Rows render after the search request: poll for a few seconds
+          var peerTitle = null;
+          for (var i = 0; i < 50; i++) {
+              peerTitle = [...chatsContainer.querySelectorAll('.peer-title')]
+                  .find(el => el.textContent.includes(chatName));
+              if (peerTitle) { break; }
+              await sleepMs(100);
+          }
+          if (!peerTitle) {
+              throw new Error(`No "${chatName}" chat in the search results!`);
+          }
+
+          // Clicking the title text does nothing: the whole row is the clickable element
+          var chatRow = peerTitle.closest('.row-clickable');
+          if (!chatRow) {
+              throw new Error(`No clickable row of the "${chatName}" chat!`);
+          }
+
+          return chatRow;
+      }
+
+      const askChatNameToSwitch = async (chatName) => {
+          try {
+              if (!chatName) {
+                  chatName = window.prompt('Chat name to switch to');
+                  if (!chatName) { throw new Error('No chat name!'); }
+              }
+
+              var searchInput = document.querySelector('.main-search-sidebar-header input[aria-label="Search"]');
+              if (!searchInput) {
+                  throw new Error('No chat list search input!');
+              }
+              searchInput.focus();
+              inputNativeValue(searchInput, chatName);
+              pressEnterKey(searchInput);
+
+              var chatsContainer = await waitForChatsContainer();
+              var chatRow = await waitForChatRow(chatsContainer, chatName);
+              elementMouseLeftClick(chatRow);
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const clickSearchResultButton = (label) => {
           try {
               var button = document.querySelector(`.topbar-search-input-tools button[aria-label="${label}"]`);
@@ -366,6 +441,7 @@
           { name: 'Message: select under mouse cursor', action: messageSelect },
           { name: 'Message: repost under mouse cursor', action: messageRepostDialogOpen },
           { name: 'Message: ask chat name to repost', action: messageAskChatNameToRepost },
+          { name: 'Ask chat name to switch', action: askChatNameToSwitch },
           // { name: 'Message: move to /save/ under mouse cursor', action: () => messageMoveToChatAtMouseCursor('/save/') },
           { name: 'Message: /!\\ DELETE under mouse cursor', action: messageDelete },
           { name: 'Message: safer delete under mouse cursor', action: messageSaferDelete },
@@ -457,6 +533,12 @@
       hotkeys('ctrl+alt+s', (e) => {
           e.preventDefault();
           messageSelect();
+      });
+
+      /** [A]sk chat name to switch */
+      hotkeys('ctrl+alt+a', (e) => {
+          e.preventDefault();
+          askChatNameToSwitch();
       });
 
       /** [R]epost (forward) the message under mouse cursor */
