@@ -22,7 +22,7 @@ if [[ -z "$CHAT_NAME" ]]; then
   help_exit
 fi
 
-$SCRIPT_DIR/firefox-telegram-select-cmd.sh "Ask chat name to switch"
+$SCRIPT_DIR/firefox-telegram-run-command.sh "Ask chat name to switch"
 
 # The userscript shows window.prompt() to ask the chat name
 sleep 0.5

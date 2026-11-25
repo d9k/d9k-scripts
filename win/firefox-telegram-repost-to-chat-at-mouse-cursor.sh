@@ -24,7 +24,7 @@ fi
 
 # The userscript searches the chat, asks for target chat name,
 # clicks the chat name row and clicks send message button
-$SCRIPT_DIR/firefox-telegram-select-cmd.sh "Message: ask chat name to repost"
+$SCRIPT_DIR/firefox-telegram-run-command.sh "Message: ask chat name to repost"
 
 # The userscript shows window.prompt() to ask the chat name
 sleep 0.5

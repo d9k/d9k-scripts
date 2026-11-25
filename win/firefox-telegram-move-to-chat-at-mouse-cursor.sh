@@ -24,7 +24,7 @@ fi
 
 eval "$(xdotool getmouselocation --shell)"
 
-$SCRIPT_DIR/firefox-telegram-select-cmd.sh "Message: ask chat name to repost"
+$SCRIPT_DIR/firefox-telegram-run-command.sh "Message: ask chat name to repost"
 
 # The userscript shows window.prompt() to ask the chat name
 sleep 0.5
