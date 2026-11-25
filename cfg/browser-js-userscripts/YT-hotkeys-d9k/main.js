@@ -103,6 +103,11 @@
 
                 buttonSubtitles.click();
 
+                await sleepMs(2000);
+
+                /** Close settings */
+                buttonSettings.click();
+
             } catch (e) {
                 console.error(logPrefix, e);
                 throw e;
