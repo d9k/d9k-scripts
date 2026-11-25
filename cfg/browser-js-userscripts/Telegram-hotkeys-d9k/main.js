@@ -327,6 +327,19 @@
           }
       }
 
+      const clickSearchResultButton = (label) => {
+          try {
+              var button = document.querySelector(`.topbar-search-input-tools button[aria-label="${label}"]`);
+              if (!button) {
+                  throw new Error(`No "${label}" search result button!`);
+              }
+              button.click();
+
+          } catch (e) {
+              console.error(logPrefix, e);
+          }
+      }
+
       const focusInChatSearch = async () => {
           try {
               const input = document.querySelector('.topbar-search-input-container .input-field-input');
@@ -462,6 +475,18 @@
       hotkeys('alt+delete, ctrl+delete', (e) => {
           e.preventDefault();
           messageSaferDelete();
+      });
+
+      /** Search result: previous */
+      hotkeys('alt+pageup', (e) => {
+          e.preventDefault();
+          clickSearchResultButton('Previous search result');
+      });
+
+      /** Search result: next */
+      hotkeys('alt+pagedown', (e) => {
+          e.preventDefault();
+          clickSearchResultButton('Next search result');
       });
 
       console.log(logPrefix, 'after hotkeys. Warning: You MUST click at least once for hotkeys to work');
