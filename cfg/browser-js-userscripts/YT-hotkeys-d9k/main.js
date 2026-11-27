@@ -2,7 +2,7 @@
 //
 // @name         YT hotkeys
 // @namespace    http://tampermonkey.net/
-// @version      2026-11-09
+// @version      2026-11-28
 // @description  try to take over the world!
 // @author       You
 // @match        *://*.youtube.com/*
@@ -114,16 +114,52 @@
             }
           }
 
+          var addToPlaylist = () => {
+              try {
+                  var menu = document.querySelector('div#menu');
+                  if (!menu) {
+                      throw new Error('No menu container!');
+                  }
+
+                  var buttonPlaylist = null;
+
+                  for (var label of ['Добавить в плейлист', 'Save', 'Сохранить']) {
+                      buttonPlaylist = menu.querySelector(`button[aria-label="${label}"]`);
+                      if (buttonPlaylist) {
+                          break;
+                      }
+                  }
+
+                  if (!buttonPlaylist) {
+                      throw new Error('No "Save (Add to playlist)" button!');
+                  }
+
+                  buttonPlaylist.click();
+
+              } catch (e) {
+                  console.error(logPrefix, e);
+                  throw e;
+              }
+          }
+
           console.log(logPrefix, 'before hotkeys');
 
+          /** Switch to [E]nglish subtitles */
           hotkeys('ctrl+alt+e', (e) => {
               e.preventDefault();
               subtitlesSwitchLanguage(['Английский', 'English']);
           });
 
+          /** Switch to [R]ussian subtitles */
           hotkeys('ctrl+alt+r', (e) => {
               e.preventDefault();
               subtitlesSwitchLanguage(['Русский', 'Russian']);
+          });
+
+          /** Add to [F]avorites/playlist */
+          hotkeys('ctrl+alt+f', (e) => {
+              e.preventDefault();
+              addToPlaylist();
           });
 
           console.log(logPrefix, 'after hotkeys');
