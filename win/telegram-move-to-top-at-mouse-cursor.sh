@@ -43,12 +43,12 @@ fi
 
 xdotool mousemove $X $Y
 
-sleep 0.3
+sleep 0.1
 $SCRIPT_DIR/telegram-delete-at-mouse-cursor.sh
-sleep 0.3
+sleep 0.2
 # --clearmodifiers
 xdotool sleep 0.5 key "Control_L+v"
-sleep 0.2
+sleep 0.15
 xdotool sleep 0.5 key "Return"
 # xdotool sleep 0.5 key "Up"
 
