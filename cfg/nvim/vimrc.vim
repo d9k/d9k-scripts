@@ -51,9 +51,15 @@ noremap <leader>ss :w<CR>
 " [v]im config [r]eload
 noremap <leader>vr :so ~/.config/nvim/init.vim<CR>
 
-map <leader>sm :set syntax=markdown<CR>
-map <leader>sj :set syntax=json<CR>
-map <leader>sJ :set syntax=js<CR>
+" or :set syntax?
+" [s]yntax
+map <leader>sh :set filetype=html<CR>
+map <leader>sm :set filetype=markdown<CR>
+map <leader>sj :set filetype=json<CR>
+map <leader>sJ :set filetype=js<CR>
+
+" [F]ormat
+map <leader>Fh :set filetype=html <bar> :%!prettier --parser html<CR>
 
 " (G[x] becomes accord beginning to [G]o somewhere) which is singular in file
 noremap GG G
